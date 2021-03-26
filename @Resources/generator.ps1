@@ -11,40 +11,53 @@ $testfile = "$($RmAPI.VariableStr('@'))includes\test.inc"
 $categoriesDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\categories\"
 $settingsFilePath = "$($RmAPI.VariableStr('SKINSPATH'))$($skin)\@Resources\$($settingsFile)"
 
-# Script variables
+# Line operation variables
+$currentIndentifier = ""
+$categoryIdentifier = ";@"
+$variableIdentifier = ";;"
+
+# Regex patterns
+$categoryPattern = '(?s-m);@(.*?)(?=;@|$)'
+$categoryTitlePattern = '(?s-m)(?<=;@)(.*?)(?=\n)'
+$variablePattern = '(?s-m);;(.*?)\n(?!;).*?\n'
+$variableTypePattern = '(?<=Type=)(.*?)(?=\n)'
+$variableDefaultValuePattern = '(?<=DefaultValue=)(.*?)(?=\n)'
+$variableNamePattern = '(?<=Name=)(.*?)(?=\n)'
+
+## Full settings object
+$settings = @()
+$categories = @()
 
 function Construct {
 
-    # Log
-    # $RmAPI.Log($settingsFilePath)
-    # $RmAPI.Log('Reading settings file from:')
+    Filter-Settings > $testfile
+
+}
+
+function Filter-Settings {
 
     # Read settings file
-    $settingsFileContent = Get-Content $settingsFilePath
+    $settingsFileContent = Get-Content $settingsFilePath -Raw
+    $categories = $settingsFileContent | Select-String -Pattern $categoryPattern -AllMatches
 
-    # Declare line operation variables
-    $currentIndentifier = ""
-    $categoryIdentifier = ";@"
-    $category = @()
-    $variableIdentifier = ";;"
-    $variable = ""
+    foreach ($match in $categories.Matches) {
+        $title = $match | Select-String -Pattern $categoryTitlePattern
+        $category = @($title.Matches[0].value)
+        $variables = $match | Select-String -Pattern $variablePattern -AllMatches
 
-    # Do operations on each line of the settings file
-
-    $i = 0
-    foreach ($line in $settingsFileContent) {
-        $identifier = -join $line[0..1]
-        if ($identifier -eq $categoryIdentifier) {
-            $category = @()
-            $category += -join $line[2..($line.Length)]
-            New-Category $category $i
-            $i++
-        } elseif ($identifier -eq $variableIdentifier) {
-            $category += -join $line[2..($line.Length)]
+        foreach ($variable in $variables.Matches) {
+            $type = $variable | Select-String -Pattern $variableTypePattern
+            $name = $variable | Select-String -Pattern $variableNamePattern
+            $defaultvalue = $variable | Select-String -Pattern $variableDefaultValuePattern
+            $variable = @{'type' = $type.Matches[0]; 'name' = $name.Matches[0]; 'defaultValue' = $defaultvalue.Matches[0]}
+            $category += $variable
         }
+
+        $settings += $category
+
     }
 
-    $categories > $testfile
+    return $settings
 
 }
 

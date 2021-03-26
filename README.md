@@ -20,3 +20,10 @@ The settings skin consists of variant skins which all have the categories menu i
       * 1.ini
       * 2.ini
     * Settings.ini
+
+
+$associativeArray=@{ Jane=1 Tom=2 Harry=3 } 
+foreach($key in $associativeArray.Keys) { $key } 
+foreach($item in $associativeArray.GetEnumerator()) {
+     "{0}={1}" -f $item.Key, $item.Value 
+}
