@@ -7,7 +7,7 @@ $skin = $RmAPI.VariableStr("Skin")
 $settingsFile = $RmAPI.VariableStr("SettingsFile")
 
 # directories & files
-$testfile = "$($RmAPI.VariableStr('@'))includes\test.inc"
+$testfile = "$($RmAPI.VariableStr('@'))test.inc"
 $categoriesDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\categories\"
 $settingsFilePath = "$($RmAPI.VariableStr('SKINSPATH'))$($skin)\@Resources\$($settingsFile)"
 
