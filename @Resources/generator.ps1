@@ -26,6 +26,8 @@ $variablePattern = '(?s-m);;(.*?)\n(?![;$]).*?\n';
 $variableTypePattern = '(?<=Type=)(.*?)(?=\n)'
 $variableDefaultValuePattern = '(?<=DefaultValue=)(.*?)(?=\n)'
 $variableNamePattern = '(?<=Name=)(.*?)(?=\n)'
+$variableDescriptionPattern = '(?<=Description=)(.*?)(?=\n)'
+$variableCurrentValuePattern = '(?m-s)^(?!;).*=(.*?)(?=\n)'
 
 function Construct {
 
@@ -36,16 +38,37 @@ function Construct {
     $settings = Filter-Settings $file
 
     # Variable to hold generated .ini
-    $ini = ""
+    $ini = Rainmeter-Section
 
     # Construct categories
     $i = 0
     foreach ($category in $settings) {
-        $ini += New-Category $category $i
+        New-Category $category $i
+        # $ini += New-Category $category $i
         $i++
     }
 
+    $settings > $testfile
     $ini > $generatedSkinFile
+
+}
+
+function Rainmeter-Section {
+    $ini = @"
+[Rainmeter]
+DefaultUpdateDivider=-1
+@IncludeSkinVariables=#ROOTCONFIGPATH#settings\skinVariables.inc
+@IncludeSettingsStyles=#ROOTCONFIGPATH#settings\includes\VarStyles.inc
+
+[IncludeBackground]
+@IncludeCategory=#ROOTCONFIGPATH#settings\includes\Background.inc
+
+[IncludeCategory]
+@IncludeCategory=#ROOTCONFIGPATH#settings\categories\[#s_CurrentCategory].inc
+
+"@
+
+return $ini
 
 }
 
@@ -54,7 +77,7 @@ function Filter-Settings($settingsFileContent) {
     $categories = $settingsFileContent | Select-String -Pattern $categoryPattern -AllMatches
 
     $settings = @()
-    
+
     foreach ($match in $categories.Matches) {
 
         $title = $match | Select-String -Pattern $categoryTitlePattern
@@ -64,13 +87,17 @@ function Filter-Settings($settingsFileContent) {
         foreach ($variable in $variables.Matches) {
             $type = $variable | Select-String -Pattern $variableTypePattern
             $name = $variable | Select-String -Pattern $variableNamePattern
+            $description = $variable | Select-String -Pattern $variableDescriptionPattern
             $defaultvalue = $variable | Select-String -Pattern $variableDefaultValuePattern
+            $currentvalue = $variable | Select-String -Pattern $variableCurrentValuePattern
 
-            $type = Filter-Newline $type.Matches[0].value
-            $name = Filter-Newline $name.Matches[0].value
-            $defaultvalue = Filter-Newline $defaultvalue.Matches[0].value
+            $variable = @{}
+            $variable.Add('Type', $type.Matches[0].value)
+            $variable.Add('Name', $name.Matches[0].value)
+            $variable.Add('DefaultValue', $defaultvalue.Matches[0].value)
+            $variable.Add('Currentvalue', $currentvalue.Matches[0].Groups[1].value)
+            $variable.Add('Description', $description.Matches[0].value)
 
-            $variable = @{'Type' = $type; 'Name' = $name; 'DefaultValue' = $defaultvalue}
             $category += , $variable
         }
 
@@ -84,35 +111,79 @@ function Filter-Settings($settingsFileContent) {
 
 function New-Category($category, $i) {
 
-    $variables = $category[1..($category.Length)]
-
-    $RmAPI.Log("Count: $($variables.Length)")
-
-    # List all variables to $text
-    $text = ""
-
-    foreach ($var in $variables) {
-        $text += "$($var.Name) "
-    }
-
-    $categoryIni = @"
-[Title$($i)]
-Meter=String
-Text=$($text)
-MeterStyle=TextStyle
+    # path to current category.inc
+    $file = "$($categoriesDir)$($i).inc"
+    # @Include statement to return to main settings.ini file
+    $include = @"
+[IncludeCategory$i]
+@IncludeCategory$i=categories\$i.inc
 
 "@
 
-    return $categoryIni
+    # new line appears from category object because idk
+    # get title of category
+    $title=$category[0]
+
+    $ini = @"
+[First]
+Meter=Image
+MeterStyle=FirstItem
+[Title$i]
+Meter=String
+Text=$title
+MeterStyle=CategoryTitle
+
+"@
+
+    # get variables hashtable array
+    $variables = $category[1..($category.Length)]
+
+    $j = 0
+    foreach ($var in $variables) {
+        $ini += New-Variable $var $j
+        $j++
+    }
+    # log n of variables in this category
+    # $RmAPI.Log("Variables in Category$($i): $($variables.Length)")
+
+    $ini > $file
+
+    return $include
 
 }
 
-# no worky
-function Filter-Newline($s) {
+function New-Variable($var, $j) {
 
-    $filter = "`n"
-    $s = $s -replace([System.Environment]::NewLine,"")
+    $type = $var.Type
+    $ini = ""
+    
+    # $RmAPI.Log("Constructing variable of type: $($var.Type)")
+    switch ($type) {
+        # the random newline is fucking shit up here too
+        # have to use -match instead of -eq
+        {$_ -match "String"} { 
+            # $RmAPI.Log("Constructing String variable")
+            $ini = @"
+[Var$j]
+Meter=String
+Text=$($var.Name)
+MeterStyle=VarTitle
+[Var$($j)Description]
+Meter=String
+Text=$($var.Description)
+MeterStyle=VarDescription
+[Value$i]
+Meter=String
+Text=$($var.CurrentValue)
+MeterStyle=VarStringValue
 
-    return $s 
+"@
+         }
+        Default {
+            $ini = ""
+        }
+    }
+
+    return $ini
 
 }
