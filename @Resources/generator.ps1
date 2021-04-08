@@ -15,68 +15,45 @@ $generatedSkinFile = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\settings.i
 $categoriesDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\categories\"
 $settingsFilePath = "$($RmAPI.VariableStr('SKINSPATH'))$($skin)\@Resources\$($settingsFile)"
 
-# Line operation variables
-$currentIndentifier = ""
-$categoryIdentifier = ";@"
-$variableIdentifier = ";;"
-
-# Regex patterns
-$categoryPattern = '(?s-m);@(.*?)(?=;@|$)'
-$categoryTitlePattern = '(?s-m)(?<=;@)(.*?)(?=\n)'
-# old pattern, doesn't lookahead for EOF, might be relevant
-# variablePattern = '(?s-m);;(.*?)\n(?!;).*?\n';
-$variablePattern = '(?s-m);;(.*?)\n(?![;$]).*?\n';
-$variableTypePattern = '(?<=Type=)(.*?)(?=\n)'
-$variableDefaultValuePattern = '(?<=DefaultValue=)(.*?)(?=\n)'
-$variableNamePattern = '(?<=Name=)(.*?)(?=\n)'
-$variableDescriptionPattern = '(?<=Description=)(.*?)(?=\n)'
-$variableCurrentValuePattern = '(?m-s)^(?!;).*=(.*?)(?=\n)'
-
 function Construct {
 
+    # Template directory
+    $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
+
     # Read settings file
-    $file = Get-Content $settingsFilePath -Raw
+    $settingsFileContent = Get-Content $settingsFilePath -Raw
 
     # Filter settings file into staggered array
-    $settings = Filter-Settings $file
+    $settings = Filter-Settings -String $settingsFileContent
 
     # Variable to hold generated .ini
-    $ini = Rainmeter-Section
+    # Get rainmeter section from template
+    $ini = Get-Content -Path "$($templatesDir)Rainmeter.inc" -Raw
 
     # Construct categories
     $i = 0
     foreach ($category in $settings) {
-        New-Category $category $i
-        # $ini += New-Category $category $i
+        New-Category -category $category -i $i
         $i++
     }
 
-    $settings > $testfile
+    # $settings > $testfile
     $ini > $generatedSkinFile
 
 }
 
-function Rainmeter-Section {
-    $ini = @"
-[Rainmeter]
-DefaultUpdateDivider=-1
-@IncludeSkinVariables=#ROOTCONFIGPATH#settings\skinVariables.inc
-@IncludeSettingsStyles=#ROOTCONFIGPATH#settings\includes\VarStyles.inc
-
-[IncludeBackground]
-@IncludeCategory=#ROOTCONFIGPATH#settings\includes\Background.inc
-
-[IncludeCategory]
-@IncludeCategory=#ROOTCONFIGPATH#settings\categories\[#s_CurrentCategory].inc
-
-"@
-
-return $ini
-
-}
-
-function Filter-Settings($settingsFileContent) {
-
+function Filter-Settings {
+    param (
+        [Parameter()]
+        [Alias("String")]
+        $settingsFileContent
+    )
+    
+    # Regex patterns
+    $categoryPattern = '(?s-m);@(.*?)(?=;@|$)'
+    $categoryTitlePattern = '(?s-m)(?<=;@)(.*?)(?=\n)'
+    $variablePattern = '(?s-m);;(.*?)\n(?![;$]).*?\n'
+    
     $categories = $settingsFileContent | Select-String -Pattern $categoryPattern -AllMatches
 
     $settings = @()
@@ -88,20 +65,10 @@ function Filter-Settings($settingsFileContent) {
         $variables = $match | Select-String -Pattern $variablePattern -AllMatches
 
         foreach ($variable in $variables.Matches) {
-            $type = $variable | Select-String -Pattern $variableTypePattern
-            $name = $variable | Select-String -Pattern $variableNamePattern
-            $description = $variable | Select-String -Pattern $variableDescriptionPattern
-            $defaultvalue = $variable | Select-String -Pattern $variableDefaultValuePattern
-            $currentvalue = $variable | Select-String -Pattern $variableCurrentValuePattern
 
-            $variable = @{}
-            $variable.Add('Type', $type.Matches[0].value)
-            $variable.Add('Name', $name.Matches[0].value)
-            $variable.Add('DefaultValue', $defaultvalue.Matches[0].value)
-            $variable.Add('Currentvalue', $currentvalue.Matches[0].Groups[1].value)
-            $variable.Add('Description', $description.Matches[0].value)
+            $var = Variable-Hastable -String $variable
+            $category += , $var
 
-            $category += , $variable
         }
 
         $settings += , $category
@@ -112,31 +79,54 @@ function Filter-Settings($settingsFileContent) {
 
 }
 
-function New-Category($category, $i) {
+function Variable-Hastable {
+    param (
+        [Parameter()]
+        [string]
+        $String
+    )
+
+    $properties = @{
+        "Type" = '(?<=Type=)(.*?)(?=\n)'
+        "Name" = '(?<=Name=)(.*?)(?=\n)'
+        "Description" = '(?<=Description=)(.*?)(?=\n)'
+        "DefaultValue" = '(?<=DefaultValue=)(.*?)(?=\n)'
+        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n)'
+    }
+
+    $var = @{}
+    $properties.GetEnumerator() | ForEach-Object{
+
+        if("$($String)" -match "$($_.Value)") {
+            $var.Add("$($_.Key)",$Matches[1])
+        }
+
+    }
+    
+    return $var
+
+}
+
+function New-Category {
+
+    param (
+        [Parameter()]
+        $category,
+        [Parameter()]
+        $i
+    )
 
     # path to current category.inc
     $file = "$($categoriesDir)$($i).inc"
-    # @Include statement to return to main settings.ini file
-    $include = @"
-[IncludeCategory$i]
-@IncludeCategory$i=categories\$i.inc
 
-"@
+    # Template strings directory
+    $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
 
-    # new line appears from category object because idk
     # get title of category
-    $title=$category[0]
+    $title = $category[0] -replace "`t|`n|`r",""
 
-    $ini = @"
-[First]
-Meter=Image
-MeterStyle=FirstItem
-[Title$i]
-Meter=String
-Text=$title
-MeterStyle=CategoryTitle
-
-"@
+    $c = Get-Content -Path "$($templatesDir)Category.inc" -Raw
+    $ini = $c -f $i, $title
 
     # get variables hashtable array
     $variables = $category[1..($category.Length)]
@@ -151,13 +141,6 @@ MeterStyle=CategoryTitle
 
     $ini > $file
 
-    return $include
-
-}
-
-function Filter-Regex($s, $filter) {
-    $temp = $s | Select-String -Pattern $filter
-    return $temp
 }
 
 function New-Variable {
@@ -165,23 +148,17 @@ function New-Variable {
         [Parameter(Mandatory=$true)]
         $Variable,
         [Parameter(Mandatory=$true)]
-        [string]
         $Index
     )
 
-    # $RmAPI.Log("Creating var type: $($Variable.Type), i: $Index")
-
     # Template strings directory
-    $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
+    $templatesDir = "$($RmAPI.VariableStr('@'))templates\variables\"
     
     # Get variable type and sanitize the random newline character
     $type = $Variable.Type -replace "`t|`n|`r",""
 
-    # Log template path
-    # $RmAPI.Log("$($templatesDir)$($type).var")
-
     if ($implementedTypes -contains $type) {
-        $c = Get-Content -Path "$($templatesDir)$($type).var" -Raw
+        $c = Get-Content -Path "$($templatesDir)$($type).inc" -Raw
         $ini = $c -f $Index, $Variable.Name, $Variable.Description, $Variable.CurrentValue
     } else {
         $ini = ""
