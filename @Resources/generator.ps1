@@ -3,7 +3,7 @@ function Update {
 }
 
 # Implemented types array
-$implementedTypes = @("String")
+$implementedTypes = @("String", "Integer", "Color", "Toggle")
 
 # variables from Rainmeter
 $skin = $RmAPI.VariableStr("Skin")
@@ -24,7 +24,7 @@ function Construct {
     $settingsFileContent = Get-Content $settingsFilePath -Raw
 
     # Filter settings file into staggered array
-    $settings = Filter-Settings -String $settingsFileContent
+    $settings = Settings-Array -String $settingsFileContent
 
     # Variable to hold generated .ini
     # Get rainmeter section from template
@@ -33,7 +33,7 @@ function Construct {
     # Construct categories
     $i = 0
     foreach ($category in $settings) {
-        New-Category -category $category -i $i
+        Category-Ini -category $category -i $i
         $i++
     }
 
@@ -42,23 +42,28 @@ function Construct {
 
 }
 
-function Filter-Settings {
+function Settings-Array {
     param (
         [Parameter()]
         [Alias("String")]
         $settingsFileContent
     )
-    
+
     # Regex patterns
     $categoryPattern = '(?s-m);@(.*?)(?=;@|$)'
     $categoryTitlePattern = '(?s-m)(?<=;@)(.*?)(?=\n)'
     $variablePattern = '(?s-m);;(.*?)\n(?![;$]).*?\n'
-    
+
     $categories = $settingsFileContent | Select-String -Pattern $categoryPattern -AllMatches
 
     $settings = @()
 
     foreach ($match in $categories.Matches) {
+
+        $properties = [ordered]@{
+            "title" = '(?s-m)(?<=;@)(.*?)(?=\n)'
+            "variable" = '(?s-m);;(.*?)\n(?![;$]).*?\n'
+        }
 
         $title = $match | Select-String -Pattern $categoryTitlePattern
         $category = @($title.Matches[0].value)
@@ -68,12 +73,12 @@ function Filter-Settings {
 
             $var = Variable-Hastable -String $variable
             $category += , $var
-
+        
         }
 
         $settings += , $category
 
-    }
+        }
 
     return $settings
 
@@ -107,7 +112,7 @@ function Variable-Hastable {
 
 }
 
-function New-Category {
+function Category-Ini {
 
     param (
         [Parameter()]
@@ -133,7 +138,7 @@ function New-Category {
 
     $j = 0
     foreach ($var in $variables) {
-        $ini += New-Variable -Variable $var -Index $j
+        $ini += Variable-Ini -Variable $var -Index $j
         $j++
     }
     # log n of variables in this category
@@ -143,7 +148,7 @@ function New-Category {
 
 }
 
-function New-Variable {
+function Variable-Ini {
     param (
         [Parameter(Mandatory=$true)]
         $Variable,

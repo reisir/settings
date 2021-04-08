@@ -1,0 +1,12 @@
+[Var{0}]
+Meter=String
+Text={1}
+MeterStyle=VarTitle
+[Var{0}Description]
+Meter=String
+Text={2}
+MeterStyle=VarDescription
+[Value{0}]
+Meter=String
+Text={3}
+MeterStyle=VarStringValue
