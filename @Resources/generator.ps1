@@ -2,6 +2,9 @@ function Update {
 
 }
 
+# Implemented types array
+$implementedTypes = @("String")
+
 # variables from Rainmeter
 $skin = $RmAPI.VariableStr("Skin")
 $settingsFile = $RmAPI.VariableStr("SettingsFile")
@@ -140,7 +143,7 @@ MeterStyle=CategoryTitle
 
     $j = 0
     foreach ($var in $variables) {
-        $ini += New-Variable $var $j
+        $ini += New-Variable -Variable $var -Index $j
         $j++
     }
     # log n of variables in this category
@@ -152,36 +155,36 @@ MeterStyle=CategoryTitle
 
 }
 
-function New-Variable($var, $j) {
+function Filter-Regex($s, $filter) {
+    $temp = $s | Select-String -Pattern $filter
+    return $temp
+}
 
-    $type = $var.Type
-    $ini = ""
+function New-Variable {
+    param (
+        [Parameter(Mandatory=$true)]
+        $Variable,
+        [Parameter(Mandatory=$true)]
+        [string]
+        $Index
+    )
+
+    # $RmAPI.Log("Creating var type: $($Variable.Type), i: $Index")
+
+    # Template strings directory
+    $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
     
-    # $RmAPI.Log("Constructing variable of type: $($var.Type)")
-    switch ($type) {
-        # the random newline is fucking shit up here too
-        # have to use -match instead of -eq
-        {$_ -match "String"} { 
-            # $RmAPI.Log("Constructing String variable")
-            $ini = @"
-[Var$j]
-Meter=String
-Text=$($var.Name)
-MeterStyle=VarTitle
-[Var$($j)Description]
-Meter=String
-Text=$($var.Description)
-MeterStyle=VarDescription
-[Value$i]
-Meter=String
-Text=$($var.CurrentValue)
-MeterStyle=VarStringValue
+    # Get variable type and sanitize the random newline character
+    $type = $Variable.Type -replace "`t|`n|`r",""
 
-"@
-         }
-        Default {
-            $ini = ""
-        }
+    # Log template path
+    # $RmAPI.Log("$($templatesDir)$($type).var")
+
+    if ($implementedTypes -contains $type) {
+        $c = Get-Content -Path "$($templatesDir)$($type).var" -Raw
+        $ini = $c -f $Index, $Variable.Name, $Variable.Description, $Variable.CurrentValue
+    } else {
+        $ini = ""
     }
 
     return $ini
