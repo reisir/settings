@@ -1,12 +1,27 @@
-[Var{0}]
+[Var{Index}]
 Meter=String
-Text={1}
+Text={Name}
 MeterStyle=VarTitle
-[Var{0}Description]
+[Var{Index}Description]
 Meter=String
-Text={2}
+Text={Description}
 MeterStyle=VarDescription
-[Value{0}]
+[Value{Index}]
 Meter=String
-Text={3}
+Text={CurrentValue}
 MeterStyle=VarStringValue
+LeftMouseUpAction=!CommandMeasure "InputText{Index}" "ExecuteBatch 1"
+[InputText{Index}]
+Measure=Plugin
+Plugin=InputText
+SolidColor=#s_RightPanelBackgroundColor#
+FontColor=#s_FontColor#
+FontFace=#s_FontFace#
+FontSize=[Value{Index}:FontSize]
+X=[Value{Index}:X]
+Y=[Value{Index}:Y]
+H=[Value{Index}:H]
+W=[Value{Index}:W]
+DynamicVariables=1
+DefaultValue="Give new value"
+Command1=[!SetOption "Value{Index}" Text "$UserInput$"][!UpdateMeter "Value{Index}"][!Redraw]

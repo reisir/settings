@@ -37,8 +37,35 @@ function Construct {
         $i++
     }
 
-    # $settings > $testfile
+    Category-List -Settings $settings
+
     $ini > $generatedSkinFile
+
+}
+
+function Category-List {
+    param(
+        [Parameter(Mandatory=$true)]
+        $Settings
+    )
+
+    $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
+
+    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+    $ini = Filter-Template -Template $ini -Properties @{"Side" = "L"}
+    $listTemplate = Get-Content -Path "$($templatesDir)CategoryList.inc" -Raw
+
+    $i = 0
+    foreach ($category in $Settings) {
+        $Properties = @{
+            "Index" = $i
+            "Category" = "$($category[0]).inc"
+        }
+        $ini += Filter-Template -Template $listTemplate -Properties $Properties
+        $i++
+    }
+
+    $ini > "$($categoriesDir)CategoryList.inc"
 
 }
 
@@ -53,6 +80,14 @@ function Settings-Array {
     $categoryPattern = '(?s-m);@(.*?)(?=;@|$)'
     $categoryTitlePattern = '(?s-m)(?<=;@)(.*?)(?=\n)'
     $variablePattern = '(?s-m);;(.*?)\n(?![;$]).*?\n'
+    $variableProperties = @{
+        "Type" = '(?<=Type=)(.*?)(?=\n)'
+        "Name" = '(?<=Name=)(.*?)(?=\n)'
+        "Description" = '(?<=Description=)(.*?)(?=\n)'
+        "DefaultValue" = '(?<=DefaultValue=)(.*?)(?=\n)'
+        "RealName" = '(?m-s)^(?!;)(.*?)(?==)'
+        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n)'
+    }
 
     $categories = $settingsFileContent | Select-String -Pattern $categoryPattern -AllMatches
 
@@ -60,20 +95,13 @@ function Settings-Array {
 
     foreach ($match in $categories.Matches) {
 
-        $properties = [ordered]@{
-            "title" = '(?s-m)(?<=;@)(.*?)(?=\n)'
-            "variable" = '(?s-m);;(.*?)\n(?![;$]).*?\n'
-        }
-
         $title = $match | Select-String -Pattern $categoryTitlePattern
-        $category = @($title.Matches[0].value)
+        $category = @(Remove-Newline -String $title.Matches[0].value)
         $variables = $match | Select-String -Pattern $variablePattern -AllMatches
 
         foreach ($variable in $variables.Matches) {
-
-            $var = Variable-Hastable -String $variable
+            $var = Filter-Hashtable -String $variable -Properties $variableProperties
             $category += , $var
-        
         }
 
         $settings += , $category
@@ -84,36 +112,29 @@ function Settings-Array {
 
 }
 
-function Variable-Hastable {
+function Filter-Hashtable {
     param (
-        [Parameter()]
+        [Parameter(Mandatory=$true)]
         [string]
-        $String
+        $String,
+        [Parameter(Mandatory=$true)]
+        [System.Collections.Hashtable]
+        $Properties
     )
 
-    $properties = @{
-        "Type" = '(?<=Type=)(.*?)(?=\n)'
-        "Name" = '(?<=Name=)(.*?)(?=\n)'
-        "Description" = '(?<=Description=)(.*?)(?=\n)'
-        "DefaultValue" = '(?<=DefaultValue=)(.*?)(?=\n)'
-        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n)'
-    }
-
-    $var = @{}
-    $properties.GetEnumerator() | ForEach-Object{
-
+    $hash = @{}
+    $Properties.GetEnumerator() | ForEach-Object {
         if("$($String)" -match "$($_.Value)") {
-            $var.Add("$($_.Key)",$Matches[1])
+            $s = Remove-Newline -String $Matches[1]
+            $hash.Add("$($_.Key)",$s)
         }
-
     }
     
-    return $var
+    return $hash
 
 }
 
 function Category-Ini {
-
     param (
         [Parameter()]
         $category,
@@ -127,11 +148,14 @@ function Category-Ini {
     # Template strings directory
     $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
 
-    # get title of category
-    $title = $category[0] -replace "`t|`n|`r",""
-
-    $c = Get-Content -Path "$($templatesDir)Category.inc" -Raw
-    $ini = $c -f $i, $title
+    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+    $ini = Filter-Template -Template $ini -Properties @{"Side" = "R"}
+    $ini += Get-Content -Path "$($templatesDir)CategoryTitle.inc" -Raw
+    $Properties = @{
+        "Index" = $i
+        "Title" = $category[0]
+    }
+    $ini = Filter-Template -Template $ini -Properties $Properties
 
     # get variables hashtable array
     $variables = $category[1..($category.Length)]
@@ -158,17 +182,53 @@ function Variable-Ini {
 
     # Template strings directory
     $templatesDir = "$($RmAPI.VariableStr('@'))templates\variables\"
-    
-    # Get variable type and sanitize the random newline character
-    $type = $Variable.Type -replace "`t|`n|`r",""
 
-    if ($implementedTypes -contains $type) {
-        $c = Get-Content -Path "$($templatesDir)$($type).inc" -Raw
-        $ini = $c -f $Index, $Variable.Name, $Variable.Description, $Variable.CurrentValue
+    $nonVariableProperties = @{
+        "Index" = $Index
+    }
+    
+    if ($implementedTypes -contains $Variable.Type) {
+        # Get template
+        $ini = Get-Content -Path "$($templatesDir)$($Variable.Type).inc" -Raw
+        # Replace {Index} with $Incdex
+        $ini = Filter-Template -Template $ini -Properties $nonVariableProperties
+        $ini = Filter-Template -Template $ini -Properties $Variable
     } else {
         $ini = ""
     }
 
     return $ini
+
+}
+
+function Filter-Template {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]
+        $Template,
+        [Parameter(Mandatory=$true)]
+        [System.Collections.Hashtable]
+        $Properties
+    )
+
+    # Iterate over the template for each property of the variable
+    $Properties.GetEnumerator() | ForEach-Object {
+        $Template = $Template.replace("{$($_.Key)}","$($_.Value)")
+    }
+
+    return $Template
+
+}
+
+function Remove-Newline {
+    param (
+        [Parameter()]
+        [string]
+        $String
+    )
+
+    $String = $String -replace "`t|`n|`r",""
+
+    return $String
 
 }

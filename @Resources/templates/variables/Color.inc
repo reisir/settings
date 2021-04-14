@@ -1,12 +1,12 @@
-[Var{0}]
+[Var{Index}Title]
 Meter=String
-Text={1}
+Text={Name}
 MeterStyle=VarTitle
-[Var{0}Description]
+[Var{Index}Description]
 Meter=String
-Text={2}
+Text={Description}
 MeterStyle=VarDescription
-[Value{0}]
-Meter=String
-Text={3}
-MeterStyle=VarStringValue
+[Value{Index}]
+Meter=Shape
+Shape=Ellipse 20,20,20,20 | Fill Color {CurrentValue} | StrokeWidth 2 | Stroke Color 0,0,0
+MeterStyle=VarColorValue

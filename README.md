@@ -2,9 +2,9 @@
 
 Settings skin generator skin. Creates a settings skin from a variables.inc file
 
-## Notes to self:
+## TO-DO:
 
-The settings skin consists of variant skins which all have the categories menu included. The categories menu is controlled with #Selected#.
+* Yeet ./settings from the repo since it should always be automatically generated
 
 ## Skin structure example:
 

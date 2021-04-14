@@ -1,9 +1,16 @@
-[FirstItem]
+[FirstItemL]
+H=0
+W=0
+SolidColor=0,0,0,0
+Container=LeftPanel
+Y=0
+[FirstItemR]
 H=0
 W=0
 SolidColor=0,0,0,0
 Container=RightPanel
 Y=0
+
 
 [CategoryTitle]
 FontFace=#s_FontFace#
@@ -39,6 +46,11 @@ FontFace=#s_FontFace#
 AccurateText=1
 AntiAlias=1
 FontSize=#s_FontSize3#
+Padding=[#s_VariableItemPadding],[#s_VariableItemPadding],[#s_VariableItemPadding],[#s_VariableItemPadding]
+Container=RightPanel
+Y=0R
+
+[VarColorValue]
 Padding=[#s_VariableItemPadding],[#s_VariableItemPadding],[#s_VariableItemPadding],[#s_VariableItemPadding]
 Container=RightPanel
 Y=0R

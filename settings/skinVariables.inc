@@ -1,6 +1,7 @@
 [Variables]
 s_FontFace=Segoe UI
 s_IconFontFace=Segoe UI
+s_FontColor=0,0,0
 
 s_FontSize5 = 8
 s_FontSize4 = 10
@@ -24,4 +25,4 @@ s_LeftPanelBackgroundColor=200,200,200,200
 
 s_BackgroundRounding=5
 
-s_CurrentCategory=0
+s_CurrentCategory=1
