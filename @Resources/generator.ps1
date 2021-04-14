@@ -12,10 +12,13 @@ $settingsFile = $RmAPI.VariableStr("SettingsFile")
 # directories & files
 $testfile = "$($RmAPI.VariableStr('@'))test.inc"
 $generatedSkinFile = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\settings.ini"
+$skinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
 $categoriesDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\categories\"
 $settingsFilePath = "$($RmAPI.VariableStr('SKINSPATH'))$($skin)\@Resources\$($settingsFile)"
 
 function Construct {
+
+    Make-Directories
 
     # Template directory
     $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
@@ -41,6 +44,10 @@ function Construct {
 
     $ini > $generatedSkinFile
 
+}
+
+function Make-Directories {
+    New-Item -Path $skinDir -ItemType "directory" -Name "categories"
 }
 
 function Category-List {
