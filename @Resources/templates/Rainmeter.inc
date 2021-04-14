@@ -1,4 +1,5 @@
 [Rainmeter]
+Update=-1
 DefaultUpdateDivider=-1
 
 [Variables]
@@ -61,6 +62,20 @@ W=0
 Y=0
 X=0
 SolidColor=0,0,0,0
+
+[CategoryListItem]
+Y=0R
+FontSize=#s_FontSize3#
+FontFace=#s_FontFace#
+AccurateText=1
+AntiAlias=1
+
+[CategoryListSuperItem]
+Y=0R
+FontSize=#s_FontSize4#
+FontFace=#s_FontFace#
+AccurateText=1
+AntiAlias=1
 
 [CategoryTitle]
 FontFace=#s_FontFace#
