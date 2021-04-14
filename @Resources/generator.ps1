@@ -52,7 +52,7 @@ function Category-List {
     $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Side" = "L"}
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
     $listTemplate = Get-Content -Path "$($templatesDir)CategoryList.inc" -Raw
 
     $i = 0
@@ -60,6 +60,7 @@ function Category-List {
         $Properties = @{
             "Index" = $i
             "Category" = "$($category[0]).inc"
+            "Container" = "LeftPanel"
         }
         $ini += Filter-Template -Template $listTemplate -Properties $Properties
         $i++
@@ -149,11 +150,11 @@ function Category-Ini {
     $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Side" = "R"}
     $ini += Get-Content -Path "$($templatesDir)CategoryTitle.inc" -Raw
     $Properties = @{
         "Index" = $i
         "Title" = $category[0]
+        "Container" = "RightPanel"
     }
     $ini = Filter-Template -Template $ini -Properties $Properties
 
@@ -185,6 +186,7 @@ function Variable-Ini {
 
     $nonVariableProperties = @{
         "Index" = $Index
+        "Container" = "RightPanel"
     }
     
     if ($implementedTypes -contains $Variable.Type) {

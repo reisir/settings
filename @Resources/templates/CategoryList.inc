@@ -2,7 +2,7 @@
 Meter=String
 Text={Category}
 Y=0R
-Container=LeftPanel
+MeterStyle={Container}
 FontSize=#s_FontSize3#
 FontFace=#s_FontFace#
 AccurateText=1

@@ -1,15 +1,15 @@
 [Var{Index}]
 Meter=String
 Text={Name}
-MeterStyle=VarTitle
+MeterStyle=VarTitle | {Container}
 [Var{Index}Description]
 Meter=String
 Text={Description}
-MeterStyle=VarDescription
+MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=String
 Text={CurrentValue}
-MeterStyle=VarStringValue
+MeterStyle=VarStringValue | {Container}
 LeftMouseUpAction=!CommandMeasure "InputText{Index}" "ExecuteBatch 1"
 [InputText{Index}]
 Measure=Plugin

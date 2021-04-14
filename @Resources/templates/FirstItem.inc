@@ -1,3 +1,3 @@
 [First]
 Meter=Image
-MeterStyle=FirstItem{Side}
+MeterStyle=FirstItem | {Container}
