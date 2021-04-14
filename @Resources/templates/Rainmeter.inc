@@ -73,6 +73,12 @@ W=0
 Y=0
 X=0
 SolidColor=0,0,0,0
+[LastITem]
+H=0
+W=0
+Y=0R
+X=0
+SolidColor=0,0,0,0
 
 ;Category list styles
 

@@ -4,6 +4,7 @@ function Update {
 
 # Implemented types array
 $variableTypes = @("String", "Integer", "Color", "Toggle")
+$defaultVariableType = @("String")
 $categoryTypes = @("Default", "About")
 $listTypes = @("Default", "Super", "About")
 
@@ -66,7 +67,7 @@ function Category-List {
     $RmAPI.Log("Building category list.")
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
 
     $i = 0
     foreach ($category in $Settings) {
@@ -90,13 +91,16 @@ function Category-List {
         $i++
     }
 
+    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
+
     $ini > "$($generatedCategoriesDir)CategoryList.inc"
 
 }
 
 function Settings-Array {
     param (
-        [Parameter()]
+        [Parameter(Mandatory=$true)]
         [Alias("String")]
         $settingsFileContent
     )
@@ -193,9 +197,9 @@ function Filter-Hashtable {
 
 function Category-Ini {
     param (
-        [Parameter()]
+        [Parameter(Mandatory=$true)]
         $Category,
-        [Parameter()]
+        [Parameter(Mandatory=$true)]
         $i
     )
 
@@ -213,6 +217,7 @@ function Category-Ini {
 
     # First Item template
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "RightPanel"; "Type" = "CategoryItem"}
 
     # If category type is not implemented, make it Default
     if($categoryTypes -NotContains $category.Type) {
@@ -234,6 +239,9 @@ function Category-Ini {
         $j++
     }
 
+    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "RightPanel"; "Type" = "CategoryItem"}
+
     $ini > $file
 
 }
@@ -246,20 +254,22 @@ function Variable-Ini {
         $Index
     )
 
-    $nonVariableProperties = @{
+    # Properties used internally for skin generation, not user submitted
+    $internalVariableProperties = @{
         "Index" = $Index
         "Container" = "RightPanel"
     }
-    
-    if ($variableTypes -contains $Variable.Type) {
-        # Get template
-        $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Type).inc" -Raw
-        # Replace {Index} with $Incdex
-        $ini = Filter-Template -Template $ini -Properties $nonVariableProperties
-        $ini = Filter-Template -Template $ini -Properties $Variable
-    } else {
-        $ini = ""
+
+    # Default to string variable
+    if ($variableTypes -NotContains $Variable.Type) {
+        $Variable["Type"] = $defaultVariableType
     }
+    
+    # Get template for type
+    $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Type).inc" -Raw
+    # Filter template
+    $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
+    $ini = Filter-Template -Template $ini -Properties $Variable
 
     return $ini
 
