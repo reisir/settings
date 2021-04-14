@@ -3,7 +3,9 @@ function Update {
 }
 
 # Implemented types array
-$implementedTypes = @("String", "Integer", "Color", "Toggle")
+$variableTypes = @("String", "Integer", "Color", "Toggle")
+$categoryTypes = @("Default", "About")
+$listTypes = @("Default", "Super", "About")
 
 # variables from Rainmeter
 $skin = $RmAPI.VariableStr("Skin")
@@ -61,10 +63,10 @@ function Category-List {
         $Settings
     )
 
+    $RmAPI.Log("Building category list.")
+
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
     $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
-    $listTemplate = Get-Content -Path "$($listTemplatesDir)CategoryList.inc" -Raw
-    $superTemplate = Get-Content -Path "$($listTemplatesDir)SuperList.inc" -Raw
 
     $i = 0
     foreach ($category in $Settings) {
@@ -73,14 +75,18 @@ function Category-List {
             "Icon" = "$($category.Icon)"
             "Category" = "$($category.Title)"
             "Container" = "LeftPanel"
-            "LeftMouseUpAction" = " "
+            "LeftMouseUpAction" = "[!WriteKeyValue Variables s_CurrentCategory $i][!Refresh]"
         }
-        if ($category.Type -match "super") {
-            $ini += Filter-Template -Template $superTemplate -Properties $Properties
+
+        # If category type is not implemented, make it Default
+        if($listTypes -NotContains $category.Type) {
+            $type = "Default"
         } else {
-            $Properties.LeftMouseUpAction = "[!WriteKeyValue Variables s_CurrentCategory $i][!Refresh]"
-            $ini += Filter-Template -Template $listTemplate -Properties $Properties
+            $type = $category.Type
         }
+
+        $template = Get-Content -Path "$($listTemplatesDir)$($type).inc" -Raw
+        $ini += Filter-Template -Template $template -Properties $Properties
         $i++
     }
 
@@ -98,7 +104,7 @@ function Settings-Array {
     # Regex patterns
     $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
     $variablePattern = '(?s-m)(;;.*?)\n(?![;$]).*?[\n|$]'
-    $variableProperties = @{
+    $variablePatterns = @{
         "Type" = '(?<=;;Type=)(.*?)(?=\n)'
         "Name" = '(?<=;;Name=)(.*?)(?=\n)'
         "Description" = '(?<=;;Description=)(.*?)(?=\n)'
@@ -106,7 +112,7 @@ function Settings-Array {
         "RealName" = '(?m-s)^(?!;)(.*?)(?==)'
         "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n)'
     }
-    $categoryProperties = @{
+    $categoryPatterns = @{
         "Title" = '(?s-m)(?<=;@)(.*?)(?=\n)'
         "Type" = '(?<=;!Type=)(.*?)(?=\n)'
         "Icon" = '(?<=;!Icon=)(.*?)(?=\n)'
@@ -124,7 +130,7 @@ function Settings-Array {
         foreach ($category in $_.Matches) {
 
             # Filter category hashtables
-            $c = Filter-Hashtable -String $category -Properties $categoryProperties
+            $c = Filter-Hashtable -String $category -Properties $categoryPatterns
 
             # Debug log
             $RmAPI.Log("Building category: $($c.Title).")
@@ -139,7 +145,7 @@ function Settings-Array {
                 # Iterate over each matched $variable in $_.Matches
                 foreach ($variable in $_.matches) {
                     # Filter $variable hashtables
-                    $var = Filter-Hashtable -String $variable -Properties $variableProperties
+                    $var = Filter-Hashtable -String $variable -Properties $variablePatterns
 
                     # Debug log
                     $RmAPI.Log("$($var.Name): $($var.keys)")
@@ -195,14 +201,8 @@ function Category-Ini {
 
     # path to current category.inc
     $file = "$($generatedCategoriesDir)$($i).inc"
-        
-    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
     
-    if ($Category.Icon) {
-        $ini += Get-Content -Path "$($categoryTemplatesDir)CategoryTitle.inc" -Raw
-    } else {
-        $ini += Get-Content -Path "$($categoryTemplatesDir)CategoryTitleIconless.inc" -Raw
-    }
+    # Properties to replace in templates
     $Properties = @{
         "Index" = $i
         "Title" = $Category.Title
@@ -211,7 +211,19 @@ function Category-Ini {
         "Description" = $Category.Description
     }
 
-    $ini = Filter-Template -Template $ini -Properties $Properties
+    # First Item template
+    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+
+    # If category type is not implemented, make it Default
+    if($categoryTypes -NotContains $category.Type) {
+        $type = "Default"
+    } else {
+        $type = $category.Type
+    }
+
+    # Build category from template
+    $template = Get-Content -Path "$($categoryTemplatesDir)$($type).inc" -Raw
+    $ini += Filter-Template -Template $template -Properties $Properties
 
     # get variables hashtable array
     $variables = $Category.Variables
@@ -239,7 +251,7 @@ function Variable-Ini {
         "Container" = "RightPanel"
     }
     
-    if ($implementedTypes -contains $Variable.Type) {
+    if ($variableTypes -contains $Variable.Type) {
         # Get template
         $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Type).inc" -Raw
         # Replace {Index} with $Incdex

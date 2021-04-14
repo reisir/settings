@@ -10,3 +10,4 @@ MeterStyle=VarDescription | {Container}
 Meter=Shape
 Shape=Ellipse 20,20,20,20 | Fill Color {CurrentValue} | StrokeWidth 2 | Stroke Color 0,0,0
 MeterStyle=VarColorValue | {Container}
+

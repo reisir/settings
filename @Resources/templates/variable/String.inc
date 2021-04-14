@@ -17,11 +17,12 @@ Plugin=InputText
 SolidColor=#s_RightPanelBackgroundColor#
 FontColor=#s_FontColor#
 FontFace=#s_FontFace#
-FontSize=[Value{Index}:FontSize]
-X=[Value{Index}:X]
-Y=[Value{Index}:Y]
+FontSize=#s_InputTextFontSize#
+X=([Value{Index}:X] + [#s_VariableLeftPadding])
+Y=([Value{Index}:Y] + [#s_VariablePadding])
 H=[Value{Index}:H]
-W=[Value{Index}:W]
+W=([RightPanelContainer:W] - ([Value{Index}:X] * 2))
 DynamicVariables=1
 DefaultValue="Give new value"
 Command1=[!SetOption "Value{Index}" Text "$UserInput$"][!UpdateMeter "Value{Index}"][!Redraw]
+
