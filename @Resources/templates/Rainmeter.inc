@@ -7,6 +7,8 @@ s_FontFace=Segoe UI
 s_IconFontFace=Segoe MDL2 Assets
 s_FontColor=0,0,0
 
+s_ScrollSpeed = 10
+s_Scroll = 0
 
 s_FontSize5 = 8
 s_FontSize4 = 10
@@ -54,12 +56,16 @@ BackgroundModifiers=Fill Color #s_LeftPanelBackgroundColor# | StrokeWidth 0
 Meter=Shape
 Shape=Rectangle 0,0,(#s_LeftPanelW#),(#s_PanelH#) | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
+MouseScrollDownAction=[!EnableMeasure "ScrollDownListItem"][!UpdateMeasure "ScrollDownListItem"]
+MouseScrollUpAction=[!EnableMeasure "ScrollUpListItem"][!UpdateMeasure "ScrollUpListItem"]
 
 [RightPanelContainer]
 Meter=Shape
 Shape=Rectangle 0,0,(#s_RightPanelW#),(#s_PanelH#) | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
 X=(#s_LeftPanelW#)
+MouseScrollDownAction=[!EnableMeasure "ScrollDownCategoryItem"][!UpdateMeasure "ScrollDownCategoryItem"]
+MouseScrollUpAction=[!EnableMeasure "ScrollUpCategoryItem"][!UpdateMeasure "ScrollUpCategoryItem"]
 
 [LeftPanel]
 Container=LeftPanelContainer
@@ -70,9 +76,10 @@ Container=RightPanelContainer
 [FirstItem]
 H=0
 W=0
-Y=0
+Y=[#s_Scroll]
 X=0
 SolidColor=0,0,0,0
+DynamicVariables=1
 [LastITem]
 H=0
 W=0

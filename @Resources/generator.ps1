@@ -114,7 +114,7 @@ function Settings-Array {
         "Description" = '(?<=;;Description=)(.*?)(?=\n)'
         "DefaultValue" = '(?<=;;DefaultValue=)(.*?)(?=\n)'
         "RealName" = '(?m-s)^(?!;)(.*?)(?==)'
-        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n)'
+        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n|$)'
     }
     $categoryPatterns = @{
         "Title" = '(?s-m)(?<=;@)(.*?)(?=\n)'
@@ -124,8 +124,31 @@ function Settings-Array {
         "Description" = '(?<=;!Description=)(.*?)(?=\n)'
     }
 
+    # Fallback pattern for getting variables from unformatted files
+    $unformattedVariablePattern = '(?sm)(?<=[^;])^([^;]+?)$'
+
     # Declare $settings as an empty array to make sure that $settings is an array
     $settings = @()
+
+    # Handle unformatted variable files
+    if($settingsFileContent -notmatch $variablePattern) {
+        $RmAPI.LogWarning("Filtering unformatted variables file")
+        $c = @{"Title" = "$skin settings"; "Variables" = @()}
+        Select-String -Pattern $unformattedVariablePattern -input $settingsFileContent -AllMatches | Foreach {
+            foreach($match in $_.Matches) {
+                $var = Filter-Hashtable -Properties $variablePatterns -String $match
+                # check if processing empty $match
+                if($var.RealName) {
+                    $RmAPI.Log("Matched unformatted variable: $($var.RealName)")
+                    $var["Name"] = $var["RealName"]
+                    $var["Description"] = " "
+                    $c.Variables += $var
+                }
+            }
+        }
+        $settings += $c
+        return $settings
+    }
 
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     Select-String -Pattern $categoryPattern -input $settingsFileContent -AllMatches | Foreach {
@@ -158,7 +181,7 @@ function Settings-Array {
                     $c.Variables += , $var
                 }
             }
-            
+
             # Add the filtered category hashtable to the $settings array 
             $settings += , $c
 
@@ -190,7 +213,7 @@ function Filter-Hashtable {
             $hash.Add("$($_.Key)",$s)
         }
     }
-    
+
     return $hash
 
 }
@@ -205,7 +228,7 @@ function Category-Ini {
 
     # path to current category.inc
     $file = "$($generatedCategoriesDir)$($i).inc"
-    
+
     # Properties to replace in templates
     $Properties = @{
         "Index" = $i
@@ -264,7 +287,7 @@ function Variable-Ini {
     if ($variableTypes -NotContains $Variable.Type) {
         $Variable["Type"] = $defaultVariableType
     }
-    
+
     # Get template for type
     $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Type).inc" -Raw
     # Filter template
