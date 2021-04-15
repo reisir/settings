@@ -7,5 +7,6 @@ Meter=String
 Text={Category}
 MeterStyle=CategoryListItem | {Container}
 X=([ListIcon{Index}:W] > #s_ListIconLeftPadding# ? ([ListIcon{Index}:W]) : ([#s_ListIconLeftPadding] - [#s_ListItemLeftPadding]))r
-LeftMouseUpAction={LeftMouseUpAction}
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory {Index} "includes\Variables.inc"][!Refresh]
+
 

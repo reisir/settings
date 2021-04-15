@@ -2,33 +2,36 @@ function Update {
 
 }
 
-# Implemented types array
+# Implemented types
 $variableTypes = @("String", "Integer", "Color", "Toggle")
 $defaultVariableType = @("String")
 $categoryTypes = @("Default", "About")
 $listTypes = @("Default", "Super", "About")
 
-# variables from Rainmeter
-$skin = $RmAPI.VariableStr("Skin")
-$settingsFile = $RmAPI.VariableStr("SettingsFile")
-$settingsFilePath = "$($RmAPI.VariableStr('SKINSPATH'))$($skin)\@Resources\$($settingsFile)"
+# Variables from Rainmeter
+$settingsFilePath = "$($RmAPI.VariableStr('s_SettingsFile'))"
 
-# directories & files
+# Testfile
 $testfile = "$($RmAPI.VariableStr('@'))test.inc"
-$skinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
 
-$generatedCategoriesDir = "$($skinDir)categories\"
-$generatedSkinFile = "$($skinDir)\settings.ini"
-
-# template directories
+# Generator directories
+$includeDir = "$($RmAPI.VariableStr('@'))includes\"
 $templatesDir = "$($RmAPI.VariableStr('@'))templates\"
+$variableTemplatesDir = "$($templatesDir)variable\"
 $categoryTemplatesDir = "$($templatesDir)category\"
 $listTemplatesDir = "$($templatesDir)list\"
-$variableTemplatesDir = "$($templatesDir)variable\"
+
+# Generated directories
+$generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
+$generatedCategoriesDir = "$($generatedSkinDir)categories\"
+$generatedIncludeDir = "$($generatedSkinDir)includes\"
+
+# Generated files
+$generatedSkinFile = "$($generatedSkinDir)settings.ini"
 
 function Construct {
-
-    Make-Directories
+    # Reset directories, copy files etc.
+    Prepare-Directories
 
     # Read settings file
     $settingsFileContent = Get-Content $settingsFilePath -Raw
@@ -50,52 +53,6 @@ function Construct {
     Category-List -Settings $settings
 
     $ini > $generatedSkinFile
-
-}
-
-function Make-Directories {
-    New-Item -Path $skinDir -ItemType "directory" -Name "categories"
-    Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
-}
-
-function Category-List {
-    param(
-        [Parameter(Mandatory=$true)]
-        $Settings
-    )
-
-    $RmAPI.Log("Building category list.")
-
-    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
-
-    $i = 0
-    foreach ($category in $Settings) {
-        $Properties = @{
-            "Index" = $i
-            "Icon" = "$($category.Icon)"
-            "Category" = "$($category.Title)"
-            "Container" = "LeftPanel"
-            "LeftMouseUpAction" = "[!WriteKeyValue Variables s_CurrentCategory $i][!Refresh]"
-        }
-
-        # If category type is not implemented, make it Default
-        if($listTypes -NotContains $category.Type) {
-            $type = "Default"
-        } else {
-            $type = $category.Type
-        }
-
-        $template = Get-Content -Path "$($listTemplatesDir)$($type).inc" -Raw
-        $ini += Filter-Template -Template $template -Properties $Properties
-        $i++
-    }
-
-    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
-
-    $ini > "$($generatedCategoriesDir)CategoryList.inc"
-
 }
 
 function Settings-Array {
@@ -133,7 +90,7 @@ function Settings-Array {
     # Handle unformatted variable files
     if($settingsFileContent -notmatch $variablePattern) {
         $RmAPI.LogWarning("Filtering unformatted variables file")
-        $c = @{"Title" = "$skin settings"; "Variables" = @()}
+        $c = @{"Title" = "settings"; "Variables" = @()}
         Select-String -Pattern $unformattedVariablePattern -input $settingsFileContent -AllMatches | Foreach {
             foreach($match in $_.Matches) {
                 $var = Filter-Hashtable -Properties $variablePatterns -String $match
@@ -189,32 +146,6 @@ function Settings-Array {
     }
 
     return $settings
-
-}
-
-function Filter-Hashtable {
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]
-        $String,
-        [Parameter(Mandatory=$true)]
-        [System.Collections.Hashtable]
-        $Properties
-    )
-
-    $hash = @{}
-    $Properties.GetEnumerator() | ForEach-Object {
-        if("$($String)" -match "$($_.Value)") {
-            # Save the matched string
-            $s = $Matches[1]
-            if("$($_.Key)" -notmatch "UnfilteredVariables") {
-                $s = Remove-Newline -String $s
-            }
-            $hash.Add("$($_.Key)",$s)
-        }
-    }
-
-    return $hash
 
 }
 
@@ -298,6 +229,71 @@ function Variable-Ini {
 
 }
 
+function Category-List {
+    param(
+        [Parameter(Mandatory=$true)]
+        $Settings
+    )
+
+    $RmAPI.Log("Building category list.")
+
+    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
+
+    $i = 0
+    foreach ($category in $Settings) {
+        $Properties = @{
+            "Index" = $i
+            "Icon" = "$($category.Icon)"
+            "Category" = "$($category.Title)"
+            "Container" = "LeftPanel"
+        }
+
+        # If category type is not implemented, make it Default
+        if($listTypes -NotContains $category.Type) {
+            $type = "Default"
+        } else {
+            $type = $category.Type
+        }
+
+        $template = Get-Content -Path "$($listTemplatesDir)$($type).inc" -Raw
+        $ini += Filter-Template -Template $template -Properties $Properties
+        $i++
+    }
+
+    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
+
+    $ini > "$($generatedCategoriesDir)CategoryList.inc"
+
+}
+
+function Filter-Hashtable {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]
+        $String,
+        [Parameter(Mandatory=$true)]
+        [System.Collections.Hashtable]
+        $Properties
+    )
+
+    $hash = @{}
+    $Properties.GetEnumerator() | ForEach-Object {
+        if("$($String)" -match "$($_.Value)") {
+            # Save the matched string
+            $s = $Matches[1]
+            if("$($_.Key)" -notmatch "UnfilteredVariables") {
+                $s = Remove-Newline -String $s
+            }
+            $hash.Add("$($_.Key)",$s)
+        }
+    }
+
+    return $hash
+
+}
+
 function Filter-Template {
     param(
         [Parameter(Mandatory=$true)]
@@ -328,4 +324,15 @@ function Remove-Newline {
 
     return $String
 
+}
+
+function Prepare-Directories {
+    # Create directories
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "categories"
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "includes"
+    # Remove files in generated directories
+    Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
+    Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    # Copy Includes to generated skin
+    Copy-Item -Path "$includeDir*" -Include "*.inc" -Destination $generatedIncludeDir -Recurse
 }
