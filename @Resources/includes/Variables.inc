@@ -54,3 +54,5 @@ s_SelectedColor=007acc
 s_GeneratorRightPanelWidth=350
 s_GeneratorLeftPanelWidth=50
 s_GeneratorPanelHeight=300
+
+s_VarTitleNudge=-1

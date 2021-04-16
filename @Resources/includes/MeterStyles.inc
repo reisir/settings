@@ -4,7 +4,7 @@ X=0
 Y=0R
 FontSize=#s_FontSize3#
 FontFace=#s_IconFontFace#
-Padding=[#s_ListIconLeftPadding],[#s_ListIconTopPadding],0,[#s_ListItemPadding]
+Padding=([#s_ListIconLeftPadding] + [#s_VarTitleNudge]),[#s_ListIconTopPadding],0,[#s_ListItemPadding]
 AccurateText=1
 AntiAlias=1
 
@@ -63,15 +63,19 @@ AccurateText=1
 AntiAlias=1
 FontSize=#s_FontSize2#
 FontWeight=#s_TitleFontWeight#
-Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],[#s_VariablePadding]
+Padding=0,[#s_VariableTopPadding],[#s_VariablePadding],[#s_VariablePadding]
 Y=0R
+X=[#s_VariableLeftPadding]
+InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
+InlinePattern=^.
 
 [VarDescription]
 FontFace=#s_FontFace#
 AccurateText=1
 AntiAlias=1
+X=[#s_VariableLeftPadding]
 FontSize=#s_FontSize4#
-Padding=[#s_VariableLeftPadding],0,[#s_VariablePadding],0
+Padding=0,0,[#s_VariablePadding],0
 Y=(-[#s_VariablePadding])R
 
 [VarStringValue]

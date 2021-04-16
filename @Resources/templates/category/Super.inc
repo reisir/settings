@@ -1,6 +1,6 @@
 [Title{Index}]
 Meter=String
-Text={Icon} {Title}
+Text={Icon} {Name}
 MeterStyle=CategoryTitle | {Container}
 InlineSetting=Face | Segoe MDL2 Assets
 InlinePattern={Icon}

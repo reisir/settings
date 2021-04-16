@@ -12,6 +12,7 @@ Shape=Rectangle 0,0,(#s_LeftPanelW#),(#s_PanelH#) | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
 MouseScrollDownAction=[!EnableMeasure "ScrollDownListItem"][!UpdateMeasure "ScrollDownListItem"]
 MouseScrollUpAction=[!EnableMeasure "ScrollUpListItem"][!UpdateMeasure "ScrollUpListItem"]
+MouseActionCursor=0
 
 [RightPanelContainer]
 Meter=Shape
@@ -20,6 +21,7 @@ PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
 X=(#s_LeftPanelW#)
 MouseScrollDownAction=[!EnableMeasure "ScrollDownCategoryItem"][!UpdateMeasure "ScrollDownCategoryItem"]
 MouseScrollUpAction=[!EnableMeasure "ScrollUpCategoryItem"][!UpdateMeasure "ScrollUpCategoryItem"]
+MouseActionCursor=0
 
 [LeftPanel]
 Container=LeftPanelContainer
