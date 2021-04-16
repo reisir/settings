@@ -30,6 +30,7 @@ DynamicVariables=1
 Y=0r
 FontSize=#s_FontSize2#
 FontFace=#s_FontFace#
+FontWeight=500
 Padding=[#s_ListItemLeftPadding],[#s_ListItemTopPadding],[#s_ListItemPadding],[#s_ListItemPadding]
 AccurateText=1
 AntiAlias=1
@@ -62,7 +63,7 @@ AccurateText=1
 AntiAlias=1
 FontSize=#s_FontSize2#
 FontWeight=#s_TitleFontWeight#
-Padding=[#s_VariableLeftPadding],[#s_VariablePadding],[#s_VariablePadding],[#s_VariablePadding]
+Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],[#s_VariablePadding]
 Y=0R
 
 [VarDescription]
@@ -78,16 +79,14 @@ FontFace=#s_FontFace#
 AccurateText=1
 AntiAlias=1
 FontSize=#s_FontSize3#
-Padding=[#s_VariableLeftPadding],[#s_VariablePadding],[#s_VariablePadding],[#s_VariablePadding]
+Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],0
 Y=0R
 
 [VarToggleValue]
-Padding=[#s_VariableLeftPadding],[#s_VariablePadding],[#s_VariablePadding],[#s_VariablePadding]
-X=([#s_ToggleSize] / 2)
-Y=0R
-
+X=(([#s_ToggleSize] / 2) + [#s_VariableLeftPadding])
+DynamicVariables=1
 
 [VarColorValue]
-Padding=[#s_VariableLeftPadding],[#s_VariablePadding],[#s_VariablePadding],[#s_VariablePadding]
+Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],0
 Y=0R
 

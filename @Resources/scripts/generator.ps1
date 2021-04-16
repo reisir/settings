@@ -42,6 +42,10 @@ function Construct {
     # Variable to hold generated .ini
     # Get rainmeter section from template
     $ini = Get-Content -Path "$($templatesDir)Rainmeter.inc" -Raw
+    $rainmeterTemplateProperties = @{
+        "SettingsFile" = $settingsFilePath
+    }
+    $ini = Filter-Template -Template $ini -Properties $rainmeterTemplateProperties
 
     # Construct categories
     $i = 0
@@ -212,6 +216,7 @@ function Variable-Ini {
     $internalVariableProperties = @{
         "Index" = $Index
         "Container" = "RightPanel"
+        "SettingsFile" = $settingsFilePath
     }
 
     # Default to string variable
