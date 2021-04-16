@@ -108,7 +108,7 @@ function Settings-Array {
     $settings = @()
 
     # Handle unformatted variable files
-    if($settingsFileContent -notmatch $variablePattern) {
+    if($settingsFileContent -notmatch $categoryPattern) {
         $RmAPI.LogWarning("Filtering unformatted variables file")
         $c = @{"Name" = "settings"; "Variables" = @()}
         Select-String -Pattern $unformattedVariablePattern -input $settingsFileContent -AllMatches | Foreach {
