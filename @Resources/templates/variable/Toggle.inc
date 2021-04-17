@@ -17,6 +17,7 @@ Hidden=([#{RealName}] - 1)
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
 MeterStyle=VarToggleValue | {Container}
 LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 0 "{SettingsFile}"][!SetVariable "{RealName}" 0][!Update][!Redraw][!Log "Toggled {Name} off"]
+Hidden={Hidden}
 
 [ToggleOff{Index}]
 Meter=Shape
@@ -28,11 +29,13 @@ Hidden=([#{RealName}])
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
 MeterStyle=VarToggleValue | {Container}
 LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 1 "{SettingsFile}"][!SetVariable "{RealName}" 1][!Update][!Redraw][!Log "Toggled {Name} on"]
+Hidden={Hidden}
 
 [ClearFloat{Index}]
 Meter=Image
 W=100
 H=([#s_VariableTopPadding] + [#s_ToggleSize])
+Hidden={Hidden}
 MeterStyle={Container}
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H])
 DynamicVariables=1

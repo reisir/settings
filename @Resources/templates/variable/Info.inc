@@ -10,4 +10,6 @@ MeterStyle=VarDescription | {Container}
 Meter=String
 Text={CurrentValue}
 MeterStyle=VarStringValue | {Container}
+Hidden={Hidden}
+LeftMouseUpAction=["{CurrentValue}"]
 

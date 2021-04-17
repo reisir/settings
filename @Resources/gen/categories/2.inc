@@ -2,7 +2,7 @@
 Meter=String
 Text=Documentation
 MeterStyle=CategoryTitle | GenRight
-X=[#s_VariableLeftPadding]
+X=[#s_VariableXPadding]
 Container=GenRightContainer
 
 [CategoryDescription0]
@@ -14,12 +14,12 @@ MeterStyle=VarDescription | GenRight
 Meter=String
 Text=Settings Templates
 MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],0,0
+Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
 [Value0]
 Meter=String
 Text=https://github.com/sceleri/settings
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableLeftPadding] * 4))
-Padding=[#s_VariableLeftPadding],0,0,0
+W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
+Padding=[#s_VariableXPadding],0,0,0
 ClipString=2
 MeterStyle=VarStringValue | GenRight
 
@@ -27,12 +27,12 @@ MeterStyle=VarStringValue | GenRight
 Meter=String
 Text=RainDoc syntax
 MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],0,0
+Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
 [Value1]
 Meter=String
 Text=https://github.com/sceleri/settings
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableLeftPadding] * 4))
-Padding=[#s_VariableLeftPadding],0,0,0
+W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
+Padding=[#s_VariableXPadding],0,0,0
 ClipString=2
 MeterStyle=VarStringValue | GenRight
 

@@ -81,6 +81,7 @@ function Settings-Array {
         "Name" = '(?<=;;Name=)(.*?)(?=\n)'
         "Description" = '(?<=;;Description=)(.*?)(?=\n)'
         "DefaultValue" = '(?<=;;DefaultValue=)(.*?)(?=\n)'
+        "Hidden" = '(?<=;;Hidden=)(.*?)(?=\n)'
         "RealName" = '(?m-s)^(?!;)(.*?)(?==)'
         "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n|$)'
     }
@@ -192,8 +193,8 @@ function Category-Ini {
     }
 
     # First Item template
-    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "RightPanel"}
+    $template = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
+    $ini = Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
 
     # If category type is not implemented, make it Default
     if($categoryTypes -NotContains $Category.Properties.Type) {
@@ -206,17 +207,19 @@ function Category-Ini {
     $template = Get-Content -Path "$($categoryTemplatesDir)$($type).inc" -Raw
     $ini += Filter-Template -Template $template -Properties $Properties
 
-    # get variables hashtable array
-    $variables = $Category.Variables
-
     $j = 0
-    foreach ($var in $variables) {
+    foreach ($var in $Category.Variables) {
         $ini += Variable-Ini -Variable $var -Index $j
         $j++
     }
 
-    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "RightPanel"}
+    if(($i -eq 0) -and ($Category.Properties.Type -match "About")) {
+        $template = Get-Content -Path "$($variableTemplatesDir)Credit.inc" -Raw
+        $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
+    }
+
+    $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
+    $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
 
     $ini > $file
 
@@ -309,8 +312,10 @@ function Filter-Hashtable {
             if("$($_.Key)" -notmatch "UnfilteredVariables") {
                 $s = Remove-Newline -String $s
             }
-            $hash.Add("$($_.Key)",$s)
+        } else {
+            $s = " "
         }
+        $hash.Add("$($_.Key)",$s)
     }
 
     return $hash

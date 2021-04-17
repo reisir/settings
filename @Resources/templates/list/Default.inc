@@ -2,7 +2,7 @@
 Meter=String
 Text={Icon}
 MeterStyle=CategoryListIcon | {Container}
-[Category{Index}]
+[ListItem{Index}]
 Meter=String
 Text={Category}
 MeterStyle=CategoryListItem | {Container}

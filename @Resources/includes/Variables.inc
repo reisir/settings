@@ -25,7 +25,7 @@ s_ListItemTopPadding=7
 s_ListIconTopPadding=10
 
 s_VariablePadding=20
-s_VariableLeftPadding=20
+s_VariableXPadding=20
 s_VariableTopPadding=10
 
 s_CategoryTitleTopPadding=35
@@ -61,3 +61,4 @@ s_ColorStrokeWidth=2
 s_ColorStrokeColor=[#s_FontColor]
 
 s_VarTitleNudge=-1
+

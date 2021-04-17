@@ -2,7 +2,7 @@
 Meter=String
 Text=Settings
 MeterStyle=CategoryTitle | GenRight
-X=[#s_VariableLeftPadding]
+X=[#s_VariableXPadding]
 Container=GenRightContainer
 
 [CategoryDescription0]
@@ -32,7 +32,7 @@ InlineSetting=Face | [#s_IconFontFace]
 InlinePattern=[\xE90F]
 MeterStyle=Center | CategoryTitle | GenRight
 Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_VariablePadding])
-LeftMouseUpAction=[!CommandMeasure Generator Construct][!Delay 1][!ActivateConfig "Settings\settings"][!Refresh "Settings\settings"]
+LeftMouseUpAction=[!CommandMeasure Generator Construct][!Delay 1][!RefreshApp]
 
 ;[GenerateIcon]
 ;Meter=String

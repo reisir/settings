@@ -11,6 +11,7 @@ Meter=String
 Text={CurrentValue}
 MeterStyle=VarStringValue | {Container}
 LeftMouseUpAction=[!CommandMeasure "InputText{Index}" "ExecuteBatch 1"]
+Hidden={Hidden}
 [InputText{Index}]
 Measure=Plugin
 Plugin=InputText
@@ -18,7 +19,8 @@ SolidColor=#s_RightPanelBackgroundColor#
 FontColor=#s_FontColor#
 FontFace=#s_FontFace#
 FontSize=#s_InputTextFontSize#
-X=([Value{Index}:X] + [#s_VariableLeftPadding])
+Disabled={Hidden}
+X=([Value{Index}:X] + [#s_VariableXPadding])
 Y=([Value{Index}:Y] + [#s_VariablePadding])
 H=[Value{Index}:H]
 W=([RightPanelContainer:W] - ([Value{Index}:X] * 2))
