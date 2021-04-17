@@ -6,6 +6,7 @@ MeterStyle=VarTitle | {Container}
 Meter=String
 Text={Description}
 MeterStyle=VarDescription | {Container}
+
 [ToggleOn{Index}]
 Meter=Shape
 Shape=Line 0,0,([#s_ToggleLength]),0 | Extend Line
@@ -13,9 +14,10 @@ Shape2=Ellipse ([#s_TogglePadding]/2),0,(([#s_ToggleSize] - ([#s_TogglePadding] 
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#{RealName}] - 1)
-Y=([#s_VariablePadding])R
+Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
 MeterStyle=VarToggleValue | {Container}
-LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 0 "{SettingsFile}"][!SetOption "ToggleOff{Index}" Hidden 0][!SetOption "ClearFloat{Index}" Hidden 1][!UpdateMeter "ToggleOff{Index}"][!SetOption "ToggleOn{Index}" Hidden 0][!UpdateMeter "ToggleOn{Index}"][!Redraw][!Log "Toggled {Name} off"]
+LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 0 "{SettingsFile}"][!SetVariable "{RealName}" 0][!Update][!Redraw][!Log "Toggled {Name} off"]
+
 [ToggleOff{Index}]
 Meter=Shape
 Shape=Line 0,0,([#s_ToggleLength]),0 | Extend Line
@@ -23,16 +25,15 @@ Shape2=Ellipse (([#s_ToggleLength]) - ([#s_TogglePadding]/2)),0,(([#s_ToggleSize
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#{RealName}])
-Y=0r
+Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
 MeterStyle=VarToggleValue | {Container}
-LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 1 "{SettingsFile}"][!SetOption "ToggleOff{Index}" Hidden 1][!SetOption "ClearFloat{Index}" Hidden 0][!UpdateMeter "ToggleOff{Index}"][!SetOption "ToggleOn{Index}" Hidden 1][!UpdateMeter "ToggleOn{Index}"][!Redraw][!Log "Toggled {Name} on"]
+LeftMouseUpAction=[!WriteKeyValue Variables "{RealName}" 1 "{SettingsFile}"][!SetVariable "{RealName}" 1][!Update][!Redraw][!Log "Toggled {Name} on"]
+
 [ClearFloat{Index}]
 Meter=Image
-W=10
-H=([#s_VariablePadding])
-Hidden=([#{RealName}] - 1)
-SolidColor=255,0,0
+W=100
+H=([#s_VariableTopPadding] + [#s_ToggleSize])
 MeterStyle={Container}
-X=0r
-Y=0R
+Y=([Var{Index}Description:Y] + [Var{Index}Description:H])
+DynamicVariables=1
 

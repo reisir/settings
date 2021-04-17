@@ -10,8 +10,8 @@ BackgroundModifiers=Fill Color #s_LeftPanelBackgroundColor# | StrokeWidth 0
 Meter=Shape
 Shape=Rectangle 0,0,(#s_LeftPanelW#),(#s_PanelH#) | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
-MouseScrollDownAction=[!EnableMeasure "ScrollDownListItem"][!UpdateMeasure "ScrollDownListItem"]
-MouseScrollUpAction=[!EnableMeasure "ScrollUpListItem"][!UpdateMeasure "ScrollUpListItem"]
+MouseScrollDownAction=[!EnableMeasure "ScrollDownLeftPanel"][!UpdateMeasure "ScrollDownLeftPanel"]
+MouseScrollUpAction=[!EnableMeasure "ScrollUpLeftPanel"][!UpdateMeasure "ScrollUpLeftPanel"]
 MouseActionCursor=0
 
 [RightPanelContainer]
@@ -19,8 +19,8 @@ Meter=Shape
 Shape=Rectangle 0,0,(#s_RightPanelW#),(#s_PanelH#) | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
 X=(#s_LeftPanelW#)
-MouseScrollDownAction=[!EnableMeasure "ScrollDownCategoryItem"][!UpdateMeasure "ScrollDownCategoryItem"]
-MouseScrollUpAction=[!EnableMeasure "ScrollUpCategoryItem"][!UpdateMeasure "ScrollUpCategoryItem"]
+MouseScrollDownAction=[!EnableMeasure "ScrollDownRightPanel"][!UpdateMeasure "ScrollDownRightPanel"]
+MouseScrollUpAction=[!EnableMeasure "ScrollUpRightPanel"][!UpdateMeasure "ScrollUpRightPanel"]
 MouseActionCursor=0
 
 [LeftPanel]
@@ -32,7 +32,6 @@ Container=RightPanelContainer
 [FirstItem]
 H=0
 W=0
-Y=[#s_Scroll]
 X=0
 SolidColor=0,0,0,0
 DynamicVariables=1

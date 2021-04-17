@@ -90,8 +90,8 @@ function Settings-Array {
     # Without this extra step, a category could end up with
     # its first variables description etc.
     $categorySplitPatterns = @{
-        "Properties" = '(?s-m);@(.*?)(?=$|;@|;\?|$[^;])'
-        "UnfilteredVariables" = '(?s-m);\?(.*)'
+        "Properties" = '(?s-m)(;@.*?)(?=$|;@|;\?|$[^;])'
+        "UnfilteredVariables" = '(?s-m)(;\?.*)'
     }
 
     $categoryPropertyPatterns = @{
@@ -147,7 +147,7 @@ function Settings-Array {
             # Get all $variablePattern matches from $c.UnfilteredVariables to %_ with Foreach
             Select-String -Pattern $variablePattern -input $c.UnfilteredVariables -AllMatches | Foreach {
                 # Debug log
-                $RmAPI.Log("Filtering variables from: $($_.Matches)")
+                $RmAPI.Log("Filtering variables from: $($_.matches)")
                 # Iterate over each matched $variable in $_.Matches
                 foreach ($variable in $_.matches) {
                     # Filter $variable hashtables
@@ -193,7 +193,7 @@ function Category-Ini {
 
     # First Item template
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "RightPanel"; "Type" = "CategoryItem"}
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "RightPanel"}
 
     # If category type is not implemented, make it Default
     if($categoryTypes -NotContains $Category.Properties.Type) {
@@ -216,7 +216,7 @@ function Category-Ini {
     }
 
     $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "RightPanel"; "Type" = "CategoryItem"}
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "RightPanel"}
 
     $ini > $file
 
@@ -261,7 +261,7 @@ function Category-List {
     $RmAPI.Log("Building category list.")
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
 
     $i = 0
     foreach ($category in $Settings) {
@@ -285,7 +285,7 @@ function Category-List {
     }
 
     $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"; "Type" = "ListItem"}
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"}
 
     $ini > "$($generatedCategoriesDir)CategoryList.inc"
 

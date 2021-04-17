@@ -1,6 +1,5 @@
 [Rainmeter]
-Update=1000
-DefaultUpdateDivider=-1
+Update=-1
 @IncludeSkinVariables={SettingsFile}
 @IncludeVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
 

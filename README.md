@@ -3,10 +3,9 @@
 Settings skin generator skin. Creates a settings skin from a variables.inc file
 
 ## TO-DO:
- * make $internalVariableProperties actually included in the $Variable hashtable
  * docs for templates
- * docs for "RainDoc" syntax
- * Change RainDoc to always read the first line as Type instead of type for variables and name for categories
+ * restructure variables in generator.ps1
+   * $internalVariableProperties etc. to the start of the script to make it easier to implement new stuff
 
 ## Skin structure example:
 

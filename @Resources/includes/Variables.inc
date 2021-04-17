@@ -4,7 +4,8 @@ s_IconFontFace=Segoe MDL2 Assets
 s_FontColor=0,0,0
 
 s_ScrollSpeed=10
-s_Scroll=0
+s_ScrollRightPanel=0
+s_ScrollLeftPanel=0
 
 s_FontSize5=8
 s_FontSize4=10
@@ -54,5 +55,9 @@ s_SelectedColor=007acc
 s_GeneratorRightPanelWidth=350
 s_GeneratorLeftPanelWidth=50
 s_GeneratorPanelHeight=300
+
+s_ColorSize=15
+s_ColorStrokeWidth=2
+s_ColorStrokeColor=[#s_FontColor]
 
 s_VarTitleNudge=-1

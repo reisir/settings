@@ -68,6 +68,7 @@ Y=0R
 X=[#s_VariableLeftPadding]
 InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
 InlinePattern=^.
+;SolidColor=0,255,255
 
 [VarDescription]
 FontFace=#s_FontFace#
@@ -77,6 +78,7 @@ X=[#s_VariableLeftPadding]
 FontSize=#s_FontSize4#
 Padding=0,0,[#s_VariablePadding],0
 Y=(-[#s_VariablePadding])R
+;SolidColor=0,255,0
 
 [VarStringValue]
 FontFace=#s_FontFace#
@@ -85,12 +87,13 @@ AntiAlias=1
 FontSize=#s_FontSize3#
 Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],0
 Y=0R
+;SolidColor=255,0,0
 
 [VarToggleValue]
 X=(([#s_ToggleSize] / 2) + [#s_VariableLeftPadding])
 DynamicVariables=1
 
 [VarColorValue]
-Padding=[#s_VariableLeftPadding],[#s_VariableTopPadding],[#s_VariablePadding],0
-Y=0R
+X=[#s_VariableLeftPadding]
+Y=[#s_VariableTopPadding]R
 

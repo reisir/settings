@@ -8,8 +8,14 @@ Text={Description}
 MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=Shape
-Shape=Ellipse 20,20,20,20 | Fill Color [#{RealName}] | StrokeWidth 2 | Stroke Color 0,0,0
+Shape=Ellipse [#s_ColorSize],[#s_ColorSize],[#s_ColorSize],[#s_ColorSize] | Fill Color [#{RealName}] | StrokeWidth [#s_ColorStrokeWidth] | Stroke Color [#s_ColorStrokeColor]
 MeterStyle=VarColorValue | {Container}
-LeftMouseUpAction=["#CURRENTPATH#addons\RainRGB4.exe" "VarName={RealName}" "FileName={SettingsFile}" "RefreshConfig=#CURRENTCONFIG#"][!Log "Picking colour {RealName}"]
-SolidColor=255,0,0
+LeftMouseUpAction=[!CommandMeasure "RainRGB{Index}" "Run"][!Log "Picking colour {RealName}"]
+[RainRGB{Index}]
+Measure=Plugin
+Plugin=RunCommand
+Program=""#CURRENTPATH#addons\RainRGB4RunCommand.exe""
+Parameter=""VarName={RealName}" "FileName={SettingsFile}" "RefreshConfig=-1""
+OutputType=ANSI
+FinishAction=[!Refresh]
 

@@ -1,25 +1,25 @@
-[Last{Type}]
+[Last{Container}]
 Meter=String
 Text=Last
 FontColor=0,0,0,0
 MeterStyle=LastItem | {Container}
 
-[ScrollDown{Type}]
+[ScrollDown{Container}]
 Measure=Calc
-Formula=[#s_Scroll] - [#s_ScrollSpeed]
-IfCondition=([Last{Type}:Y] > ([#s_PanelH]))
-IfTrueAction=[!SetVariable "s_Scroll" "[&ScrollDown{Type}]"][!DisableMeasure "ScrollDown{Type}"][!UpdateMeter "First{Type}"][!Redraw]
-IfFalseAction=[!DisableMeasure "ScrollDown{Type}"][!UpdateMeter "First{Type}"][!Redraw]
+Formula=[#s_Scroll{Container}] - [#s_ScrollSpeed]
+IfCondition=([Last{Container}:Y] > ([#s_PanelH] / 2))
+IfTrueAction=[!SetVariable "s_Scroll{Container}" "[&ScrollDown{Container}]"][!DisableMeasure "ScrollDown{Container}"][!Update][!Redraw]
+IfFalseAction=[!DisableMeasure "ScrollDown{Container}"]
 IfConditionMode=1
 Disabled=1
 DynamicVariables=1
 
-[ScrollUp{Type}]
+[ScrollUp{Container}]
 Measure=Calc
-Formula=[#s_Scroll] + [#s_ScrollSpeed]
-IfCondition=([First{Type}:Y] < 0)
-IfTrueAction=[!SetVariable "s_Scroll" "[&ScrollUp{Type}]"][!DisableMeasure "ScrollUp{Type}"][!UpdateMeter "First{Type}"][!Redraw]
-IfFalseAction=[!DisableMeasure "ScrollUp{Type}"][!UpdateMeter "First{Type}"][!Redraw]
+Formula=[#s_Scroll{Container}] + [#s_ScrollSpeed]
+IfCondition=([First{Container}:Y] < 0)
+IfTrueAction=[!SetVariable "s_Scroll{Container}" "[&ScrollUp{Container}]"][!DisableMeasure "ScrollUp{Container}"][!Update][!Redraw]
+IfFalseAction=[!DisableMeasure "ScrollUp{Container}"]
 IfConditionMode=1
 Disabled=1
 DynamicVariables=1
