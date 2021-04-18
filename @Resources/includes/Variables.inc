@@ -40,8 +40,8 @@ s_SelectedColor=007acc
 
 ; Color variables
 s_ColorSize=15
-s_ColorStrokeWidth=0
-s_ColorStrokeColor=[#s_FontColor]
+s_ColorStrokeWidth=1
+s_ColorStrokeColor=200,200,200
 s_ColorStringLeftPadding=10
 
 ; Category list

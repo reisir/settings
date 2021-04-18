@@ -80,22 +80,8 @@ function Settings-Array {
 
     # Handle unformatted variable files
     if($settingsFileContent -notmatch $categoryPattern) {
-        $RmAPI.LogWarning("Filtering unformatted variables file")
-        $c = @{"Name" = "settings"; "Variables" = @()}
-        Select-String -Pattern $unformattedVariablePattern -input $settingsFileContent -AllMatches | Foreach {
-            foreach($match in $_.Matches) {
-                $var = Filter-Hashtable -Properties $variablePatterns -String $match
-                # check if processing empty $match
-                if($var.RealName) {
-                    $RmAPI.Log("Matched unformatted variable: $($var.RealName)")
-                    $var["Name"] = $var["RealName"]
-                    $var["Description"] = " "
-                    $c.Variables += $var
-                }
-            }
-        }
-        $settings += $c
-        return $settings
+        $RmAPI.Log("Fuck you it's not formatted right")
+        return 
     }
 
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach

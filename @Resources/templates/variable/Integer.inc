@@ -8,9 +8,9 @@ Text={Description}
 MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=String
-Text={Value}
+Text=[#{Key}]
 MeterStyle=VarStringValue | {Container}
-LeftMouseUpAction=!CommandMeasure "InputText{Index}" "ExecuteBatch 1"
+LeftMouseUpAction=[!CommandMeasure "InputText{Index}" "ExecuteBatch All"][!Log "InputText{Index}"]
 Hidden={Hidden}
 [InputText{Index}]
 Measure=Plugin
@@ -26,7 +26,6 @@ H=[Value{Index}:H]
 W=([RightPanelContainer:W] - ([Value{Index}:X] * 2))
 DynamicVariables=1
 DefaultValue="Give new value"
-Command1=[!SetOption "Value{Index}" Text "$UserInput$"][!UpdateMeter "Value{Index}"][!Redraw]
-
+Command1=[!WriteKeyValue "Variables" "{Key}" "$UserInput$" "{SettingsFile}"][!Refresh]
 InputNumber=1
 
