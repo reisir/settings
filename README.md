@@ -2,21 +2,25 @@
 
 Settings is a Rainmeter skin that generates settings skins for other Rainmeter skins.
 
-It reads the target skins `settings.inc` file and generates meters and measures to both display and change the variables. 
+It reads the target skins variable file and generates meters and measures to both display and change the variables. 
 
-## Usage
+## Basic usage
 
-1. Drag & Drop your settings.inc on the generator skin.
-2. Confirm that the right skin and file is selected.
-3. Click on Generate.
+Drag & Drop your settings.inc on the generator skin.
+
+Confirm that the right skin and file is selected.
+
+Click on Generate.
    * This will remove any previous files in the settings directory.
 
-A generated settings skin should open. You can test it and confirm it's changing the right file. If it works, move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+A generated settings skin should open. You can test it and confirm it's changing the right file.
 
-If the generated skin looks like ass, [RTFM](https://github.com/sceleri/settings/wiki)
+Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to customize the generated skin.
+
+Once you're done, move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
 
 ## TO-DO:
- - [ ] Update RainDoc wiki to new Pipe syntax
+ - [x] Update RainDoc wiki to new Pipe syntax
  - [x] Write an example.inc
  - [ ] Write wiki for templates
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
@@ -25,4 +29,5 @@ If the generated skin looks like ass, [RTFM](https://github.com/sceleri/settings
  - [x] Make the generated skin look nicer
  - [ ] Another way to select file other than Drag & Drop
  - [ ] Add icon support for variables. Then move descriptions to X=0r instead of relying the padding being the same
+ - [ ] Add a scroll indicator
 

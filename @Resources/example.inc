@@ -5,11 +5,11 @@ Link=https://github.com/sceleri/settings/wiki
 
 ;@Topic | Name Personalization
 ;@Default | Name Font | Icon [\xE986]
-;?String | Name Font face | Description The font used throughout the skin | DefaultValue Segoe UI
+;?String | Name Font face | Description The font used throughout the skin
 FontFace=Segoe UI
-;?Color | Name Font color | DefaultValue 0,0,0 | Description Colour of all text elements
-FontColor=176,39,207
-;?String | Name Font size | Description The size of all text elements | DefaultValue 18
+;?Color | Name Font color | Description Colour of all text elements
+FontColor=43,43,43
+;?String | Name Font size | Description The size of all text elements
 FontSize=12
 
 ;@Topic | Name Skin settings
@@ -19,5 +19,5 @@ SkinHeight=300
 ;?Integer | Name Width
 SkinWidth=400
 ;@Default | Name Miscellanious
-;?Toggle | Name Enable automatic sizing | DefaultValue 1
+;?Toggle | Name Enable automatic sizing
 autosize=1
