@@ -14,7 +14,7 @@ Shape2=Ellipse ([#s_TogglePadding]/2),0,(([#s_ToggleSize] - ([#s_TogglePadding] 
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#{Key}] - 1)
-Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
+Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_ValueYPadding])
 MeterStyle=VarToggleValue | {Container}
 LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 0 "{SettingsFile}"][!SetVariable "{Key}" 0][!Update][!Redraw][!Log "Toggled {Name} off"]
 Hidden={Hidden}
@@ -26,17 +26,18 @@ Shape2=Ellipse (([#s_ToggleLength]) - ([#s_TogglePadding]/2)),0,(([#s_ToggleSize
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#{Key}])
-Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_VariableTopPadding])
+Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_ValueYPadding])
 MeterStyle=VarToggleValue | {Container}
 LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 1 "{SettingsFile}"][!SetVariable "{Key}" 1][!Update][!Redraw][!Log "Toggled {Name} on"]
 Hidden={Hidden}
 
 [ClearFloat{Index}]
 Meter=Image
-W=100
-H=([#s_VariableTopPadding] + [#s_ToggleSize])
+W=[#s_RightPanelW]
+H=([#s_ValueYPadding] + [#s_ToggleSize] + [#s_ValueYPadding])
 Hidden={Hidden}
 MeterStyle={Container}
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H])
 DynamicVariables=1
+
 

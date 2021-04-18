@@ -5,7 +5,7 @@ DynamicVariables=1
 
 [Left]
 StringAlign=Left
-X=[#s_VariablePadding]
+X=[#s_ValueYPadding]
 DynamicVariables=1
 
 [GenLeft]
@@ -15,7 +15,7 @@ Container=genRightContainer
 
 [Right]
 StringAlign=Left
-X=([#s_GeneratorRightPanelWidth] - [#s_VariablePadding] - [[#CURRENTSECTION]:W])
+X=([#s_GeneratorRightPanelWidth] - [#s_ValueYPadding] - [[#CURRENTSECTION]:W])
 DynamicVariables=1
 Y=0r
 

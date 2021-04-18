@@ -31,7 +31,7 @@ Text=Generate
 InlineSetting=Face | [#s_IconFontFace]
 InlinePattern=[\xE90F]
 MeterStyle=Center | CategoryTitle | GenRight
-Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_VariablePadding])
+Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
 LeftMouseUpAction=[!CommandMeasure Generator Construct][!Delay 1][!RefreshApp]
 
 ;[GenerateIcon]

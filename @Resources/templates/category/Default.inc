@@ -7,10 +7,14 @@ MeterStyle=CategoryIcon | {Container}
 Meter=String
 Text={Name}
 MeterStyle=CategoryTitle | {Container}
-X=([CategoryIcon{Index}:W] > #s_ListItemPadding# ? ([CategoryIcon{Index}:W]) : 0)r
+X=([CategoryIcon{Index}:W] > #s_CategoryTitleLeftPadding# ? ([CategoryIcon{Index}:W]) : [#s_VariableXPadding])r
 
 [CategoryDescription{Index}]
 Meter=String
 Text={Description}
 MeterStyle=VarDescription | {Container}
+
+[CategoryTitleSeparator{Index}]
+Meter=Image
+MeterStyle=CategoryTitleSeparator | {Container}
 

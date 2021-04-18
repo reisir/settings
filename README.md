@@ -17,10 +17,12 @@ If the generated skin looks like ass, [RTFM](https://github.com/sceleri/settings
 
 ## TO-DO:
  - [ ] Update RainDoc wiki to new Pipe syntax
+ - [x] Write an example.inc
  - [ ] Write wiki for templates
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
  - [ ] Add a way to refresh the right skin when variables are changed
     - [ ] Maybe add a way to specify a custom bang to run when variables are changed
- - [ ] Make the generated skin look nicer
+ - [x] Make the generated skin look nicer
  - [ ] Another way to select file other than Drag & Drop
+ - [ ] Add icon support for variables. Then move descriptions to X=0r instead of relying the padding being the same
 
