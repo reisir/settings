@@ -8,8 +8,8 @@ Text={Description}
 MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=String
-Text={CurrentValue}
+Text={Value}
 MeterStyle=VarStringValue | {Container}
 Hidden={Hidden}
-LeftMouseUpAction=["{CurrentValue}"]
+LeftMouseUpAction=["{Value}"]
 

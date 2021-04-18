@@ -8,7 +8,7 @@ Text={Description}
 MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=String
-Text={CurrentValue}
+Text={Value}
 MeterStyle=VarStringValue | {Container}
 LeftMouseUpAction=!CommandMeasure "InputText{Index}" "ExecuteBatch 1"
 Hidden={Hidden}

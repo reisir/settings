@@ -69,38 +69,8 @@ function Settings-Array {
         $settingsFileContent
     )
 
-    # old patterns
-    # $variablePattern = '(?s-m)(;;.*?)\n(?![;$]).*?[\n|$]'
-    # "Type" = '(?<=;;Type=)(.*?)(?=\n)'
-
     # Regex patterns
     $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
-    $variablePattern = '(?s-m)(;\?.*?)\n(?!;|$).*?[\n|$]'
-    $variablePatterns = @{
-        "Type" = '(?<=;\?)(.*?)(?=\n)'
-        "Name" = '(?<=;;Name=)(.*?)(?=\n)'
-        "Description" = '(?<=;;Description=)(.*?)(?=\n)'
-        "DefaultValue" = '(?<=;;DefaultValue=)(.*?)(?=\n)'
-        "Hidden" = '(?<=;;Hidden=)(.*?)(?=\n)'
-        "RealName" = '(?m-s)^(?!;)(.*?)(?==)'
-        "CurrentValue" = '(?m-s)^(?!;).*=(.*?)(?=\n|$)'
-    }
-
-    # Patterns to filter out any declared variables and 
-    # their properties from the category property search.
-    # Without this extra step, a category could end up with
-    # its first variables description etc.
-    $categorySplitPatterns = @{
-        "Properties" = '(?s-m)(;@.*?)(?=$|;@|;\?|$[^;])'
-        "UnfilteredVariables" = '(?s-m)(;\?.*)'
-    }
-
-    $categoryPropertyPatterns = @{
-        "Type" = '(?s-m)(?<=;@)(.*?)(?=\n|;;|$)'
-        "Name" = '(?<=;;Name=)(.*?)(?=\n|;;|$)'
-        "Icon" = '(?<=;;Icon=)(.*?)(?=\n|;;|$)'
-        "Description" = '(?<=;;Description=)(.*?)(?=\n|;;|$)'
-    }
 
     # Fallback pattern for getting variables from unformatted files
     $unformattedVariablePattern = '(?sm)(?<=[^;])^([^;]+?)$'
@@ -130,45 +100,164 @@ function Settings-Array {
 
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     Select-String -Pattern $categoryPattern -input $settingsFileContent -AllMatches | Foreach {
-
-        # Iterate over each matched $category in $_.Matches
+        # Filter each matched $category
         foreach ($category in $_.Matches) {
-
-            # Split category string into 'category properties' and 'unfiltered variables' strings
-            $c = Filter-Hashtable -String $category -Properties $categorySplitPatterns
-            # Filter properties string into a properties hashtable
-            $c["Properties"] = Filter-Hashtable -String $c.Properties -Properties $categoryPropertyPatterns
-
-            # Debug log
-            $RmAPI.Log("Building category: $($c.Properties.Name).")
-
-            # Create empty Variables array
-            $c.Add("Variables", @())
-
-            # Get all $variablePattern matches from $c.UnfilteredVariables to %_ with Foreach
-            Select-String -Pattern $variablePattern -input $c.UnfilteredVariables -AllMatches | Foreach {
-                # Debug log
-                $RmAPI.Log("Filtering variables from: $($_.matches)")
-                # Iterate over each matched $variable in $_.Matches
-                foreach ($variable in $_.matches) {
-                    # Filter $variable hashtables
-                    $var = Filter-Hashtable -String $variable -Properties $variablePatterns
-
-                    # Debug log
-                    $RmAPI.Log("$($var.Name): $($var.keys)")
-
-                    # Add the filtered variable hashtable to the $c.Variables array
-                    $c.Variables += , $var
-                }
-            }
-
+            $c = Pipe-Category -String $category
             # Add the filtered category hashtable to the $settings array 
             $settings += , $c
-
         }
     }
 
     return $settings
+
+}
+
+function Pipe-Variable {
+
+    param(
+        [Parameter(Mandatory=$true)]
+        $String,
+        [Parameter(Mandatory=$true)]
+        $Category
+    )
+
+    $Patterns = @{
+        "UnfilteredProperties" = '(?s-m)(;\?.*?)(?=$|;@|;\?|$|\n)'
+
+        "Type" = '(?<=;\?)(.*?)(?=\||\n|$)'
+        "UnfilteredProperty" = '(?s-m)(?<=\|)(.*?)(?=\||\n|$)'
+        "PropertyKey" = '^\s*(.*?)\s|$|\n'
+        "PropertyValue" = '(?s-m)\s?.*?\s(.*?)(?=$|\n|\|)'
+
+        "KeyValue" = '(?m-s)^(?!;)(.*?)(?=$|\n)'
+        "Key" = '^(.*?)(?==)'
+        "Value" = '(?<==)(.*?)(?=\n|$)'
+    }
+
+    # Get unfiltered data
+    $Variable = Filter-Hashtable -String $String -Properties @{"KeyValue" = $Patterns.KeyValue; "UnfilteredProperties" = $Patterns.UnfilteredProperties}
+
+    # Get the variable properties
+
+    # Make the Properties hashtable
+    $Variable.Properties = @{}
+
+    # Get type
+    if("$($Variable.UnfilteredProperties)" -match "$($Patterns.Type)") {
+        $Variable.Properties.Type = Remove-Whitespace -String $Matches[1]
+        # Change type to String if empty
+        if($Variable.Properties.Type -eq "") {
+            $Variable.Properties.Type = "String"
+            $RmAPI.Log("Changed $($Variable.UnfilteredProperties) type to String")
+        }
+    }
+
+    # Match every | Key Value | pair from the property line
+    Select-String -Pattern $Patterns.UnfilteredProperty -input $Variable.UnfilteredProperties -AllMatches | Foreach {
+        # Filter each matched $category
+        foreach ($UnfilteredProperty in $_.Matches) {
+            $key, $value = ""
+            if($UnfilteredProperty -match $Patterns.PropertyValue) {
+                $value = $Matches[1]
+                # $RmAPI.Log("Got variable value $value from $($UnfilteredProperty)")
+            }
+            # Only add the property to the hashtable if it has a key.
+            if($UnfilteredProperty -match $Patterns.PropertyKey) {
+                $key = Remove-Whitespace -String $Matches[1]
+                # $RmAPI.Log("Got variable key $key from $($UnfilteredProperty)")
+                $Variable.Properties.Add("$key", "$value")
+            }
+        }
+    }
+
+    # Checkpoint 1
+    # $RmAPI.Log("Got variable properties: $($Variable.Properties.Keys)")
+    $RmAPI.Log("This variable is: $($Variable.Properties.Name) from $Category")
+
+    # Get the key and value from the unformatted line
+    $Variable.KeyValue = Filter-Hashtable -String $Variable.KeyValue -Properties @{"Key" = $Patterns.Key; "Value" = $Patterns.Value}
+    # Add Key and Value from KeyValue to the main object
+    $Variable.KeyValue.GetEnumerator() | ForEach-Object {
+        $Variable.Add("$($_.Key)", "$($_.Value)")
+    }
+
+    return $Variable
+
+}
+
+function Pipe-Category {
+
+    param(
+        [Parameter(Mandatory=$true)]
+        $String
+    )
+
+    $Patterns = @{
+        "UnfilteredProperties" = '(?s-m)(;@.*?)(?=$|;@|;\?|$|\n)'
+        "UnfilteredVariables" = '(?s-m)(;\?.*)'
+
+        "Type" = '(?<=;\@)(.*?)(?=\||\n|$)'
+        "UnfilteredProperty" = '(?s-m)(?<=\|)(.*?)(?=\||\n|$)'
+        "PropertyKey" = '^\s*(.*?)\s|$|\n'
+        "PropertyValue" = '(?s-m)\s?.*?\s(.*?)(?=$|\n|\|)'
+
+        "UnfilteredVariable" = '(?s-m)(;\?.*?)(?=;\?|;@|$)'
+    }
+
+    # Get unfiltered data
+    $Category = Filter-Hashtable -String $String -Properties @{"UnfilteredProperties" = $Patterns.UnfilteredProperties; "UnfilteredVariables" = $Patterns.UnfilteredVariables}
+
+    # Get the category properties
+
+    # Make the Properties hashtable
+    $Category.Properties = @{}
+
+    # Get type
+    if("$($Category.UnfilteredProperties)" -match "$($Patterns.Type)") {
+        $Category.Properties.Type = Remove-Whitespace -String $Matches[1]
+        # Change type to Default if empty
+        if($Category.Properties.Type -eq "") {
+            $Category.Properties.Type = "Default"
+            $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
+        }
+    }
+    
+    # Match every | Key Value | pair from the property line
+    Select-String -Pattern $Patterns.UnfilteredProperty -input $Category.UnfilteredProperties -AllMatches | Foreach {
+        # Filter each matched $category
+        foreach ($UnfilteredProperty in $_.Matches) {
+            $key, $value = ""
+            if($UnfilteredProperty -match $Patterns.PropertyValue) {
+                $value = $Matches[1]
+            }
+            # Only add the property to the hashtable if it has a key.
+            # This is a very smart move.
+            if($UnfilteredProperty -match $Patterns.PropertyKey) {
+                $key = Remove-Whitespace -String $Matches[1]
+                $Category.Properties.Add("$key", "$value")
+            }
+        }
+    }
+
+    # Checkpoint 1
+    $RmAPI.Log("Got category properties: $($Category.Properties.Keys)")
+    
+    # Make the Variables array
+    $Category.Add("Variables", @())
+    # Get all UnfilteredVariable matches from UnfilteredVariables
+    Select-String -Pattern $Patterns.UnfilteredVariable -input $Category.UnfilteredVariables -AllMatches | Foreach {
+        # Filter each matched $category
+        foreach ($UnfilteredVariable in $_.Matches) {
+            # Filter each Variable
+            $v = Pipe-Variable -String $UnfilteredVariable -Category $Category.Properties.Name
+            $Category.Variables += , $v
+        }
+    }
+    
+    # Checkpoint 2
+    $RmAPI.Log("Got $($Category.Variables.Count) variables for category '$($Category.Properties.Name)' !")
+
+    return $Category
 
 }
 
@@ -240,16 +329,13 @@ function Variable-Ini {
         "SettingsFile" = $settingsFilePath
     }
 
-    # Default to string variable
-    if ($variableTypes -NotContains $Variable.Type) {
-        $Variable["Type"] = $defaultVariableType
-    }
-
     # Get template for type
-    $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Type).inc" -Raw
+    $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
     # Filter template
     $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
+    $ini = Filter-Template -Template $ini -Properties $Variable.Properties
     $ini = Filter-Template -Template $ini -Properties $Variable
+    $ini = Remove-UnformattedValues -Template $ini
 
     return $ini
 
@@ -307,13 +393,12 @@ function Filter-Hashtable {
     $hash = @{}
     $Properties.GetEnumerator() | ForEach-Object {
         if("$($String)" -match "$($_.Value)") {
-            # Save the matched string
+            # Save the matched string before
             $s = $Matches[1]
-            if("$($_.Key)" -notmatch "UnfilteredVariables") {
+            # checking if the value is supposed to be unfiltered
+            if("$($_.Key)" -notmatch "Unfiltered") {
                 $s = Remove-Newline -String $s
             }
-        } else {
-            $s = " "
         }
         $hash.Add("$($_.Key)",$s)
     }
@@ -341,6 +426,19 @@ function Filter-Template {
 
 }
 
+function Remove-UnformattedValues {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]
+        $Template
+    )
+
+    $Template = $Template -replace "\{.*?\}",""
+
+    return $Template
+
+}
+
 function Remove-Newline {
     param (
         [Parameter()]
@@ -352,6 +450,17 @@ function Remove-Newline {
 
     return $String
 
+}
+
+function Remove-Whitespace {
+    param (
+        [Parameter()]
+        $String
+    )
+
+    $String = $String -replace "`t|`n|`r|\s+",""
+
+    return $String
 }
 
 function Prepare-Directories {
