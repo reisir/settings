@@ -1,22 +1,26 @@
 # Settings
 
-Settings skin generator skin. Creates a settings skin from a variables.inc file
+Settings is a Rainmeter skin that generates settings skins for other Rainmeter skins.
+
+It reads the target skins `settings.inc` file and generates meters and measures to both display and change the variables. 
+
+## Usage
+
+1. Drag & Drop your settings.inc on the generator skin.
+2. Confirm that the right skin and file is selected.
+3. Click on Generate.
+   * This will remove any previous files in the settings directory.
+
+A generated settings skin should open. You can test it and confirm it's changing the right file. If it works, move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+
+If the generated skin looks like ass, [RTFM](https://github.com/sceleri/settings/wiki)
 
 ## TO-DO:
- * docs for templates
- * restructure variables in generator.ps1
-   * $internalVariableProperties etc. to the start of the script to make it easier to implement new stuff
-
-## Skin structure example:
-
-### Outputted skin structure
-
-* Skins\Settings\Settings
-    * Categories
-      * 0.inc
-      * 1.inc
-      * 2.inc
-      * CategoryList.inc
-    * Settings.ini
-
+ - [ ] Update RainDoc wiki to new Pipe syntax
+ - [ ] Write wiki for templates
+ - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
+ - [ ] Add a way to refresh the right skin when variables are changed
+    - [ ] Maybe add a way to specify a custom bang to run when variables are changed
+ - [ ] Make the generated skin look nicer
+ - [ ] Another way to select file other than Drag & Drop
 

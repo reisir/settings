@@ -148,7 +148,7 @@ function Pipe-Variable {
         # Change type to String if empty
         if($Variable.Properties.Type -eq "") {
             $Variable.Properties.Type = "String"
-            $RmAPI.Log("Changed $($Variable.UnfilteredProperties) type to String")
+            # $RmAPI.Log("Changed $($Variable.UnfilteredProperties) type to String")
         }
     }
 
@@ -171,8 +171,8 @@ function Pipe-Variable {
     }
 
     # Checkpoint 1
-    # $RmAPI.Log("Got variable properties: $($Variable.Properties.Keys)")
-    $RmAPI.Log("This variable is: $($Variable.Properties.Name) from $Category")
+    # $RmAPI.Log("$($Variable.Properties.Name) properties: $($Variable.Properties.Keys)")
+    # $RmAPI.Log("This variable is: $($Variable.Properties.Name) from $Category")
 
     # Get the key and value from the unformatted line
     $Variable.KeyValue = Filter-Hashtable -String $Variable.KeyValue -Properties @{"Key" = $Patterns.Key; "Value" = $Patterns.Value}
@@ -218,7 +218,7 @@ function Pipe-Category {
         # Change type to Default if empty
         if($Category.Properties.Type -eq "") {
             $Category.Properties.Type = "Default"
-            $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
+            # $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
         }
     }
     
@@ -240,7 +240,7 @@ function Pipe-Category {
     }
 
     # Checkpoint 1
-    $RmAPI.Log("Got category properties: $($Category.Properties.Keys)")
+    # $RmAPI.Log("Got category properties: $($Category.Properties.Keys)")
     
     # Make the Variables array
     $Category.Add("Variables", @())
@@ -255,7 +255,7 @@ function Pipe-Category {
     }
     
     # Checkpoint 2
-    $RmAPI.Log("Got $($Category.Variables.Count) variables for category '$($Category.Properties.Name)' !")
+    $RmAPI.Log("Generated $($Category.Variables.Count) variables for '$($Category.Properties.Name)'")
 
     return $Category
 
@@ -396,7 +396,7 @@ function Filter-Hashtable {
             # Save the matched string before
             $s = $Matches[1]
             # checking if the value is supposed to be unfiltered
-            if("$($_.Key)" -notmatch "Unfiltered") {
+            if("$($_.Key)" -notmatch "UnfilteredVariables") {
                 $s = Remove-Newline -String $s
             }
         }

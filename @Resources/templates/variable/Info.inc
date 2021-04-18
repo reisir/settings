@@ -9,7 +9,7 @@ MeterStyle=VarDescription | {Container}
 [Value{Index}]
 Meter=String
 Text={Value}
-MeterStyle=VarStringValue | {Container}
+MeterStyle=VarStringValue | Link{Link} | {Container}
 Hidden={Hidden}
 LeftMouseUpAction=["{Value}"]
 

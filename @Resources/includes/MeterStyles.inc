@@ -89,6 +89,13 @@ Padding=[#s_VariableXPadding],[#s_VariableTopPadding],[#s_VariableXPadding],0
 Y=0R
 ;SolidColor=255,0,0
 
+[Link1]
+MouseOverAction=[!SetOption #CURRENTSECTION# FontColor [#s_SelectedColor]][!SetOption #CURRENTSECTION# InlineSetting "Underline"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# FontColor [#s_FontColor]][!SetOption #CURRENTSECTION# InlineSetting ""][!UpdateMeter #CURRENTSECTION#][!Redraw]
+
+[Link]
+FontColor=[#s_FontColor]
+
 [VarToggleValue]
 X=(([#s_ToggleSize] / 2) + [#s_VariableXPadding])
 DynamicVariables=1
