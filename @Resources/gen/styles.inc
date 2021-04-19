@@ -8,9 +8,9 @@ StringAlign=Left
 X=[#s_ValueYPadding]
 DynamicVariables=1
 
-[GenLeft]
+[LeftPanel]
 Container=genLeftContainer
-[GenRight]
+[RightPanel]
 Container=genRightContainer
 
 [Right]

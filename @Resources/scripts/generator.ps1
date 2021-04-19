@@ -288,11 +288,6 @@ function Category-Ini {
         $j++
     }
 
-    if(($i -eq 0) -and ($Category.Properties.Type -match "About")) {
-        $template = Get-Content -Path "$($variableTemplatesDir)Credit.inc" -Raw
-        $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
-    }
-
     $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
     $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
 
@@ -340,10 +335,8 @@ function Category-List {
 
     $i = 0
     foreach ($category in $Settings) {
-        $Properties = @{
+        $externalProperties = @{
             "Index" = $i
-            "Icon" = "$($category.Properties.Icon)"
-            "Category" = "$($category.Properties.Name)"
             "Container" = "LeftPanel"
         }
 
@@ -355,12 +348,18 @@ function Category-List {
         }
 
         $template = Get-Content -Path "$($listTemplatesDir)$($type).inc" -Raw
-        $ini += Filter-Template -Template $template -Properties $Properties
+        $template = Filter-Template -Template $template -Properties $externalProperties
+        $template = Filter-Template -Template $template -Properties $category.Properties
+        $ini += Remove-UnformattedValues -Template $template
         $i++
     }
 
     $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
     $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"}
+
+    # credit last, outside of the scrollable item list
+    $template = Get-Content -Path "$($listTemplatesDir)Credit.inc" -Raw
+    $ini += $template
 
     $ini > "$($generatedCategoriesDir)CategoryList.inc"
 

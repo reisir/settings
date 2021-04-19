@@ -7,7 +7,7 @@ MeterStyle=CategoryIcon | {Container}
 Meter=String
 Text={Name}
 MeterStyle=CategoryTitle | {Container}
-X=([CategoryIcon{Index}:W] > #s_CategoryTitleLeftPadding# ? ([CategoryIcon{Index}:W]) : [#s_VariableXPadding])r
+W=([#s_RightPanelW] - [CategoryIcon{Index}:W])
 
 [CategoryDescription{Index}]
 Meter=String

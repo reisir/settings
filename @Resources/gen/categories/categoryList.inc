@@ -6,12 +6,12 @@ Square=Fill Color [#s_SelectedColor]
 X=(-[#s_SelectorWidth])
 Y=((([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]) / 2) + (([GeneratorIcon0:H] + ([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W])) * [#s_GenCurrentCategory]))
 DynamicVariables=1
-MeterStyle=GenLeft
+MeterStyle=LeftPanel
 
 [GeneratorIcon0]
 Meter=String
 Text=[\xE713]
-MeterStyle=CategoryIcon | GenLeft | Center
+MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))
@@ -21,7 +21,7 @@ LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 0][!Refresh]
 [GeneratorIcon1]
 Meter=String
 Text=[\xE897]
-MeterStyle=CategoryIcon | GenLeft | Center
+MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
@@ -31,7 +31,7 @@ LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 1][!Refresh]
 [GeneratorIcon2]
 Meter=String
 Text=[\xE71D]
-MeterStyle=CategoryIcon | GenLeft | Center
+MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R

@@ -1,11 +1,13 @@
 [ListIcon{Index}]
 Meter=String
 Text={Icon}
-MeterStyle=CategoryListIcon | {Container}
+MeterStyle=ListIcon | ListTopicIcon | {Container}
 [ListItem{Index}]
 Meter=String
-Text={Category}
-MeterStyle=CategoryListTopicItem | {Container}
+Text={Name}
+MeterStyle=ListItem | ListTopicItem | {Container}
+W=([#s_LeftPanelW] - ([ListIcon{Index}:W] + [#s_ListRightPadding]))
 FontWeight=([#s_CurrentCategory] = {Index}) ? [#s_SelectedFontWeight] : [#s_FontWeight]
-X=([ListIcon{Index}:W] > #s_ListIconLeftPadding# ? ([ListIcon{Index}:W]) : 0)r
+ToolTipTitle={Name}
+ToolTipText={Tooltip}
 

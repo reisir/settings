@@ -7,7 +7,7 @@ MeterStyle=LastItem | {Container}
 [ScrollDown{Container}]
 Measure=Calc
 Formula=[#s_Scroll{Container}] - [#s_ScrollSpeed]
-IfCondition=([Last{Container}:Y] > ([#s_PanelH] / 2))
+IfCondition=([Last{Container}:Y] > [#s_ScrollTreshold])
 IfTrueAction=[!SetVariable "s_Scroll{Container}" "[&ScrollDown{Container}]"][!DisableMeasure "ScrollDown{Container}"][!Update][!Redraw]
 IfFalseAction=[!DisableMeasure "ScrollDown{Container}"]
 IfConditionMode=1

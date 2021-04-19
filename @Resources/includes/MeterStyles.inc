@@ -1,48 +1,10 @@
-;Category list styles
-[CategoryListIcon]
-AccurateText=1
-AntiAlias=1
-X=0
-Y=0R
-Padding=([#s_ListIconLeftPadding] + [#s_VarTitleNudge]),[#s_ListIconTopPadding],0,[#s_ListItemPadding]
-FontSize=#s_FontSize3#
-FontFace=#s_IconFontFace#
-
-[CategoryListItem]
-AccurateText=1
-AntiAlias=1
-Y=0r
-Padding=[#s_ListItemLeftPadding],[#s_ListItemTopPadding],[#s_ListItemPadding],[#s_ListItemPadding]
-FontSize=#s_FontSize3#
-FontFace=#s_FontFace#
-DynamicVariables=1
-
-[CategoryListTopicItem]
-AccurateText=1
-AntiAlias=1
-Y=0r
-Padding=[#s_ListItemLeftPadding],[#s_ListItemTopPadding],[#s_ListItemPadding],[#s_ListItemPadding]
-FontSize=#s_FontSize4#
-FontFace=#s_FontFace#
-DynamicVariables=1
-
-[CategoryListAboutItem]
-AccurateText=1
-AntiAlias=1
-Y=0r
-Padding=[#s_ListItemLeftPadding],[#s_ListItemTopPadding],[#s_ListItemPadding],[#s_ListItemPadding]
-FontSize=#s_FontSize2#
-FontFace=#s_FontFace#
-FontWeight=500
-DynamicVariables=1
-
 ;Category styles
 [CategoryIcon]
 AccurateText=1
 AntiAlias=1
 X=0
 Y=0R
-Padding=[#s_CategoryTitleLeftPadding],[#s_CategoryIconTopPadding],0,0
+Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
 FontSize=#s_FontSize1#
 FontFace=#s_IconFontFace#
 
@@ -50,7 +12,9 @@ FontFace=#s_IconFontFace#
 AccurateText=1
 AntiAlias=1
 Y=0r
+X=0R
 Padding=0,[#s_CategoryTitleTopPadding],0,0
+ClipString=2
 FontFace=#s_FontFace#
 FontWeight=#s_TitleFontWeight#
 FontSize=#s_FontSize1#
@@ -71,6 +35,8 @@ AntiAlias=1
 Y=0R
 X=0
 Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
+W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
+ClipString=2
 FontFace=#s_FontFace#
 FontSize=#s_FontSize2#
 FontWeight=#s_TitleFontWeight#
@@ -85,12 +51,16 @@ Y=0R
 Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
 FontFace=#s_FontFace#
 FontSize=#s_FontSize4#
+W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
+ClipString=2
 
 [VarStringValue]
 AccurateText=1
 AntiAlias=1
 Y=0R
 Padding=[#s_VariableXPadding],[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
+W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
+ClipString=2
 FontFace=#s_FontFace#
 FontSize=#s_FontSize3#
 MouseOverAction=[!SetOption #CURRENTSECTION# FontColor [#s_SelectedColor]][!SetOption #CURRENTSECTION# FontWeight [#s_SelectedFontWeight]][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -115,4 +85,7 @@ DynamicVariables=1
 [VarColorValue]
 X=[#s_VariableXPadding]
 Y=[#s_ValueYPadding]R
+
+MouseOverAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_SelectedColor]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_ColorStrokeColor]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 

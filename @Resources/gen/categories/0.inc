@@ -1,45 +1,68 @@
+[FirstRightPanel]
+Meter=String
+Text=First
+FontColor=0,0,0,0
+MeterStyle=FirstItem | RightPanel
+Y=[#s_ScrollRightPanel]
+[CategoryIcon0]
+Meter=String
+Text=
+MeterStyle=CategoryIcon | RightPanel
+
 [Title0]
 Meter=String
-Text=Settings
-MeterStyle=CategoryTitle | GenRight
-X=[#s_VariableXPadding]
-Container=GenRightContainer
+Text=Settings 
+MeterStyle=CategoryTitle | RightPanel
+W=([#s_RightPanelW] - [CategoryIcon0:W])
 
 [CategoryDescription0]
 Meter=String
-Text=a settings skin generator skin 
-MeterStyle=VarDescription | GenRight
+Text=a settings skin generator skin
+MeterStyle=VarDescription | RightPanel
+
+[CategoryTitleSeparator0]
+Meter=Image
+MeterStyle=CategoryTitleSeparator | RightPanel
 
 [Var0]
 Meter=String
-Text=File
-MeterStyle=VarTitle | GenRight
+Text=File 
+MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
 Text=File to process.
-MeterStyle=VarDescription | GenRight
+MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
 Text=[&MeasureSkin]\[#s_File].[#s_Type]
-MeterStyle=VarStringValue | GenRight
-ToolTipTitle=Full path:
-ToolTipText=[#s_SettingsFile]
+MeterStyle=VarStringValue | RightPanel
+LeftMouseUpAction=["[#s_Directory]"]
+Hidden=
 
 [Generate]
 Meter=String
 Text=Generate
 InlineSetting=Face | [#s_IconFontFace]
 InlinePattern=[\xE90F]
-MeterStyle=Center | CategoryTitle | GenRight
+MeterStyle=Center | VarStringValue | VarTitle | RightPanel
 Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
+StringAlign=Center
+X=(([#s_GeneratorRightPanelWidth] / 2) - (([Generate:W] + [Open:W]) / 2) + [Generate:W] / 2)
+W=
+DynamicVariables=1
+Padding=10,0,10,0
 LeftMouseUpAction=[!CommandMeasure Generator Construct][!Delay 1][!RefreshApp]
 
-;[GenerateIcon]
-;Meter=String
-;Text=[\xE90F]
-;MeterStyle=CategoryIcon | Left | GenRight
-;X=(-([GenerateIcon:W] + ([Generate:W] / 2)))r
-;DynamicVariables=1
-;FontSize=[#s_FontSize2]
-;Y=(([Generate:H] - [GenerateIcon:H]) / 2)r
-
+[Open]
+Meter=String
+Text=Open skin
+InlineSetting=Face | [#s_IconFontFace]
+InlinePattern=[\xE90F]
+MeterStyle=Center | VarStringValue | VarTitle | RightPanel
+Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
+StringAlign=Center
+Padding=10,0,10,0
+W=
+X=R
+DynamicVariables=1
+LeftMouseUpAction=[!ActivateConfig "Settings\settings" "settings.ini"]

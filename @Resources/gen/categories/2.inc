@@ -1,39 +1,41 @@
-[Title0]
+[FirstRightPanel]
 Meter=String
-Text=Documentation
-MeterStyle=CategoryTitle | GenRight
-X=[#s_VariableXPadding]
-Container=GenRightContainer
+Text=First
+FontColor=0,0,0,0
+MeterStyle=FirstItem | RightPanel
+Y=[#s_ScrollRightPanel]
+[CategoryIcon2]
+Meter=String
+Text=
+MeterStyle=CategoryIcon | RightPanel
 
-[CategoryDescription0]
+[Title2]
 Meter=String
-Text=Links to Settings and RainDoc documentation
-MeterStyle=VarDescription | GenRight
+Text=Documentation 
+MeterStyle=CategoryTitle | RightPanel
+W=([#s_RightPanelW] - [CategoryIcon2:W])
+
+[CategoryDescription2]
+Meter=String
+Text=Links to documentation
+MeterStyle=VarDescription | RightPanel
+
+[CategoryTitleSeparator2]
+Meter=Image
+MeterStyle=CategoryTitleSeparator | RightPanel
 
 [Var0]
 Meter=String
-Text=Settings Templates
-MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
+Text=RainDoc syntax
+MeterStyle=VarTitle | RightPanel
+[Var0Description]
+Meter=String
+Text=Includes quick-start guide.
+MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
-Text=https://github.com/sceleri/settings
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
-Padding=[#s_VariableXPadding],0,0,0
-ClipString=2
-MeterStyle=VarStringValue | GenRight
-
-[Var1]
-Meter=String
-Text=RainDoc syntax
-MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
-[Value1]
-Meter=String
-Text=https://github.com/sceleri/settings
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
-Padding=[#s_VariableXPadding],0,0,0
-ClipString=2
-MeterStyle=VarStringValue | GenRight
-
+Text=https://github.com/sceleri/settings/wiki
+MeterStyle=VarStringValue | Link1 | RightPanel
+Hidden=
+LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
 

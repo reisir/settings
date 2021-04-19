@@ -23,13 +23,13 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
  - [x] Update RainDoc wiki to new Pipe syntax
  - [x] Write an example.inc
  - [ ] Make the generated skin look nicer
-   - [ ] Add a bit of padding to the top of the category list
-   - [ ] Make all string meters `ClipString=2`
-   - [ ] Move Credit.inc from the first page to the bottom of the list
- - [ ] Add a scroll indicator
- - [ ] Update generator.ini to match new templates
-   - [ ] Add links to guides in generator.ini
- - [ ] Flip the toggle buttons
+   - [x] Add a bit of padding to the top of the category list
+   - [x] Make all string meters `ClipString=2`
+   - [x] Move Credit.inc from the first page to the bottom of the list
+ - [x] Add a scroll indicator
+ - [x] Update generator.ini to match new templates
+   - [x] Add links to guides in generator.ini
+ - [x] Flip the toggle buttons
 
 ## TO-DO: 
  - [ ] Write wiki for templates
@@ -43,4 +43,6 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
  - [ ] Slider template
  - [ ] Generate generator.ini
  - [ ] Better (custom ?) colour picker
+ - [ ] Document Tooltip
+ - [ ] Make list items rely on actual padding for ClipString instead of complicated width calculations 
 

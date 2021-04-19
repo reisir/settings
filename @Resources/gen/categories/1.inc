@@ -1,39 +1,51 @@
-[Title0]
+[FirstRightPanel]
+Meter=String
+Text=First
+FontColor=0,0,0,0
+MeterStyle=FirstItem | RightPanel
+Y=[#s_ScrollRightPanel]
+[CategoryIcon1]
+Meter=String
+Text=
+MeterStyle=CategoryIcon | RightPanel
+
+[Title1]
 Meter=String
 Text=Instructions
-MeterStyle=CategoryTitle | GenRight
-X=[#s_VariableXPadding]
-Container=GenRightContainer
+MeterStyle=CategoryTitle | RightPanel
+W=([#s_RightPanelW] - [CategoryIcon1:W])
 
-[CategoryDescription0]
+[CategoryDescription1]
 Meter=String
-Text=Settings generator help
-MeterStyle=VarDescription | GenRight
+Text=
+MeterStyle=VarDescription | RightPanel
+
+[CategoryTitleSeparator1]
+Meter=Image
+MeterStyle=CategoryTitleSeparator | RightPanel
 
 [Var0]
 Meter=String
 Text=File selection
-MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
+MeterStyle=VarTitle | RightPanel
 [Value0]
 Meter=String
-Text=Drag & Drop your skins settings file on the generator skin.
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
-Padding=[#s_VariableXPadding],0,0,0
-ClipString=2
-MeterStyle=VarStringValue | GenRight
+Text=Drag & Drop your variable file on this skin.
+MeterStyle=VarStringValue | RightPanel
+Hidden=
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
+MouseOverAction=
 
 [Var1]
 Meter=String
 Text=Usage
-MeterStyle=VarTitle | GenRight
-Padding=[#s_VariableXPadding],[#s_VariableTopPadding],0,0
+MeterStyle=VarTitle | RightPanel
 [Value1]
 Meter=String
-Text=Move the "settings" directory from "Settings\" to your skins root folder.
-W=([#s_GeneratorRightPanelWidth] - ([#s_VariableXPadding] * 4))
-Padding=[#s_VariableXPadding],0,0,0
-ClipString=2
-MeterStyle=VarStringValue | GenRight
+Text=Move the "settings" directory from "Settings" to your skins root folder.
+MeterStyle=VarStringValue | RightPanel
+Hidden=
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+MouseOverAction=
 
 

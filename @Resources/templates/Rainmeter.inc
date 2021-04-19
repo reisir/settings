@@ -14,7 +14,10 @@ Update=-1
 @IncludeBackground=#ROOTCONFIGPATH#settings\includes\Background.inc
 
 [IncludeMeterStyles]
-@IncludeBackground=#ROOTCONFIGPATH#settings\includes\MeterStyles.inc
+@IncludeMeterStyles=#ROOTCONFIGPATH#settings\includes\MeterStyles.inc
+
+[IncludeListItems]
+@IncludeListItems=#ROOTCONFIGPATH#settings\includes\ListITems.inc
 
 [IncludeCategoryList]
 @IncludeCategoryList=#ROOTCONFIGPATH#settings\categories\CategoryList.inc

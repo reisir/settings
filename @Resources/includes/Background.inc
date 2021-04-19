@@ -31,7 +31,46 @@ Square=Fill Color [#s_SelectedColor]
 X=(-[#s_SelectorWidth])
 Y=([ListIcon[#s_CurrentCategory]:Y])
 DynamicVariables=1
-MeterStyle=GenLeft
+
+; Scroll indicator. This can be optimized a lot
+
+[MaxScroll]
+Measure=Calc 
+Formula=([LastRightPanel:Y] + ([#s_PanelH] - [#s_ScrollTreshold]) - [#s_PanelH])
+DynamicVariables=1
+OnUpdateAction=!PauseMeasure MaxScroll
+
+[ScrollerHeight]
+Measure=Calc 
+Formula=([#s_ScrollIndicatorMaxHeight]) * (([LastRightPanel:Y] + ([#s_PanelH] - [#s_ScrollTreshold]) - [#s_PanelH]) / [LastRightPanel:Y])
+DynamicVariables=1
+OnUpdateAction=!PauseMeasure ScrollerHeight
+
+[ScrollLeft]
+Measure=Calc 
+Formula=([#s_ScrollIndicatorMaxHeight]) - ScrollerHeight
+DynamicVariables=1
+OnUpdateAction=!PauseMeasure ScrollerHeight
+
+[CurrScroll]
+Measure=Calc 
+Formula=Clamp((-[#s_ScrollRightPanel] / MaxScroll),0,1)
+DynamicVariables=1
+
+[CategoryCurrentScroll]
+Measure=Calc
+Formula=ScrollLeft * CurrScroll
+DynamicVariables=1
+
+[CategoryScrollIndicator]
+Meter=Shape
+Shape=Rectangle 0,0,[#s_ScrollIndicatorWidth],[#s_ScrollIndicatorMaxHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorBackgroundColor] | StrokeWidth 0
+Shape2=Rectangle 0,[CategoryCurrentScroll],[#s_ScrollIndicatorWidth],[ScrollerHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorColor] | StrokeWidth 0
+Y=[#s_scrollIndicatorYPadding]
+X=(([#s_LeftPanelW] + [#s_RightPanelW]) - ([#s_ScrollIndicatorWidth] + [#s_scrollIndicatorXPadding]))
+DynamicVariables=1
+Hidden=([MaxScroll] > ([#s_PanelH] - [#s_ScrollTreshold])) ? 0 : 1
+
 
 [LeftPanel]
 Container=LeftPanelContainer
