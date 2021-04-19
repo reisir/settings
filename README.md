@@ -6,18 +6,16 @@ It reads the target skins variable file and generates meters and measures to bot
 
 ## Basic usage
 
-Drag & Drop your settings.inc on the generator skin.
-
-Confirm that the right skin and file is selected.
-
-Click on Generate.
+1. Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to format the generated skin. Settings will not work if you don't format your variable file correctly.
+2. Format your variable file.
+3. Drag & Drop your settings.inc on the generator skin.
+4. Confirm that the right skin and file is selected.
+5. Click on Generate.
    * This will remove any previous files in the settings directory.
-
-After generation, click on "Open skin".
-
-Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to customize the generated skin.
-
-Once you're done, move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+6. Click on "Open skin".
+7. Test that the generated skin works and is actually changing the variables.
+   * You will have to refresh your skin manually after changing them with Settings.
+8. Move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
 
 ## TO-DO for release:
  - [x] Update RainDoc wiki to new Pipe syntax
