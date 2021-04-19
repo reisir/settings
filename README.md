@@ -2,20 +2,19 @@
 
 Settings is a Rainmeter skin that generates settings skins for other Rainmeter skins.
 
-It reads the target skins variable file and generates meters and measures to both display and change the variables. 
-
 ## Basic usage
 
 1. Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to format the generated skin. Settings will not work if you don't format your variable file correctly.
 2. Format your variable file.
-3. Drag & Drop your settings.inc on the generator skin.
-4. Confirm that the right skin and file is selected.
-5. Click on Generate.
-   * This will remove any previous files in the settings directory.
-6. Click on "Open skin".
-7. Test that the generated skin works and is actually changing the variables.
-   * You will have to refresh your skin manually after changing them with Settings.
-8. Move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+3. Drag & Drop your variable file on the generator skin.
+4. Click on Generate.
+5. Click on "Open skin".
+6. Test that the generated skin works and is actually changing the variables.
+   * You have to refresh your skin manually after changing variables with Settings.
+7. Move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+8. Right click the Rainmeter tray icon and Refresh all.
+
+Steps 4-8 will be combined into one step in a later release.
 
 ## TO-DO for release:
  - [x] Update RainDoc wiki to new Pipe syntax
