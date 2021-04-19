@@ -13,7 +13,7 @@ Confirm that the right skin and file is selected.
 Click on Generate.
    * This will remove any previous files in the settings directory.
 
-A generated settings skin should open. You can test it and confirm it's changing the right file.
+After generation, click on "Open skin".
 
 Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to customize the generated skin.
 
@@ -22,7 +22,7 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
 ## TO-DO for release:
  - [x] Update RainDoc wiki to new Pipe syntax
  - [x] Write an example.inc
- - [ ] Make the generated skin look nicer
+ - [x] Make the generated skin look nicer
    - [x] Add a bit of padding to the top of the category list
    - [x] Make all string meters `ClipString=2`
    - [x] Move Credit.inc from the first page to the bottom of the list
@@ -45,4 +45,5 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
  - [ ] Better (custom ?) colour picker
  - [ ] Document Tooltip
  - [ ] Make list items rely on actual padding for ClipString instead of complicated width calculations 
+ - [ ] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
 
