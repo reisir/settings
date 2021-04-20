@@ -124,10 +124,18 @@ function Pipe-Variable {
     # Get unfiltered data
     $Variable = Filter-Hashtable -String $String -Properties @{"KeyValue" = $Patterns.KeyValue; "UnfilteredProperties" = $Patterns.UnfilteredProperties}
 
+
+    # Get the key and value from the unformatted line
+    $Variable.KeyValue = Filter-Hashtable -String $Variable.KeyValue -Properties @{"Key" = $Patterns.Key; "Value" = $Patterns.Value}
+    # Add Key and Value from KeyValue to the main object
+    $Variable.KeyValue.GetEnumerator() | ForEach-Object {
+        $Variable.Add("$($_.Key)", "$($_.Value)")
+    }
+    
     # Get the variable properties
 
     # Make the Properties hashtable
-    $Variable.Properties = @{}
+    $Variable.Properties = @{"Name" = $Variable.Key}
 
     # Get type
     if("$($Variable.UnfilteredProperties)" -match "$($Patterns.Type)") {
@@ -152,7 +160,7 @@ function Pipe-Variable {
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
                 $key = Remove-Whitespace -String $Matches[1]
                 # $RmAPI.Log("Got variable key $key from $($UnfilteredProperty)")
-                $Variable.Properties.Add("$key", "$value")
+                $Variable.Properties["$key"] = "$value"
             }
         }
     }
@@ -160,13 +168,6 @@ function Pipe-Variable {
     # Checkpoint 1
     # $RmAPI.Log("$($Variable.Properties.Name) properties: $($Variable.Properties.Keys)")
     # $RmAPI.Log("This variable is: $($Variable.Properties.Name) from $Category")
-
-    # Get the key and value from the unformatted line
-    $Variable.KeyValue = Filter-Hashtable -String $Variable.KeyValue -Properties @{"Key" = $Patterns.Key; "Value" = $Patterns.Value}
-    # Add Key and Value from KeyValue to the main object
-    $Variable.KeyValue.GetEnumerator() | ForEach-Object {
-        $Variable.Add("$($_.Key)", "$($_.Value)")
-    }
 
     return $Variable
 
