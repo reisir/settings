@@ -2,27 +2,24 @@
 
 Settings is a Rainmeter skin that generates settings skins for other Rainmeter skins.
 
-It reads the target skins variable file and generates meters and measures to both display and change the variables. 
-
 ## Basic usage
 
-Drag & Drop your settings.inc on the generator skin.
+1. Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to format the generated skin. Settings will not work if you don't format your variable file correctly.
+2. Format your variable file.
+3. Drag & Drop your variable file on the generator skin.
+4. Click on Generate.
+5. Click on "Open skin".
+6. Test that the generated skin works and is actually changing the variables.
+   * You have to refresh your skin manually after changing variables with Settings.
+7. Move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+8. Right click the Rainmeter tray icon and Refresh all.
 
-Confirm that the right skin and file is selected.
-
-Click on Generate.
-   * This will remove any previous files in the settings directory.
-
-A generated settings skin should open. You can test it and confirm it's changing the right file.
-
-Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to customize the generated skin.
-
-Once you're done, move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
+Steps 4-8 will be combined into one step in a later release.
 
 ## TO-DO for release:
  - [x] Update RainDoc wiki to new Pipe syntax
  - [x] Write an example.inc
- - [ ] Make the generated skin look nicer
+ - [x] Make the generated skin look nicer
    - [x] Add a bit of padding to the top of the category list
    - [x] Make all string meters `ClipString=2`
    - [x] Move Credit.inc from the first page to the bottom of the list
@@ -46,4 +43,5 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
  - [ ] Better (custom ?) colour picker
  - [ ] Document Tooltip
  - [ ] Make list items rely on actual padding for ClipString instead of complicated width calculations 
+ - [ ] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
 
