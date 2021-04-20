@@ -16,11 +16,14 @@ X=0R
 Padding=0,[#s_CategoryTitleTopPadding],0,0
 ClipString=2
 FontFace=#s_FontFace#
-FontWeight=#s_TitleFontWeight#
+FontWeight=#s_CategoryTitleFontWeight#
 FontSize=#s_FontSize1#
 InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
 InlinePattern=^.
 DynamicVariables=1
+
+[ThickDescription]
+FontWeight=[#s_CategoryDescriptionFontWeight]
 
 [CategoryTitleSeparator]
 X=0
@@ -34,12 +37,12 @@ AccurateText=1
 AntiAlias=1
 Y=0R
 X=0
-Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
+Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
 FontFace=#s_FontFace#
 FontSize=#s_FontSize2#
-FontWeight=#s_TitleFontWeight#
+FontWeight=#s_VariableTitleFontWeight#
 InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
 InlinePattern=^.
 
@@ -48,21 +51,22 @@ AccurateText=1
 AntiAlias=1
 X=0
 Y=0R
+W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
+ClipString=2
 Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
 FontFace=#s_FontFace#
 FontSize=#s_FontSize4#
-W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
-ClipString=2
 
 [VarStringValue]
 AccurateText=1
 AntiAlias=1
 Y=0R
-Padding=[#s_VariableXPadding],[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
+Padding=[#s_VariableXPadding],[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
 FontFace=#s_FontFace#
 FontSize=#s_FontSize3#
+SolidColor=[#s_DebugValueColor[#s_DebugColors]] 
 MouseOverAction=[!SetOption #CURRENTSECTION# FontColor [#s_SelectedColor]][!SetOption #CURRENTSECTION# FontWeight [#s_SelectedFontWeight]][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# FontColor [#s_FontColor]][!SetOption #CURRENTSECTION# FontWeight [#s_FontWeight]][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
@@ -85,7 +89,6 @@ DynamicVariables=1
 [VarColorValue]
 X=[#s_VariableXPadding]
 Y=[#s_ValueYPadding]R
-
-MouseOverAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_SelectedColor]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_ColorStrokeColor]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseOverAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_SelectedColor]"][!SetVariable s_ColorStrokeWidth [#s_ColorStrokeWidthSelected]][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_ColorStrokeColor]"][!SetVariable s_ColorStrokeWidth [#s_ColorStrokeWidth]][!UpdateMeter #CURRENTSECTION#][!Redraw]
 

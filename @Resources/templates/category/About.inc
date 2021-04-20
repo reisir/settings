@@ -12,7 +12,7 @@ W=([#s_RightPanelW] - [CategoryIcon{Index}:W])
 [CategoryDescription{Index}]
 Meter=String
 Text={Description}
-MeterStyle=VarDescription | {Container}
+MeterStyle=VarDescription | ThickDescription | {Container}
 
 [CategoryTitleSeparator{Index}]
 Meter=Image

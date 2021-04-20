@@ -8,7 +8,6 @@ s_FontSize4=10
 s_FontSize3=12
 s_FontSize2=16
 s_FontSize1=20
-s_TitleFontWeight=400
 s_SelectedFontWeight=500
 s_FontWeight=400
 
@@ -16,7 +15,7 @@ s_FontWeight=400
 s_ValueYPadding=10
 s_VariableXPadding=20
 
-; Titles
+; Category titles
 s_CategoryTitleTopPadding=35
 s_CategoryTitleBottomPadding=20
 s_CategoryTitleXPadding=20
@@ -24,6 +23,11 @@ s_CategoryTitleXPadding=20
 s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + 5)
 ; Fix the literal 1px offset caused by the title and description using different font sizes
 s_VarTitleNudge=-1
+s_CategoryTitleFontWeight=500
+s_CategoryDescriptionFontWeight=500
+
+; Variable titles
+s_VariableTitleFontWeight=[#s_FontWeight]
 
 ; Toggle
 s_ToggleActiveColor=[#s_SelectedColor]
@@ -41,6 +45,7 @@ s_SelectedColor=007acc
 ; Color variables
 s_ColorSize=15
 s_ColorStrokeWidth=1
+s_ColorStrokeWidthSelected=2
 s_ColorStrokeColor=200,200,200
 s_ColorStringLeftPadding=10
 
@@ -84,3 +89,11 @@ s_ScrollRightPanel=0
 s_ScrollLeftPanel=0
 s_InputTextFontSize=[#s_FontSize3]
 s_ScrollTreshold=([#s_PanelH] - ([#s_PanelH] / 4))
+
+; Debug
+s_DebugColors=0
+s_DebugTitleColor1=255,0,0,100
+s_DebugValueColor1=,0,0,100
+s_DebugDescriptionColor1=255,0,0,100
+s_DebugListColor1=255,0,0,100
+s_DebugIconColor1=255,0,0,100

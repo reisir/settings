@@ -34,7 +34,7 @@ Text=File to process.
 MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
-Text=[&MeasureSkin]\[#s_File].[#s_Type]
+Text=[&MeasureSkin]
 MeterStyle=VarStringValue | RightPanel
 LeftMouseUpAction=["[#s_Directory]"]
 Hidden=

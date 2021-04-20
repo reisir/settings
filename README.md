@@ -32,6 +32,7 @@ Once you're done, move the folder called "settings" from `Skins\Settings` to `Sk
  - [x] Flip the toggle buttons
 
 ## TO-DO: 
+ - [ ] Link syntax Display=Target
  - [ ] Write wiki for templates
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
  - [ ] Add a way to refresh the right skin when variables are changed

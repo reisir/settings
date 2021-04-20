@@ -10,6 +10,7 @@ $listTypes = @("Default", "About", "Topic")
 
 # Variables from Rainmeter
 $settingsFilePath = "$($RmAPI.VariableStr('s_SettingsFile'))"
+$dynamicSettingsFilePath = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicPath'))"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
@@ -46,7 +47,7 @@ function Construct {
     # Get rainmeter section from template
     $ini = Get-Content -Path "$($templatesDir)Rainmeter.inc" -Raw
     $rainmeterTemplateProperties = @{
-        "SettingsFile" = $settingsFilePath
+        "SettingsFile" = $dynamicSettingsFilePath
     }
     $ini = Filter-Template -Template $ini -Properties $rainmeterTemplateProperties
 
@@ -307,7 +308,7 @@ function Variable-Ini {
     $internalVariableProperties = @{
         "Index" = $Index
         "Container" = "RightPanel"
-        "SettingsFile" = $settingsFilePath
+        "SettingsFile" = $dynamicSettingsFilePath
     }
 
     # Get template for type
