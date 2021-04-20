@@ -5,7 +5,7 @@ AccurateText=1
 AntiAlias=1
 Y=0R
 X=0
-;solidColor = 255,0,255,100
+SolidColor=[#s_DebugListIconColor[#s_DebugColors]] 
 
 [ListDefaultIcon]
 Padding=[#s_ListDefaultLeftPadding],[#s_ListYPadding],0,[#s_ListYPadding]
@@ -21,6 +21,7 @@ FontSize=#s_FontSize1#
 
 [ListItem]
 Padding=0,[#s_ListYPadding],0,[#s_ListYPadding]
+SolidColor=[#s_DebugListColor[#s_DebugColors]] 
 FontFace=#s_FontFace#
 ClipString=2
 DynamicVariables=1

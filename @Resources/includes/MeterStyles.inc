@@ -7,6 +7,7 @@ Y=0R
 Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
 FontSize=#s_FontSize1#
 FontFace=#s_IconFontFace#
+SolidColor=[#s_DebugCategoryIconColor[#s_DebugColors]] 
 
 [CategoryTitle]
 AccurateText=1
@@ -21,6 +22,7 @@ FontSize=#s_FontSize1#
 InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
 InlinePattern=^.
 DynamicVariables=1
+SolidColor=[#s_DebugCategoryTitleColor[#s_DebugColors]] 
 
 [ThickDescription]
 FontWeight=[#s_CategoryDescriptionFontWeight]
@@ -30,6 +32,7 @@ X=0
 Y=0R
 H=[#s_CategoryTitleBottomPadding]
 W=[#s_RightPanelW]
+SolidColor=[#s_DebugSeparatorColor[#s_DebugColors]] 
 
 ;Variable styles
 [VarTitle]
@@ -45,6 +48,7 @@ FontSize=#s_FontSize2#
 FontWeight=#s_VariableTitleFontWeight#
 InlineSetting=CharacterSpacing | [#s_VarTitleNudge] | *
 InlinePattern=^.
+SolidColor=[#s_DebugVariableTitleColor[#s_DebugColors]] 
 
 [VarDescription]
 AccurateText=1
@@ -56,6 +60,7 @@ ClipString=2
 Padding=[#s_VariableXPadding],0,[#s_VariableXPadding],0
 FontFace=#s_FontFace#
 FontSize=#s_FontSize4#
+SolidColor=[#s_DebugDescriptionColor[#s_DebugColors]] 
 
 [VarStringValue]
 AccurateText=1
@@ -85,10 +90,12 @@ FontColor=[#s_FontColor]
 [VarToggleValue]
 X=(([#s_ToggleSize] / 2) + [#s_VariableXPadding])
 DynamicVariables=1
+SolidColor=[#s_DebugToggleColor[#s_DebugColors]] 
 
 [VarColorValue]
 X=[#s_VariableXPadding]
 Y=[#s_ValueYPadding]R
+SolidColor=[#s_DebugColorColor[#s_DebugColors]] 
 MouseOverAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_SelectedColor]"][!SetVariable s_ColorStrokeWidth [#s_ColorStrokeWidthSelected]][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_ColorStrokeColor]"][!SetVariable s_ColorStrokeWidth [#s_ColorStrokeWidth]][!UpdateMeter #CURRENTSECTION#][!Redraw]
 

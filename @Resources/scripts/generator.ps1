@@ -95,6 +95,8 @@ function Settings-Array {
         }
     }
 
+    $settings > $testfile
+
     return $settings
 
 }
@@ -123,7 +125,6 @@ function Pipe-Variable {
 
     # Get unfiltered data
     $Variable = Filter-Hashtable -String $String -Properties @{"KeyValue" = $Patterns.KeyValue; "UnfilteredProperties" = $Patterns.UnfilteredProperties}
-
 
     # Get the key and value from the unformatted line
     $Variable.KeyValue = Filter-Hashtable -String $Variable.KeyValue -Properties @{"Key" = $Patterns.Key; "Value" = $Patterns.Value}
@@ -208,6 +209,7 @@ function Pipe-Category {
             $Category.Properties.Type = "Default"
             # $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
         }
+        
     }
     
     # Match every | Key Value | pair from the property line
@@ -219,7 +221,6 @@ function Pipe-Category {
                 $value = $Matches[1]
             }
             # Only add the property to the hashtable if it has a key.
-            # This is a very smart move.
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
                 $key = Remove-Whitespace -String $Matches[1]
                 $Category.Properties.Add("$key", "$value")
