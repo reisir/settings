@@ -28,7 +28,7 @@ Text=1. Formatting
 MeterStyle=VarTitle | RightPanel
 [Var6Description]
 Meter=String
-Text=For Settings to correctly read your variables, you need to format the file.
+Text=For Settings to correctly parse your variables, you need to format the variable file.
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value6]
@@ -41,11 +41,19 @@ LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
 Meter=String
 Text=2. Generating
 MeterStyle=VarTitle | RightPanel
-[Var0Description]
+[Value7]
 Meter=String
 Text=Drag & Drop your variable file on this skin.
-MeterStyle=VarDescription | RightPanel
-[Var1Description]
+MeterStyle=VarStringValue | Link0 | RightPanel
+[Value8]
 Meter=String
 Text=Click on "Generate & Inject".
-MeterStyle=VarDescription | RightPanel
+MeterStyle=VarStringValue | Link0 | RightPanel
+; [Var0Description]
+; Meter=String
+; Text=
+; MeterStyle=VarDescription | RightPanel
+; [Var1Description]
+; Meter=String
+; Text=
+; MeterStyle=VarDescription | RightPanel

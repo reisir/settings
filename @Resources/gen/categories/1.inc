@@ -28,16 +28,16 @@ H=([#s_CategoryTitleBottomPadding] / 2)
 
 [Var0]
 Meter=String
-Text=Internal settings
+Text=Internal variables
 MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
-Text=Customize your generated settings.
+Text=Customize your generated settings skins.
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value0]
 Meter=String
-Text=Change to internal settings file
+Text=Change to internal variable file
 MeterStyle=VarStringValue | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]

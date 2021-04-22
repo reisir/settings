@@ -58,7 +58,7 @@ s_ScrollIndicatorWidth=5
 ;?Integer |
 s_scrollIndicatorXPadding=5
 ;?Color | 
-s_ScrollIndicatorBackgroundColor=0,0,0,100
+s_ScrollIndicatorBackgroundColor=0,0,0,0
 ;?Color | 
 s_ScrollIndicatorColor=200,200,200
 ;?Integer |
@@ -109,13 +109,12 @@ s_ListRightPadding=10
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=5
 
-
 ;@Topic | Name Variables
 ;@ | Name Variable
 ;?Integer |
 s_VariableTitleFontWeight=400
 ;?Integer |
-s_ValueYPadding=10
+s_ValueYPadding=5
 ;?Integer |
 s_VariableXPadding=20
 ;? | Description Uses s_FontSize3

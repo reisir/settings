@@ -88,8 +88,23 @@ function Settings-Array {
 
     # Handle unformatted variable files
     if($settingsFileContent -notmatch $categoryPattern) {
-        $RmAPI.Log("Fuck you it's not formatted right")
-        return 
+        return @(@{
+            "Properties" = @{
+                "Type" = "Default"
+                "Name" = "File format error"
+                "Description" = "Please add at least one (1) category"
+                "Icon" = "[\xE783]"
+            }
+            "Variables" = @{
+                "Properties" = @{
+                    "Type" = "Info"
+                    "Name" = "Refer to the RainDoc syntax wiki"
+                    "Link" = "1"
+                }
+                "Key" = "RainDoc syntax"
+                "Value" = "https://github.com/sceleri/settings/wiki"
+            }
+        })
     }
 
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
@@ -99,6 +114,7 @@ function Settings-Array {
             $c = Pipe-Category -String $category
             # Add the filtered category hashtable to the $settings array 
             $settings += , $c
+            $RmAPI.Log("$c")
         }
     }
 
@@ -112,9 +128,7 @@ function Pipe-Variable {
 
     param(
         [Parameter(Mandatory=$true)]
-        $String,
-        [Parameter(Mandatory=$true)]
-        $Category
+        $String
     )
 
     $Patterns = @{
@@ -173,10 +187,6 @@ function Pipe-Variable {
         }
     }
 
-    # Checkpoint 1
-    # $RmAPI.Log("$($Variable.Properties.Name) properties: $($Variable.Properties.Keys)")
-    # $RmAPI.Log("This variable is: $($Variable.Properties.Name) from $Category")
-
     return $Variable
 
 }
@@ -229,6 +239,7 @@ function Pipe-Category {
             }
             # Only add the property to the hashtable if it has a key.
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
+                $RmAPI.Log("Adding key: '$($Matches[1])'")
                 $key = Remove-Whitespace -String $Matches[1]
                 $Category.Properties.Add("$key", "$value")
             }
@@ -245,7 +256,7 @@ function Pipe-Category {
         # Filter each matched $category
         foreach ($UnfilteredVariable in $_.Matches) {
             # Filter each Variable
-            $v = Pipe-Variable -String $UnfilteredVariable -Category $Category.Properties.Name
+            $v = Pipe-Variable -String $UnfilteredVariable
             $Category.Variables += , $v
         }
     }
@@ -478,5 +489,7 @@ function Prepare-Directories {
 function Inject-Settings {
     # Inject generated settings
     Copy-Item -Path "$generatedSkinDir*" -Destination "$($injectPath)settings\" -Recurse
+    $RmAPI.Bang('[!RefreshApp]')
+    # $RmAPI.Bang('[!ActivateConfig]$($targetSkin)\settings\settings.ini')
     Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\settings", "settings.ini"
 }

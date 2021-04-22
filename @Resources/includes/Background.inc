@@ -64,8 +64,8 @@ DynamicVariables=1
 
 [CategoryScrollIndicator]
 Meter=Shape
-;Shape=Rectangle 0,0,[#s_ScrollIndicatorWidth],[#s_ScrollIndicatorMaxHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorBackgroundColor] | StrokeWidth 0
-Shape=Rectangle 0,[CategoryCurrentScroll],[#s_ScrollIndicatorWidth],[ScrollerHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorColor] | StrokeWidth 0
+Shape=Rectangle 0,0,[#s_ScrollIndicatorWidth],[#s_ScrollIndicatorMaxHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorBackgroundColor] | StrokeWidth 0
+Shape2=Rectangle 0,[CategoryCurrentScroll],[#s_ScrollIndicatorWidth],[ScrollerHeight],[#s_ScrollIndicatorRounding] | Fill Color [#s_ScrollIndicatorColor] | StrokeWidth 0
 Y=[#s_scrollIndicatorYPadding]
 X=([#s_RightPanelW] - ([#s_ScrollIndicatorWidth] + [#s_scrollIndicatorXPadding]))
 Hidden=([ScrollerHeight] > 0) ? 0 : 1

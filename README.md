@@ -33,7 +33,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TO-DO:
  - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
-   - [ ] Make construct.ps1 !RefreshApp and load the generated skin without errors
+   - [x] Make construct.ps1 !RefreshApp and load the generated skin without errors.
+   - [ ] Make the user hold alt or something to Inject automatically.
  - [x] Link syntax Display=Target
  - [x] Add a way to refresh the right skin when variables are changed
     - [x] Add a way to specify a custom bang to run when variables are changed

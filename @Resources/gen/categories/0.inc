@@ -50,7 +50,8 @@ InlineSetting2=Size | [#s_FontSize3]
 InlinePattern2=[\xE90F]
 [Var1Description]
 Meter=String
-Text=This will remove old files.
+Text=This will delete all files in "[#s_Skin]\settings" and copy over the generated settings skin.
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 MeterStyle=VarDescription | RightPanel
 [Value1]
 Meter=String
