@@ -26,5 +26,5 @@ H=[Value{Index}:H]
 W=([RightPanelContainer:W] - ([Value{Index}:X] * 2))
 DynamicVariables=1
 DefaultValue="Give new value"
-Command1=[!WriteKeyValue "Variables" "{Key}" "$UserInput$" "{SettingsFile}"][!Refresh]
+Command1=[!WriteKeyValue "Variables" "{Key}" "$UserInput$" "{SettingsFile}"][!Refresh][#s_OnChangeAction]
 

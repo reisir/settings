@@ -16,7 +16,7 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap 
 Hidden=([#{Key}])
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_ValueYPadding])
 MeterStyle=VarToggleValue | {Container}
-LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 1 "{SettingsFile}"][!SetVariable "{Key}" 1][!Update][!Redraw][!Log "Toggled {Name} on"]
+LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 1 "{SettingsFile}"][!SetVariable "{Key}" 1][!Update][!Redraw][#s_OnChangeAction]
 Hidden={Hidden}
 
 [ToggleOn{Index}]
@@ -28,7 +28,7 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeS
 Hidden=([#{Key}] - 1)
 Y=([Var{Index}Description:Y] + [Var{Index}Description:H] + ([#s_ToggleSize] / 2) + [#s_ValueYPadding])
 MeterStyle=VarToggleValue | {Container}
-LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 0 "{SettingsFile}"][!SetVariable "{Key}" 0][!Update][!Redraw][!Log "Toggled {Name} off"]
+LeftMouseUpAction=[!WriteKeyValue Variables "{Key}" 0 "{SettingsFile}"][!SetVariable "{Key}" 0][!Update][!Redraw][#s_OnChangeAction]
 Hidden={Hidden}
 
 [ClearFloat{Index}]

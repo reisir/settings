@@ -4,48 +4,57 @@ Text=First
 FontColor=0,0,0,0
 MeterStyle=FirstItem | RightPanel
 Y=[#s_ScrollRightPanel]
+
 [CategoryIcon1]
 Meter=String
 Text=
 MeterStyle=CategoryIcon | RightPanel
-
+Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
+Y=0
 [Title1]
 Meter=String
-Text=Instructions
+Text=Settings settings
 MeterStyle=CategoryTitle | RightPanel
 W=([#s_RightPanelW] - [CategoryIcon1:W])
-
+Padding=0,[#s_CategoryTitleXPadding],0,0
 [CategoryDescription1]
 Meter=String
 Text=
 MeterStyle=VarDescription | RightPanel
-
 [CategoryTitleSeparator1]
 Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
+H=([#s_CategoryTitleBottomPadding] / 2)
 
 [Var0]
 Meter=String
-Text=File selection
+Text=Internal settings
 MeterStyle=VarTitle | RightPanel
+[Var0Description]
+Meter=String
+Text=Customize your generated settings.
+MeterStyle=VarDescription | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value0]
 Meter=String
-Text=Drag & Drop your variable file on this skin.
+Text=Change to internal settings file
 MeterStyle=VarStringValue | RightPanel
-Hidden=
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-MouseOverAction=
+LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
 [Var1]
 Meter=String
-Text=Usage
+Text=OnChangeAction
 MeterStyle=VarTitle | RightPanel
+[Var1Description]
+Meter=String
+Text=Variable file containing bangs run every time the generated settings skin changes a variable.
+MeterStyle=VarDescription | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value1]
 Meter=String
-Text=Move the "settings" directory from "Settings" to your skins root folder.
+Text=Open s_OnChangeAction.inc
 MeterStyle=VarStringValue | RightPanel
-Hidden=
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-MouseOverAction=
-
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
+LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
 

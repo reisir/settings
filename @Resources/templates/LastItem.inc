@@ -1,7 +1,7 @@
 [Last{Container}]
 Meter=String
 Text=Last
-FontColor=0,0,0,0
+FontColor=255,0,0,0
 MeterStyle=LastItem | {Container}
 
 [ScrollDown{Container}]

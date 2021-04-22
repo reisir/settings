@@ -9,6 +9,7 @@ License=CC BY-NC-SA 4.0
 Update=-1
 @IncludeSkinVariables={SettingsFile}
 @IncludeVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
+@IncludesOnChangeAction=#ROOTCONFIGPATH#settings\includes\s_OnChangeAction.inc
 
 [IncludeBackground]
 @IncludeBackground=#ROOTCONFIGPATH#settings\includes\Background.inc
@@ -17,7 +18,7 @@ Update=-1
 @IncludeMeterStyles=#ROOTCONFIGPATH#settings\includes\MeterStyles.inc
 
 [IncludeListItems]
-@IncludeListItems=#ROOTCONFIGPATH#settings\includes\ListITems.inc
+@IncludeListItems=#ROOTCONFIGPATH#settings\includes\ListItems.inc
 
 [IncludeCategoryList]
 @IncludeCategoryList=#ROOTCONFIGPATH#settings\categories\CategoryList.inc

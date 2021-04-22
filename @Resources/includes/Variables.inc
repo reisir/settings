@@ -1,10 +1,6 @@
 [Variables]
 
-;@About | Name Internal settings | Description You better know what you're doing.
-
-;?Info | Name Disclaimer | Description Changing internal variables requires manual regeneration to apply changes.
-s_Disclaimer=
-
+;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes.
 ;?Integer | Description This controls the default category.
 s_CurrentCategory=0
 ;?Integer |
@@ -19,10 +15,11 @@ s_LeftPanelW=200
 s_RightPanelW=600
 ;?Integer |
 s_PanelH=700
-;? | Description Controls when to allow scrolling and when to show the scroll indicator. Uses s_PanelH
-s_ScrollTreshold=([#s_PanelH] - ([#s_PanelH] / 4))
+s_ScrollTreshold=[#s_PanelH]
 
-;@Default | Name Background 
+;@Topic | Name Customization
+
+;@ | Name Background 
 ;?Color | 
 s_RightPanelBackgroundColor=255,255,255,255
 ;?Color | 
@@ -30,7 +27,7 @@ s_LeftPanelBackgroundColor=200,200,200,255
 ;?Integer |
 s_BackgroundRounding=5
 
-;@Default | Name Font
+;@ | Name Font
 ;? | 
 s_FontFace=Segoe UI
 ;? | 
@@ -38,34 +35,48 @@ s_IconFontFace=Segoe MDL2 Assets
 ;?Color | 
 s_FontColor=0,0,0
 ;?Integer |
-s_FontSize5=8
-;?Integer |
-s_FontSize4=10
-;?Integer |
-s_FontSize3=12
+s_FontSize1=20
 ;?Integer |
 s_FontSize2=16
 ;?Integer |
-s_FontSize1=20
+s_FontSize3=12
 ;?Integer |
-s_SelectedFontWeight=500
+s_FontSize4=10
+;?Integer |
+s_FontSize5=8
 ;?Integer |
 s_FontWeight=400
+;?Integer |
+s_SelectedFontWeight=500
 
-;@ | Name Category list
+;@ | Name Scroll indicator
+;?Integer | Description uses s_ValueYPadding
+s_scrollIndicatorYPadding=[#s_ValueYPadding]
+s_ScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_scrollIndicatorYPadding] * 2))
 ;?Integer |
-s_ListAboutTopPadding=35
+s_ScrollIndicatorWidth=5
 ;?Integer |
-s_ListAboutLeftPadding=8
+s_scrollIndicatorXPadding=5
+;?Color | 
+s_ScrollIndicatorBackgroundColor=0,0,0,100
+;?Color | 
+s_ScrollIndicatorColor=200,200,200
 ;?Integer |
-s_ListDefaultLeftPadding=20
-;?Integer |
-s_ListTopicLeftPadding=10
-;?Integer |
-s_ListYPadding=7
-;? | Description Used for width calculations ClipString=2
-s_ListRightPadding=10
+s_ScrollIndicatorRounding=5
+;?Info | Name Filler variable 0 | Description This is here to show the scroll indicator
+ = 
+;?Info | Name Filler variable 1 | Description This is here to show the scroll indicator
+ = 
+;?Info | Name Filler variable 2 | Description This is here to show the scroll indicator
+ = 
+;?Info | Name Filler variable 3 | Description This is here to show the scroll indicator
+ = 
+;?Info | Name Filler variable 4 | Description This is here to show the scroll indicator
+ = 
+;?Info | Name Filler variable 5 | Description This is here to show the scroll indicator
+ = 
 
+;@Topic | Name Categories
 ;@ | Name Category
 ;? | Description Visually center the category icon. Uses s_CategoryTitleTopPadding
 s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + 5)
@@ -81,7 +92,25 @@ s_CategoryTitleXPadding=20
 s_CategoryTitleFontWeight=500
 ;?Integer |
 s_CategoryDescriptionFontWeight=500
+;@ | Name Category list
+;?Integer |
+s_ListAboutTopPadding=35
+;?Integer |
+s_ListAboutLeftPadding=8
+;?Integer |
+s_ListDefaultLeftPadding=20
+;?Integer |
+s_ListTopicLeftPadding=10
+;?Integer |
+s_ListYPadding=7
+;? | Description Used for width calculations & ClipString=2
+s_ListRightPadding=10
+;?Info | Name s_SettingsIconPadding | Description The padding of the Settings icon in the bottom left. Set to -100 to move the icon outside of the skin.
+5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
+s_CreditIconPadding=5
 
+
+;@Topic | Name Variables
 ;@ | Name Variable
 ;?Integer |
 s_VariableTitleFontWeight=400
@@ -126,22 +155,7 @@ s_SelectorRounding=[#s_SelectorWidth]
 ;?Integer |
 s_SelectedColor=007acc
 
-;@ | Name Scroll indicator
-;?Integer | Description uses s_ValueYPadding
-s_scrollIndicatorYPadding=[#s_ValueYPadding]
-;?Integer |
-s_ScrollIndicatorWidth=5
-;?Integer |
-s_scrollIndicatorXPadding=5
-;?Color | 
-s_ScrollIndicatorBackgroundColor=0,0,0,100
-;?Color | 
-s_ScrollIndicatorColor=200,200,200
-;?Integer |
-s_ScrollIndicatorRounding=5
-;? | Hidden 1
-s_ScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_scrollIndicatorYPadding] * 2))
-
+;@Topic | Name Developer
 ;@ | Name Generator
 ;? | 
 s_GeneratorRightPanelWidth=350
@@ -156,7 +170,7 @@ s_GeneratorPanelHeight=300
 s_DebugColors=0
 ;?Color | 
 s_DebugCategoryTitleColor1=255,0,195,100
-s_DebugCategoryTitleColo0=0,0,0,0
+s_DebugCategoryTitleColor0=0,0,0,0
 ;?Color | 
 s_DebugValueColor1=170,0,255,100
 s_DebugValueColor0=0,0,0,0

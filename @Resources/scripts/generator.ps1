@@ -9,8 +9,8 @@ $categoryTypes = @("Default", "About")
 $listTypes = @("Default", "About", "Topic")
 
 # Variables from Rainmeter
-$settingsFilePath = "$($RmAPI.VariableStr('s_SettingsFile'))"
-$dynamicSettingsFilePath = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicPath'))"
+$settingsFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
+$dynamicSettingsFilePath = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicFilePath'))"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
@@ -29,6 +29,10 @@ $generatedAddonsDir = "$($generatedSkinDir)addons"
 
 # Generated files
 $generatedSkinFile = "$($generatedSkinDir)settings.ini"
+
+# Injectors
+$targetSkin = $RmAPI.VariableStr('s_Skin')
+$injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$($targetSkin)\"
 
 # Testfile
 $testfile = "$($resourcesDir)test.inc"
@@ -61,6 +65,9 @@ function Construct {
     Category-List -Settings $settings
 
     $ini > $generatedSkinFile
+
+    Inject-Settings
+
 }
 
 function Settings-Array {
@@ -456,11 +463,20 @@ function Prepare-Directories {
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "categories"
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "includes"
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "addons"
+    New-Item -Path $injectPath -ItemType "directory" -Name "settings"
     # Remove files in generated directories
     Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
     Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    # Remove settings injected earlier
+    Get-ChildItem -Path "$($injectPath)settings\*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
     # Copy Includes to generated skin
     Copy-Item -Path "$includeDir*" -Include "*.inc" -Destination $generatedIncludeDir -Recurse
     # Copy Addons to generated skin
     Copy-Item -Path "$addonsDir*" -Include "*.exe" -Destination $generatedAddonsDir -Recurse
+}
+
+function Inject-Settings {
+    # Inject generated settings
+    Copy-Item -Path "$generatedSkinDir*" -Destination "$($injectPath)settings\" -Recurse
+    Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\settings", "settings.ini"
 }

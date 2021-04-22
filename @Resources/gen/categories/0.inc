@@ -4,65 +4,71 @@ Text=First
 FontColor=0,0,0,0
 MeterStyle=FirstItem | RightPanel
 Y=[#s_ScrollRightPanel]
+
 [CategoryIcon0]
 Meter=String
 Text=
 MeterStyle=CategoryIcon | RightPanel
-
+Y=0
+Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
 [Title0]
 Meter=String
-Text=Settings 
+Text=Settings
 MeterStyle=CategoryTitle | RightPanel
 W=([#s_RightPanelW] - [CategoryIcon0:W])
-
+Padding=0,[#s_CategoryTitleXPadding],0,0
 [CategoryDescription0]
 Meter=String
-Text=a settings skin generator skin
+Text=a skin that generates settings skins for other skins.
 MeterStyle=VarDescription | RightPanel
-
-[CategoryTitleSeparator0]
+[CategoryTitleSeparator1]
 Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
+H=([#s_CategoryTitleBottomPadding] / 2)
 
 [Var0]
 Meter=String
-Text=File 
+Text=Selected file 
 MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
-Text=File to process.
+Text=[#s_DynamicFilePath]
 MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
-Text=[&MeasureSkin]
+Text=Click to open directory
 MeterStyle=VarStringValue | RightPanel
-LeftMouseUpAction=["[#s_Directory]"]
-Hidden=
+LeftMouseUpAction=["#SKINSPATH#[#s_DynamicDirectory]"]
 
-[Generate]
+[Var1]
 Meter=String
-Text=Generate
+Text=Generation [\xE90F] 
+MeterStyle=VarTitle | RightPanel
 InlineSetting=Face | [#s_IconFontFace]
 InlinePattern=[\xE90F]
-MeterStyle=Center | VarStringValue | VarTitle | RightPanel
-Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
-StringAlign=Center
-X=(([#s_GeneratorRightPanelWidth] / 2) - (([Generate:W] + [Open:W]) / 2) + [Generate:W] / 2)
-W=
-DynamicVariables=1
-Padding=10,0,10,0
-LeftMouseUpAction=[!CommandMeasure Generator Construct][!Delay 1][!RefreshApp]
-
-[Open]
+InlineSetting2=Size | [#s_FontSize3]
+InlinePattern2=[\xE90F]
+[Var1Description]
 Meter=String
-Text=Open skin
-InlineSetting=Face | [#s_IconFontFace]
-InlinePattern=[\xE90F]
-MeterStyle=Center | VarStringValue | VarTitle | RightPanel
-Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
-StringAlign=Center
-Padding=10,0,10,0
-W=
-X=R
-DynamicVariables=1
-LeftMouseUpAction=[!ActivateConfig "Settings\settings" "settings.ini"]
+Text=This will remove old files.
+MeterStyle=VarDescription | RightPanel
+[Value1]
+Meter=String
+Text=Generate & Inject
+MeterStyle=VarStringValue | RightPanel
+LeftMouseUpAction=[!CommandMeasure Generator Construct]
+
+; [Generate]
+; Meter=String
+; Text=Generate & Inject
+; InlineSetting=Face | [#s_IconFontFace]
+; InlinePattern=[\xE90F]
+; MeterStyle=Center | VarStringValue | VarTitle | RightPanel
+; Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_ValueYPadding])
+; StringAlign=Center
+; X=([#s_GeneratorRightPanelWidth] / 2)
+; W=
+; DynamicVariables=1
+; Padding=10,0,10,0
+; LeftMouseUpAction=
+

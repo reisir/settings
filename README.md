@@ -2,19 +2,22 @@
 
 Settings is a Rainmeter skin that generates settings skins for other Rainmeter skins.
 
-## Basic usage
+# Disclaimer
 
-1. Read the [quick-start guide](https://github.com/sceleri/settings/wiki) on how to format the generated skin. Settings will not work if you don't format your variable file correctly.
-2. Format your variable file.
-3. Drag & Drop your variable file on the generator skin.
-4. Click on Generate.
-5. Click on "Open skin".
-6. Test that the generated skin works and is actually changing the variables.
-   * You have to refresh your skin manually after changing variables with Settings.
-7. Move the folder called "settings" from `Skins\Settings` to `Skins\YourSkin`.
-8. Right click the Rainmeter tray icon and Refresh all.
+### :warning: When you use the generator, all .inc,.ini and "RainRGB4RunCommand.exe" files in "yourskin\settings" are deleted and replaced :warning:
 
-Steps 4-8 will be combined into one step in a later release.
+# Using Settings
+
+## Pre-requisites
+
+ * Format your variable file with [RainDoc](https://github.com/sceleri/settings/wiki/RainDoc-syntax) syntax.
+   * Check out the [quick-start guide](https://github.com/sceleri/settings/wiki) for a guide and example of a simple variable file.
+
+## Generating settings skins
+
+ 1. Drag & Drop your formatted variable file on the generator skin.
+ 2. Click on Generate.
+   * This deletes files in "yourskin\settings". Including any skins you had there or modifications you made to an earlier generated skin.
 
 ## TO-DO for release:
  - [x] Update RainDoc wiki to new Pipe syntax
@@ -28,20 +31,27 @@ Steps 4-8 will be combined into one step in a later release.
    - [x] Add links to guides in generator.ini
  - [x] Flip the toggle buttons
 
-## TO-DO: 
- - [ ] Link syntax Display=Target
- - [ ] Write wiki for templates
+## TO-DO:
+ - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
+   - [ ] Make construct.ps1 !RefreshApp and load the generated skin without errors
+ - [x] Link syntax Display=Target
+ - [x] Add a way to refresh the right skin when variables are changed
+    - [x] Add a way to specify a custom bang to run when variables are changed
+ - [x] Guide on overriding internal Settings `[#s_]` variables
+   - [x] Can now just generate internal Settings settings skin.. because duh
+ - [x] Generate generator.ini
+   - [x] Reconsider.
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
- - [ ] Add a way to refresh the right skin when variables are changed
-    - [ ] Maybe add a way to specify a custom bang to run when variables are changed
- - [ ] Another way to select file other than Drag & Drop
- - [ ] Add icon support for variables. Then move descriptions to X=0r instead of relying on the padding being the same
- - [ ] Guide on overriding internal Settings `[#s_]` variables
- - [ ] Add way to change the icon font per Icon
  - [ ] Slider template
- - [ ] Generate generator.ini
+ - [ ] Write wiki for templates
+   - [ ] Dynamically get list of templates for $implementedTypes
+   - [ ] Dynamically include all includes in Rainmeter.inc template
+ - [ ] Add icon support for variables. Then move descriptions to X=0r instead of relying on the padding being the same
  - [ ] Better (custom ?) colour picker
  - [ ] Document Tooltip
+   - [ ] Make it work first
  - [ ] Make list items rely on actual padding for ClipString instead of complicated width calculations 
- - [ ] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
+ - [ ] Proofread the wiki
+ - [ ] Another way to select file other than Drag & Drop
+ - [ ] Add way to change the icon font per Icon
 

@@ -4,38 +4,48 @@ Text=First
 FontColor=0,0,0,0
 MeterStyle=FirstItem | RightPanel
 Y=[#s_ScrollRightPanel]
-[CategoryIcon2]
+
+[CategoryIcon1]
 Meter=String
 Text=
 MeterStyle=CategoryIcon | RightPanel
-
-[Title2]
+Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
+Y=0
+[Title1]
 Meter=String
-Text=Documentation 
+Text=Instructions
 MeterStyle=CategoryTitle | RightPanel
-W=([#s_RightPanelW] - [CategoryIcon2:W])
-
-[CategoryDescription2]
-Meter=String
-Text=Links to documentation
-MeterStyle=VarDescription | RightPanel
-
-[CategoryTitleSeparator2]
+W=([#s_RightPanelW] - [CategoryIcon1:W])
+Padding=0,[#s_CategoryTitleXPadding],0,0
+[CategoryTitleSeparator1]
 Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
+H=([#s_CategoryTitleBottomPadding] / 2)
 
-[Var0]
+[Var6]
 Meter=String
-Text=RainDoc syntax
+Text=1. Formatting
+MeterStyle=VarTitle | RightPanel
+[Var6Description]
+Meter=String
+Text=For Settings to correctly read your variables, you need to format the file.
+MeterStyle=VarDescription | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+[Value6]
+Meter=String
+Text=RainDoc documentation
+MeterStyle=VarStringValue | Link1 | RightPanel
+LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
+
+[Var3]
+Meter=String
+Text=2. Generating
 MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
-Text=Includes quick-start guide.
+Text=Drag & Drop your variable file on this skin.
 MeterStyle=VarDescription | RightPanel
-[Value0]
+[Var1Description]
 Meter=String
-Text=https://github.com/sceleri/settings/wiki
-MeterStyle=VarStringValue | Link1 | RightPanel
-Hidden=
-LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
-
+Text=Click on "Generate & Inject".
+MeterStyle=VarDescription | RightPanel
