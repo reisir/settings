@@ -9,9 +9,10 @@ License=CC BY-NC-SA 4.0
 Update=-1
 @IncludeSkinVariables={SettingsFile}
 @IncludesOnChangeAction=#ROOTCONFIGPATH#settings\includes\s_OnChangeAction.inc
+@IncludeInternalVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
 
 [Theme]
-@IncludeInternalVariables={ThemeFile}
+@IncludeTheme={ThemeFile}
 
 [FrostedGlass]
 Measure=Plugin

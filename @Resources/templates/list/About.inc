@@ -9,7 +9,7 @@ Text={Name}
 MeterStyle=ListItem | ListAboutItem | {Container}
 W=([#s_LeftPanelW] - ([ListIcon{Index}:W] + [#s_ListRightPadding]))
 FontWeight=([#s_CurrentCategory] = {Index}) ? [#s_SelectedFontWeight] : [#s_VariableTitleFontWeight]
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory {Index} "includes\Variables.inc"][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory {Index} "{InternalVariables}"][!Refresh]
 ToolTipTitle={Name}
 ToolTipText={Tooltip}
 

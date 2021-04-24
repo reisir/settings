@@ -1,10 +1,7 @@
 [Variables]
 ;@About | Name About | Description an example settings skin generated from example.inc
-;?Info | Name Settings wiki | Link 1
-https://github.com/sceleri/settings/wiki=https://github.com/sceleri/settings/wiki
-
-;?Info | Name Settings | Link 0
-a settings skin generator=
+;?Info | Name Generate your own Settings skin: | Link 1
+Settings wiki=https://github.com/sceleri/settings/wiki
 
 ;@Topic | Name Personalization | Icon [\xE771]
 ;@Defaut | Name Font | Icon [\xE986]

@@ -13,55 +13,61 @@ Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
 Y=0
 [Title1]
 Meter=String
-Text=Instructions
+Text=Settings settings
 MeterStyle=CategoryTitle | RightPanel
 W=([#s_RightPanelW] - [CategoryIcon1:W])
 Padding=0,[#s_CategoryTitleXPadding],0,0
+[CategoryDescription1]
+Meter=String
+Text=
+MeterStyle=VarDescription | RightPanel
 [CategoryTitleSeparator1]
 Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
-[VariableIcon6]
+[VariableIcon0]
+Meter=String
+Text=[\xE9E9]
+MeterStyle=VariableIcon | RightPanel
+FontSize=14
+[Var0]
+Meter=String
+Text=Internal variables  
+MeterStyle=VarTitle | RightPanel
+Y=-6r
+[Var0Description]
 Meter=String
 Text=
-MeterStyle=VariableIcon | RightPanel
-[Var6]
-Meter=String
-Text=1. Formatting
-MeterStyle=VarTitle | RightPanel
-[Var6Description]
-Meter=String
-Text=For Settings to correctly parse your variables, you need to format the variable file.
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value6]
+[Value0]
 Meter=String
-Text=RainDoc documentation
-MeterStyle=VarStringValue | Link1 | RightPanel
-LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
+Text=Change to internal variable file
+MeterStyle=VarStringValue | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
+LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
-[VariableIcon3]
+[VariableIcon1]
 Meter=String
-Text=
+Text=[\xE9F3]
 MeterStyle=VariableIcon | RightPanel
-[Var3]
+FontSize=14
+Y=5R
+[Var1]
 Meter=String
-Text=2. Generating
+Text=OnChangeAction
 MeterStyle=VarTitle | RightPanel
-[Value7]
+Y=-6r
+[Var1Description]
 Meter=String
-Text=Drag & Drop your variable file on this skin.
-MeterStyle=VarStringValue | Link0 | RightPanel
-[Value8]
+Text=Variable file containing bangs run every time the generated settings skin changes a variable.
+MeterStyle=VarDescription | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+[Value1]
 Meter=String
-Text=Click on "Generate & Inject".
-MeterStyle=VarStringValue | Link0 | RightPanel
-; [Var0Description]
-; Meter=String
-; Text=
-; MeterStyle=VarDescription | RightPanel
-; [Var1Description]
-; Meter=String
-; Text=
-; MeterStyle=VarDescription | RightPanel
+Text=Open s_OnChangeAction.inc
+MeterStyle=VarStringValue | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
+LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
+

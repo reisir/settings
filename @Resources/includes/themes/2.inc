@@ -1,30 +1,21 @@
 [Variables]
 
-;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes.
-;?Integer | Hidden 1
-s_CurrentCategory=0
-;?Integer | Name Scroll speed | Description 
-s_ScrollSpeed=30
+;@About | Name Theme 3 [#s_Theme2Name]
+;@Topic | Name Customization
+;@ | Name Background
 ;?Integer | Name Left panel width | Description 
 s_LeftPanelW=200
 ;?Integer | Name Right panel width | Description 
 s_RightPanelW=600
 ;?Integer | Name Skin height | Description 
 s_PanelH=700
-s_ScrollTreshold=[#s_PanelH]
-s_ScrollRightPanel=0
-s_ScrollLeftPanel=0
-
-;@Topic | Name Customization
-
-;@ | Name Background 
 ;?Color | Name Right panel background color | Description 
 s_RightPanelBackgroundColor=253,253,255,255
 ;?Color | Name Left panel background color | Description 
 s_LeftPanelBackgroundColor=200,200,203,255
 ;?Integer | Name Background corner radius | Description 
 s_BackgroundRounding=5
-;? | Name FrostedGlass mode | Description A certain Windows 10 update made Acrylic lag a lot, hence it's not recommended#CRLF#Available modes: Acrylic, Blur, None
+;? | Name FrostedGlass mode | Description A certain Windows 10 update made Acrylic lag a lot, so it's not recommended#CRLF#Available modes: Acrylic, Blur, None
 s_FrostedGlassMode=None
 ;? | Name FrostedGlass border | Description 
 s_FrostedGlassBorders=All
@@ -159,46 +150,3 @@ More variables for Toggle customization=
 s_ToggleActiveColor=[#s_SelectedColor]
 s_ToggleInactiveColor=[#s_RightPanelBackgroundColor]
 
-;@Topic | Name Internal
-;@ | Name Generator
-;? | 
-s_GeneratorRightPanelWidth=350
-;? | 
-s_GeneratorLeftPanelWidth=50
-;? | 
-s_GeneratorPanelHeight=300
-
-; Apparently the script doesn't break when there's more than one variable under one declaration
-;@ | Name Debug colors
-;?Toggle | 
-s_DebugColors=0
-;?Color | 
-s_DebugCategoryTitleColor1=255,0,195,100
-s_DebugCategoryTitleColor0=0,0,0,0
-;?Color | 
-s_DebugValueColor1=170,0,255,100
-s_DebugValueColor0=0,0,0,0
-;?Color | 
-s_DebugDescriptionColor1=0,238,255,100
-s_DebugDescriptionColor0=0,0,0,0
-;?Color | 
-s_DebugListColor1=0,255,51,100
-s_DebugListColor0=0,0,0,0
-;?Color | 
-s_DebugListIconColor1=255,255,0,100
-s_DebugListIconColor0=0,0,0,0
-;?Color | 
-s_DebugSeparatorColor1=51,46,46,100
-s_DebugSeparatorColor0=0,0,0,0
-;?Color | 
-s_DebugVariableTitleColor1=255,0,0,100
-s_DebugVariableTitleColor0=0,0,0,0
-;?Color | 
-s_DebugCategoryIconColor1=229,255,0,100
-s_DebugCategoryIconColor0=0,0,0,0
-;?Color | 
-s_DebugToggleColor1=255,0,0,100
-s_DebugToggleColor0=0,0,0,0
-;?Color | 
-s_DebugColorColor1=255,0,0,100
-s_DebugColorColor0=0,0,0,0

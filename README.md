@@ -29,6 +29,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
    - [x] Update wiki to match
  - [x] Frosted glass plugin
  - [x] Themes
+   - [ ] Dark theme
+   - [ ] Slim theme
  - [x] Make the skin !Log if you have a typo (only for Type atm)
  - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
    - [x] Make construct.ps1 !RefreshApp and load the generated skin without errors.
@@ -42,6 +44,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  - [ ] Dynamically get list of templates for $implementedTypes
    - [ ] Dynamically include all includes in Rainmeter.inc template 
  - [ ] Hold alt to override auto-inject?
+ - [ ] Improve the theme system, move theming variables outside of internal variables.
  - [ ] Slider template
  - [ ] Toggle for variable indenting
  - [ ] Write wiki for templates

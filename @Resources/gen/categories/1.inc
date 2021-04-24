@@ -13,13 +13,13 @@ Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
 Y=0
 [Title1]
 Meter=String
-Text=Settings settings
+Text=Themes
 MeterStyle=CategoryTitle | RightPanel
 W=([#s_RightPanelW] - [CategoryIcon1:W])
 Padding=0,[#s_CategoryTitleXPadding],0,0
 [CategoryDescription1]
 Meter=String
-Text=
+Text=Change theme names in Internal variables
 MeterStyle=VarDescription | RightPanel
 [CategoryTitleSeparator1]
 Meter=Image
@@ -32,19 +32,19 @@ Text=
 MeterStyle=VariableIcon | RightPanel
 [Var0]
 Meter=String
-Text=Internal variables
+Text=Light theme
 MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
-Text=Customize your generated settings skins.
+Text=
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value0]
 Meter=String
-Text=Change to internal variable file
+Text=Edit theme 1: [#s_Theme0Name]
 MeterStyle=VarStringValue | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "0"][!WriteKeyValue Variables "s_SettingsTheme" "0" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
 [VariableIcon1]
 Meter=String
@@ -52,17 +52,37 @@ Text=
 MeterStyle=VariableIcon | RightPanel
 [Var1]
 Meter=String
-Text=OnChangeAction
+Text=Dark theme
 MeterStyle=VarTitle | RightPanel
 [Var1Description]
 Meter=String
-Text=Variable file containing bangs run every time the generated settings skin changes a variable.
+Text=
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value1]
 Meter=String
-Text=Open s_OnChangeAction.inc
+Text=Edit theme 2: [#s_Theme1Name]
 MeterStyle=VarStringValue | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "1"][!WriteKeyValue Variables "s_SettingsTheme" "1" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+
+[VariableIcon2]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
+[Var2]
+Meter=String
+Text=Slim theme
+MeterStyle=VarTitle | RightPanel
+[Var2Description]
+Meter=String
+Text=
+MeterStyle=VarDescription | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+[Value2]
+Meter=String
+Text=Edit theme 3: [#s_Theme2Name]
+MeterStyle=VarStringValue | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "2"][!WriteKeyValue Variables "s_SettingsTheme" "2" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 

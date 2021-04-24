@@ -21,7 +21,7 @@ ToolTipText=Generate
 
 [GeneratorIcon1]
 Meter=String
-Text=[\xE713]
+Text=[\xE771]
 MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
@@ -32,12 +32,23 @@ ToolTipText=Settings settings
 
 [GeneratorIcon2]
 Meter=String
-Text=[\xE897]
+Text=[\xE713]
 MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
 DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 2][!Refresh]
+ToolTipText=Themes
+
+[GeneratorIcon3]
+Meter=String
+Text=[\xE897]
+MeterStyle=CategoryIcon | LeftPanel | Center
+Padding=0,0,0,0
+X=([#s_GeneratorLeftPanelWidth] / 2)
+Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
+DynamicVariables=1
+LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 3][!Refresh]
 ToolTipText=Help
 

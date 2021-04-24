@@ -36,27 +36,26 @@ Text=Selected file
 MeterStyle=VarTitle | RightPanel
 [Var0Description]
 Meter=String
-Text=[#s_DynamicFilePath]
+Text=[#s_DynamicVariableFile]
 MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
 Text=Click to open directory
 MeterStyle=VarStringValue | RightPanel
-LeftMouseUpAction=["#SKINSPATH#[#s_DynamicDirectory]"]
+LeftMouseUpAction=["#SKINSPATH#[#s_DynamicVariableDirectory]"]
 
 
 [VariableIcon1]
 Meter=String
-Text=
+Text=[\xE90F] 
 MeterStyle=VariableIcon | RightPanel
+FontSize=14
+Y=5R
 [Var1]
 Meter=String
-Text=Generation [\xE90F] 
+Text=Generation 
 MeterStyle=VarTitle | RightPanel
-InlineSetting=Face | [#s_IconFontFace]
-InlinePattern=[\xE90F]
-InlineSetting2=Size | [#s_FontSize3]
-InlinePattern2=[\xE90F]
+Y=-5r
 [Var1Description]
 Meter=String
 Text=This will delete all files in "[#s_Skin]\settings" and copy over the generated settings skin.
