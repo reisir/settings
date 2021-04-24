@@ -16,7 +16,7 @@ s_ScrollTreshold=[#s_PanelH]
 s_ScrollRightPanel=0
 s_ScrollLeftPanel=0
 s_CurrentCategory=0
-s_SettingsTheme=0
+s_SettingsTheme=1
 
 ;@ | Name Generator | Icon [\xE9F5]
 ;? | 

@@ -19,22 +19,6 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  2. Click on Generate.
    * This deletes files in "yourskin\settings". Including any skins you had there or modifications you made to an earlier generated skin.
 
-## TO-DO for v1.2 release:
- - [x] Fix InputText sizing
- - [x] Add a way to refresh the right skin when variables are changed
-    - [x] Add a way to specify a custom bang to run when variables are changed
- - [x] Handle unformatted files
- - [x] Link syntax Display=Target
- - [x] Add icon support for variables. Then move descriptions to X=0r instead of relying on the padding being the same
-   - [x] Update wiki to match
- - [x] Frosted glass plugin
- - [x] Themes
-   - [ ] Dark theme
-   - [ ] Slim theme
- - [x] Make the skin !Log if you have a typo (only for Type atm)
- - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
-   - [x] Make construct.ps1 !RefreshApp and load the generated skin without errors.
-
 ## TO-DO:
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
    - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
@@ -47,10 +31,17 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  - [ ] Hold alt to override auto-inject?
  - [ ] Improve the theme system, move theming variables outside of internal variables.
  - [ ] Slider template
+ - [ ] Make variables use `ClipStringW` instead of `W`
+ - [ ] Selected indicator doesn't take scrolling into account
+ - [ ] Close button
+   - [ ] Set category back to 0
+ - [ ] Change the version in rainmeter.inc template
  - [ ] Toggle for variable indenting
+ - [ ] Reset s_OnChangeAction before release
  - [ ] Write wiki for templates
  - [ ] Write more examples for the wiki
  - [ ] Better (custom ?) colour picker that can handle alpha
+ - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
  - [ ] Document Tooltip
    - [ ] Make it work first
  - [ ] Proofread the wiki
