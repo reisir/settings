@@ -26,16 +26,12 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  - [x] Handle unformatted files
  - [x] Link syntax Display=Target
  - [x] Add icon support for variables. Then move descriptions to X=0r instead of relying on the padding being the same
-   - [ ] Toggle for variable indenting
-   - [ ] Update wiki to match
+   - [x] Update wiki to match
  - [x] Frosted glass plugin
  - [x] Themes
  - [x] Make the skin !Log if you have a typo (only for Type atm)
-   - [ ] Dynamically get list of templates for $implementedTypes
-   - [ ] Dynamically include all includes in Rainmeter.inc template
  - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
    - [x] Make construct.ps1 !RefreshApp and load the generated skin without errors.
-   - [ ] Make the user hold alt or something to Inject automatically?
 
 ## TO-DO:
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
@@ -43,7 +39,11 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
        * This is mostly because I want the error logs to have access to the Name
  - [ ] Make a better way to disable the changing of variables
  - [ ] Invert property for toggles
+ - [ ] Dynamically get list of templates for $implementedTypes
+   - [ ] Dynamically include all includes in Rainmeter.inc template 
+ - [ ] Hold alt to override auto-inject?
  - [ ] Slider template
+ - [ ] Toggle for variable indenting
  - [ ] Write wiki for templates
  - [ ] Write more examples for the wiki
  - [ ] Better (custom ?) colour picker that can handle alpha
