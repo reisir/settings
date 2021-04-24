@@ -26,6 +26,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
+[VariableIcon0]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var0]
 Meter=String
 Text=Selected file 
@@ -40,6 +44,11 @@ Text=Click to open directory
 MeterStyle=VarStringValue | RightPanel
 LeftMouseUpAction=["#SKINSPATH#[#s_DynamicDirectory]"]
 
+
+[VariableIcon1]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var1]
 Meter=String
 Text=Generation [\xE90F] 

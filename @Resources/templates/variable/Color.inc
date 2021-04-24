@@ -1,19 +1,26 @@
-[Var{Index}Title]
+[VariableIcon{Index}]
+Meter=String
+Text={Icon}
+MeterStyle=VariableIcon | {Container}
+Hidden={Hidden}
+[VariableTitle{Index}Title]
 Meter=String
 Text={Name}
 MeterStyle=VarTitle | {Container}
-[Var{Index}Description]
+Hidden={Hidden}
+[VariableDescription{Index}]
 Meter=String
 Text={Description}
 MeterStyle=VarDescription | {Container}
-[ColorValue{Index}]
+Hidden={Hidden}
+[ColorVariableValue{Index}]
 Meter=Shape
 Shape=Ellipse [#s_ColorSize],[#s_ColorSize],[#s_ColorSize],[#s_ColorSize] | Fill Color [#{Key}] | StrokeWidth [#s_ColorStrokeWidth] | Extend Outline
 Outline=Stroke Color [#s_ColorStrokeColor]
 MeterStyle=VarColorValue | {Container}
 LeftMouseUpAction=[!CommandMeasure "RainRGB{Index}" "Run"]
 Hidden={Hidden}
-[StringValue{Index}]
+[StringVariableValue{Index}]
 Meter=String
 Text=[#{Key}]
 MeterStyle=VarStringValue | VarColorString | {Container}

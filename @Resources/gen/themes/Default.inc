@@ -101,7 +101,6 @@ s_CategoryTitleFontWeight=500
 s_CategoryDescriptionFontWeight=500
 ;? | Description Visually center the category icon. Uses s_CategoryTitleTopPadding
 s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + 5)
-
 ;@ | Name Category list
 ;?Integer | Name About item top padding | Description s_ListAboutTopPadding
 s_ListAboutTopPadding=35
@@ -127,8 +126,6 @@ s_VariableTitleFontWeight=400
 s_ValueYPadding=5
 ;?Integer | Name Variable item left and right padding | Description s_VariableXPadding (applies for variable titles, descriptions and values)
 s_VariableXPadding=20
-;?Toggle | Name Indent variables | Description Not implemented
-s_IndentVariables=1
 
 ;@ | Name Color
 ;?Integer | Name Color circle radius | Description s_ColorSize

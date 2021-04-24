@@ -22,6 +22,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
+[VariableIcon6]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var6]
 Meter=String
 Text=1. Formatting
@@ -37,6 +41,10 @@ Text=RainDoc documentation
 MeterStyle=VarStringValue | Link1 | RightPanel
 LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
 
+[VariableIcon3]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var3]
 Meter=String
 Text=2. Generating

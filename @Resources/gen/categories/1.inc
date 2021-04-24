@@ -26,6 +26,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
+[VariableIcon0]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var0]
 Meter=String
 Text=Internal variables
@@ -42,6 +46,10 @@ MeterStyle=VarStringValue | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
+[VariableIcon1]
+Meter=String
+Text=
+MeterStyle=VariableIcon | RightPanel
 [Var1]
 Meter=String
 Text=OnChangeAction

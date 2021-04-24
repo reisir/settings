@@ -45,6 +45,7 @@ function Construct {
     $settingsFileContent = Get-Content $settingsFilePath -Raw
 
     # Filter settings file into staggered array
+    $RmAPI.Log("Parsing settings file")
     $settings = Settings-Array -String $settingsFileContent
 
     # Variable to hold generated .ini
@@ -58,10 +59,12 @@ function Construct {
     # Construct categories
     $i = 0
     foreach ($category in $settings) {
+        $RmAPI.Log("Building category $($i).inc")
         Category-Ini -category $category -i $i
         $i++
     }
 
+    $RmAPI.Log("Building category list")
     Category-List -Settings $settings
 
     $ini > $generatedSkinFile
@@ -114,11 +117,11 @@ function Settings-Array {
             $c = Pipe-Category -String $category
             # Add the filtered category hashtable to the $settings array 
             $settings += , $c
-            $RmAPI.Log("$c")
+            # $RmAPI.Log("$c")
         }
     }
 
-    $settings > $testfile
+    # $settings > $testfile
 
     return $settings
 
@@ -226,7 +229,6 @@ function Pipe-Category {
             $Category.Properties.Type = "Default"
             # $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
         }
-        
     }
     
     # Match every | Key Value | pair from the property line
@@ -239,7 +241,7 @@ function Pipe-Category {
             }
             # Only add the property to the hashtable if it has a key.
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
-                $RmAPI.Log("Adding key: '$($Matches[1])'")
+                # $RmAPI.Log("Adding key: '$($Matches[1])'")
                 $key = Remove-Whitespace -String $Matches[1]
                 $Category.Properties.Add("$key", "$value")
             }
@@ -262,7 +264,7 @@ function Pipe-Category {
     }
     
     # Checkpoint 2
-    $RmAPI.Log("Generated $($Category.Variables.Count) variables for '$($Category.Properties.Name)'")
+    # $RmAPI.Log("Generated $($Category.Variables.Count) variables for '$($Category.Properties.Name)'")
 
     return $Category
 
@@ -299,6 +301,9 @@ function Category-Ini {
         $type = $Category.Properties.Type
     }
 
+    # Error log
+    $RmAPI.Log("Filtering template $($type) for $i")
+
     # Build category from template
     $template = Get-Content -Path "$($categoryTemplatesDir)$($type).inc" -Raw
     $ini += Filter-Template -Template $template -Properties $Properties
@@ -311,6 +316,7 @@ function Category-Ini {
 
     $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
     $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
+    $RmAPI.Log("Filtering lastitem for $i")
 
     $ini > $file
 
@@ -333,6 +339,7 @@ function Variable-Ini {
 
     # Get template for type
     $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
+    $ini > $testfile
     # Filter template
     $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
     $ini = Filter-Template -Template $ini -Properties $Variable.Properties
@@ -348,8 +355,6 @@ function Category-List {
         [Parameter(Mandatory=$true)]
         $Settings
     )
-
-    $RmAPI.Log("Building category list.")
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
     $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
@@ -489,7 +494,10 @@ function Prepare-Directories {
 function Inject-Settings {
     # Inject generated settings
     Copy-Item -Path "$generatedSkinDir*" -Destination "$($injectPath)settings\" -Recurse
+    
+    $RmAPI.Log("Refreshing Rainmeter")
     $RmAPI.Bang('[!RefreshApp]')
     # $RmAPI.Bang('[!ActivateConfig]$($targetSkin)\settings\settings.ini')
+    $RmAPI.Log("Loading generated settings skin")
     Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\settings", "settings.ini"
 }

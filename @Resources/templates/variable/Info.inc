@@ -1,12 +1,19 @@
-[Var{Index}]
+[VariableIcon{Index}]
+Meter=String
+Text={Icon}
+MeterStyle=VariableIcon | {Container}
+Hidden={Hidden}
+[VariableTitle{Index}]
 Meter=String
 Text={Name}
 MeterStyle=VarTitle | {Container}
-[Var{Index}Description]
+Hidden={Hidden}
+[VariableDescription{Index}]
 Meter=String
 Text={Description}
 MeterStyle=VarDescription | {Container}
-[Value{Index}]
+Hidden={Hidden}
+[VariableValue{Index}]
 Meter=String
 Text={Key}
 MeterStyle=VarStringValue | Link{Link} | {Container}
@@ -15,5 +22,6 @@ LeftMouseUpAction=["{Value}"]
 [MeasureLinkStatus{0}]
 Measure=Calc
 IfCondition={Link} = 1
-IfFalseAction=[!DisableMouseAction Value{Index} LeftMouseUpAction]
+IfFalseAction=[!DisableMouseAction VariableValue{Index} LeftMouseUpAction]
+Disabled={Hidden}
 
