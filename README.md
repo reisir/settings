@@ -27,9 +27,10 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  - [x] Link syntax Display=Target
  - [x] Add icon support for variables. Then move descriptions to X=0r instead of relying on the padding being the same
    - [ ] Toggle for variable indenting
+   - [ ] Update wiki to match
  - [ ] Frosted glass plugin
  - [ ] Themes
- - [ ] Make the skin !Log if you have a typo
+ - [x] Make the skin !Log if you have a typo (only for Type atm)
    - [ ] Dynamically get list of templates for $implementedTypes
    - [ ] Dynamically include all includes in Rainmeter.inc template
  - [x] Streamline the generation sequence, maybe make Settings "inject" the generated settings skin into the target skin
@@ -38,6 +39,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TO-DO:
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
+   - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
+       * This is mostly because I want the error logs to have access to the Name
  - [ ] Make a better way to disable the changing of variables
  - [ ] Slider template
  - [ ] Write wiki for templates

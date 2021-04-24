@@ -162,13 +162,18 @@ function Pipe-Variable {
     # Make the Properties hashtable
     $Variable.Properties = @{"Name" = $Variable.Key}
 
-    # Get type
+    # Filter type
+    # Type is special since it's required
     if("$($Variable.UnfilteredProperties)" -match "$($Patterns.Type)") {
         $Variable.Properties.Type = Remove-Whitespace -String $Matches[1]
-        # Change type to String if empty
+        # Default undeclared type to String without logging
         if($Variable.Properties.Type -eq "") {
             $Variable.Properties.Type = "String"
-            # $RmAPI.Log("Changed $($Variable.UnfilteredProperties) type to String")
+        }
+        # Default typos to String
+        if($variableTypes -NotContains $Variable.Properties.Type) {
+            $RmAPI.Log("Variable type '$($Variable.Properties.Type)' is not implemented, defaulting to String")
+            $Variable.Properties.Type = "String"
         }
     }
 
@@ -221,13 +226,18 @@ function Pipe-Category {
     # Make the Properties hashtable
     $Category.Properties = @{}
 
-    # Get type
+    # Filter type
+    # Type is special since it's required
     if("$($Category.UnfilteredProperties)" -match "$($Patterns.Type)") {
         $Category.Properties.Type = Remove-Whitespace -String $Matches[1]
-        # Change type to Default if empty
+        # Default undeclared type to Default without logging
         if($Category.Properties.Type -eq "") {
             $Category.Properties.Type = "Default"
-            # $RmAPI.Log("Changed $($Category.UnfilteredProperties) type to Default")
+        }
+        # Default typos to Default
+        if($listTypes -NotContains $Category.Properties.Type) {
+            $RmAPI.Log("Category type '$($Category.Properties.Type)' is not implemented. Changed to Default")
+            $Category.Properties.Type = "Default"
         }
     }
     
@@ -301,9 +311,6 @@ function Category-Ini {
         $type = $Category.Properties.Type
     }
 
-    # Error log
-    $RmAPI.Log("Filtering template $($type) for $i")
-
     # Build category from template
     $template = Get-Content -Path "$($categoryTemplatesDir)$($type).inc" -Raw
     $ini += Filter-Template -Template $template -Properties $Properties
@@ -316,7 +323,6 @@ function Category-Ini {
 
     $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
     $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
-    $RmAPI.Log("Filtering lastitem for $i")
 
     $ini > $file
 
