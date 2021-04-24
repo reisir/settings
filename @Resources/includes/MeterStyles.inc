@@ -8,6 +8,7 @@ Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
 FontSize=#s_FontSize1#
 FontFace=#s_IconFontFace#
 SolidColor=[#s_DebugCategoryIconColor[#s_DebugColors]] 
+FontColor=[#s_FontColor]
 
 [CategoryTitle]
 AccurateText=1
@@ -23,6 +24,7 @@ InlineSetting=CharacterSpacing | [#s_TitleIconNudge] | *
 InlinePattern=^.
 DynamicVariables=1
 SolidColor=[#s_DebugCategoryTitleColor[#s_DebugColors]] 
+FontColor=[#s_FontColor]
 
 [ThickDescription]
 FontWeight=[#s_CategoryDescriptionFontWeight]
@@ -44,6 +46,7 @@ Padding=[#s_VariableXPadding],0,0,0
 FontSize=[#s_FontSize1]
 FontFace=[#s_IconFontFace]
 SolidColor=[#s_DebugCategoryIconColor[#s_DebugColors]]
+FontColor=[#s_FontColor]
 
 [VarTitle]
 AccurateText=1
@@ -59,6 +62,7 @@ FontWeight=[#s_VariableTitleFontWeight]
 InlineSetting=CharacterSpacing | [#s_TitleIconNudge] | *
 InlinePattern=^.
 SolidColor=[#s_DebugVariableTitleColor[#s_DebugColors]] 
+FontColor=[#s_FontColor]
 
 [VarDescription]
 AccurateText=1
@@ -71,6 +75,7 @@ Padding=0,0,[#s_VariableXPadding],0
 FontFace=[#s_FontFace]
 FontSize=[#s_FontSize4]
 SolidColor=[#s_DebugDescriptionColor[#s_DebugColors]] 
+FontColor=[#s_FontColor]
 
 [VarStringValue]
 AccurateText=1
@@ -80,6 +85,7 @@ X=0r
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
 Padding=0,[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
+FontColor=[#s_FontColor]
 FontFace=[#s_FontFace]
 FontSize=[#s_FontSize3]
 SolidColor=[#s_DebugValueColor[#s_DebugColors]] 
@@ -89,6 +95,7 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# FontColor [#s_FontColor]][!SetOpti
 [VarColorString]
 Y=0r
 X=0R
+FontColor=[#s_FontColor]
 Padding=[#s_ColorStringLeftPadding],([#s_ColorSize] - [#s_FontSize3]),[#s_VariableXPadding],(([#s_ColorSize] - [#s_FontSize3]) + [#s_ValueYPadding])
 
 [Link1]

@@ -6,9 +6,9 @@
 ;?Integer | Name Left panel width | Description 
 s_LeftPanelW=200
 ;?Integer | Name Right panel width | Description 
-s_RightPanelW=600
+s_RightPanelW=500
 ;?Integer | Name Skin height | Description 
-s_PanelH=700
+s_PanelH=600
 ;?Color | Name Right panel background color | Description 
 s_RightPanelBackgroundColor=253,253,255,255
 ;?Color | Name Left panel background color | Description 
@@ -17,7 +17,7 @@ s_LeftPanelBackgroundColor=200,200,203,255
 s_BackgroundRounding=5
 ;? | Name FrostedGlass mode | Description A certain Windows 10 update made Acrylic lag a lot, so it's not recommended#CRLF#Available modes: Acrylic, Blur, None
 s_FrostedGlassMode=None
-;? | Name FrostedGlass border | Description 
+;? | Name FrostedGlass border | Description All, None, Left, Right, Top and Bottom. Can be combined with pipes
 s_FrostedGlassBorders=All
 
 ;@ | Name Font
@@ -114,6 +114,7 @@ s_ListRightPadding=10
 ;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=5
+s_CreditIconSize=12
 
 ;@Topic | Name Variables
 ;@ | Name Variable

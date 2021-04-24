@@ -1,6 +1,6 @@
 [Variables]
 
-;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes.
+;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes. | Icon [\xF259]
 ;?Integer | Name Scroll speed | Description 
 s_ScrollSpeed=30
 ;? | Name Theme 1 name
@@ -10,7 +10,7 @@ s_Theme1Name=Dark
 ;? | Name Theme 3 name
 s_Theme2Name=Slim
 
-;@Topic | Name Internal
+;@Topic | Name Internal | Icon  | 
 ;? | Name hidden | Hidden 1
 s_ScrollTreshold=[#s_PanelH]
 s_ScrollRightPanel=0
@@ -18,7 +18,7 @@ s_ScrollLeftPanel=0
 s_CurrentCategory=0
 s_SettingsTheme=0
 
-;@ | Name Generator
+;@ | Name Generator | Icon [\xE9F5]
 ;? | 
 s_GeneratorRightPanelWidth=350
 ;? | 
@@ -26,7 +26,7 @@ s_GeneratorLeftPanelWidth=50
 ;? | 
 s_GeneratorPanelHeight=300
 
-;@ | Name Debug colors
+;@ | Name Debug colors | Icon [\xE783]
 ;?Toggle | 
 s_DebugColors=0
 ;?Color | 

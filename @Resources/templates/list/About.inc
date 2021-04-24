@@ -3,6 +3,7 @@ Meter=String
 Text={Icon}
 Y=[#s_ListAboutTopPadding]R
 MeterStyle=ListIcon | ListAboutIcon | {Container}
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory {Index} "{InternalVariables}"][!Refresh]
 [ListItem{Index}]
 Meter=String
 Text={Name}

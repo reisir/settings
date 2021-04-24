@@ -17,7 +17,7 @@ Hidden={Hidden}
 Meter=String
 Text=[#{Key}]
 MeterStyle=VarStringValue | {Container}
-LeftMouseUpAction=[!CommandMeasure "InputText{Index}" "ExecuteBatch All"][!SetOption VariableValue{Index} FontColor "0,0,0,0"][!UpdateMeter VariableValue{Index}][!Redraw]
+LeftMouseUpAction=[!CommandMeasure "InputText{Index}" "ExecuteBatch All"][!SetOption #CURRENTSECTION# FontColor "0,0,0,0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Hidden={Hidden}
 [InputText{Index}]
 Measure=Plugin
@@ -27,7 +27,7 @@ FontColor=[#s_FontColor]
 FontFace=[#s_FontFace]
 FontSize=[#s_InputTextFontSize]
 Disabled={Hidden}
-X=([VariableValue{Index}:X] + [#s_VariableXPadding])
+X=([VariableValue{Index}:X])
 Y=([VariableValue{Index}:Y] + [#s_ValueYPadding])
 H=[VariableValue{Index}:H]
 W=([#s_RightPanelW] - ([#s_VariableXPadding] * 2))

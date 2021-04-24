@@ -61,7 +61,7 @@ MeterStyle=VarTitle | RightPanel
 Y=-6r
 [Var1Description]
 Meter=String
-Text=Variable file containing bangs run every time the generated settings skin changes a variable.
+Text=Ran everytime a variable is changed.
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value1]

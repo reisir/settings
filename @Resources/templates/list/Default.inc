@@ -2,6 +2,7 @@
 Meter=String
 Text={Icon}
 MeterStyle=ListIcon | ListDefaultIcon | {Container}
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory {Index} "{InternalVariables}"][!Refresh]
 [ListItem{Index}]
 Meter=String
 Text={Name}

@@ -1,5 +1,5 @@
 [CreditIcon]
-FontSize=12
+FontSize=[#s_CreditIconSize]
 AntiAlias=1
 Meter=String
 Text=[\xF259]

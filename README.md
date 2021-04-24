@@ -41,6 +41,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
        * This is mostly because I want the error logs to have access to the Name
  - [ ] Make a better way to disable the changing of variables
  - [ ] Invert property for toggles
+   - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles
  - [ ] Dynamically get list of templates for $implementedTypes
    - [ ] Dynamically include all includes in Rainmeter.inc template 
  - [ ] Hold alt to override auto-inject?

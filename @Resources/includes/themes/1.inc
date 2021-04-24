@@ -6,19 +6,19 @@
 ;?Integer | Name Left panel width | Description 
 s_LeftPanelW=200
 ;?Integer | Name Right panel width | Description 
-s_RightPanelW=600
+s_RightPanelW=500
 ;?Integer | Name Skin height | Description 
-s_PanelH=700
+s_PanelH=600
 ;?Color | Name Right panel background color | Description 
-s_RightPanelBackgroundColor=253,253,255,255
+s_RightPanelBackgroundColor=26,26,38,125
 ;?Color | Name Left panel background color | Description 
-s_LeftPanelBackgroundColor=200,200,203,255
+s_LeftPanelBackgroundColor=28,28,43,125
 ;?Integer | Name Background corner radius | Description 
-s_BackgroundRounding=5
+s_BackgroundRounding=0
 ;? | Name FrostedGlass mode | Description A certain Windows 10 update made Acrylic lag a lot, so it's not recommended#CRLF#Available modes: Acrylic, Blur, None
-s_FrostedGlassMode=None
-;? | Name FrostedGlass border | Description 
-s_FrostedGlassBorders=All
+s_FrostedGlassMode=Blur
+;? | Name FrostedGlass border | Description All, None, Left, Right, Top and Bottom. Can be combined with pipes
+s_FrostedGlassBorders=None
 
 ;@ | Name Font
 ;? | Name Font face | Description 
@@ -26,7 +26,7 @@ s_FontFace=Segoe UI
 ;? | Name Icon font face | Description 
 s_IconFontFace=Segoe MDL2 Assets
 ;?Color | Name Font color | Description 
-s_FontColor=0,0,0
+s_FontColor=235,235,235
 ;?Integer | Name Font size 1 | Description Used for category titles
 s_FontSize1=20
 ;?Integer | Name Font size 2 | Description Used for variable titles
@@ -54,7 +54,7 @@ s_ScrollIndicatorWidth=5
 ;?Color | Name Scroll indicator background color | Description 
 s_ScrollIndicatorBackgroundColor=0,0,0,0
 ;?Color | Name Scroll indicator color | Description 
-s_ScrollIndicatorColor=200,200,200
+s_ScrollIndicatorColor=64,64,64
 ;?Integer | Name Scroll indicator rounding | Description 
 s_ScrollIndicatorRounding=5
 ;?Info | Name Filler variable 0 | Description This is here to show the scroll indicator
@@ -72,7 +72,7 @@ s_ScrollIndicatorRounding=5
 
 ;@ | Name Selected indicator
 ;?Color | Name Selected color | Description Most selected items use this color
-s_SelectedColor=007acc
+s_SelectedColor=16CCD9
 ;?Integer | Name Indicator height padding | Description 
 s_SelectorPadding=8
 ;?Integer | Name Indicator width  | Description 
@@ -114,6 +114,7 @@ s_ListRightPadding=10
 ;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=5
+s_CreditIconSize=12
 
 ;@Topic | Name Variables
 ;@ | Name Variable

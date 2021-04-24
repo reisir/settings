@@ -8,7 +8,7 @@ BackgroundModifiers=Fill Color #s_LeftPanelBackgroundColor# | StrokeWidth 0
 
 [LeftPanelContainer]
 Meter=Shape
-Shape=Rectangle 0,0,(#s_LeftPanelW#),(#s_PanelH#) | Extend PanelModifiers
+Shape=Rectangle 0,0,(#s_LeftPanelW#),(#s_PanelH#),[#s_BackgroundRounding] | Extend PanelModifiers
 PanelModifiers=Fill Color 255,255,255 | StrokeWidth 0
 MouseScrollDownAction=[!EnableMeasure "ScrollDownLeftPanel"][!UpdateMeasure "ScrollDownLeftPanel"]
 MouseScrollUpAction=[!EnableMeasure "ScrollUpLeftPanel"][!UpdateMeasure "ScrollUpLeftPanel"]
@@ -30,6 +30,7 @@ Line=StrokeWidth 0
 Square=Fill Color [#s_SelectedColor]
 X=(-[#s_SelectorWidth])
 Y=([ListIcon[#s_CurrentCategory]:Y])
+Container=LeftPanelContainer
 DynamicVariables=1
 
 ; Scroll indicator. This can be optimized a lot

@@ -42,7 +42,7 @@ MeterStyle=VarDescription | RightPanel
 Meter=String
 Text=Click to open directory
 MeterStyle=VarStringValue | RightPanel
-LeftMouseUpAction=["#SKINSPATH#[#s_DynamicVariableDirectory]"]
+LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
 
 
 [VariableIcon1]
