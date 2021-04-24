@@ -8,8 +8,16 @@ License=CC BY-NC-SA 4.0
 [Rainmeter]
 Update=-1
 @IncludeSkinVariables={SettingsFile}
-@IncludeVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
 @IncludesOnChangeAction=#ROOTCONFIGPATH#settings\includes\s_OnChangeAction.inc
+
+[Theme]
+@IncludeInternalVariables={ThemeFile}
+
+[FrostedGlass]
+Measure=Plugin
+Plugin=FrostedGlass
+Type=[#s_FrostedGlassMode]
+Border=[#s_FrostedGlassBorders]
 
 [IncludeBackground]
 @IncludeBackground=#ROOTCONFIGPATH#settings\includes\Background.inc

@@ -11,6 +11,7 @@ $listTypes = @("Default", "About", "Topic")
 # Variables from Rainmeter
 $settingsFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicSettingsFilePath = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicFilePath'))"
+$dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
@@ -53,6 +54,7 @@ function Construct {
     $ini = Get-Content -Path "$($templatesDir)Rainmeter.inc" -Raw
     $rainmeterTemplateProperties = @{
         "SettingsFile" = $dynamicSettingsFilePath
+        "ThemeFile" = $dynamicThemeFile
     }
     $ini = Filter-Template -Template $ini -Properties $rainmeterTemplateProperties
 
@@ -172,7 +174,7 @@ function Pipe-Variable {
         }
         # Default typos to String
         if($variableTypes -NotContains $Variable.Properties.Type) {
-            $RmAPI.Log("Variable type '$($Variable.Properties.Type)' is not implemented, defaulting to String")
+            $RmAPI.LogError("Variable type '$($Variable.Properties.Type)' is not implemented, defaulting to String")
             $Variable.Properties.Type = "String"
         }
     }
@@ -236,7 +238,7 @@ function Pipe-Category {
         }
         # Default typos to Default
         if($listTypes -NotContains $Category.Properties.Type) {
-            $RmAPI.Log("Category type '$($Category.Properties.Type)' is not implemented. Changed to Default")
+            $RmAPI.LogError("Category type '$($Category.Properties.Type)' is not implemented. Changed to Default")
             $Category.Properties.Type = "Default"
         }
     }
@@ -492,7 +494,7 @@ function Prepare-Directories {
     # Remove settings injected earlier
     Get-ChildItem -Path "$($injectPath)settings\*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
     # Copy Includes to generated skin
-    Copy-Item -Path "$includeDir*" -Include "*.inc" -Destination $generatedIncludeDir -Recurse
+    Copy-Item -Path "$includeDir*" -Destination $generatedIncludeDir -Recurse
     # Copy Addons to generated skin
     Copy-Item -Path "$addonsDir*" -Include "*.exe" -Destination $generatedAddonsDir -Recurse
 }

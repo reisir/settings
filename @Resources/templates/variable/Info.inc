@@ -19,9 +19,10 @@ Text={Key}
 MeterStyle=VarStringValue | Link{Link} | {Container}
 Hidden={Hidden}
 LeftMouseUpAction=["{Value}"]
-[MeasureLinkStatus{0}]
+[MeasureLinkStatus{Index}]
 Measure=Calc
-IfCondition={Link} = 1
+Formula={Link}
+IfCondition=(0 = [#CURRENTSECTION#])
 IfFalseAction=[!DisableMouseAction VariableValue{Index} LeftMouseUpAction]
 Disabled={Hidden}
 

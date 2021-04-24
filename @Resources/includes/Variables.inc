@@ -1,15 +1,15 @@
 [Variables]
 
 ;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes.
-;?Integer | Description This controls the default category.
+;?Integer | Hidden 1
 s_CurrentCategory=0
-;?Integer | Name Scroll speed | Description s_ScrollSpeed
+;?Integer | Name Scroll speed | Description 
 s_ScrollSpeed=30
-;?Integer | Name Left panel width | Description s_LeftPanelW
+;?Integer | Name Left panel width | Description 
 s_LeftPanelW=200
-;?Integer | Name Right panel width | Description s_RightPanelW
+;?Integer | Name Right panel width | Description 
 s_RightPanelW=600
-;?Integer | Name Skin height | Description s_PanelH
+;?Integer | Name Skin height | Description 
 s_PanelH=700
 s_ScrollTreshold=[#s_PanelH]
 s_ScrollRightPanel=0
@@ -18,19 +18,23 @@ s_ScrollLeftPanel=0
 ;@Topic | Name Customization
 
 ;@ | Name Background 
-;?Color | Name Right panel background color | Description s_RightPanelBackgroundColor
-s_RightPanelBackgroundColor=255,255,255,255
-;?Color | Name Left panel background color | Description s_LeftPanelBackgroundColor
-s_LeftPanelBackgroundColor=200,200,200,255
-;?Integer | Name Background corner radius | Description s_BackgroundRounding
+;?Color | Name Right panel background color | Description 
+s_RightPanelBackgroundColor=253,253,255,255
+;?Color | Name Left panel background color | Description 
+s_LeftPanelBackgroundColor=200,200,203,255
+;?Integer | Name Background corner radius | Description 
 s_BackgroundRounding=5
+;? | Name FrostedGlass mode | Description A certain Windows 10 update made Acrylic lag a lot, hence it's not recommended#CRLF#Available modes: Acrylic, Blur, None
+s_FrostedGlassMode=None
+;? | Name FrostedGlass border | Description 
+s_FrostedGlassBorders=All
 
 ;@ | Name Font
-;? | Name Font face | Description s_FontFace
+;? | Name Font face | Description 
 s_FontFace=Segoe UI
-;? | Name Icon font face | Description s_IconFontFace
+;? | Name Icon font face | Description 
 s_IconFontFace=Segoe MDL2 Assets
-;?Color | Name Font color | Description s_FontColor
+;?Color | Name Font color | Description 
 s_FontColor=0,0,0
 ;?Integer | Name Font size 1 | Description Used for category titles
 s_FontSize1=20
@@ -43,24 +47,24 @@ s_InputTextFontSize=[#s_FontSize3]
 s_FontSize4=10
 ;?Integer | Name Font size 5 | Description Unused (for now)
 s_FontSize5=8
-;?Integer | Name Selected item font weight | Description s_SelectedFontWeight
+;?Integer | Name Selected item font weight | Description 
 s_SelectedFontWeight=500
-;?Integer | Name Font weight | Description s_FontWeight
+;?Integer | Name Font weight | Description 
 s_FontWeight=400
 
 ;@ | Name Scroll indicator
 ;?Integer | Name Scroll indicator Y padding | Description uses s_ValueYPadding | Hidden 1
 s_scrollIndicatorYPadding=[#s_ValueYPadding]
 s_ScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_scrollIndicatorYPadding] * 2))
-;?Integer | Name Scroll indicator X padding | Description s_scrollIndicatorXPadding
+;?Integer | Name Scroll indicator X padding | Description 
 s_scrollIndicatorXPadding=5
-;?Integer | Name Scroll indicator width | Description s_ScrollIndicatorWidth
+;?Integer | Name Scroll indicator width | Description 
 s_ScrollIndicatorWidth=5
-;?Color | Name Scroll indicator background color | Description s_ScrollIndicatorBackgroundColor
+;?Color | Name Scroll indicator background color | Description 
 s_ScrollIndicatorBackgroundColor=0,0,0,0
-;?Color | Name Scroll indicator color | Description s_ScrollIndicatorColor
+;?Color | Name Scroll indicator color | Description 
 s_ScrollIndicatorColor=200,200,200
-;?Integer | Name Scroll indicator rounding | Description s_ScrollIndicatorRounding
+;?Integer | Name Scroll indicator rounding | Description 
 s_ScrollIndicatorRounding=5
 ;?Info | Name Filler variable 0 | Description This is here to show the scroll indicator
  = 
@@ -76,46 +80,47 @@ s_ScrollIndicatorRounding=5
  = 
 
 ;@ | Name Selected indicator
-;?Color | Name Selected color | Description s_SelectedColor (most selected items use this color)
+;?Color | Name Selected color | Description Most selected items use this color
 s_SelectedColor=007acc
-;?Integer | Name Indicator height padding | Description s_SelectorPadding
+;?Integer | Name Indicator height padding | Description 
 s_SelectorPadding=8
 ;?Integer | Name Indicator width  | Description 
 s_SelectorWidth=3
-;?Integer | Name Indicator rounding | Description s_SelectorRounding (default: [#s_SelectorWidth])
+;?Integer | Name Indicator rounding | Description default: [#s_SelectorWidth]
 s_SelectorRounding=[#s_SelectorWidth]
 
 ;@Topic | Name Categories
 ;@ | Name Category
 ;? | Name Title icon nudge | Description Fixes the literal 1px offset caused by the title and description using different font sizes
 s_TitleIconNudge=-1
-;?Integer | Name Category title top and bottom padding | Description s_CategoryTitleXPadding
+;?Integer | Name Category title top and bottom padding | Description 
 s_CategoryTitleXPadding=20
-;?Integer | Name Category title top padding | Description s_CategoryTitleTopPadding
+;?Integer | Name Category title top padding | Description 
 s_CategoryTitleTopPadding=35
-;?Integer | Name Category title bottom padding | Description s_CategoryTitleBottomPadding
+;?Integer | Name Category title bottom padding | Description 
 s_CategoryTitleBottomPadding=20
-;?Integer | Name Category title font weight | Description s_CategoryTitleFontWeight
+;?Integer | Name Category title font weight | Description 
 s_CategoryTitleFontWeight=500
-;?Integer | Name Category description font weight | Description s_CategoryDescriptionFontWeight
+;?Integer | Name Category description font weight | Description 
 s_CategoryDescriptionFontWeight=500
-;? | Description Visually center the category icon. Uses s_CategoryTitleTopPadding
-s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + 5)
+;? | Name Category icon nudge | Description Visually center the category icon
+s_CategoryIconNudge=5
+s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + [#s_CategoryIconNudge])
 
 ;@ | Name Category list
-;?Integer | Name About item top padding | Description s_ListAboutTopPadding
+;?Integer | Name About item top padding | Description 
 s_ListAboutTopPadding=35
-;?Integer | Name About item left padding | Description s_ListAboutLeftPadding
+;?Integer | Name About item left padding | Description 
 s_ListAboutLeftPadding=8
-;?Integer | Name Default item left padding | Description s_ListDefaultLeftPadding
+;?Integer | Name Default item left padding | Description 
 s_ListDefaultLeftPadding=20
-;?Integer | Name Topic item left padding | Description s_ListTopicLeftPadding
+;?Integer | Name Topic item left padding | Description 
 s_ListTopicLeftPadding=10
-;?Integer | Name List item top and bottom padding | Description s_ListYPadding
+;?Integer | Name List item top and bottom padding | Description 
 s_ListYPadding=7
 ;? | Name List item right padding | Description Used for width calculations for ClipString=2
 s_ListRightPadding=10
-;?Info | Name Settings credit icon padding | Description s_CreditIconPadding
+;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=5
 
