@@ -23,28 +23,34 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
  - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
    - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
        * This is mostly because I want the error logs to have access to the Name
- - [ ] Make a better way to disable the changing of variables
- - [ ] Invert property for toggles
-   - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles
+ - [ ] Hold alt to override auto-inject?
+ - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
  - [ ] Dynamically get list of templates for $implementedTypes
    - [ ] Dynamically include all includes in Rainmeter.inc template 
- - [ ] Hold alt to override auto-inject?
- - [ ] Improve the theme system, move theming variables outside of internal variables.
- - [ ] Slider template
- - [ ] Make variables use `ClipStringW` instead of `W`
+ - [ ] Template stuff
+   - [ ] Document templates 
+   - [ ] Slider template
+   - [ ] Image template
+ - [ ] Documentation
+   - [ ] Write more examples for the wiki
+   - [ ] Proofread the wiki
+   - [ ] Document Tooltip
+     - [ ] Make it work first
+ - [ ] Invert property for toggles
+   - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
+ - [ ] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
  - [ ] Selected indicator doesn't take scrolling into account
- - [ ] Close button
-   - [ ] Set category back to 0
  - [ ] Change the version in rainmeter.inc template
- - [ ] Toggle for variable indenting
- - [ ] Reset s_OnChangeAction before release
- - [ ] Write wiki for templates
- - [ ] Write more examples for the wiki
+ - [ ] Internal settings
+   - [ ] Reset s_OnChangeAction before release
+   - [ ] Close button
+     - [ ] Set category back to 0
+     - [ ] Way to set the default category
+   - [ ] Toggle for variable indenting
  - [ ] Better (custom ?) colour picker that can handle alpha
- - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
- - [ ] Document Tooltip
-   - [ ] Make it work first
- - [ ] Proofread the wiki
+ - [ ] Make a better way to disable the changing of variables
+   - [ ] Figure out what this was about
  - [ ] Another way to select file other than Drag & Drop
  - [ ] Add way to change the icon font per Icon
+ - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
 
