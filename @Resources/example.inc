@@ -1,10 +1,10 @@
 [Variables]
 ;@About | Name About | Description an example settings skin generated from example.inc | Icon [\xE897]
 ;?Info | Name Disclaimer | Link 0
-These variables don't actually control anything=
+These variables don't actually control anything=https://google.com
 ;?Info | Name Generate your own Settings skin: | Link 1
 Settings wiki=https://github.com/sceleri/settings/wiki
-;?Info | Name Open the example file
+;?Info | Name Open the example file | Link 2
 example.inc=#@#example.inc
 
 ;@Topic | Name Personalization | Icon [\xE771]

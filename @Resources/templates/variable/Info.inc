@@ -22,7 +22,7 @@ LeftMouseUpAction=["{Value}"]
 [MeasureLinkStatus{Index}]
 Measure=Calc
 Formula={Link}
-IfCondition=(0 = [#CURRENTSECTION#])
-IfFalseAction=[!DisableMouseAction VariableValue{Index} LeftMouseUpAction]
+IfCondition=(0 = #CURRENTSECTION#)
+IfTrueAction=[!DisableMouseAction VariableValue{Index} LeftMouseUpAction]
 Disabled={Hidden}
 
