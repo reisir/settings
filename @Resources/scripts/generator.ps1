@@ -3,7 +3,8 @@ function Update {
 }
 
 # Implemented types
-$variableTypes = @("String", "Integer", "Color", "Toggle", "Info")
+$variableTypes = @("String", "Integer", "Color", "Toggle", "Info", "RadioButton")
+$defaultVariableTypes = @("String", "Integer", "Color", "Toggle", "Info")
 $defaultVariableType = @("String")
 $categoryTypes = @("Default", "About")
 $listTypes = @("Default", "About", "Topic")
@@ -180,6 +181,10 @@ function Pipe-Variable {
         }
     }
 
+    # Creates Extensions array in $Variables if Variable type is not one of the default variable types
+    if ($defaultVariableTypes -notcontains $Variable.Property.Type) {
+        $Variable.Add('Extension', @{})
+    }
     # Match every | Key Value | pair from the property line
     Select-String -Pattern $Patterns.UnfilteredProperty -input $Variable.UnfilteredProperties -AllMatches | Foreach {
         # Filter each matched $category
@@ -194,6 +199,30 @@ function Pipe-Variable {
                 $key = Remove-Whitespace -String $Matches[1]
                 # $RmAPI.Log("Got variable key $key from $($UnfilteredProperty)")
                 $Variable.Properties["$key"] = "$value"
+
+                # If property name is Options it creates an Extension in $Variable.Extensions
+                if ($key -eq 'Options') {
+                    switch ($Variable.Properties.Type) {
+                        'RadioButton' {
+                            $Variable.Extension.Add("$_",@{"Label"=@(); "Option"=@()})
+                            ($value -split '; ') | ForEach-Object {
+                                if ($_ -match ',') {
+                                    $c=$_ -split ','
+                                    $Variable.Extension.$($Variable.Properties.Type).Label+=$c[0]
+                                    $Variable.Extension.$($Variable.Properties.Type).Option+=$c[1]
+                                } else {
+                                    $Variable.Extension.$($Variable.Properties.Type).Label+=$_
+                                    $Variable.Extension.$($Variable.Properties.Type).Option+=$_
+                                }
+                            }
+                            break
+                        }
+                        # add more extensions here
+                        default {
+                            break
+                        }
+                    }
+                }
             }
         }
     }
@@ -320,7 +349,20 @@ function Category-Ini {
 
     $j = 0
     foreach ($var in $Category.Variables) {
-        $ini += Variable-Ini -Variable $var -Index $j
+        switch ($var.Properties.Type) {
+            'RadioButton' {
+                $ini += Variable-Ini -Variable $var -Index $j
+                $k=0
+                $var.Extension.$_.Label | ForEach-Object {
+                    $ini += Variable-Ini -Variable $var -Index $j -Type Extension -ExtensionIndex $k
+                    $k++
+                }
+            }
+            default {
+                $ini += Variable-Ini -Variable $var -Index $j
+                
+            }
+        }
         $j++
     }
 
@@ -336,7 +378,12 @@ function Variable-Ini {
         [Parameter(Mandatory=$true)]
         $Variable,
         [Parameter(Mandatory=$true)]
-        $Index
+        $Index,
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('Default','Extension')]
+        $Type,
+        [Parameter(Mandatory=$false)]
+        $ExtensionIndex
     )
 
     # Properties used internally for skin generation, not user submitted
@@ -347,11 +394,32 @@ function Variable-Ini {
     }
 
     # Get template for type
-    $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
+    switch ($Type) {
+        'Extension' {
+            $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type)(Extension).inc" -Raw
+            break
+        }
+        default {
+            $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
+        }
+    }
     $ini > $testfile
     # Filter template
     $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
-    $ini = Filter-Template -Template $ini -Properties $Variable.Properties
+    $RmAPI.Variable('Got here!')
+    switch ($Type) {
+        'Extension' {
+            $ini = Filter-Template -Template $ini -Properties $Variable.Properties
+            $Variable.Extension.Keys | ForEach-Object {
+                $ini = Filter-Extension -Template $ini -Properties $Variable.Extension.RadioButton -Index $ExtensionIndex
+            }
+            break
+        }
+        default {
+            
+            $ini = Filter-Template -Template $ini -Properties $Variable.Properties
+        }
+    }
     $ini = Filter-Template -Template $ini -Properties $Variable
     $ini = Remove-UnformattedValues -Template $ini
 
@@ -444,7 +512,27 @@ function Filter-Template {
     }
 
     return $Template
+}
+function Filter-Extension { 
+    # processes extensions of templates.
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]
+        $Template,
+        [Parameter(Mandatory=$true)]
+        [System.Collections.Hashtable]
+        $Properties,
+        [Parameter(Mandatory=$true)]
+        $Index
+    )
 
+    # The extension contians two arrays named as the replacements
+    # and value is replaced by contents of the array, indexed.
+    $Properties.GetEnumerator() | ForEach-Object {
+        $Template = $Template.replace("{$($_.Key)}","$($_.Value[$Index])")
+    }
+
+    return $Template
 }
 
 function Remove-UnformattedValues {
