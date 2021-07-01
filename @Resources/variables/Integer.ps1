@@ -3,30 +3,30 @@ param (
     [System.Collections.Hashtable]
     $Variable,
     [Parameter()]
-    [System.Collections.Hashtable]
-    $Options
+    [String]
+    $SettingsFile
 )
 
 $ini = @"
 [VariableIcon$($Variable.Index)]
 Meter=String
 Text=$($Variable.Icon)
-MeterStyle=VariableIcon | $($Options.Container)
+MeterStyle=VariableIcon | RightPanel
 
 [VariableTitle$($Variable.Index)]
 Meter=String
 Text=$($Variable.Name)
-MeterStyle=VarTitle | $($Options.Container)
+MeterStyle=VarTitle
 
 [VariableDescription$($Variable.Index)]
 Meter=String
 Text=$($Variable.Description)
-MeterStyle=VarDescription | $($Options.Container)
+MeterStyle=VarDescription | RightPanel
 
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=[#$($Variable.Key)]
-MeterStyle=VarStringValue | $($Options.Container)
+MeterStyle=VarStringValue | RightPanel
 LeftMouseUpAction=[!CommandMeasure "InputText$($Variable.Index)" "ExecuteBatch All"][!SetOption #CURRENTSECTION# FontColor "0,0,0,0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [InputText$($Variable.Index)]
@@ -42,11 +42,9 @@ H=[VariableValue$($Variable.Index):H]
 W=([#s_RightPanelW] - ([#s_VariableXPadding] * 2))
 DynamicVariables=1
 DefaultValue=[#$($Variable.Key)]
-Command1=[!WriteKeyValue "Variables" "$($Variable.Key)" "`$UserInput`$" "$($Options.SettingsFile)"][!Refresh][#s_OnChangeAction]
+Command1=[!WriteKeyValue "Variables" "$($Variable.Key)" "`$UserInput`$" "$($SettingsFile)"][!Refresh][#s_OnChangeAction]
 OnDismissAction=[!SetOption VariableValue$($Variable.Index) FontColor "[#s_FontColor]"][!UpdateMeter VariableValue$($Variable.Index)][!Redraw]
 InputNumber=1
-
-
 "@
 
 return $ini

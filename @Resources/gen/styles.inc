@@ -8,10 +8,21 @@ StringAlign=Left
 X=[#s_ValueYPadding]
 DynamicVariables=1
 
+[FirstRightPanel]
+X=[#s_GeneratorLeftPanelWidth]
+
+[FirstLeftPanel]
+X=0
+
 [LeftPanel]
-Container=genLeftContainer
+X=[FirstLeft:X]
+DynamicVariables=1
+Y=0R
+
 [RightPanel]
-Container=genRightContainer
+X=[FirstRight:X]
+DynamicVariables=1
+Y=0R
 
 [Right]
 StringAlign=Left

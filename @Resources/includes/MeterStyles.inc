@@ -1,9 +1,7 @@
-;Category styles
 [CategoryIcon]
 AccurateText=1
 AntiAlias=1
-X=0
-Y=0R
+DynamicVariables=1
 Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
 FontSize=#s_FontSize1#
 FontFace=#s_IconFontFace#
@@ -30,8 +28,6 @@ FontColor=[#s_FontColor]
 FontWeight=[#s_CategoryDescriptionFontWeight]
 
 [CategoryTitleSeparator]
-X=0
-Y=0R
 H=[#s_CategoryTitleBottomPadding]
 W=[#s_RightPanelW]
 SolidColor=[#s_DebugSeparatorColor[#s_DebugColors]] 
@@ -40,8 +36,6 @@ SolidColor=[#s_DebugSeparatorColor[#s_DebugColors]]
 [VariableIcon]
 AccurateText=1
 AntiAlias=1
-X=0
-Y=0R
 Padding=[#s_VariableXPadding],0,0,0
 FontSize=[#s_FontSize1]
 FontFace=[#s_IconFontFace]
@@ -67,8 +61,6 @@ FontColor=[#s_FontColor]
 [VarDescription]
 AccurateText=1
 AntiAlias=1
-X=[#s_VariableXPadding]
-Y=0R
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
 Padding=0,0,[#s_VariableXPadding],0
@@ -80,8 +72,6 @@ FontColor=[#s_FontColor]
 [VarStringValue]
 AccurateText=1
 AntiAlias=1
-Y=0R
-X=0r
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
 Padding=0,[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
@@ -104,11 +94,9 @@ MouseLeaveAction=
 [Link0]
 MouseOverAction=
 MouseLeaveAction=
-
 [Link1]
 MouseOverAction=[!SetOption #CURRENTSECTION# FontColor [#s_SelectedColor]][!SetOption #CURRENTSECTION# InlineSetting "Underline"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# FontColor [#s_FontColor]][!SetOption #CURRENTSECTION# InlineSetting ""][!UpdateMeter #CURRENTSECTION#][!Redraw]
-
 
 [VarToggleValue]
 X=(([#s_ToggleSize] / 2) + [#s_VariableXPadding])

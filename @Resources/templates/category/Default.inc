@@ -6,7 +6,7 @@ MeterStyle=CategoryIcon | {Container}
 [Title{Index}]
 Meter=String
 Text={Name}
-MeterStyle=CategoryTitle | {Container}
+MeterStyle=CategoryTitle
 W=([#s_RightPanelW] - [CategoryIcon{Index}:W])
 
 [CategoryDescription{Index}]

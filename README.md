@@ -24,6 +24,11 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TO-DO:
 
+- [ ] Dynamically get list of templates for $implementedTypes
+  - [ ] Check if type is implemented before attempting run script
+  - [ ] Dynamically include all includes in Rainmeter.inc template
+- [x] Add safety newlines after variable templates
+- [ ] Redo the Settings skins probably separately from the generated skins styles etc
 - [ ] Script based templates
   - [ ] Each script receives a variable object with index
   - [x] Move Variable.Properties... to Variable...
@@ -37,8 +42,6 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Hold alt to override auto-inject?
 - [ ] Test if file needs to be in @Resources or a subdirectory
 - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
-- [ ] Dynamically get list of templates for $implementedTypes
-  - [ ] Dynamically include all includes in Rainmeter.inc template
 - [ ] Template stuff
   - [ ] Document templates
   - [ ] Slider template

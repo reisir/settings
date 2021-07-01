@@ -1,8 +1,8 @@
-[FirstRightPanel]
+[FirstRight]
 Meter=String
 Text=First
 FontColor=0,0,0,0
-MeterStyle=FirstItem | RightPanel
+MeterStyle=FirstItem | FirstRightPanel
 Y=[#s_ScrollRightPanel]
 
 [CategoryIcon1]

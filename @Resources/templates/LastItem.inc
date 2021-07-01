@@ -2,7 +2,7 @@
 Meter=String
 Text=Last
 FontColor=255,0,0,0
-MeterStyle=LastItem | {Container}
+MeterStyle=LastItem | {Container}Panel
 
 [ScrollDown{Container}]
 Measure=Calc

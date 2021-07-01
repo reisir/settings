@@ -19,10 +19,9 @@ $resourcesDir = "$($RmAPI.VariableStr('@'))"
 $includeDir = "$($resourcesDir)includes\"
 $addonsDir = "$($resourcesDir)addons\"
 $templatesDir = "$($resourcesDir)templates\"
-$variableTemplatesDir = "$($templatesDir)variable\"
-$categoryTemplatesDir = "$($templatesDir)category\"
 $listTemplatesDir = "$($templatesDir)list\"
 $variableScriptsDir = "$($resourcesDir)variables\"
+$categoryScriptsDir = "$($resourcesDir)categories\"
 
 # Generated directories
 $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
@@ -217,7 +216,7 @@ function Pipe-Category {
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
                 # $RmAPI.Log("Adding key: '$($Matches[1])'")
                 $key = Remove-Whitespace -String $Matches[1]
-                $Category.Properties.Add("$key", "$value")
+                $Category.Add("$key", "$value")
             }
         }
     }
@@ -252,43 +251,37 @@ function Category-Ini {
         $i
     )
 
-    # path to current category.inc
-    $file = "$($generatedCategoriesDir)$($i).inc"
-
-    # Properties to replace in templates
-    $Properties = @{
-        "Index" = $i
-        "Name" = $Category.Properties.Name
-        "Icon" = "$($Category.Properties.Icon)"
-        "Container" = "RightPanel"
-        "Description" = $Category.Properties.Description
+    # If category type is not implemented, make it Default
+    # TODO: check the list of implemented categories
+    $Type = $Category.Type
+    if($categoryTypes -NotContains $Type) {
+        $Type = "Default"
     }
+
+    # Set the Index
+    $Category.Index = $i
 
     # First Item template
     $template = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
-
-    # If category type is not implemented, make it Default
-    if($categoryTypes -NotContains $Category.Properties.Type) {
-        $type = "Default"
-    } else {
-        $type = $Category.Properties.Type
-    }
-
-    # Build category from template
-    $template = Get-Content -Path "$($categoryTemplatesDir)$($type).inc" -Raw
-    $ini += Filter-Template -Template $template -Properties $Properties
-
-    $j = 0
-    foreach ($var in $Category.Variables) {
-        $ini += Variable-Ini -Variable $var -Index $j
+    $ini = Filter-Template -Template $template -Properties @{"Container" = "Right"}
+    
+    # Call the appropriate Variable script
+    $ini += &"$($categoryScriptsDir)$($Type).ps1" -Category $Category
+    # Add space between variables, without newlines the section name would be appended to the last templates last option
+    $ini += "`n`n"
+    
+    # Create variable inis
+    $Category.Variables | ForEach-Object { $j = 0 } {
+        $ini += Variable-Ini -Variable $_ -Index $j
         $j++
     }
 
+    # Last Item template
     $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $template -Properties @{"Container" = "RightPanel"}
+    $ini += Filter-Template -Template $template -Properties @{"Container" = "Right"}
 
-    $ini > $file
+    # Write category
+    $ini > "$($generatedCategoriesDir)$($i).inc"
 
 }
 
@@ -300,17 +293,13 @@ function Variable-Ini {
         $Index
     )
 
-    # Properties used internally for skin generation, not user submitted
-    # TODO: get rid of containers and only pass in $SettingsFile
-    $internalVariableProperties = @{
-        "Container" = "RightPanel"
-        "SettingsFile" = $dynamicVariableFile
-    }
-
     $Variable["Index"] = $Index
-
-    $ini = &"$($variableScriptsDir)$($Variable.Type).ps1" -Variable $Variable -Options $internalVariableProperties
-
+    
+    # Call the appropriate Variable script
+    $ini = &"$($variableScriptsDir)$($Variable.Type).ps1" -Variable $Variable -SettingsFile $dynamicVariableFile
+    # Add space between variables, without newlines the section name would be appended to the last templates last option
+    $ini += "`n`n"
+    
     return $ini
 
 }
@@ -322,13 +311,13 @@ function Category-List {
     )
 
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "LeftPanel"}
+    $ini = Filter-Template -Template $ini -Properties @{"Container" = "Left"}
 
     $i = 0
     foreach ($category in $Settings) {
         $externalProperties = @{
             "Index" = $i
-            "Container" = "LeftPanel"
+            "Container" = "Left"
             "InternalVariables" = "$dynamicInternalVariableFile"
         }
 
@@ -347,7 +336,7 @@ function Category-List {
     }
 
     $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "LeftPanel"}
+    $ini += Filter-Template -Template $last -Properties @{"Container" = "Left"}
 
     # credit last, outside of the scrollable item list
     $template = Get-Content -Path "$($listTemplatesDir)Credit.inc" -Raw
@@ -426,7 +415,6 @@ function Remove-Newline {
     $String = $String -replace "`t|`n|`r",""
 
     return $String
-
 }
 
 function Remove-Whitespace {

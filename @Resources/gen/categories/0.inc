@@ -1,8 +1,8 @@
-[FirstRightPanel]
+[FirstRight]
 Meter=String
 Text=First
 FontColor=0,0,0,0
-MeterStyle=FirstItem | RightPanel
+MeterStyle=FirstItem | FirstRightPanel
 Y=[#s_ScrollRightPanel]
 
 [CategoryIcon0]
@@ -14,7 +14,7 @@ Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
 [Title0]
 Meter=String
 Text=Settings
-MeterStyle=CategoryTitle | RightPanel
+MeterStyle=CategoryTitle
 W=([#s_RightPanelW] - [CategoryIcon0:W])
 Padding=0,[#s_CategoryTitleXPadding],0,0
 [CategoryDescription0]
