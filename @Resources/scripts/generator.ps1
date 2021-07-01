@@ -48,7 +48,24 @@ function Construct {
 
     # Filter settings file into staggered array
     $RmAPI.Log("Parsing settings file")
-    $settings = Settings-Array -String $settingsFileContent
+
+    # Regex patterns
+    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
+
+    # Handle unformatted variable files
+    if($settingsFileContent -notmatch $categoryPattern) {}
+    
+    # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
+    $settings = @(
+        Select-String -Pattern $categoryPattern -input $settingsFileContent -AllMatches | ForEach-Object {
+        # Filter each matched $category
+        foreach ($category in $_.Matches) {
+            Pipe-Category -String $category
+        }
+    })
+
+    # Testing
+    $settings > $testfile
 
     # Variable to hold generated .ini
     # Get rainmeter section from template
@@ -58,75 +75,19 @@ function Construct {
         "ThemeFile" = $dynamicThemeFile
     }
     $ini = Filter-Template -Template $ini -Properties $rainmeterTemplateProperties
+    $ini > $generatedSkinFile
 
     # Construct categories
-    $i = 0
-    foreach ($category in $settings) {
+    $settings | ForEach-Object { $i = 0 } {
         $RmAPI.Log("Building category $($i).inc")
-        Category-Ini -category $category -i $i
+        Category-Ini -category $_ -i $i
         $i++
     }
 
     $RmAPI.Log("Building category list")
     Category-List -Settings $settings
 
-    $ini > $generatedSkinFile
-
     Inject-Settings
-
-}
-
-function Settings-Array {
-    param (
-        [Parameter(Mandatory=$true)]
-        [Alias("String")]
-        $settingsFileContent
-    )
-
-    # Regex patterns
-    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
-
-    # Fallback pattern for getting variables from unformatted files
-    $unformattedVariablePattern = '(?sm)(?<=[^;])^([^;]+?)$'
-
-    # Declare $settings as an empty array to make sure that $settings is an array
-    $settings = @()
-
-    # Handle unformatted variable files
-    if($settingsFileContent -notmatch $categoryPattern) {
-        return @(@{
-            "Properties" = @{
-                "Type" = "Default"
-                "Name" = "File format error"
-                "Description" = "Please add at least one (1) category"
-                "Icon" = "[\xE783]"
-            }
-            "Variables" = @{
-                "Properties" = @{
-                    "Type" = "Info"
-                    "Name" = "Refer to the RainDoc syntax wiki"
-                    "Link" = "1"
-                }
-                "Key" = "RainDoc syntax"
-                "Value" = "https://github.com/sceleri/settings/wiki"
-            }
-        })
-    }
-
-    # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
-    Select-String -Pattern $categoryPattern -input $settingsFileContent -AllMatches | Foreach {
-        # Filter each matched $category
-        foreach ($category in $_.Matches) {
-            $c = Pipe-Category -String $category
-            # Add the filtered category hashtable to the $settings array 
-            $settings += , $c
-            # $RmAPI.Log("$c")
-        }
-    }
-
-    # $settings > $testfile
-
-    return $settings
 
 }
 
@@ -181,7 +142,7 @@ function Pipe-Variable {
     }
 
     # Match every | Key Value | pair from the property line
-    Select-String -Pattern $Patterns.UnfilteredProperty -input $Variable.UnfilteredProperties -AllMatches | Foreach {
+    Select-String -Pattern $Patterns.UnfilteredProperty -input $Variable.UnfilteredProperties -AllMatches | ForEach-Object {
         # Filter each matched $category
         foreach ($UnfilteredProperty in $_.Matches) {
             $key, $value = ""
@@ -245,7 +206,7 @@ function Pipe-Category {
     }
     
     # Match every | Key Value | pair from the property line
-    Select-String -Pattern $Patterns.UnfilteredProperty -input $Category.UnfilteredProperties -AllMatches | Foreach {
+    Select-String -Pattern $Patterns.UnfilteredProperty -input $Category.UnfilteredProperties -AllMatches | ForEach-Object {
         # Filter each matched $category
         foreach ($UnfilteredProperty in $_.Matches) {
             $key, $value = ""
@@ -267,7 +228,7 @@ function Pipe-Category {
     # Make the Variables array
     $Category.Add("Variables", @())
     # Get all UnfilteredVariable matches from UnfilteredVariables
-    Select-String -Pattern $Patterns.UnfilteredVariable -input $Category.UnfilteredVariables -AllMatches | Foreach {
+    Select-String -Pattern $Patterns.UnfilteredVariable -input $Category.UnfilteredVariables -AllMatches | ForEach-Object {
         # Filter each matched $category
         foreach ($UnfilteredVariable in $_.Matches) {
             # Filter each Variable
@@ -348,7 +309,6 @@ function Variable-Ini {
 
     # Get template for type
     $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
-    $ini > $testfile
     # Filter template
     $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
     $ini = Filter-Template -Template $ini -Properties $Variable.Properties
