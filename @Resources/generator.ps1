@@ -22,6 +22,7 @@ $templatesDir = "$($resourcesDir)templates\"
 $variableTemplatesDir = "$($templatesDir)variable\"
 $categoryTemplatesDir = "$($templatesDir)category\"
 $listTemplatesDir = "$($templatesDir)list\"
+$variableScriptsDir = "$($resourcesDir)variables\"
 
 # Generated directories
 $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
@@ -162,6 +163,7 @@ function Pipe-Variable {
     return $Variable
 
 }
+
 
 function Pipe-Category {
 
@@ -307,13 +309,7 @@ function Variable-Ini {
         "SettingsFile" = $dynamicVariableFile
     }
 
-    # Get template for type
-    $ini = Get-Content -Path "$($variableTemplatesDir)$($Variable.Properties.Type).inc" -Raw
-    # Filter template
-    $ini = Filter-Template -Template $ini -Properties $internalVariableProperties
-    $ini = Filter-Template -Template $ini -Properties $Variable.Properties
-    $ini = Filter-Template -Template $ini -Properties $Variable
-    $ini = Remove-UnformattedValues -Template $ini
+    $ini = &"$($variableScriptsDir)$($Variable.Properties.Type).ps1" -Variable $Variable -Options $internalVariableProperties
 
     return $ini
 

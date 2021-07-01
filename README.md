@@ -4,6 +4,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 # Disclaimer
 
+# :warning: I'm currently rewriting the generator so DO NOT clone this repository and expect it to work. Use the latest version in [Releases](https://github.com/sceleri/settings/releases) :warning:
+
 ### :warning: When you use the generator, all .inc,.ini and "RainRGB4RunCommand.exe" files in "yourskin\settings" are deleted and replaced :warning:
 
 # Using Settings
