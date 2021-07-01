@@ -8,32 +8,32 @@ param (
 )
 
 $ini = @"
-[VariableIcon$($Options.Index)]
+[VariableIcon$($Variable.Index)]
 Meter=String
-Text=$($Variable.Properties.Icon)
+Text=$($Variable.Icon)
 MeterStyle=VariableIcon | $($Options.Container)
 
-[VariableTitle$($Options.Index)]
+[VariableTitle$($Variable.Index)]
 Meter=String
-Text=$($Variable.Properties.Name)
+Text=$($Variable.Name)
 MeterStyle=VarTitle | $($Options.Container)
 
-[VariableDescription$($Options.Index)]
+[VariableDescription$($Variable.Index)]
 Meter=String
-Text=$($Variable.Properties.Description)
+Text=$($Variable.Description)
 MeterStyle=VarDescription | $($Options.Container)
 
-[VariableValue$($Options.Index)]
+[VariableValue$($Variable.Index)]
 Meter=String
 Text=$($Variable.Key)
-MeterStyle=VarStringValue | Link$($Variable.Properties.Link) | $($Options.Container)
+MeterStyle=VarStringValue | Link$($Variable.Link) | $($Options.Container)
 LeftMouseUpAction=["$($Variable.Value)"]
 
-[MeasureLinkStatus$($Options.Index)]
+[MeasureLinkStatus$($Variable.Index)]
 Measure=Calc
-Formula=$($Variable.Properties.Link)
+Formula=$($Variable.Link)
 IfCondition=(0 = #CURRENTSECTION#)
-IfTrueAction=[!DisableMouseAction VariableValue$($Options.Index) LeftMouseUpAction]
+IfTrueAction=[!DisableMouseAction VariableValue$($Variable.Index) LeftMouseUpAction]
 
 
 "@

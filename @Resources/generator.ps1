@@ -122,23 +122,23 @@ function Pipe-Variable {
         $Variable.Add("$($_.Key)", "$($_.Value)")
     }
     
-    # Get the variable properties
-
     # Make the Properties hashtable
+
+    # Default the Name property to the Key
     $Variable.Properties = @{"Name" = $Variable.Key}
 
     # Filter type
     # Type is special since it's required
     if("$($Variable.UnfilteredProperties)" -match "$($Patterns.Type)") {
-        $Variable.Properties.Type = Remove-Whitespace -String $Matches[1]
+        $Variable.Type = Remove-Whitespace -String $Matches[1]
         # Default undeclared type to String without logging
-        if($Variable.Properties.Type -eq "") {
-            $Variable.Properties.Type = "String"
+        if($Variable.Type -eq "") {
+            $Variable.Type = "String"
         }
         # Default typos to String
-        if($variableTypes -NotContains $Variable.Properties.Type) {
-            $RmAPI.LogError("Variable type '$($Variable.Properties.Type)' is not implemented, defaulting to String")
-            $Variable.Properties.Type = "String"
+        if($variableTypes -NotContains $Variable.Type) {
+            $RmAPI.LogError("Variable type '$($Variable.Type)' is not implemented, defaulting to String")
+            $Variable.Type = "String"
         }
     }
 
@@ -149,13 +149,12 @@ function Pipe-Variable {
             $key, $value = ""
             if($UnfilteredProperty -match $Patterns.PropertyValue) {
                 $value = $Matches[1]
-                # $RmAPI.Log("Got variable value $value from $($UnfilteredProperty)")
             }
             # Only add the property to the hashtable if it has a key.
             if($UnfilteredProperty -match $Patterns.PropertyKey) {
                 $key = Remove-Whitespace -String $Matches[1]
-                # $RmAPI.Log("Got variable key $key from $($UnfilteredProperty)")
-                $Variable.Properties["$key"] = "$value"
+                #TODO: maybe add a check if props are overriding internal props like Index etc.
+                $Variable["$key"] = "$value"
             }
         }
     }
@@ -163,7 +162,6 @@ function Pipe-Variable {
     return $Variable
 
 }
-
 
 function Pipe-Category {
 
@@ -303,13 +301,15 @@ function Variable-Ini {
     )
 
     # Properties used internally for skin generation, not user submitted
+    # TODO: get rid of containers and only pass in $SettingsFile
     $internalVariableProperties = @{
-        "Index" = $Index
         "Container" = "RightPanel"
         "SettingsFile" = $dynamicVariableFile
     }
 
-    $ini = &"$($variableScriptsDir)$($Variable.Properties.Type).ps1" -Variable $Variable -Options $internalVariableProperties
+    $Variable["Index"] = $Index
+
+    $ini = &"$($variableScriptsDir)$($Variable.Type).ps1" -Variable $Variable -Options $internalVariableProperties
 
     return $ini
 

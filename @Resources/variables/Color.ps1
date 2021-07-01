@@ -8,35 +8,35 @@ param (
 )
 
 $ini = @"
-[VariableIcon$($Options.Index)]
+[VariableIcon$($Variable.Index)]
 Meter=String
-Text=$($Variable.Properties.Icon)
+Text=$($Variable.Icon)
 MeterStyle=VariableIcon | $($Options.Container)
 
-[VariableTitle$($Options.Index)Title]
+[VariableTitle$($Variable.Index)Title]
 Meter=String
-Text=$($Variable.Properties.Name)
+Text=$($Variable.Name)
 MeterStyle=VarTitle | $($Options.Container)
 
-[VariableDescription$($Options.Index)]
+[VariableDescription$($Variable.Index)]
 Meter=String
-Text=$($Variable.Properties.Description)
+Text=$($Variable.Description)
 MeterStyle=VarDescription | $($Options.Container)
 
-[ColorVariableValue$($Options.Index)]
+[ColorVariableValue$($Variable.Index)]
 Meter=Shape
 Shape=Ellipse [#s_ColorSize],[#s_ColorSize],[#s_ColorSize],[#s_ColorSize] | Fill Color [#$($Variable.Key)] | StrokeWidth [#s_ColorStrokeWidth] | Extend Outline
 Outline=Stroke Color [#s_ColorStrokeColor]
 MeterStyle=VarColorValue | $($Options.Container)
-LeftMouseUpAction=[!CommandMeasure "RainRGB$($Options.Index)" "Run"]
+LeftMouseUpAction=[!CommandMeasure "RainRGB$($Variable.Index)" "Run"]
 
-[StringVariableValue$($Options.Index)]
+[StringVariableValue$($Variable.Index)]
 Meter=String
 Text=[#$($Variable.Key)]
 MeterStyle=VarStringValue | VarColorString | $($Options.Container)
-LeftMouseUpAction=[!CommandMeasure "RainRGB$($Options.Index)" "Run"]
+LeftMouseUpAction=[!CommandMeasure "RainRGB$($Variable.Index)" "Run"]
 
-[RainRGB$($Options.Index)]
+[RainRGB$($Variable.Index)]
 Measure=Plugin
 Plugin=RunCommand
 Program=""#CURRENTPATH#addons\RainRGB4RunCommand.exe""
