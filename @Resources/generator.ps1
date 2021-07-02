@@ -19,9 +19,9 @@ $resourcesDir = "$($RmAPI.VariableStr('@'))"
 $includeDir = "$($resourcesDir)includes\"
 $addonsDir = "$($resourcesDir)addons\"
 $templatesDir = "$($resourcesDir)templates\"
-$listTemplatesDir = "$($templatesDir)list\"
 $variableScriptsDir = "$($resourcesDir)variables\"
 $categoryScriptsDir = "$($resourcesDir)categories\"
+$listitemScriptsDir = "$($resourcesDir)listitems\"
 
 # Generated directories
 $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
@@ -310,38 +310,34 @@ function Category-List {
         $Settings
     )
 
+    # FirstItem template
     $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
     $ini = Filter-Template -Template $ini -Properties @{"Container" = "Left"}
+    
+    # Loop through the categories
+    $Settings | ForEach-Object { $i = 0 } {
+        # Set the Index number
+        $_.Index = $i
 
-    $i = 0
-    foreach ($category in $Settings) {
-        $externalProperties = @{
-            "Index" = $i
-            "Container" = "Left"
-            "InternalVariables" = "$dynamicInternalVariableFile"
-        }
-
+        # Get the category type
+        $type = $_.Type
         # If category type is not implemented, make it Default
-        if($listTypes -NotContains $category.Properties.Type) {
-            $type = "Default"
-        } else {
-            $type = $category.Properties.Type
-        }
+        if($listTypes -NotContains $_.Type) { $type = "Default" }
 
-        $template = Get-Content -Path "$($listTemplatesDir)$($type).inc" -Raw
-        $template = Filter-Template -Template $template -Properties $externalProperties
-        $template = Filter-Template -Template $template -Properties $category.Properties
-        $ini += Remove-UnformattedValues -Template $template
+        # Call the appropriate ListItem template script
+        $ini += &"$($listitemScriptsDir)$($type).ps1" -Category $_ -InternalSettingsFile $dynamicInternalVariableFile
+        $ini += "`n`n"
         $i++
     }
 
+    # Add in the LastItem
     $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
     $ini += Filter-Template -Template $last -Properties @{"Container" = "Left"}
 
-    # credit last, outside of the scrollable item list
-    $template = Get-Content -Path "$($listTemplatesDir)Credit.inc" -Raw
-    $ini += $template
+    # Credit icon last, outside of the scrollable item list
+    $ini += &"$($listitemScriptsDir)Credit.ps1"
 
+    # Write category list to file
     $ini > "$($generatedCategoriesDir)CategoryList.inc"
 
 }
