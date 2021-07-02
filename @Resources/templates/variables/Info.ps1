@@ -7,22 +7,9 @@ param (
     $SettingsFile
 )
 
-$ini = @"
-[VariableIcon$($Variable.Index)]
-Meter=String
-Text=$($Variable.Icon)
-MeterStyle=VariableIcon | RightPanel
+$ini = &"$variableTitleScript" -Variable $Variable
 
-[VariableTitle$($Variable.Index)]
-Meter=String
-Text=$($Variable.Name)
-MeterStyle=VarTitle
-
-[VariableDescription$($Variable.Index)]
-Meter=String
-Text=$($Variable.Description)
-MeterStyle=VarDescription | RightPanel
-
+$ini += @"
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=$($Variable.Key)
@@ -37,3 +24,4 @@ IfTrueAction=[!DisableMouseAction VariableValue$($Variable.Index) LeftMouseUpAct
 "@
 
 return $ini
+

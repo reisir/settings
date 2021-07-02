@@ -16,12 +16,12 @@ Y=([ListIcon[#s_CurrentCategory]:Y])
 DynamicVariables=1
 
 [LeftPanel]
-X=[FirstLeft:X]
+Padding=[FirstLeft:X],0,0,0
 DynamicVariables=1
 Y=0R
 
 [RightPanel]
-X=[FirstRight:X]
+Padding=[FirstRight:X],0,0,0
 DynamicVariables=1
 Y=0R
 

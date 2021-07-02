@@ -7,22 +7,9 @@ param (
     $SettingsFile
 )
 
-$ini = @"
-[VariableIcon$($Variable.Index)]
-Meter=String
-Text=$($Variable.Icon)
-MeterStyle=VariableIcon | RightPanel
+$ini = &"$variableTitleScript" -Variable $Variable
 
-[VariableTitle$($Variable.Index)Title]
-Meter=String
-Text=$($Variable.Name)
-MeterStyle=VarTitle
-
-[VariableDescription$($Variable.Index)]
-Meter=String
-Text=$($Variable.Description)
-MeterStyle=VarDescription | RightPanel
-
+$ini += @"
 [ColorVariableValue$($Variable.Index)]
 Meter=Shape
 Shape=Ellipse [#s_ColorSize],[#s_ColorSize],[#s_ColorSize],[#s_ColorSize] | Fill Color [#$($Variable.Key)] | StrokeWidth [#s_ColorStrokeWidth] | Extend Outline

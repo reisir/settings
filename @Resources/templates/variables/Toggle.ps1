@@ -7,22 +7,9 @@ param (
     $SettingsFile
 )
 
-$ini = @"
-[VariableIcon$($Variable.Index)]
-Meter=String
-Text=$($Variable.Icon)
-MeterStyle=VariableIcon | RightPanel
+$ini = &"$variableTitleScript" -Variable $Variable
 
-[VariableTitle$($Variable.Index)]
-Meter=String
-Text=$($Variable.Name)
-MeterStyle=VarTitle
-
-[VariableDescription$($Variable.Index)]
-Meter=String
-Text=$($Variable.Description)
-MeterStyle=VarDescription | RightPanel
-
+$ini += @"
 [ToggleOff$($Variable.Index)]
 Meter=Shape
 Shape=Line 0,0,([#s_ToggleLength]),0 | Extend Line

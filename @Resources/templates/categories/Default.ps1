@@ -4,7 +4,6 @@ param (
     $Category
 )
 
-
 $ini = @"
 [CategoryIcon$($Category.Index)]
 Meter=String

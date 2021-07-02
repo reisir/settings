@@ -19,9 +19,10 @@ $resourcesDir = "$($RmAPI.VariableStr('@'))"
 $includeDir = "$($resourcesDir)includes\"
 $addonsDir = "$($resourcesDir)addons\"
 $templatesDir = "$($resourcesDir)templates\"
-$variableScriptsDir = "$($resourcesDir)variables\"
-$categoryScriptsDir = "$($resourcesDir)categories\"
-$listitemScriptsDir = "$($resourcesDir)listitems\"
+$variableScriptsDir = "$($resourcesDir)templates\variables\"
+$categoryScriptsDir = "$($resourcesDir)templates\categories\"
+$listitemScriptsDir = "$($resourcesDir)templates\listitems\"
+$variableTitleScript = "$($variableScriptsDir)s_Title.ps1"
 
 # Generated directories
 $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
