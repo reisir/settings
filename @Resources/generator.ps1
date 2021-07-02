@@ -11,7 +11,8 @@ $listTypes = @("Default", "About", "Topic")
 # Variables from Rainmeter
 $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
-$dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
+# $dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
+$dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\1.inc"
 $dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
 
 # Generator directories

@@ -13,8 +13,8 @@ s_Theme2Name=Slim
 ;@Topic | Name Internal | Icon  | 
 ;? | Name hidden | Hidden 1
 s_ScrollTreshold=[#s_PanelH]
-s_ScrollRightPanel=0
-s_ScrollLeftPanel=0
+s_ScrollRight=0
+s_ScrollLeft=0
 s_CurrentCategory=0
 s_SettingsTheme=1
 
@@ -28,7 +28,7 @@ s_GeneratorPanelHeight=300
 
 ;@ | Name Debug colors | Icon [\xE783]
 ;?Toggle | 
-s_DebugColors=0
+s_DebugColors=1
 ;?Color | 
 s_DebugCategoryTitleColor1=255,0,195,100
 s_DebugCategoryTitleColor0=0,0,0,0
@@ -45,7 +45,7 @@ s_DebugListColor0=0,0,0,0
 s_DebugListIconColor1=255,255,0,100
 s_DebugListIconColor0=0,0,0,0
 ;?Color | 
-s_DebugSeparatorColor1=51,46,46,100
+s_DebugSeparatorColor1=51,255,46,100
 s_DebugSeparatorColor0=0,0,0,0
 ;?Color | 
 s_DebugVariableTitleColor1=255,0,0,100
@@ -53,6 +53,9 @@ s_DebugVariableTitleColor0=0,0,0,0
 ;?Color | 
 s_DebugCategoryIconColor1=229,255,0,100
 s_DebugCategoryIconColor0=0,0,0,0
+;?Color | 
+s_DebugVariableIconColor1=229,255,0,100
+s_DebugVariableIconColor0=0,0,0,0
 ;?Color | 
 s_DebugToggleColor1=255,0,0,100
 s_DebugToggleColor0=0,0,0,0

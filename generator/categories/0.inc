@@ -3,7 +3,7 @@ Meter=String
 Text=First
 FontColor=0,0,0,0
 MeterStyle=FirstItem | FirstRightPanel
-Y=[#s_ScrollRightPanel]
+Y=[#s_ScrollRight]
 
 [CategoryIcon0]
 Meter=String

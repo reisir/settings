@@ -11,6 +11,7 @@ $ini = @"
 [ListIcon$($Category.Index)]
 Meter=String
 Text=$($Category.Icon)
+Y=[#s_ListTopicTopPadding]R
 MeterStyle=ListIcon | ListTopicIcon | LeftPanel
 
 [ListItem$($Category.Index)]

@@ -11,6 +11,7 @@ $ini = @"
 [ListIcon$($Category.Index)]
 Meter=String
 Text=$($Category.Icon)
+Y=[#s_ListDefaultTopPadding]R
 MeterStyle=ListIcon | ListDefaultIcon | LeftPanel
 LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
 

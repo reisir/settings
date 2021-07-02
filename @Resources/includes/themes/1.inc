@@ -100,13 +100,17 @@ s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + [#s_CategoryIconNudge])
 
 ;@ | Name Category list
 ;?Integer | Name About item top padding | Description 
-s_ListAboutTopPadding=35
+s_ListAboutTopPadding=15
 ;?Integer | Name About item left padding | Description 
-s_ListAboutLeftPadding=20
+s_ListAboutLeftPadding=5
+;?Integer | Name Default item top padding | Description 
+s_ListDefaultTopPadding=0
 ;?Integer | Name Default item left padding | Description 
-s_ListDefaultLeftPadding=35
+s_ListDefaultLeftPadding=15
+;?Integer | Name Topic item top padding | Description 
+s_ListTopicTopPadding=0
 ;?Integer | Name Topic item left padding | Description 
-s_ListTopicLeftPadding=20
+s_ListTopicLeftPadding=5
 ;?Integer | Name List item top and bottom padding | Description 
 s_ListYPadding=7
 ;? | Name List item right padding | Description Used for width calculations for ClipString=2

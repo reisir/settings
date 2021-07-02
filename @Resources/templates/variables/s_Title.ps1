@@ -5,15 +5,10 @@ param (
 )
 
 $ini = @"
-[VariableIcon$($Variable.Index)]
-Meter=String
-Text=$($Variable.Icon)
-MeterStyle=VariableIcon | RightPanel
-
 [VariableTitle$($Variable.Index)]
 Meter=String
 Text=$($Variable.Name)
-MeterStyle=VarTitle
+MeterStyle=VarTitle | RightPanel
 
 [VariableDescription$($Variable.Index)]
 Meter=String

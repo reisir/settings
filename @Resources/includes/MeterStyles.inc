@@ -32,16 +32,6 @@ H=[#s_CategoryTitleBottomPadding]
 W=[#s_RightPanelW]
 SolidColor=[#s_DebugSeparatorColor[#s_DebugColors]] 
 
-;Variable styles
-[VariableIcon]
-AccurateText=1
-AntiAlias=1
-Padding=[#s_VariableXPadding],0,0,0
-FontSize=[#s_FontSize1]
-FontFace=[#s_IconFontFace]
-SolidColor=[#s_DebugCategoryIconColor[#s_DebugColors]]
-FontColor=[#s_FontColor]
-
 [VarTitle]
 AccurateText=1
 AntiAlias=1
@@ -63,6 +53,7 @@ AccurateText=1
 AntiAlias=1
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
+;TODO: change this to variable description padding
 Padding=0,0,[#s_VariableXPadding],0
 FontFace=[#s_FontFace]
 FontSize=[#s_FontSize4]
@@ -74,7 +65,7 @@ AccurateText=1
 AntiAlias=1
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 ClipString=2
-Padding=0,[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
+Padding=[#s_VariableXPadding],[#s_ValueYPadding],[#s_VariableXPadding],[#s_ValueYPadding]
 FontColor=[#s_FontColor]
 FontFace=[#s_FontFace]
 FontSize=[#s_FontSize3]
