@@ -43,21 +43,21 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value0]
 Meter=String
 Text=Change to theme: [#s_Theme0Name]
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "0"][!WriteKeyValue Variables "s_SettingsTheme" "0" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Padding=0,0,0,0
 [Value1]
 Meter=String
 Text=Change to theme: [#s_Theme1Name]
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "1"][!WriteKeyValue Variables "s_SettingsTheme" "1" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Padding=0,0,0,0
 [Value2]
 Meter=String
 Text=Change to theme: [#s_Theme2Name]
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "2"][!WriteKeyValue Variables "s_SettingsTheme" "2" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Y=0R
@@ -80,7 +80,7 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value3]
 Meter=String
 Text=Go to internal tab
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!WriteKeyValue Variables s_GenCurrentCategory 2][!Refresh]
 

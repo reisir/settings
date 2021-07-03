@@ -44,7 +44,7 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value0]
 Meter=String
 Text=Change to internal variable file
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
@@ -67,7 +67,7 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value1]
 Meter=String
 Text=Open s_OnChangeAction.inc
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
 

@@ -13,7 +13,7 @@ $ini += @"
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=[#$($Variable.Key)]
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 LeftMouseUpAction=[!CommandMeasure "InputText$($Variable.Index)" "ExecuteBatch All"][!SetOption #CURRENTSECTION# FontColor "0,0,0,0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [InputText$($Variable.Index)]

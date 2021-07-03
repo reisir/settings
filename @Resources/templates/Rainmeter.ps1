@@ -15,13 +15,11 @@ License=CC BY-NC-SA 4.0
 [Rainmeter]
 Update=-1
 @IncludeSkinVariables=$($Options.SettingsFile)
-@IncludesOnChangeAction=#ROOTCONFIGPATH#settings\includes\s_OnChangeAction.inc
-@IncludeInternalVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
+@IncludesOnChangeAction=#ROOTCONFIGPATH#Settings\Includes\s_OnChangeAction.inc
+@IncludeInternalVariables=#ROOTCONFIGPATH#Settings\Includes\Variables.inc
+@IncludeTheme=$($Options.ThemeFile)
 SkinHeight=[#s_PanelH]
 ;SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
-
-[Theme]
-@IncludeTheme=$($Options.ThemeFile)
 
 [FrostedGlass]
 Measure=Plugin
@@ -29,20 +27,17 @@ Plugin=FrostedGlass
 Type=[#s_FrostedGlassMode]
 Border=[#s_FrostedGlassBorders]
 
-[IncludeBackground]
-@IncludeBackground=#ROOTCONFIGPATH#settings\includes\Background.inc
-
 [IncludeMeterStyles]
-@IncludeMeterStyles=#ROOTCONFIGPATH#settings\includes\MeterStyles.inc
+@IncludeMeterStyles=#ROOTCONFIGPATH#Settings\Includes\MeterStyles.inc
 
-[IncludeListItems]
-@IncludeListItems=#ROOTCONFIGPATH#settings\includes\ListItems.inc
+[IncludeBackground]
+@IncludeBackground=#ROOTCONFIGPATH#Settings\Includes\Background.inc
 
 [IncludeCategoryList]
-@IncludeCategoryList=#ROOTCONFIGPATH#settings\categories\CategoryList.inc
+@IncludeCategoryList=#ROOTCONFIGPATH#Settings\Categories\CategoryList.inc
 
 [IncludeCurrentCategory]
-@IncludeCategory=#ROOTCONFIGPATH#settings\categories\[#s_CurrentCategory].inc
+@IncludeCategory=#ROOTCONFIGPATH#Settings\Categories\[#s_CurrentCategory].inc
 
 
 "@

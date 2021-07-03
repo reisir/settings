@@ -24,7 +24,4 @@ ToolTipTitle=$($Category.Name)
 ToolTipText=$($Category.Tooltip)
 "@
 
-
-
-
 return $ini

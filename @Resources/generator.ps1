@@ -2,12 +2,6 @@ function Update {
 
 }
 
-# Implemented types
-$variableTypes = @("String", "Integer", "Color", "Toggle", "Info")
-$defaultVariableType = @("String")
-$categoryTypes = @("Default", "About")
-$listTypes = @("Default", "About", "Topic")
-
 # Variables from Rainmeter
 $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
@@ -17,24 +11,28 @@ $dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
-$includeDir = "$($resourcesDir)includes\"
-$addonsDir = "$($resourcesDir)addons\"
-$templatesDir = "$($resourcesDir)templates\"
-$variableScriptsDir = "$($templatesDir)variables\"
-$categoryScriptsDir = "$($templatesDir)categories\"
-$listitemScriptsDir = "$($templatesDir)listitems\"
+$includeDir = "$($resourcesDir)Includes\"
+$addonsDir = "$($resourcesDir)Addons\"
+$templatesDir = "$($resourcesDir)Templates\"
+$meterstylesDir = "$($resourcesDir)MeterStyles"
+
+# Template scripts
+$variableScriptsDir = "$($templatesDir)Variables\"
+$categoryScriptsDir = "$($templatesDir)Categories\"
+$listitemScriptsDir = "$($templatesDir)ListItems\"
 
 # Declare the title script for easy use in template scripts
-$variableTitleScript = "$($variableScriptsDir)s_Title.ps1"
+$commonScriptsDir = "$($templatesDir)Common\"
+$variableTitleScript = "$($commonScriptsDir)varTitle.ps1"
 
 # Generated directories
-$generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))settings\"
-$generatedCategoriesDir = "$($generatedSkinDir)categories\"
-$generatedIncludeDir = "$($generatedSkinDir)includes\"
-$generatedAddonsDir = "$($generatedSkinDir)addons"
+$generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))Settings\"
+$generatedCategoriesDir = "$($generatedSkinDir)Categories\"
+$generatedIncludeDir = "$($generatedSkinDir)Includes\"
+$generatedAddonsDir = "$($generatedSkinDir)Addons"
 
 # Generated files
-$generatedSkinFile = "$($generatedSkinDir)settings.ini"
+$generatedSkinFile = "$($generatedSkinDir)Settings.ini"
 
 # Injectors
 $targetSkin = $RmAPI.VariableStr('s_Skin')
@@ -44,6 +42,12 @@ $injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$($targetSkin)\"
 $testfile = "$($resourcesDir)test.inc"
 
 function Construct {
+
+    # Implemented types
+    $variableTypes = @(Get-ChildItem -Path $($variableScriptsDir) -Name | % { $_.Split('.')[0] })
+    $categoryTypes = @(Get-ChildItem -Path $($categoryScriptsDir) -Name | % { $_.Split('.')[0] })
+    $listTypes = @(Get-ChildItem -Path $($listitemScriptsDir) -Name | % { $_.Split('.')[0] })
+
     # Reset directories, copy files etc.
     Prepare-Directories
 
@@ -56,8 +60,11 @@ function Construct {
     # Regex patterns
     $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
 
-    # Handle unformatted variable files
-    # if($settingsFileContent -notmatch $categoryPattern) {}
+    # TODO: Handle unformatted variable files
+    if($settingsFileContent -notmatch $categoryPattern) {
+        $RmAPI.LogError("Variable file is not formatted")
+        return
+    }
     
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     $settings = @(
@@ -67,9 +74,6 @@ function Construct {
             Pipe-Category -String $category
         }
     })
-
-    # Debug settings hashtable
-    $settings > $testfile
 
     # Write main settings.ini
     $RainmeterOptions = @{
@@ -89,8 +93,16 @@ function Construct {
     $RmAPI.Log("Category list")
     Category-List -Settings $settings
 
+    Join-MeterStyles
+
     Inject-Settings
 
+}
+
+function Join-MeterStyles {
+        
+    Get-ChildItem $($meterstylesDir) -Include *.inc -Recurse | ForEach-Object {Get-Content $_; ""} | Out-File "$($includeDir)MeterStyles.inc"
+   
 }
 
 function Pipe-Variable {
@@ -272,7 +284,7 @@ function Category-Ini {
     
     # Create variable inis
     $Category.Variables | ForEach-Object { $j = 0 } {
-        $RmAPI.Log("Variable $($_.Key) ($j.inc)")
+        # $RmAPI.Log("Variable $($_.Key) ($j.inc)")
         $ini += Variable-Ini -Variable $_ -Index $j
         $j++
     }

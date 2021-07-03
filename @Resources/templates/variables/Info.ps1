@@ -13,7 +13,7 @@ $ini += @"
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=$($Variable.Key)
-MeterStyle=VarStringValue | Link$($Variable.Link)
+MeterStyle=VarString | Link$($Variable.Link)
 LeftMouseUpAction=["$($Variable.Value)"]
 
 [MeasureLinkStatus$($Variable.Index)]

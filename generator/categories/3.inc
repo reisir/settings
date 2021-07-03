@@ -27,18 +27,18 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value6]
 Meter=String
 Text=1. Read the RainDoc documentation
-MeterStyle=VarStringValue | Link1 | RightPanel
+MeterStyle=VarString | Link1 | RightPanel
 LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
 
 [Value7]
 Meter=String
 Text=2. Drag & Drop your formatted variable file on this skin
-MeterStyle=VarStringValue | Link0 | RightPanel
+MeterStyle=VarString | Link0 | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value8]
 Meter=String
 Text=3. Click on "Generate & Inject".
-MeterStyle=VarStringValue | Link0 | RightPanel
+MeterStyle=VarString | Link0 | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 
 [VariableIcon2]
@@ -60,7 +60,7 @@ W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 [Value2]
 Meter=String
 Text=Change to the example file
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 

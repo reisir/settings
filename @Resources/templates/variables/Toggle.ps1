@@ -22,7 +22,7 @@ Shape2=Ellipse ([#s_TogglePadding]/2),0,(([#s_ToggleSize] - ([#s_TogglePadding] 
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#$($Variable.Key)])
-MeterStyle=VarToggleValue
+MeterStyle=VarToggle
 Container=VarContainer$($Variable.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][!Update][!Redraw][#s_OnChangeAction]
 
@@ -33,7 +33,7 @@ Shape2=Ellipse (([#s_ToggleLength]) - ([#s_TogglePadding]/2)),0,(([#s_ToggleSize
 Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
 Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeStartCap Round | StrokeEndCap Round
 Hidden=([#$($Variable.Key)] - 1)
-MeterStyle=VarToggleValue
+MeterStyle=VarToggle
 Container=VarContainer$($Variable.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][!Update][!Redraw][#s_OnChangeAction]
 "@

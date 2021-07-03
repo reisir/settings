@@ -41,7 +41,7 @@ MeterStyle=VarDescription | RightPanel
 [Value0]
 Meter=String
 Text=Click to open directory
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
 
 
@@ -64,7 +64,7 @@ MeterStyle=VarDescription | RightPanel
 [Value1]
 Meter=String
 Text=Generate & Inject
-MeterStyle=VarStringValue | RightPanel
+MeterStyle=VarString | RightPanel
 LeftMouseUpAction=[!CommandMeasure Generator Construct]
 
 ; [Generate]
@@ -72,7 +72,7 @@ LeftMouseUpAction=[!CommandMeasure Generator Construct]
 ; Text=Generate & Inject
 ; InlineSetting=Face | [#s_IconFontFace]
 ; InlinePattern=[\xE90F]
-; MeterStyle=Center | VarStringValue | VarTitle | RightPanel
+; MeterStyle=Center | VarString | VarTitle | RightPanel
 ; Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_VariableYPadding])
 ; StringAlign=Center
 ; X=([#s_GeneratorRightPanelWidth] / 2)
