@@ -24,6 +24,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TO-DO:
 
+- [ ] Make all variabletypes use their own container that's s_RightPanelWidth
 - [ ] Dynamically get list of templates for $implementedTypes
   - [ ] Check if type is implemented before attempting run script
   - [ ] Dynamically include all includes in Rainmeter.inc template

@@ -20,9 +20,9 @@ $resourcesDir = "$($RmAPI.VariableStr('@'))"
 $includeDir = "$($resourcesDir)includes\"
 $addonsDir = "$($resourcesDir)addons\"
 $templatesDir = "$($resourcesDir)templates\"
-$variableScriptsDir = "$($resourcesDir)templates\variables\"
-$categoryScriptsDir = "$($resourcesDir)templates\categories\"
-$listitemScriptsDir = "$($resourcesDir)templates\listitems\"
+$variableScriptsDir = "$($templatesDir)variables\"
+$categoryScriptsDir = "$($templatesDir)categories\"
+$listitemScriptsDir = "$($templatesDir)listitems\"
 $variableTitleScript = "$($variableScriptsDir)s_Title.ps1"
 
 # Generated directories
@@ -55,38 +55,36 @@ function Construct {
     $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
 
     # Handle unformatted variable files
-    if($settingsFileContent -notmatch $categoryPattern) {}
+    # if($settingsFileContent -notmatch $categoryPattern) {}
     
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     $settings = @(
-        Select-String -Pattern $categoryPattern -input $settingsFileContent -AllMatches | ForEach-Object {
+        Select-String -Pattern $categoryPattern -Input $settingsFileContent -AllMatches | ForEach-Object {
         # Filter each matched $category
         foreach ($category in $_.Matches) {
             Pipe-Category -String $category
         }
     })
 
-    # Testing
+    # Debug settings hashtable
     $settings > $testfile
 
-    # Variable to hold generated .ini
-    # Get rainmeter section from template
-    $ini = Get-Content -Path "$($templatesDir)Rainmeter.inc" -Raw
-    $rainmeterTemplateProperties = @{
+    # Write main settings.ini
+    $RainmeterOptions = @{
         "SettingsFile" = $dynamicVariableFile
         "ThemeFile" = $dynamicThemeFile
     }
-    $ini = Filter-Template -Template $ini -Properties $rainmeterTemplateProperties
-    $ini > $generatedSkinFile
-
+    &"$($templatesDir)Rainmeter.ps1" -Options $RainmeterOptions > $generatedSkinFile
+    
     # Construct categories
     $settings | ForEach-Object { $i = 0 } {
-        $RmAPI.Log("Building category $($i).inc")
+        $RmAPI.Log("Category $($_.Name) ($i.inc)")
         Category-Ini -category $_ -i $i
         $i++
     }
 
-    $RmAPI.Log("Building category list")
+    # Construct category list
+    $RmAPI.Log("Category list")
     Category-List -Settings $settings
 
     Inject-Settings
@@ -264,24 +262,22 @@ function Category-Ini {
     $Category.Index = $i
 
     # First Item template
-    $template = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $template -Properties @{"Container" = "Right"}
+    $ini = &"$($templatesDir)FirstItem.ps1" -Side "Right"
     
     # Call the appropriate Variable script
     $ini += &"$($categoryScriptsDir)$($Type).ps1" -Category $Category
-    # Add space between variables, without newlines the section name would be appended to the last templates last option
     $ini += "`n`n"
     
     # Create variable inis
     $Category.Variables | ForEach-Object { $j = 0 } {
+        $RmAPI.Log("Variable $($_.Key) ($j.inc)")
         $ini += Variable-Ini -Variable $_ -Index $j
         $j++
     }
 
     # Last Item template
-    $template = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $template -Properties @{"Container" = "Right"}
-
+    $ini += &"$($templatesDir)LastItem.ps1" -Side "Right"
+    
     # Write category
     $ini > "$($generatedCategoriesDir)$($i).inc"
 
@@ -295,13 +291,13 @@ function Variable-Ini {
         $Index
     )
 
+    # Set index of variable
     $Variable["Index"] = $Index
-    
+
     # Call the appropriate Variable script
     $ini = &"$($variableScriptsDir)$($Variable.Type).ps1" -Variable $Variable -SettingsFile $dynamicVariableFile
-    # Add space between variables, without newlines the section name would be appended to the last templates last option
     $ini += "`n`n"
-    
+
     return $ini
 
 }
@@ -312,9 +308,8 @@ function Category-List {
         $Settings
     )
 
-    # FirstItem template
-    $ini = Get-Content -Path "$($templatesDir)FirstItem.inc" -Raw
-    $ini = Filter-Template -Template $ini -Properties @{"Container" = "Left"}
+    # First Item template
+    $ini = &"$($templatesDir)FirstItem.ps1" -Side "Left"
     
     # Loop through the categories
     $Settings | ForEach-Object { $i = 0 } {
@@ -332,11 +327,10 @@ function Category-List {
         $i++
     }
 
-    # Add in the LastItem
-    $last = Get-Content -Path "$($templatesDir)LastItem.inc" -Raw
-    $ini += Filter-Template -Template $last -Properties @{"Container" = "Left"}
+    # Last Item template
+    $ini += &"$($templatesDir)LastItem.ps1" -Side "Left"
 
-    # Credit icon last, outside of the scrollable item list
+    # Credit icon, outside of the scrollable item list
     $ini += &"$($listitemScriptsDir)Credit.ps1"
 
     # Write category list to file
