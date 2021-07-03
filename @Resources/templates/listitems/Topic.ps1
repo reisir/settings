@@ -26,7 +26,7 @@ Container=ListItem$($Category.Index)
 Meter=String
 Text=$($Category.Name)
 MeterStyle=ListItem | ListTopicItem 
-W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]))
+W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]) - [#s_ListTopicGap])
 Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 Container=ListItem$($Category.Index)

@@ -27,3 +27,14 @@ $(if($Variable.Description) {
 
 "@
 }
+
+function UsePlugin {
+    param (
+        [Parameter()]
+        [String]
+        $Plugin
+    )
+
+    $usedPlugins[$Plugin] = $true
+    
+}

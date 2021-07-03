@@ -100,13 +100,19 @@ s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + [#s_CategoryIconNudge])
 
 ;@ | Name Category list
 ;?Integer | Name About item top padding | Description 
+s_ListAboutGap=7
+;?Integer | Name About item top padding | Description 
 s_ListAboutTopPadding=15
 ;?Integer | Name About item left padding | Description 
 s_ListAboutLeftPadding=15
+;?Integer | Name About item top padding | Description 
+s_ListDefaultGap=5
 ;?Integer | Name Default item top padding | Description 
 s_ListDefaultTopPadding=0
 ;?Integer | Name Default item left padding | Description 
 s_ListDefaultLeftPadding=15
+;?Integer | Name About item top padding | Description 
+s_ListTopicGap=5
 ;?Integer | Name Topic item top padding | Description 
 s_ListTopicTopPadding=15
 ;?Integer | Name Topic item left padding | Description 

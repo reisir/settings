@@ -24,7 +24,7 @@ SolidColor=[#s_RightPanelBackgroundColor]
 FontColor=[#s_FontColor]
 $(FontFace)
 FontSize=[#s_InputTextFontSize]
-X=([VariableValue$($Variable.Index):X])
+X=([VariableValue$($Variable.Index):X] + [#s_VariableXPadding])
 Y=([VariableValue$($Variable.Index):Y] + [#s_VariableYPadding])
 H=[VariableValue$($Variable.Index):H]
 W=([#s_RightPanelW] - ([#s_VariableXPadding] * 2))

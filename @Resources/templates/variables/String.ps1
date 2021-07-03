@@ -14,8 +14,8 @@ $(Title)
 Meter=String
 Text=[#$($Variable.Key)]
 MeterStyle=VarString | RightPanel
-LeftMouseUpAction=[!CommandMeasure "InputText$($Variable.Index)" "ExecuteBatch All"][!SetOption #CURRENTSECTION# FontColor "0,0,0,0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 $(FontFace)
+LeftMouseUpAction=[!CommandMeasure "InputText$($Variable.Index)" "ExecuteBatch All"][!SetOption #CURRENTSECTION# FontColor "0,0,0,0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [InputText$($Variable.Index)]
 Measure=Plugin
@@ -24,7 +24,7 @@ SolidColor=[#s_RightPanelBackgroundColor]
 FontColor=#s_FontColor#
 $(FontFace)
 FontSize=#s_InputTextFontSize#
-X=([VariableValue$($Variable.Index):X])
+X=([VariableValue$($Variable.Index):X] + [#s_VariableXPadding])
 Y=([VariableValue$($Variable.Index):Y] + [#s_VariableYPadding])
 H=[VariableValue$($Variable.Index):H]
 W=([#s_RightPanelW] - ([#s_VariableXPadding] * 2))

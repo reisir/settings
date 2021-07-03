@@ -22,9 +22,6 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
-- [ ] Fix InputText position
-- [ ] Padding between items and icons
-- [ ] Rename VarContainer etc to VariableContainer
 - [ ] Redo the Settings skins separate from the generated skins styles etc
 - [ ] Clamp based scrolling
   - [ ] Figure out a better way to make the scroll indicator work
@@ -55,6 +52,9 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Rename VarContainer etc to VariableContainer
+- [x] Padding between items and icons
+- [x] Fix InputText position
 - [x] Font Property
 - [x] Script based templates
   - [x] Each script receives a variable object with index

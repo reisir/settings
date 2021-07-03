@@ -10,8 +10,8 @@ param (
 return @"
 $(Title)
 
-[VarContainer$($Variable.Index)]
-MeterStyle=VarContainer | RightPanel
+[VariableContainer$($Variable.Index)]
+MeterStyle=VariableContainer | RightPanel
 Meter=Image
 H=([ColorVariableValue$($Variable.Index):H] > [ColorStringValue$($Variable.Index):H]) ? [ColorVariableValue$($Variable.Index):H] : [ColorStringValue$($Variable.Index):H]
 
@@ -21,7 +21,7 @@ Shape=Ellipse [#s_ColorSize],[#s_ColorSize],[#s_ColorSize],[#s_ColorSize] | Fill
 Outline=Stroke Color [#s_ColorStrokeColor]
 MeterStyle=VarColor
 LeftMouseUpAction=[!CommandMeasure "RainRGB$($Variable.Index)" "Run"]
-Container=VarContainer$($Variable.Index)
+Container=VariableContainer$($Variable.Index)
 
 [ColorStringValue$($Variable.Index)]
 Meter=String
@@ -29,7 +29,7 @@ Text=[#$($Variable.Key)]
 MeterStyle=VarString | VarColorString
 $(FontFace)
 LeftMouseUpAction=[!CommandMeasure "RainRGB$($Variable.Index)" "Run"]
-Container=VarContainer$($Variable.Index)
+Container=VariableContainer$($Variable.Index)
 
 [RainRGB$($Variable.Index)]
 Measure=Plugin
