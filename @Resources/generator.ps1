@@ -23,6 +23,8 @@ $templatesDir = "$($resourcesDir)templates\"
 $variableScriptsDir = "$($templatesDir)variables\"
 $categoryScriptsDir = "$($templatesDir)categories\"
 $listitemScriptsDir = "$($templatesDir)listitems\"
+
+# Declare the title script for easy use in template scripts
 $variableTitleScript = "$($variableScriptsDir)s_Title.ps1"
 
 # Generated directories
@@ -362,38 +364,6 @@ function Filter-Hashtable {
     }
 
     return $hash
-
-}
-
-function Filter-Template {
-    param(
-        [Parameter(Mandatory=$true)]
-        [string]
-        $Template,
-        [Parameter(Mandatory=$true)]
-        [System.Collections.Hashtable]
-        $Properties
-    )
-
-    # Iterate over the template for each property of the variable
-    $Properties.GetEnumerator() | ForEach-Object {
-        $Template = $Template.replace("{$($_.Key)}","$($_.Value)")
-    }
-
-    return $Template
-
-}
-
-function Remove-UnformattedValues {
-    param(
-        [Parameter(Mandatory=$true)]
-        [string]
-        $Template
-    )
-
-    $Template = $Template -replace "\{.*?\}",""
-
-    return $Template
 
 }
 

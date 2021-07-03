@@ -66,7 +66,7 @@ Padding=0,0,0,0
 [VariableIcon1]
 Meter=String
 Text=
-Y=[#s_ValueYPadding]R
+Y=[#s_VariableYPadding]R
 MeterStyle=VariableIcon | RightPanel
 [Var1]
 Meter=String

@@ -44,8 +44,8 @@ s_SelectedFontWeight=500
 s_FontWeight=400
 
 ;@ | Name Scroll indicator
-;?Integer | Name Scroll indicator Y padding | Description uses s_ValueYPadding | Hidden 1
-s_scrollIndicatorYPadding=[#s_ValueYPadding]
+;?Integer | Name Scroll indicator Y padding | Description uses s_VariableYPadding | Hidden 1
+s_scrollIndicatorYPadding=[#s_VariableYPadding]
 s_ScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_scrollIndicatorYPadding] * 2))
 ;?Integer | Name Scroll indicator X padding | Description 
 s_scrollIndicatorXPadding=5
@@ -124,8 +124,8 @@ s_CreditIconSize=12
 ;@ | Name Variable
 ;?Integer | Name Variable title font weight | Description s_VariableTitleFontWeight
 s_VariableTitleFontWeight=400
-;?Integer | Name Variable value meter top and bottom padding | Description s_ValueYPadding
-s_ValueYPadding=5
+;?Integer | Name Variable value meter top and bottom padding | Description s_VariableYPadding
+s_VariableYPadding=5
 ;?Integer | Name Variable item left and right padding | Description s_VariableXPadding (applies for variable titles, descriptions and values)
 s_VariableXPadding=20
 ;?Toggle | Name Indent variables | Description Not implemented
@@ -135,6 +135,7 @@ s_IndentVariables=1
 ;?Integer | Name Color circle radius | Description s_ColorSize
 s_ColorSize=15
 ;?Integer | Name Color circle stroke width | Description s_ColorStrokeWidth
+s_ColorStrokeWidthDefault=1
 s_ColorStrokeWidth=1
 ;?Integer | Name Color circle stroke width on hover | Description s_ColorStrokeWidthSelected
 s_ColorStrokeWidthSelected=2

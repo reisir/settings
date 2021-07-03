@@ -5,7 +5,7 @@ DynamicVariables=1
 
 [Left]
 StringAlign=Left
-X=[#s_ValueYPadding]
+X=[#s_VariableYPadding]
 DynamicVariables=1
 
 [FirstRightPanel]
@@ -26,7 +26,7 @@ Y=0R
 
 [Right]
 StringAlign=Left
-X=([#s_GeneratorRightPanelWidth] - [#s_ValueYPadding] - [[#CURRENTSECTION]:W])
+X=([#s_GeneratorRightPanelWidth] - [#s_VariableYPadding] - [[#CURRENTSECTION]:W])
 DynamicVariables=1
 Y=0r
 

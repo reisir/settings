@@ -18,6 +18,14 @@ s_ScrollLeft=0
 s_CurrentCategory=0
 s_SettingsTheme=1
 
+;@ | Name Test | Icon [\xE9F5] | Description Test variables for theme editing
+;? | Name Long Description | Description My description is so long that it should hopefully force this string meter to clipstring=2 and break to multiple lines thanks.
+longdesc=value
+;? | Name Long Value
+longvalue=This value is so long that it should hopefully force this string meter to clipstring=2 and break to multiple lines thanks.
+;? | Name akjkja
+asjbdkjasbd=92892892
+
 ;@ | Name Generator | Icon [\xE9F5]
 ;? | 
 s_GeneratorRightPanelWidth=350
@@ -27,8 +35,6 @@ s_GeneratorLeftPanelWidth=50
 s_GeneratorPanelHeight=300
 
 ;@ | Name Debug colors | Icon [\xE783]
-;?Toggle | 
-s_DebugColors=1
 ;?Color | 
 s_DebugCategoryTitleColor1=255,0,195,100
 s_DebugCategoryTitleColor0=0,0,0,0
@@ -41,6 +47,8 @@ s_DebugDescriptionColor0=0,0,0,0
 ;?Color | 
 s_DebugListColor1=0,255,51,100
 s_DebugListColor0=0,0,0,0
+;?Toggle | Name Debug colors | Description Toggle debug colors on/off
+s_DebugColors=0
 ;?Color | 
 s_DebugListIconColor1=255,255,0,100
 s_DebugListIconColor0=0,0,0,0

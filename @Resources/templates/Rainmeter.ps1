@@ -17,6 +17,8 @@ Update=-1
 @IncludeSkinVariables=$($Options.SettingsFile)
 @IncludesOnChangeAction=#ROOTCONFIGPATH#settings\includes\s_OnChangeAction.inc
 @IncludeInternalVariables=#ROOTCONFIGPATH#settings\includes\Variables.inc
+SkinHeight=[#s_PanelH]
+;SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
 
 [Theme]
 @IncludeTheme=$($Options.ThemeFile)

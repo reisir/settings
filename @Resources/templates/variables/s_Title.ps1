@@ -14,7 +14,9 @@ MeterStyle=VarTitle | RightPanel
 Meter=String
 Text=$($Variable.Description)
 MeterStyle=VarDescription | RightPanel
-
+$(if($Variable.Description) { 
+"Y=(-[#s_VariableYPadding])R`n"
+})
 
 "@
 
