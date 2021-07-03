@@ -24,7 +24,7 @@ $listitemScriptsDir = "$($templatesDir)ListItems\"
 $commonScriptsDir = "$($templatesDir)Common\"
 
 # Title script for easy access in Variable template scripts
-$variableTitleScript = "$($commonScriptsDir)varTitle.ps1"
+$variableCommonScript = "$($commonScriptsDir)VariableCommons.ps1"
 
 # Defaults
 $defaultVariableType = "String"
@@ -306,6 +306,9 @@ function Variable-Ini {
         [Parameter(Mandatory=$true)]
         $Index
     )
+
+    # Load common variable functions to scope
+    ."$variableCommonScript"
 
     # Set index of variable
     $Variable["Index"] = $Index

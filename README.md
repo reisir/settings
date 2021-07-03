@@ -22,6 +22,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
+- [ ] Fix InputText position
 - [ ] Padding between items and icons
 - [ ] Rename VarContainer etc to VariableContainer
 - [ ] Redo the Settings skins separate from the generated skins styles etc
@@ -54,6 +55,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Font Property
 - [x] Script based templates
   - [x] Each script receives a variable object with index
   - [x] Move Variable.Properties... to Variable...

@@ -7,9 +7,9 @@ param (
     $SettingsFile
 )
 
-$ini = &"$variableTitleScript" -Variable $Variable
+return @"
+$(Title)
 
-$ini += @"
 [VarContainer$($Variable.Index)]
 MeterStyle=VarContainer | RightPanel
 Meter=Image
@@ -27,6 +27,7 @@ Container=VarContainer$($Variable.Index)
 Meter=String
 Text=[#$($Variable.Key)]
 MeterStyle=VarString | VarColorString
+$(FontFace)
 LeftMouseUpAction=[!CommandMeasure "RainRGB$($Variable.Index)" "Run"]
 Container=VarContainer$($Variable.Index)
 
@@ -38,5 +39,3 @@ Parameter=""VarName=$($Variable.Key)" "FileName=$($SettingsFile)" "RefreshConfig
 OutputType=ANSI
 FinishAction=[!Refresh][#s_OnChangeAction]
 "@
-
-return $ini

@@ -1,13 +1,13 @@
 [Variables]
 
 ;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes. | Icon [\xF259]
-;?Integer | Name Scroll speed | Description 
+;?Integer | Name Scroll speed | Description | Font Impact
 s_ScrollSpeed=30
-;? | Name Theme 1 name
+;? | Name Theme 1 name | Font Comic Sans MS
 s_Theme0Name=Light
-;? | Name Theme 2 name
+;? | Name Theme 2 name | Font Alibi
 s_Theme1Name=Dark
-;? | Name Theme 3 name
+;? | Name Theme 3 name | Font Consolas
 s_Theme2Name=Slim
 
 ;@Topic | Name Internal | Icon  | 

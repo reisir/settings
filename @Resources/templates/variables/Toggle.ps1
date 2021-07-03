@@ -7,10 +7,9 @@ param (
     $SettingsFile
 )
 
-$ini = &"$variableTitleScript" -Variable $Variable
+return @"
+$(Title)
 
-
-$ini += @"
 [VarContainer$($Variable.Index)]
 MeterStyle=VarContainer | RightPanel
 Meter=Image
@@ -38,5 +37,3 @@ MeterStyle=VarToggle
 Container=VarContainer$($Variable.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][!Update][!Redraw][#s_OnChangeAction]
 "@
-
-return $ini
