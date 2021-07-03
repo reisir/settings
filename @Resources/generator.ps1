@@ -91,7 +91,6 @@ function Construct {
     
     # Construct categories
     $settings | ForEach-Object { $i = 0 } {
-        $RmAPI.Log("$($_.Type)")
         Category-Ini -category $_ -i $i
         $i++
     }
@@ -333,8 +332,6 @@ function Category-List {
         # Set the Index number
         $_.Index = $i
         
-        $RmAPI.Log("$($_.Type)")
-
         # Get the category type
         $Type = $_.Type
         if($listTypes -NotContains $_.Type) { $Type = $defaultListItemType }

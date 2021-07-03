@@ -36,6 +36,9 @@ Border=[#s_FrostedGlassBorders]
 [IncludeCategoryList]
 @IncludeCategoryList=#ROOTCONFIGPATH#Settings\Categories\CategoryList.inc
 
+[IncludeSelectedIndicator]
+@IncludeBackground=#ROOTCONFIGPATH#Settings\Includes\SelectedIndicator.inc
+
 [IncludeCurrentCategory]
 @IncludeCategory=#ROOTCONFIGPATH#Settings\Categories\[#s_CurrentCategory].inc
 

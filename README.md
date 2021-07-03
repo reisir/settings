@@ -22,17 +22,9 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
+- [ ] Padding between items and icons
 - [ ] Rename VarContainer etc to VariableContainer
-- [x] Combine meterstyles from separate files into one big file and @Include that to the main .ini
-- [x] Dynamically get list of templates for $implementedTypes
-  - [ ] Check if type is implemented before attempting run script
-  - [ ] Dynamically include all includes in Rainmeter.inc template
-- [x] Add safety newlines after variable templates
-- [ ] Redo the Settings skins probably separately from the generated skins styles etc
-- [x] Script based templates
-  - [x] Each script receives a variable object with index
-  - [x] Move Variable.Properties... to Variable...
-- [ ] Handle unformatted variable files
+- [ ] Redo the Settings skins separate from the generated skins styles etc
 - [ ] Clamp based scrolling
   - [ ] Figure out a better way to make the scroll indicator work
 - [ ] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
@@ -62,3 +54,10 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Script based templates
+  - [x] Each script receives a variable object with index
+  - [x] Move Variable.Properties... to Variable...
+- [x] Handle unformatted variable files (just logs error for now)
+- [x] Combine meterstyles from separate files into one big file and @Include that to the main .ini
+- [x] Dynamically get list of templates for $implementedTypes
+- [x] Add safety newlines after variable templates

@@ -8,22 +8,31 @@ param (
 )
 
 $ini = @"
+[ListItem$($Category.Index)]
+Meter=Image
+W=[#s_LeftPanelW]
+H=([ListIcon$($Category.Index):H] > [ListTitle$($Category.Index):H]) ? [ListIcon$($Category.Index):H] : [ListTitle$($Category.Index):H]
+SolidColor=255,255,255
+MeterStyle=LeftPanel
+
 [ListIcon$($Category.Index)]
 Meter=String
 Text=$($Category.Icon)
-Y=([#s_ListAboutTopPadding] + (([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2)))R
-MeterStyle=ListIcon | ListAboutIcon | LeftPanel
+MeterStyle=ListIcon | ListAboutIcon
+Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
+Container=ListItem$($Category.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
 
-[ListItem$($Category.Index)]
+[ListTitle$($Category.Index)]
 Meter=String
 Text=$($Category.Name)
 MeterStyle=ListItem | ListAboutItem
 W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]))
-Y=(([#CURRENTSECTION#:H] /2 - [ListIcon$($Category.Index):H] / 2) * -1)r
+Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2)
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_VariableTitleFontWeight]
 ToolTipTitle=$($Category.Name)
 ToolTipText=$($Category.Tooltip)
+Container=ListItem$($Category.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
 "@
 

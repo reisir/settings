@@ -6,6 +6,7 @@ Y=0R
 X=0
 SolidColor=[#s_DebugListIconColor[#s_DebugColors]] 
 FontColor=[#s_FontColor]
+DynamicVariables=1
 
 [ListItem]
 Padding=0,[#s_ListYPadding],0,[#s_ListYPadding]
