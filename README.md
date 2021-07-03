@@ -23,7 +23,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 ## TODO:
 
 - [ ] Rename VarContainer etc to VariableContainer
-- [ ] Combine meterstyles from separate files into one big file and write that to the main .ini
+- [x] Combine meterstyles from separate files into one big file and @Include that to the main .ini
 - [x] Dynamically get list of templates for $implementedTypes
   - [ ] Check if type is implemented before attempting run script
   - [ ] Dynamically include all includes in Rainmeter.inc template

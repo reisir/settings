@@ -21,9 +21,9 @@ Text=$($Category.Name)
 MeterStyle=ListItem | ListDefaultItem 
 W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]))
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
 ToolTipTitle=$($Category.Name)
 ToolTipText=$($Category.Tooltip)
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
 "@
 
 return $ini

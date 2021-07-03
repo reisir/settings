@@ -5,14 +5,15 @@ function Update {
 # Variables from Rainmeter
 $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
-# $dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
-$dynamicThemeFile = "#ROOTCONFIGPATH#settings\includes\themes\1.inc"
+# $dynamicThemeFile = "#ROOTCONFIGPATH#settings\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
+$dynamicThemeFile = "#ROOTCONFIGPATH#settings\Themes\1.inc"
 $dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
 $includeDir = "$($resourcesDir)Includes\"
 $addonsDir = "$($resourcesDir)Addons\"
+$themesDir = "$($resourcesDir)Themes\"
 $templatesDir = "$($resourcesDir)Templates\"
 $meterstylesDir = "$($resourcesDir)MeterStyles"
 
@@ -20,16 +21,22 @@ $meterstylesDir = "$($resourcesDir)MeterStyles"
 $variableScriptsDir = "$($templatesDir)Variables\"
 $categoryScriptsDir = "$($templatesDir)Categories\"
 $listitemScriptsDir = "$($templatesDir)ListItems\"
-
-# Declare the title script for easy use in template scripts
 $commonScriptsDir = "$($templatesDir)Common\"
+
+# Title script for easy access in Variable template scripts
 $variableTitleScript = "$($commonScriptsDir)varTitle.ps1"
+
+# Defaults
+$defaultVariableType = "String"
+$defaultCategoryType = "Default"
+$defaultListItemType = "Default"
 
 # Generated directories
 $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))Settings\"
 $generatedCategoriesDir = "$($generatedSkinDir)Categories\"
 $generatedIncludeDir = "$($generatedSkinDir)Includes\"
-$generatedAddonsDir = "$($generatedSkinDir)Addons"
+$generatedAddonsDir = "$($generatedSkinDir)Addons\"
+$generatedThemesDir = "$($generatedSkinDir)Themes\"
 
 # Generated files
 $generatedSkinFile = "$($generatedSkinDir)Settings.ini"
@@ -84,7 +91,7 @@ function Construct {
     
     # Construct categories
     $settings | ForEach-Object { $i = 0 } {
-        $RmAPI.Log("Category $($_.Name) ($i.inc)")
+        $RmAPI.Log("$($_.Type)")
         Category-Ini -category $_ -i $i
         $i++
     }
@@ -150,8 +157,8 @@ function Pipe-Variable {
         }
         # Default typos to String
         if($variableTypes -NotContains $Variable.Type) {
-            $RmAPI.LogError("Variable type '$($Variable.Type)' is not implemented, defaulting to String")
-            $Variable.Type = "String"
+            $RmAPI.LogError("Variable type '$($Variable.Type)' is not implemented, defaulting to $defaultVariableType")
+            $Variable.Type = $defaultVariableType
         }
     }
 
@@ -200,21 +207,18 @@ function Pipe-Category {
 
     # Get the category properties
 
-    # Make the Properties hashtable
-    $Category.Properties = @{}
-
     # Filter type
     # Type is special since it's required
     if("$($Category.UnfilteredProperties)" -match "$($Patterns.Type)") {
-        $Category.Properties.Type = Remove-Whitespace -String $Matches[1]
+        $Category.Type = Remove-Whitespace -String $Matches[1]
         # Default undeclared type to Default without logging
-        if($Category.Properties.Type -eq "") {
-            $Category.Properties.Type = "Default"
+        if($Category.Type -eq "") {
+            $Category.Type = $defaultCategoryType
         }
         # Default typos to Default
-        if($listTypes -NotContains $Category.Properties.Type) {
-            $RmAPI.LogError("Category type '$($Category.Properties.Type)' is not implemented. Changed to Default")
-            $Category.Properties.Type = "Default"
+        if($listTypes -NotContains $Category.Type) {
+            $RmAPI.LogError("Category type '$($Category.Type)' is not implemented. Changed to $defaultCategoryType")
+            $Category.Type = $defaultCategoryType
         }
     }
     
@@ -265,12 +269,11 @@ function Category-Ini {
         $i
     )
 
-    # If category type is not implemented, make it Default
-    # TODO: check the list of implemented categories
+    # $RmAPI.Log("Category $($Category.Name) ($i.inc)")
+
+    # Local Type variable to not fuck up the Category List creation
     $Type = $Category.Type
-    if($categoryTypes -NotContains $Type) {
-        $Type = "Default"
-    }
+    if($categoryTypes -NotContains $Type) { $Type = $defaultCategoryType }
 
     # Set the Index
     $Category.Index = $i
@@ -329,14 +332,15 @@ function Category-List {
     $Settings | ForEach-Object { $i = 0 } {
         # Set the Index number
         $_.Index = $i
+        
+        $RmAPI.Log("$($_.Type)")
 
         # Get the category type
-        $type = $_.Type
-        # If category type is not implemented, make it Default
-        if($listTypes -NotContains $_.Type) { $type = "Default" }
+        $Type = $_.Type
+        if($listTypes -NotContains $_.Type) { $Type = $defaultListItemType }
 
         # Call the appropriate ListItem template script
-        $ini += &"$($listitemScriptsDir)$($type).ps1" -Category $_ -InternalSettingsFile $dynamicInternalVariableFile
+        $ini += &"$($listitemScriptsDir)$($Type).ps1" -Category $_ -InternalSettingsFile $dynamicInternalVariableFile
         $ini += "`n`n"
         $i++
     }
@@ -404,17 +408,20 @@ function Remove-Whitespace {
 
 function Prepare-Directories {
     # Create directories
-    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "categories"
-    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "includes"
-    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "addons"
-    New-Item -Path $injectPath -ItemType "directory" -Name "settings"
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Categories"
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Includes"
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Addons"
+    New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Themes"
+    New-Item -Path $injectPath -ItemType "directory" -Name "Settings"
     # Remove files in generated directories
     Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
     Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
     # Remove settings injected earlier
-    Get-ChildItem -Path "$($injectPath)settings\*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
+    Get-ChildItem -Path "$($injectPath)Settings\*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
     # Copy Includes to generated skin
     Copy-Item -Path "$includeDir*" -Destination $generatedIncludeDir -Recurse
+    # Copy Themes to generated skin
+    Copy-Item -Path "$themesDir*" -Include "*.inc" -Destination $generatedThemesDir -Recurse
     # Copy Addons to generated skin
     Copy-Item -Path "$addonsDir*" -Include "*.exe" -Destination $generatedAddonsDir -Recurse
 }

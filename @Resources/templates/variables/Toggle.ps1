@@ -9,6 +9,7 @@ param (
 
 $ini = &"$variableTitleScript" -Variable $Variable
 
+
 $ini += @"
 [VarContainer$($Variable.Index)]
 MeterStyle=VarContainer | RightPanel
