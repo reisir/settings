@@ -19,13 +19,17 @@ Update=-1
 @IncludeInternalVariables=#ROOTCONFIGPATH#Settings\Includes\Variables.inc
 @IncludeTheme=$($Options.ThemeFile)
 SkinHeight=[#s_PanelH]
-;SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
+SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
 
 [FrostedGlass]
 Measure=Plugin
 Plugin=FrostedGlass
 Type=[#s_FrostedGlassMode]
 Border=[#s_FrostedGlassBorders]
+
+[Ternary]
+Measure=Script
+ScriptFile=Addons\Ternary.lua
 
 [IncludeMeterStyles]
 @IncludeMeterStyles=#ROOTCONFIGPATH#Settings\Includes\MeterStyles.inc
