@@ -423,7 +423,7 @@ function Prepare-Directories {
     # Copy Themes to generated skin
     Copy-Item -Path "$themesDir*" -Include "*.inc" -Destination $generatedThemesDir -Recurse
     # Copy Addons to generated skin
-    Copy-Item -Path "$addonsDir*" -Include "*.exe" -Destination $generatedAddonsDir -Recurse
+    Copy-Item -Path "$addonsDir*" -Destination $generatedAddonsDir -Recurse
 }
 
 function Inject-Settings {

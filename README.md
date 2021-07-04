@@ -22,6 +22,9 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
+- [ ] Close button
+- [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
+- [ ] Check if containers can be taller than their contents without affecting flow
 - [ ] Redo the Settings skins separate from the generated skins styles etc
 - [ ] Clamp based scrolling
   - [ ] Figure out a better way to make the scroll indicator work
@@ -30,7 +33,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
   - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
     - This is mostly because I want the error logs to have access to the Name
-- [ ] Hold alt to override auto-inject?
+- [ ] Checkbox for auto-inject
 - [ ] Test if file needs to be in @Resources or its subdirectory
 - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
 - [ ] Documentation
