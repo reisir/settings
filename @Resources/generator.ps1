@@ -59,7 +59,7 @@ function Construct {
     Prepare-Directories
 
     # Read settings file
-    $settingsFileContent = Get-Content -Path $variableFilePath -Raw
+    $settingsFileContent = Get-Content $variableFilePath -Raw
 
     # Filter settings file into staggered array
     $RmAPI.Log("Parsing settings file")
