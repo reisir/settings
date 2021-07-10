@@ -71,3 +71,61 @@ s_DebugToggleColor0=0,0,0,0
 s_DebugColorColor1=255,0,0,100
 s_DebugColorColor0=0,0,0,0
 
+
+;@ | Name Scroll filler | Icon [\xE783]
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;? | Name Scroll filler 
+filler=255,0,0,100
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler s | Icon [\xE783]
+;@ | Name Scroll filler s s | Icon [\xE783]
+;@ | Name Scroll filler s  s  s | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  s | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  s  s  | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  s  s  s  | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  s  s  s  s  | Icon [\xE783]
+;@ | Name Scroll filler s  s  s  s  s  s  s  s  s  s | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+
+

@@ -26,8 +26,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
 - [ ] Redo the Settings skins separate from the generated skins styles etc
-- [ ] Clamp based scrolling
-  - [ ] Figure out a better way to make the scroll indicator work
+- [ ] Figure out a better way to make the scroll indicator work
+  - [x] Implement scrolling again
 - [ ] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
 - [ ] Log errors ? Error rendering template ?
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`

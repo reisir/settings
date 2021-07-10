@@ -1,5 +1,4 @@
 [VarString]
-AccurateText=1
 AntiAlias=1
 FontColor=[#s_FontColor]
 FontFace=[#s_FontFace]

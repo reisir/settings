@@ -27,7 +27,7 @@ LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index)
 Meter=String
 Text=$($Category.Name)
 MeterStyle=ListItem | ListDefaultItem 
-W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]) - [#s_ListDefaultGap])
+ClipStringW=([#s_LeftPanelW] - [ListIcon$($Category.Index):W] - [#s_ListRightPadding] - [#s_ListDefaultGap])
 Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 ToolTipTitle=$($Category.Name)

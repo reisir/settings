@@ -6,7 +6,6 @@ AntiAlias=1
 Meter=String
 Text=[\xF259]
 FontWeight=400
-AccurateText=1
 Padding=0,0,0,0
 DynamicVariables=1
 SolidColor=0,0,0,1

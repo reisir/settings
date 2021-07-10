@@ -14,6 +14,9 @@ License=CC BY-NC-SA 4.0
 
 [Rainmeter]
 Update=-1
+;This updates measures like the scroll measure once
+OnRefreshAction=[!Update]
+AccurateText=1
 @IncludeSkinVariables=$($Options.SettingsFile)
 @IncludesOnChangeAction=#ROOTCONFIGPATH#Settings\Includes\s_OnChangeAction.inc
 @IncludeInternalVariables=#ROOTCONFIGPATH#Settings\Includes\Variables.inc

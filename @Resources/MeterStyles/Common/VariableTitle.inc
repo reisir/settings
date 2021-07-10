@@ -1,5 +1,4 @@
 [VarTitle]
-AccurateText=1
 AntiAlias=1
 Y=0r
 X=0R
@@ -15,7 +14,6 @@ Padding=[#s_VariableXPadding],[#s_VariableYPadding],[#s_VariableXPadding],[#s_Va
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 
 [VarDescription]
-AccurateText=1
 AntiAlias=1
 ClipString=2
 FontFace=[#s_FontFace]

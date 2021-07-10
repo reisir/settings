@@ -43,32 +43,29 @@ s_SelectedFontWeight=500
 ;?Integer | Name Font weight | Description 
 s_FontWeight=400
 
-;@ | Name Scroll indicator
-;?Integer | Name Scroll indicator Y padding | Description uses s_VariableYPadding | Hidden 1
-s_scrollIndicatorYPadding=[#s_VariableYPadding]
-s_ScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_scrollIndicatorYPadding] * 2))
-;?Integer | Name Scroll indicator X padding | Description 
-s_scrollIndicatorXPadding=5
-;?Integer | Name Scroll indicator width | Description 
-s_ScrollIndicatorWidth=5
-;?Color | Name Scroll indicator background color | Description 
-s_ScrollIndicatorBackgroundColor=0,0,0,0
-;?Color | Name Scroll indicator color | Description 
-s_ScrollIndicatorColor=64,64,64
-;?Integer | Name Scroll indicator rounding | Description 
-s_ScrollIndicatorRounding=5
-;?Info | Name Filler variable 0 | Description This is here to show the scroll indicator
- = 
-;?Info | Name Filler variable 1 | Description This is here to show the scroll indicator
- = 
-;?Info | Name Filler variable 2 | Description This is here to show the scroll indicator
- = 
-;?Info | Name Filler variable 3 | Description This is here to show the scroll indicator
- = 
-;?Info | Name Filler variable 4 | Description This is here to show the scroll indicator
- = 
-;?Info | Name Filler variable 5 | Description This is here to show the scroll indicator
- = 
+;@ | Name Scroll indicators
+;?Integer | Name Right scroll indicator Y padding | Description uses s_VariableYPadding
+s_RightScrollIndicatorYPadding=25
+s_RightScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_RightScrollIndicatorYPadding] * 2))
+;?Integer | Name Right scroll indicator X padding | Description 
+s_RightScrollIndicatorXPadding=5
+;?Integer | Name Right scroll indicator width | Description 
+s_RightScrollIndicatorWidth=5
+;?Color | Name Right scroll indicator color | Description 
+s_RightScrollIndicatorColor=64,64,64
+;?Integer | Name Right scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
+s_RightScrollIndicatorRounding=1
+;?Integer | Name Left scroll indicator Y padding | Description uses s_VariableYPadding
+s_LeftScrollIndicatorYPadding=25
+s_LeftScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_LeftScrollIndicatorYPadding] * 2))
+;?Integer | Name Left scroll indicator X padding | Description 
+s_LeftScrollIndicatorXPadding=5
+;?Integer | Name Left scroll indicator width | Description 
+s_LeftScrollIndicatorWidth=5
+;?Color | Name Left scroll indicator color | Description 
+s_LeftScrollIndicatorColor=64,64,64
+;?Integer | Name Left scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
+s_LeftScrollIndicatorRounding=1
 
 ;@ | Name Selected indicator
 ;?Color | Name Selected color | Description Most selected items use this color
@@ -120,7 +117,7 @@ s_ListTopicLeftPadding=15
 ;?Integer | Name List item top and bottom padding | Description 
 s_ListYPadding=7
 ;? | Name List item right padding | Description Used for width calculations for ClipString=2
-s_ListRightPadding=10
+s_ListRightPadding=15
 ;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=5

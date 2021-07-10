@@ -1,5 +1,4 @@
 [CategoryIcon]
-AccurateText=1
 AntiAlias=1
 DynamicVariables=1
 Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
@@ -9,7 +8,6 @@ SolidColor=[#s_DebugCategoryIconColor[#s_DebugColors]]
 FontColor=[#s_FontColor]
 
 [CategoryTitle]
-AccurateText=1
 AntiAlias=1
 Y=0r
 X=0R
