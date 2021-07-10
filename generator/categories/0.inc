@@ -26,10 +26,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
-[VariableIcon0]
+[VarIcon0]
 Meter=String
 Text=
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 [Var0]
 Meter=String
 Text=Selected file 
@@ -45,10 +45,10 @@ MeterStyle=VarString | RightPanel
 LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
 
 
-[VariableIcon1]
+[VarIcon1]
 Meter=String
 Text=[\xE90F] 
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 FontSize=14
 Y=5R
 [Var1]

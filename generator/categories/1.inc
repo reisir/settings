@@ -27,10 +27,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
-[VariableIcon0]
+[VarIcon0]
 Meter=String
 Text=
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 [Var0]
 Meter=String
 Text=Themes:
@@ -45,29 +45,29 @@ Meter=String
 Text=Change to theme: [#s_Theme0Name]
 MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "0"][!WriteKeyValue Variables "s_SettingsTheme" "0" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "0"][!WriteKeyValue Variables "s_SettingsTheme" "0" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#themes\0.inc"][!WriteKeyValue Variables "s_RawPath" "#@#themes\0.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Padding=0,0,0,0
 [Value1]
 Meter=String
 Text=Change to theme: [#s_Theme1Name]
 MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "1"][!WriteKeyValue Variables "s_SettingsTheme" "1" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "1"][!WriteKeyValue Variables "s_SettingsTheme" "1" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#themes\1.inc"][!WriteKeyValue Variables "s_RawPath" "#@#themes\1.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Padding=0,0,0,0
 [Value2]
 Meter=String
 Text=Change to theme: [#s_Theme2Name]
 MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "2"][!WriteKeyValue Variables "s_SettingsTheme" "2" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "2"][!WriteKeyValue Variables "s_SettingsTheme" "2" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#themes\2.inc"][!WriteKeyValue Variables "s_RawPath" "#@#themes\2.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 Y=0R
 Padding=0,0,0,0
 
-[VariableIcon1]
+[VarIcon1]
 Meter=String
 Text=
 Y=[#s_VariableYPadding]R
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 [Var1]
 Meter=String
 Text=

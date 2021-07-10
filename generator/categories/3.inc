@@ -41,10 +41,10 @@ Text=3. Click on "Generate & Inject".
 MeterStyle=VarString | Link0 | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
 
-[VariableIcon2]
+[VarIcon2]
 Meter=String
 Text=[\xE835]
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 FontSize=14
 Y=5R
 [Var2]

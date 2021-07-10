@@ -13,7 +13,7 @@ $(Title)
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=$($Variable.Key)
-MeterStyle=VarString | Link$($Variable.Link)
+MeterStyle=VarString | RightPanel | Link$($Variable.Link)
 $(FontFace)
 LeftMouseUpAction=["$($Variable.Value)"]
 

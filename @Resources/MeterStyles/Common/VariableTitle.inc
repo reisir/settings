@@ -1,3 +1,12 @@
+[VarIcon]
+AntiAlias=1
+Y=0R
+X=0R
+FontSize=[#s_FontSize2]
+FontWeight=[#s_VariableTitleFontWeight]
+SolidColor=[#s_DebugVarIconColor[#s_DebugColors]] 
+FontColor=[#s_FontColor]
+
 [VarTitle]
 AntiAlias=1
 Y=0r
@@ -6,12 +15,8 @@ ClipString=2
 FontFace=[#s_FontFace]
 FontSize=[#s_FontSize2]
 FontWeight=[#s_VariableTitleFontWeight]
-InlineSetting=CharacterSpacing | [#s_TitleIconNudge] | *
-InlinePattern=^.
 SolidColor=[#s_DebugVariableTitleColor[#s_DebugColors]] 
 FontColor=[#s_FontColor]
-Padding=[#s_VariableXPadding],[#s_VariableYPadding],[#s_VariableXPadding],[#s_VariableYPadding]
-W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)
 
 [VarDescription]
 AntiAlias=1

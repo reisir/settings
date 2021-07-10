@@ -3,7 +3,7 @@
 ;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes. | Icon [\xF259]
 ;?Integer | Name Scroll speed | Description | Font Impact
 s_ScrollSpeed=30
-;? | Name Theme 1 name | Font Comic Sans MS
+;? | Name Theme 1 name | Font Comic Sans MS | Icon [\xF570]
 s_Theme0Name=Light
 ;? | Name Theme 2 name | Font Alibi
 s_Theme1Name=Dark
@@ -48,7 +48,7 @@ s_DebugDescriptionColor0=0,0,0,0
 s_DebugListColor1=0,255,51,100
 s_DebugListColor0=0,0,0,0
 ;?Toggle | Name Debug colors | Description Toggle debug colors on/off
-s_DebugColors=0
+s_DebugColors=1
 ;?Color | 
 s_DebugListIconColor1=255,255,0,100
 s_DebugListIconColor0=0,0,0,0
@@ -62,8 +62,8 @@ s_DebugVariableTitleColor0=0,0,0,0
 s_DebugCategoryIconColor1=229,255,0,100
 s_DebugCategoryIconColor0=0,0,0,0
 ;?Color | 
-s_DebugVariableIconColor1=229,255,0,100
-s_DebugVariableIconColor0=0,0,0,0
+s_DebugVarIconColor1=229,255,0,100
+s_DebugVarIconColor0=0,0,0,0
 ;?Color | 
 s_DebugToggleColor1=255,0,0,100
 s_DebugToggleColor0=0,0,0,0
@@ -108,15 +108,8 @@ filler=255,0,0,100
 ;? | Name Scroll filler 
 filler=255,0,0,100
 ;@ | Name Scroll filler | Icon [\xE783]
-;@ | Name Scroll filler s | Icon [\xE783]
-;@ | Name Scroll filler s s | Icon [\xE783]
-;@ | Name Scroll filler s  s  s | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  s | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  s  s  | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  s  s  s  | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  s  s  s  s  | Icon [\xE783]
-;@ | Name Scroll filler s  s  s  s  s  s  s  s  s  s | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
+;@ | Name Scroll filler | Icon [\xE783]
 ;@ | Name Scroll filler | Icon [\xE783]
 ;@ | Name Scroll filler | Icon [\xE783]
 ;@ | Name Scroll filler | Icon [\xE783]

@@ -26,10 +26,10 @@ Meter=Image
 MeterStyle=CategoryTitleSeparator | RightPanel
 H=([#s_CategoryTitleBottomPadding] / 2)
 
-[VariableIcon0]
+[VarIcon0]
 Meter=String
 Text=[\xE9E9]
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 FontSize=14
 [Var0]
 Meter=String
@@ -48,10 +48,10 @@ MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
 LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
-[VariableIcon1]
+[VarIcon1]
 Meter=String
 Text=[\xE9F3]
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=VarIcon | RightPanel
 FontSize=14
 Y=5R
 [Var1]
