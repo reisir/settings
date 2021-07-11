@@ -25,6 +25,7 @@ $commonScriptsDir = "$($templatesDir)Common\"
 
 # Title script for easy access in Variable template scripts
 $variableCommonScript = "$($commonScriptsDir)VariableCommons.ps1"
+$listCommonScript = "$($commonScriptsDir)ListCommons.ps1"
 
 # Defaults
 $defaultVariableType = "String"
@@ -329,6 +330,8 @@ function Category-List {
 
     # First Item template
     $ini = &"$($templatesDir)FirstItem.ps1" -Side "Left"
+
+    ."$listCommonScript"
     
     # Loop through the categories
     $Settings | ForEach-Object { $i = 0 } {

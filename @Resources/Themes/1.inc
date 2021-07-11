@@ -1,6 +1,7 @@
 [Variables]
 
-;@About | Name Theme 2 [#s_Theme1Name]
+;@About | Name About theme: [#s_Theme1Name] | Description Customize the theme here 
+
 ;@Topic | Name Customization
 ;@ | Name Background
 ;?Integer | Name Left panel width | Description 
@@ -9,12 +10,12 @@ s_LeftPanelW=200
 s_RightPanelW=500
 ;?Integer | Name Skin height | Description 
 s_PanelH=600
-;?Color | Name Right panel background color | Description 
+;?Color | Name Right panel background color
 s_RightPanelBackgroundColor=26,26,38,125
-;?Color | Name Left panel background color | Description 
+;?Color | Name Left panel background color 
 s_LeftPanelBackgroundColor=28,28,43,125
-;?Integer | Name Background corner radius | Description 
-s_BackgroundRounding=0
+;?Integer | Name Background corner radius
+s_BackgroundRounding=5
 ;? | Name FrostedGlass mode | Description Only available on Windows 10#CRLF#A certain Windows 10 update made Acrylic very laggy so it's not recommended.#CRLF#Available modes: Acrylic, Blur, None
 s_FrostedGlassMode=Blur
 ;? | Name FrostedGlass border | Description All, None, Left, Right, Top and Bottom. Can be combined with pipes
@@ -93,33 +94,50 @@ s_CategoryDescriptionFontWeight=500
 s_CategoryIconNudge=5
 s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + [#s_CategoryIconNudge])
 
-;@ | Name Category list
-;?Integer | Name About item top padding | Description 
-s_ListAboutGap=7
-;?Integer | Name About item top padding | Description 
-s_ListAboutTopPadding=15
-;?Integer | Name About item left padding | Description 
-s_ListAboutLeftPadding=15
-;?Integer | Name About item top padding | Description 
-s_ListDefaultGap=5
-;?Integer | Name Default item top padding | Description 
-s_ListDefaultTopPadding=0
-;?Integer | Name Default item left padding | Description 
-s_ListDefaultLeftPadding=15
-;?Integer | Name About item top padding | Description 
-s_ListTopicGap=5
-;?Integer | Name Topic item top padding | Description 
-s_ListTopicTopPadding=15
-;?Integer | Name Topic item left padding | Description 
-s_ListTopicLeftPadding=15
+;@Topic | Name Category list
+
+;@ | Name General
 ;?Integer | Name List item top and bottom padding | Description 
 s_ListYPadding=7
 ;? | Name List item right padding | Description Used for width calculations for ClipString=2
 s_ListRightPadding=15
 ;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
-s_CreditIconPadding=5
+s_CreditIconPadding=(5 + [#s_BackgroundRounding] / 2)
 s_CreditIconSize=12
+
+;@ | Name About items
+;?Integer | Name About item top padding | Description 
+s_ListAboutTopPadding=100
+;?Integer | Name About item bottom padding | Description 
+s_ListAboutBottomPadding=15
+s_ListAboutTotalPadding=([#s_ListAboutTopPadding] + [#s_ListAboutBottomPadding])
+;?Integer | Name About item left padding | Description 
+s_ListAboutLeftPadding=15
+;?Integer | Name About item icon gap | Description 
+s_ListAboutGap=7
+
+;@ | Name Default items
+;?Integer | Name Default item top padding | Description 
+s_ListDefaultTopPadding=0
+;?Integer | Name Default item bottom padding | Description 
+s_ListDefaultBottomPadding=0
+s_ListDefaultTotalPadding=([#s_ListDefaultTopPadding] + [#s_ListDefaultBottomPadding])
+;?Integer | Name Default item left padding | Description 
+s_ListDefaultLeftPadding=15
+;?Integer | Name Default item icon gap | Description 
+s_ListDefaultGap=0
+
+;@ | Name Topic items
+;?Integer | Name Topic item top padding | Description 
+s_ListTopicTopPadding=15
+;?Integer | Name Topic item bottom padding | Description 
+s_ListTopicBottomPadding=0
+s_ListTopicTotalPadding=([#s_ListTopicTopPadding] + [#s_ListTopicBottomPadding])
+;?Integer | Name Topic item left padding | Description 
+s_ListTopicLeftPadding=15
+;?Integer | Name Topic item icon gap | Description 
+s_ListTopicGap=5
 
 ;@Topic | Name Variables
 ;@ | Name Variable

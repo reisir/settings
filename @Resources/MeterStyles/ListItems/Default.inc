@@ -6,5 +6,4 @@ FontColor=[#s_FontColor]
 [ListDefaultItem]
 FontSize=#s_FontSize3#
 FontColor=[#s_FontColor]
-X=([#s_ListDefaultGap])R
 

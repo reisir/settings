@@ -10,7 +10,7 @@ s_Theme1Name=Dark
 ;? | Name Theme 3 name | Font Consolas
 s_Theme2Name=Slim
 
-;@Topic | Name Internal | Icon  | 
+;@Topic | Name Internal | 
 ;? | Name hidden | Hidden 1
 s_ScrollTreshold=[#s_PanelH]
 s_ScrollRight=0
@@ -26,7 +26,7 @@ longvalue=This value is so long that it should hopefully force this string meter
 ;? | Name akjkja
 asjbdkjasbd=92892892
 
-;@ | Name Generator | Icon [\xE9F5]
+;@ | Name Generator
 ;? | 
 s_GeneratorRightPanelWidth=350
 ;? | 
@@ -48,7 +48,7 @@ s_DebugDescriptionColor0=0,0,0,0
 s_DebugListColor1=0,255,51,100
 s_DebugListColor0=0,0,0,0
 ;?Toggle | Name Debug colors | Description Toggle debug colors on/off
-s_DebugColors=1
+s_DebugColors=0
 ;?Color | 
 s_DebugListIconColor1=255,255,0,100
 s_DebugListIconColor0=0,0,0,0

@@ -6,5 +6,4 @@ FontColor=[#s_FontColor]
 [ListTopicItem]
 FontSize=#s_FontSize4#
 FontColor=[#s_FontColor]
-X=([#s_ListTopicGap])R
 
