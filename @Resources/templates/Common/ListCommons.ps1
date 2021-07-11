@@ -19,3 +19,20 @@ function ListX {
         return "X=R`n"
     }
 }
+
+function SelectedIndicator {
+    return @"
+[ListSelectedIndicator$($Category.Index)]
+Meter=Shape
+Shape=Rectangle 0,[#s_SelectorPadding],([#s_SelectorWidth] * 2),((([ListIcon$($Category.Index):H] > [ListTitle$($Category.Index):H]) ? [ListIcon$($Category.Index):H] : [ListTitle$($Category.Index):H]) - ([#s_SelectorPadding] * 2)),[#s_SelectorRounding] | Extend Line, Square
+Line=StrokeWidth 0
+Square=Fill Color [#s_SelectedColor]
+X=(-[#s_SelectorWidth])
+Y=([#s_List$($Category.Type)TopPadding])
+DynamicVariables=1
+Container=ListItem$($Category.Index)
+Hidden=([#s_CurrentCategory] = $($Category.Index)) ? 0 : 1
+
+
+"@
+}

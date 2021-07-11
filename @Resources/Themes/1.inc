@@ -72,7 +72,7 @@ s_LeftScrollIndicatorRounding=1
 ;?Color | Name Selected color | Description Most selected items use this color
 s_SelectedColor=1671D9
 ;?Integer | Name Indicator height padding | Description 
-s_SelectorPadding=8
+s_SelectorPadding=5
 ;?Integer | Name Indicator width  | Description 
 s_SelectorWidth=3
 ;?Integer | Name Indicator rounding | Description default: [#s_SelectorWidth]

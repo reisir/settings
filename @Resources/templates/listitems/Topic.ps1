@@ -27,6 +27,9 @@ Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s
 $(ListX)
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 Container=ListItem$($Category.Index)
+
+$(SelectedIndicator)
+
 "@
 
 return $ini

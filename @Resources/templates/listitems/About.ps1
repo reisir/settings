@@ -25,9 +25,12 @@ MeterStyle=ListItem | ListAboutItem
 ClipStringW=([#s_LeftPanelW] - [ListIcon$($Category.Index):W] - [#s_ListRightPadding] - [#s_ListAboutGap])
 Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
 $(ListX)
-FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_VariableTitleFontWeight]
+FontWeight=[#s_SelectedFontWeight]
 Container=ListItem$($Category.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
+
+$(SelectedIndicator)
+
 "@
 
 return $ini

@@ -28,6 +28,9 @@ $(ListX)
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 Container=ListItem$($Category.Index)
 LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
+
+$(SelectedIndicator)
+
 "@
 
 return $ini
