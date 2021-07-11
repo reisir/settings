@@ -25,10 +25,11 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Close button
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
-- [ ] Redo the Settings skins separate from the generated skins styles etc
-- [ ] Figure out a better way to make the scroll indicator work
-  - [x] Implement scrolling again
-- [ ] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
+- [ ] Redo the Settings generator skins separate from the generated skins styles etc
+- [ ] Make the skin remember the scroll position when variables are changed and the skin is refreshed
+- [x] Figure out a better way to make the scroll indicator work
+  - It's not better but it works
+  - [ ] Optimize the scroll indicator math, no need for so many measures
 - [ ] Log errors ? Error rendering template ?
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
   - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
@@ -43,18 +44,15 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
     - [ ] Make it work first
 - [ ] Invert property for toggles
   - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
-- [ ] Selected indicator doesn't take scrolling into account
-- [ ] Change the version in rainmeter.inc template
-- [ ] Internal settings
-  - [ ] Reset s_OnChangeAction before release
-  - [ ] Close button
-    - [ ] Set category back to 0
-    - [ ] Way to set the default category
-  - [ ] Toggle for variable indenting
+- [x] Change the version in rainmeter.inc template
 - [ ] Better (custom ?) colour picker that can handle alpha
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Implement scrolling again
+- [x] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
+- [x] Selected indicator doesn't take scrolling into account
+  - Fixed by making a selected indicator for each list item
 - [x] Rename VarContainer etc to VariableContainer
 - [x] Padding between items and icons
 - [x] Fix InputText position
