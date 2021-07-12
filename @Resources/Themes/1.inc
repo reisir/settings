@@ -15,9 +15,15 @@ Bang your mom = [!Log "urmom"]
 s_TopHeight=40
 s_PanelTotalHeight=[#s_PanelH] - [#s_TopHeight]
 ;?Color | Name Title bar background color 
-s_TopBarColor=0,0,0,50
+s_TopBarColor=0,0,0,255
 ;?Toggle | Name Hide title bar rounding corrector
 s_HideTopCorrector=0
+;?Integer | Name Title size
+s_TitleSize=18
+;?Integer | Name Title padding
+s_TitlePadding=20
+;? | Name Title alignment
+s_TitleAlign=Left
 
 ;@ | Name Background
 ;?Integer | Name Left panel width | Description 

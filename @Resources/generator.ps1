@@ -59,7 +59,6 @@ function Construct {
 
     $Overrides = Filter-Properties -String $Matches[0]
 
-
     if($Overrides.SkinName) { $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" } 
     else { $GeneratedSkinName = "Settings.ini" }
 
@@ -112,6 +111,10 @@ function Construct {
     Category-List -Settings $settings
 
     Join-MeterStyles
+
+    &"$($templatesDir)TitleBar.ps1" -Overrides $Overrides > "$($generatedIncludeDir)TitleBar.inc"
+    
+    $Overrides > $testfile
 
     Inject-Settings -Path $injectPath
 
