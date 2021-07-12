@@ -2,7 +2,7 @@
 AntiAlias=1
 Y=0R
 X=0R
-FontSize=[#s_FontSize2]
+FontSize=[#s_VarTitleSize]
 FontWeight=[#s_VariableTitleFontWeight]
 SolidColor=[#s_DebugVarIconColor[#s_DebugColors]] 
 FontColor=[#s_FontColor]
@@ -13,7 +13,7 @@ Y=0r
 X=0R
 ClipString=2
 FontFace=[#s_FontFace]
-FontSize=[#s_FontSize2]
+FontSize=[#s_VarTitleSize]
 FontWeight=[#s_VariableTitleFontWeight]
 SolidColor=[#s_DebugVariableTitleColor[#s_DebugColors]] 
 FontColor=[#s_FontColor]
@@ -22,7 +22,7 @@ FontColor=[#s_FontColor]
 AntiAlias=1
 ClipString=2
 FontFace=[#s_FontFace]
-FontSize=[#s_FontSize4]
+FontSize=[#s_VarDescriptionSize]
 SolidColor=[#s_DebugDescriptionColor[#s_DebugColors]] 
 FontColor=[#s_FontColor]
 ;TODO: change this to variable description padding

@@ -33,7 +33,7 @@ Y=0r
 [TextOptions]
 AntiAlias=1
 FontFace=[#s_FontFace]
-FontSize=[#s_FontSize3]
+FontSize=[#s_VarTextSize]
 Y=0R
 
 

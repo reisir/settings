@@ -4,8 +4,12 @@
 s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
 
 ;@About | Name About theme: [#s_Theme1Name] | Description Customize the theme here 
+;?Info | Description Link test | Link 1
+GitHub=https://GitHub.com/sceleri/settings
 
-;@Topic | Name Customization
+;?Info | Description Banger | Link 2
+Bang your mom = [!Log "urmom"]
+
 ;@ | Name Background
 ;?Integer | Name Left panel width | Description 
 s_LeftPanelW=200
@@ -25,29 +29,37 @@ s_FrostedGlassMode=Blur
 s_FrostedGlassBorders=None
 
 ;@ | Name Font
-;? | Name Font face | Description 
+;? | Name Font face 
 s_FontFace=Segoe UI
-;? | Name Icon font face | Description 
+;? | Name Icon font face 
 s_IconFontFace=Segoe MDL2 Assets
-;?Color | Name Font color | Description 
+;?Color | Name Font color  
 s_FontColor=235,235,235
-;?Integer | Name Font size 1 | Description Used for category titles
-s_FontSize1=20
-;?Integer | Name Font size 2 | Description Used for variable titles
-s_FontSize2=16
-;?Integer | Name Font size 3 | Description Used for variable values
-s_FontSize3=12
-s_InputTextFontSize=[#s_FontSize3]
-;?Integer | Name Font size 4 | Description Used for descriptions
-s_FontSize4=10
-;?Integer | Name Font size 5 | Description Unused (for now)
-s_FontSize5=8
+;?Integer | Name Category Title Size
+s_CategoryTitleSize=20
+;?Integer | Name Variable Title Size
+s_VarTitleSize=16
+;?Integer | Name Variable Text Size
+s_VarTextSize=12
+s_InputTextFontSize=[#s_VarTextSize]
+;?Integer | Name Variable Description Size
+s_VarDescriptionSize=10
 ;?Integer | Name Selected item font weight | Description 
 s_SelectedFontWeight=500
+
+;?Integer | Name List About Size
+s_ListAboutSize=20
+;?Integer | Name List Default Size
+s_ListDefaultSize=15
+;?Integer | Name List Topic Size
+s_ListTopicSize=10
+
 ;?Integer | Name Font weight | Description 
 s_FontWeight=400
 
-;@ | Name Scroll indicators
+
+;@Topic | Name Indicators
+;@ | Name Right scroll indicator
 ;?Integer | Name Right scroll indicator Y padding | Description uses s_VariableYPadding
 s_RightScrollIndicatorYPadding=25
 s_RightScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_RightScrollIndicatorYPadding] * 2))
@@ -59,6 +71,7 @@ s_RightScrollIndicatorWidth=5
 s_RightScrollIndicatorColor=255,255,255
 ;?Integer | Name Right scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
 s_RightScrollIndicatorRounding=1
+;@ | Name Left scroll indicator
 ;?Integer | Name Left scroll indicator Y padding | Description uses s_VariableYPadding
 s_LeftScrollIndicatorYPadding=25
 s_LeftScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_LeftScrollIndicatorYPadding] * 2))
