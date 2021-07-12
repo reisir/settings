@@ -42,6 +42,8 @@ Border=[#s_FrostedGlassBorders]
 [IncludeCurrentCategory]
 @IncludeCategory=#ROOTCONFIGPATH#Settings\Categories\[#s_CurrentCategory].inc
 
+[IncludeTitleBar]
+@IncludeBackground=#ROOTCONFIGPATH#Settings\Includes\TitleBar.inc
 
 "@
 

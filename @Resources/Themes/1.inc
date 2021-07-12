@@ -1,6 +1,6 @@
 [Variables]
 
-;! | SkinName Theme 1 | SkinDirectory Themes 
+;! | SkinName Theme 1 | SkinDirectory Themes | Title Theme 1: [#s_Theme1Name]
 s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
 
 ;@About | Name About theme: [#s_Theme1Name] | Description Customize the theme here 
@@ -9,6 +9,15 @@ GitHub=https://GitHub.com/sceleri/settings
 
 ;?Info | Description Banger | Link 2
 Bang your mom = [!Log "urmom"]
+
+;@ | Name Title bar
+;?Integer | Name Title bar height
+s_TopHeight=40
+s_PanelTotalHeight=[#s_PanelH] - [#s_TopHeight]
+;?Color | Name Title bar background color 
+s_TopBarColor=0,0,0,50
+;?Toggle | Name Hide title bar rounding corrector
+s_HideTopCorrector=0
 
 ;@ | Name Background
 ;?Integer | Name Left panel width | Description 
@@ -23,6 +32,8 @@ s_RightPanelBackgroundColor=26,26,38,125
 s_LeftPanelBackgroundColor=28,28,43,125
 ;?Integer | Name Background corner radius
 s_BackgroundRounding=5
+;?Toggle | Name Hide right panel rounding corrector
+s_HidePanelCorrector=0
 ;? | Name FrostedGlass mode | Description Only available on Windows 10#CRLF#A certain Windows 10 update made Acrylic very laggy so it's not recommended.#CRLF#Available modes: Acrylic, Blur, None
 s_FrostedGlassMode=Blur
 ;? | Name FrostedGlass border | Description All, None, Left, Right, Top and Bottom. Can be combined with pipes
@@ -50,7 +61,7 @@ s_SelectedFontWeight=500
 ;?Integer | Name List About Size
 s_ListAboutSize=20
 ;?Integer | Name List Default Size
-s_ListDefaultSize=15
+s_ListDefaultSize=12
 ;?Integer | Name List Topic Size
 s_ListTopicSize=10
 
@@ -62,7 +73,7 @@ s_FontWeight=400
 ;@ | Name Right scroll indicator
 ;?Integer | Name Right scroll indicator Y padding | Description uses s_VariableYPadding
 s_RightScrollIndicatorYPadding=25
-s_RightScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_RightScrollIndicatorYPadding] * 2))
+s_RightScrollIndicatorMaxHeight=([#s_PanelTotalHeight] - ([#s_RightScrollIndicatorYPadding] * 2))
 ;?Integer | Name Right scroll indicator X padding | Description 
 s_RightScrollIndicatorXPadding=5
 ;?Integer | Name Right scroll indicator width | Description 
@@ -74,7 +85,7 @@ s_RightScrollIndicatorRounding=1
 ;@ | Name Left scroll indicator
 ;?Integer | Name Left scroll indicator Y padding | Description uses s_VariableYPadding
 s_LeftScrollIndicatorYPadding=25
-s_LeftScrollIndicatorMaxHeight=([#s_PanelH] - ([#s_LeftScrollIndicatorYPadding] * 2))
+s_LeftScrollIndicatorMaxHeight=([#s_PanelTotalHeight] - ([#s_LeftScrollIndicatorYPadding] * 2))
 ;?Integer | Name Left scroll indicator X padding | Description 
 s_LeftScrollIndicatorXPadding=5
 ;?Integer | Name Left scroll indicator width | Description 

@@ -22,6 +22,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
+- [ ] LeftMouseUpAction override instead of using info variables
 - [ ] Close button
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
