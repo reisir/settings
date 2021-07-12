@@ -1,5 +1,8 @@
 [Variables]
 
+;! | SkinName Theme 1 | SkinDirectory Themes 
+s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
+
 ;@About | Name About theme: [#s_Theme1Name] | Description Customize the theme here 
 
 ;@Topic | Name Customization
@@ -53,7 +56,7 @@ s_RightScrollIndicatorXPadding=5
 ;?Integer | Name Right scroll indicator width | Description 
 s_RightScrollIndicatorWidth=5
 ;?Color | Name Right scroll indicator color | Description 
-s_RightScrollIndicatorColor=245,245,245
+s_RightScrollIndicatorColor=255,255,255
 ;?Integer | Name Right scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
 s_RightScrollIndicatorRounding=1
 ;?Integer | Name Left scroll indicator Y padding | Description uses s_VariableYPadding
