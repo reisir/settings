@@ -1,27 +1,48 @@
 [Variables]
 
-;! | SkinName Theme 1 | SkinDirectory Themes | Title Theme 1: [#s_Theme1Name]
+;! | SkinName Theme 1 | SkinDirectory Themes
 s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
 
-;@About | Name About theme: [#s_Theme1Name] | Description Customize the theme here 
+;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
 ;?Info | Description Link test | Link 1
 GitHub=https://GitHub.com/sceleri/settings
 
 ;?Info | Description Banger | Link 2
 Bang your mom = [!Log "urmom"]
 
+;@ | Name Close button
+;?Color | Name Close button color
+s_CloseButtonColor=FC3B4C
+;?Integer | Name Close button stroke width
+s_CloseButtonStrokeWidth=0
+;?Color | Name Close button stroke color
+s_CloseButtonStrokeColor=255,255,255
+;?Integer | Name Close button size | Description As a percentage of the title bar height
+s_CloseButtonSize=0.4
+s_CBS=([#s_TopHeight] * [#s_CloseButtonSize])
+;?Integer | Name Close button cross thickness
+s_CloseCrossThick=2
+;?Color | Name Close button cross color
+s_CloseCrossColor=0,0,0
+;?Integer | Name Close button cross size | Description As a percentage of the close button size
+s_CS=0.6
+
 ;@ | Name Title bar
 ;?Integer | Name Title bar height
 s_TopHeight=40
 s_PanelTotalHeight=[#s_PanelH] - [#s_TopHeight]
 ;?Color | Name Title bar background color 
-s_TopBarColor=0,0,0,255
+s_TopBarColor=26,35,56,255
+;?Color | Name Title text color
+s_TopFontColor=255,255,255
+;? | Name Title font face
+s_TitleFont=Segoe UI
 ;?Toggle | Name Hide title bar rounding corrector
 s_HideTopCorrector=0
 ;?Integer | Name Title size
-s_TitleSize=18
-;?Integer | Name Title padding
-s_TitlePadding=20
+s_TitleSize=15
+;?Integer | Name Title nudge | Description Visual fix
+s_TitleNudge=-1
 ;? | Name Title alignment
 s_TitleAlign=Left
 

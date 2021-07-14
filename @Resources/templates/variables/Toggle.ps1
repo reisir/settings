@@ -24,7 +24,7 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap 
 Hidden=([#$($Variable.Key)])
 MeterStyle=VarToggle
 Container=VariableContainer$($Variable.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
 
 [ToggleOn$($Variable.Index)]
 Meter=Shape
@@ -35,5 +35,5 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeS
 Hidden=([#$($Variable.Key)] - 1)
 MeterStyle=VarToggle
 Container=VariableContainer$($Variable.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
 "@

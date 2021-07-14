@@ -6,8 +6,6 @@ function Update {
 $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
 # $dynamicThemeFile = "#ROOTCONFIGPATH#settings\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
-$dynamicThemeFile = "#ROOTCONFIGPATH#settings\Themes\1.inc"
-$dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
@@ -62,8 +60,16 @@ function Construct {
     if($Overrides.SkinName) { $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" } 
     else { $GeneratedSkinName = "Settings.ini" }
 
-    if($Overrides.SkinDirectory) { $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\" } 
-    else { $TargetDirectory = "Settings\" }
+    if($Overrides.SkinDirectory) {
+        $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
+        $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
+        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\includes\Variables.inc"
+     } 
+    else { 
+        $TargetDirectory = "Settings\"
+        $dynamicThemeFile = "#ROOTCONFIGPATH#settings\Themes\1.inc"
+        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
+     }
 
     # Generated files
     $generatedSkinFile = "$($generatedSkinDir)$GeneratedSkinName"
@@ -98,7 +104,7 @@ function Construct {
         "SettingsFile" = $dynamicVariableFile
         "ThemeFile" = $dynamicThemeFile
     }
-    &"$($templatesDir)Rainmeter.ps1" -Options $RainmeterOptions > $generatedSkinFile
+    &"$($templatesDir)Rainmeter.ps1" -Options $RainmeterOptions -Overrides $Overrides > $generatedSkinFile
     
     # Construct categories
     $settings | ForEach-Object { $i = 0 } {

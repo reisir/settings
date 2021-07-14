@@ -1,8 +1,15 @@
 param (
     [Parameter()]
     [System.Collections.Hashtable]
-    $Options
+    $Options,
+    [Parameter()]
+    [System.Collections.Hashtable]
+    $Overrides
 )
+
+if ($Overrides.SkinDirectory) { $dir = $Overrides.SkinDirectory.Trim() } else { $dir = "Settings" }
+
+$RmAPI.Log($Overrides.SkinDirectory)
 
 return @"
 [Metadata]
@@ -15,11 +22,11 @@ License=CC BY-NC-SA 4.0
 [Rainmeter]
 Update=-1
 ;This updates measures like the scroll measure once
-OnRefreshAction=[!Update]
+OnRefreshAction=[!Update][!Redraw]
 AccurateText=1
 @IncludeSkinVariables=$($Options.SettingsFile)
-@IncludesOnChangeAction=#ROOTCONFIGPATH#Settings\Includes\s_OnChangeAction.inc
-@IncludeInternalVariables=#ROOTCONFIGPATH#Settings\Includes\Variables.inc
+@IncludesOnChangeAction=#ROOTCONFIGPATH#$($dir)\Includes\s_OnChangeAction.inc
+@IncludeInternalVariables=#ROOTCONFIGPATH#$($dir)\Includes\Variables.inc
 @IncludeTheme=$($Options.ThemeFile)
 SkinHeight=[#s_PanelH]
 ;SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
@@ -31,19 +38,20 @@ Type=[#s_FrostedGlassMode]
 Border=[#s_FrostedGlassBorders]
 
 [IncludeMeterStyles]
-@IncludeMeterStyles=#ROOTCONFIGPATH#Settings\Includes\MeterStyles.inc
+@IncludeMeterStyles=#ROOTCONFIGPATH#$($dir)\Includes\MeterStyles.inc
 
 [IncludeBackground]
-@IncludeBackground=#ROOTCONFIGPATH#Settings\Includes\Background.inc
+@IncludeBackground=#ROOTCONFIGPATH#$($dir)\Includes\Background.inc
 
 [IncludeCategoryList]
-@IncludeCategoryList=#ROOTCONFIGPATH#Settings\Categories\CategoryList.inc
+@IncludeCategoryList=#ROOTCONFIGPATH#$($dir)\Categories\CategoryList.inc
 
 [IncludeCurrentCategory]
-@IncludeCategory=#ROOTCONFIGPATH#Settings\Categories\[#s_CurrentCategory].inc
+@IncludeCategory=#ROOTCONFIGPATH#$($dir)\Categories\[#s_CurrentCategory].inc
 
 [IncludeTitleBar]
-@IncludeBackground=#ROOTCONFIGPATH#Settings\Includes\TitleBar.inc
+@IncludeBackground=#ROOTCONFIGPATH#$($dir)\Includes\TitleBar.inc
+
 
 "@
 

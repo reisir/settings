@@ -37,5 +37,5 @@ Plugin=RunCommand
 Program=""#CURRENTPATH#addons\RainRGB4RunCommand.exe""
 Parameter=""VarName=$($Variable.Key)" "FileName=$($SettingsFile)" "RefreshConfig=-1""
 OutputType=ANSI
-FinishAction=[!Refresh][#s_OnChangeAction]
+FinishAction=[#s_SaveScroll][!Refresh][#s_OnChangeAction]
 "@

@@ -33,6 +33,24 @@ Measure=Calc
 Formula=([#s_LeftScrollIndicatorMaxHeight] * ([#s_PanelH] / ([LeftMaxScrollAmount] + [#s_PanelH])))
 DynamicVariables=1
 
+[LeftScrollIndicatorPosition]
+Measure=Calc
+Formula=([#s_LeftScrollIndicatorYPadding] + ([LeftScrollPercentage] * ([#s_LeftScrollIndicatorMaxHeight] - [LeftScrollIndicator:H])) + [#s_TopHeight])
+DynamicVariables=1
+
+[LeftScroll]
+Measure=Calc
+Formula=([#s_ScrollLeft])
+DynamicVariables=1
+[LeftFirst]
+Measure=Calc
+Formula=([FirstLeft:Y])
+DynamicVariables=1
+[LeftLast]
+Measure=Calc
+Formula=([LastLeft:Y])
+DynamicVariables=1
+
 [LeftScrollIndicator]
 Meter=Shape
 Shape=Rectangle 0,0,[#s_LeftScrollIndicatorWidth],[LeftScrollIndicatorHeight],([#s_LeftScrollIndicatorRounding] * [#s_LeftScrollIndicatorWidth] / 2) | StrokeWidth 0 | Extend FillModifiers
