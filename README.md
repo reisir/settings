@@ -23,14 +23,10 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 ## TODO:
 
 - [ ] LeftMouseUpAction override instead of using info variables
-- [ ] Close button
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
 - [ ] Redo the Settings generator skins separate from the generated skins styles etc
 - [ ] Make the skin remember the scroll position when variables are changed and the skin is refreshed
-- [x] Figure out a better way to make the scroll indicator work
-  - It's not better but it works
-  - [ ] Optimize the scroll indicator math, no need for so many measures
 - [ ] Log errors ? Error rendering template ?
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
   - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
@@ -45,11 +41,14 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
     - [ ] Make it work first
 - [ ] Invert property for toggles
   - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
-- [x] Change the version in rainmeter.inc template
 - [ ] Better (custom ?) colour picker that can handle alpha
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Change the version in rainmeter.inc template
+- [x] Figure out a better way to make the scroll indicator work
+  - It's not better but it works
+- [x] Close button
 - [x] Implement scrolling again
 - [x] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
 - [x] Selected indicator doesn't take scrolling into account
