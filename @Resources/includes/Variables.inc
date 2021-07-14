@@ -18,6 +18,7 @@ s_ScrollLeft=0
 s_CurrentCategory=0
 s_SettingsTheme=1
 s_SaveScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "Includes\Variables.inc"][!WriteKeyValue Variables s_ScrollRight [#*s_ScrollRight*] "Includes\Variables.inc"]
+s_SaveLeftScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "Includes\Variables.inc"][!WriteKeyValue Variables s_ScrollRight 0 "Includes\Variables.inc"]
 
 ;@ | Name Test | Icon [\xE9F5] | Description Test variables for theme editing
 ;? | Name Long Description | Description My description is so long that it should hopefully force this string meter to clipstring=2 and break to multiple lines thanks.

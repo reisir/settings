@@ -21,6 +21,11 @@ IfConditionMode=1
 Disabled=1
 DynamicVariables=1
 
+[Last$($Side)Position]
+Measure=Calc
+Formula=[Last$($Side):Y]
+DynamicVariables=1
+
 [ScrollUp$($Side)]
 Measure=Calc
 Formula=[#s_Scroll$($Side)] + [#s_ScrollSpeed]

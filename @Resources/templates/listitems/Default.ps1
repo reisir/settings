@@ -16,7 +16,7 @@ Text=$($Category.Icon)
 Container=ListItem$($Category.Index)
 MeterStyle=ListIcon | ListDefaultIcon
 Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveScroll][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveLeftScroll][!Refresh]
 
 [ListTitle$($Category.Index)]
 Meter=String
@@ -27,7 +27,7 @@ Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s
 $(ListX)
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 Container=ListItem$($Category.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveScroll][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveLeftScroll][!Refresh]
 
 $(SelectedIndicator)
 

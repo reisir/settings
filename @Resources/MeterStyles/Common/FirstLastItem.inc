@@ -19,12 +19,12 @@ X=[#s_LeftPanelW]
 X=0
 
 [LeftPanel]
-X=[FirstLeft:X]
+X=0
 DynamicVariables=1
 Y=0R
 
 [RightPanel]
-X=[FirstRight:X]
+X=#s_LeftPanelW#
 DynamicVariables=1
 Y=0R
 

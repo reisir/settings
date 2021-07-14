@@ -84,17 +84,14 @@ s_InputTextFontSize=[#s_VarTextSize]
 s_VarDescriptionSize=10
 ;?Integer | Name Selected item font weight | Description 
 s_SelectedFontWeight=500
-
 ;?Integer | Name List About Size
 s_ListAboutSize=20
 ;?Integer | Name List Default Size
 s_ListDefaultSize=12
 ;?Integer | Name List Topic Size
 s_ListTopicSize=10
-
 ;?Integer | Name Font weight | Description 
 s_FontWeight=400
-
 
 ;@Topic | Name Indicators
 ;@ | Name Right scroll indicator
@@ -109,6 +106,7 @@ s_RightScrollIndicatorWidth=5
 s_RightScrollIndicatorColor=255,255,255
 ;?Integer | Name Right scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
 s_RightScrollIndicatorRounding=1
+
 ;@ | Name Left scroll indicator
 ;?Integer | Name Left scroll indicator Y padding | Description uses s_VariableYPadding
 s_LeftScrollIndicatorYPadding=25

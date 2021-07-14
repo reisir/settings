@@ -20,7 +20,7 @@ MouseScrollUpAction=[!EnableMeasure ScrollUpRight][!UpdateMeasure ScrollUpRight]
 
 [LeftMaxScrollAmount]
 Measure=Calc 
-Formula=Abs([FirstLeft:Y] - [LastLeft:Y]) - [#s_PanelH]
+Formula=Abs([FirstLeft:Y] - [LastLeft:Y]) - [#s_PanelH] + [#s_LeftScrollIndicatorYPadding]
 DynamicVariables=1
 
 [LeftScrollPercentage]
@@ -32,23 +32,13 @@ DynamicVariables=1
 Measure=Calc
 Formula=([#s_LeftScrollIndicatorMaxHeight] * ([#s_PanelH] / ([LeftMaxScrollAmount] + [#s_PanelH])))
 DynamicVariables=1
+IfCondition=LeftScrollIndicatorHeight < [#s_LeftScrollIndicatorMaxHeight]
+IfTrueAction=[!UpdateMeter LeftScrollIndicator][!ShowMeter LeftScrollIndicator][!Delay 0][!Redraw]
+IfConditionMode=2
 
 [LeftScrollIndicatorPosition]
 Measure=Calc
 Formula=([#s_LeftScrollIndicatorYPadding] + ([LeftScrollPercentage] * ([#s_LeftScrollIndicatorMaxHeight] - [LeftScrollIndicator:H])) + [#s_TopHeight])
-DynamicVariables=1
-
-[LeftScroll]
-Measure=Calc
-Formula=([#s_ScrollLeft])
-DynamicVariables=1
-[LeftFirst]
-Measure=Calc
-Formula=([FirstLeft:Y])
-DynamicVariables=1
-[LeftLast]
-Measure=Calc
-Formula=([LastLeft:Y])
 DynamicVariables=1
 
 [LeftScrollIndicator]
@@ -58,11 +48,11 @@ FillModifiers=Fill Color [#s_LeftScrollIndicatorColor]
 X=([#s_LeftPanelW] - [#s_LeftScrollIndicatorXPadding] - [#s_LeftScrollIndicatorWidth])
 Y=([#s_LeftScrollIndicatorYPadding] + ([LeftScrollPercentage] * ([#s_LeftScrollIndicatorMaxHeight] - [#CURRENTSECTION#:H])) + [#s_TopHeight])
 DynamicVariables=1
-Hidden=([LeftMaxScrollAmount] > 0 ? 0 : 1)
+Hidden=1
 
 [RightMaxScrollAmount]
 Measure=Calc 
-Formula=Abs([FirstRight:Y] - [LastRight:Y]) - [#s_PanelH]
+Formula=Abs([FirstRight:Y] - [LastRight:Y]) - [#s_PanelH] + [#s_RightScrollIndicatorYPadding]
 DynamicVariables=1
 
 [RightScrollPercentage]
@@ -74,6 +64,9 @@ DynamicVariables=1
 Measure=Calc
 Formula=([#s_RightScrollIndicatorMaxHeight] * ([#s_PanelH] / ([RightMaxScrollAmount] + [#s_PanelH])))
 DynamicVariables=1
+IfCondition=RightScrollIndicatorHeight < [#s_RightScrollIndicatorMaxHeight]
+IfTrueAction=[!UpdateMeter RightScrollIndicator][!ShowMeter RightScrollIndicator][!Delay 0][!Redraw]
+IfConditionMode=2
 
 [RightScrollIndicator]
 Meter=Shape
@@ -82,6 +75,5 @@ FillModifiers=Fill Color [#s_RightScrollIndicatorColor]
 X=([#s_LeftPanelW] + [#s_RightPanelW] - [#s_RightScrollIndicatorXPadding] - [#s_RightScrollIndicatorWidth])
 Y=([#s_RightScrollIndicatorYPadding] + ([RightScrollPercentage] * ([#s_RightScrollIndicatorMaxHeight] - [#CURRENTSECTION#:H])) + [#s_TopHeight])
 DynamicVariables=1
-Hidden=([RightMaxScrollAmount] > 0 ? 0 : 1)
- 
+Hidden=([RightMaxScrollAmount] > 0 ? 0 : 1) 
 

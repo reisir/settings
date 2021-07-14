@@ -29,7 +29,7 @@ AccurateText=1
 @IncludeInternalVariables=#ROOTCONFIGPATH#$($dir)\Includes\Variables.inc
 @IncludeTheme=$($Options.ThemeFile)
 SkinHeight=[#s_PanelH]
-;SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
+SkinWidth=([#s_LeftPanelW] + [#s_RightPanelW])
 
 [FrostedGlass]
 Measure=Plugin
