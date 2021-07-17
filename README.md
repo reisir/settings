@@ -22,7 +22,6 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
-- [ ] LeftMouseUpAction override instead of using info variables
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
 - [ ] Redo the Settings generator skins separate from the generated skins styles etc
@@ -41,6 +40,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Better (custom ?) colour picker that can handle alpha
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] LeftMouseUpAction override instead of using info variables
 - [x] Add way to change the icon font per Icon
 - [x] Make the skin remember the scroll position when variables are changed and the skin is refreshed
 - [x] Change the version in rainmeter.inc template

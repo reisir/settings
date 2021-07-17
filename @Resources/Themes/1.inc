@@ -4,10 +4,10 @@
 s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
 
 ;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
-;?Info | Description Link test | Link 1
+;?Action | Description Link test | Link 1
 GitHub=https://GitHub.com/sceleri/settings
 
-;?Info | Description Banger | Link 2
+;?Action | Description Banger | Link 2
 Bang your mom = [!Log "urmom"]
 
 ;@ | Name Close button
@@ -153,7 +153,7 @@ s_CategoryIconTopPadding=([#s_CategoryTitleTopPadding] + [#s_CategoryIconNudge])
 s_ListYPadding=7
 ;? | Name List item right padding | Description Used for width calculations for ClipString=2
 s_ListRightPadding=15
-;?Info | Name Settings credit icon padding | Description Move the Settings link/credit icon
+;?Action | Name Settings credit icon padding | Description Move the Settings link/credit icon
 5=https://www.youtube.com/watch?v=dQw4w9WgXcQ
 s_CreditIconPadding=(5 + [#s_BackgroundRounding] / 2)
 s_CreditIconSize=12
@@ -226,7 +226,7 @@ s_ToggleSize=20
 s_ToggleLength=25
 ;?Integer | Name Toggle internal padding | Description s_TogglePadding
 s_TogglePadding=2.5
-;?Info | Name TODO | Link 0
+;?Action | Name TODO | Link 0
 More variables for Toggle customization=
 s_ToggleActiveColor=[#s_SelectedColor]
 s_ToggleInactiveColor=[#s_RightPanelBackgroundColor]
