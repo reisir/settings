@@ -1,10 +1,7 @@
 param (
     [Parameter()]
     [System.Collections.Hashtable]
-    $Category,
-    [Parameter()]
-    [String]
-    $InternalSettingsFile
+    $Category
 )
 
 $ini = @"
@@ -16,7 +13,7 @@ Text=$($Category.Icon)
 Container=ListItem$($Category.Index)
 MeterStyle=ListIcon | ListAboutIcon
 Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveLeftScroll][!Delay 1][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "[#s_CurrentFile]"][#s_SaveLeftScroll][!Delay 1][!Refresh]
 
 [ListTitle$($Category.Index)]
 Meter=String
@@ -27,7 +24,7 @@ Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s
 $(ListX)
 FontWeight=[#s_SelectedFontWeight]
 Container=ListItem$($Category.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][#s_SaveLeftScroll][!Delay 1][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "[#s_CurrentFile]"][#s_SaveLeftScroll][!Delay 1][!Refresh]
 
 $(SelectedIndicator)
 

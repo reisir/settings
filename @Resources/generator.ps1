@@ -363,7 +363,7 @@ function Category-List {
         if($listTypes -NotContains $_.Type) { $Type = $defaultListItemType }
 
         # Call the appropriate ListItem template script
-        $ini += &"$($listitemScriptsDir)$($Type).ps1" -Category $_ -InternalSettingsFile $dynamicInternalVariableFile
+        $ini += &"$($listitemScriptsDir)$($Type).ps1" -Category $_ 
         $ini += "`n`n"
         $i++
     }

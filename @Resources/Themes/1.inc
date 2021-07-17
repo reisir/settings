@@ -231,3 +231,6 @@ More variables for Toggle customization=
 s_ToggleActiveColor=[#s_SelectedColor]
 s_ToggleInactiveColor=[#s_RightPanelBackgroundColor]
 
+s_ScrollLeft=0
+s_ScrollRight=0
+s_CurrentCategory=0

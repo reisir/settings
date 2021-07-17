@@ -1,10 +1,7 @@
 param (
     [Parameter()]
     [System.Collections.Hashtable]
-    $Category,
-    [Parameter()]
-    [String]
-    $InternalSettingsFile
+    $Category
 )
 
 $ini = @"
