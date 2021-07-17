@@ -1,7 +1,7 @@
 [Variables]
 
 ;! | SkinName Theme 1 | SkinDirectory Themes
-s_OnChangeAction=[!Refresh #ROOTCONFIG#][!CommandMeasure Generator Construct #ROOTCONFIG#]
+s_OnChangeAction=[!Log "Theme Changed"][!CommandMeasure Paths """Paths "#s_CurrentFile#" 1""" #ROOTCONFIG#]
 
 ;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
 ;?Action | Description Link test | Link 1

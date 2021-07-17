@@ -1,83 +1,66 @@
 [FirstRight]
-Meter=String
-Text=First
-FontColor=0,0,0,0
+Meter=Image
 MeterStyle=FirstItem | FirstRightPanel
-Y=[#s_ScrollRight]
+Y=([#s_GenTopHeight])
+SolidColor=0,0,0,0
+W=0
+H=0
 
 [CategoryIcon0]
 Meter=String
 Text=
-MeterStyle=CategoryIcon | RightPanel
-Y=0
-Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
+MeterStyle=RightPanel | GenIcon
+Padding=[#s_CategoryTitleXPadding],[#s_CategoryIconTopPadding],0,0
 [Title0]
 Meter=String
 Text=Settings
-MeterStyle=CategoryTitle
+MeterStyle=GenTitle
 W=([#s_RightPanelW] - [CategoryIcon0:W])
-Padding=0,[#s_CategoryTitleXPadding],0,0
+Padding=0,0,0,0
 [CategoryDescription0]
 Meter=String
 Text=a skin that generates settings skins for other skins.
-MeterStyle=VarDescription | RightPanel
-[CategoryTitleSeparator1]
+MeterStyle=VarDescription | ThickDescription | RightPanel
+[CategoryTitleSeparator0]
 Meter=Image
-MeterStyle=CategoryTitleSeparator | RightPanel
-H=([#s_CategoryTitleBottomPadding] / 2)
+MeterStyle=RightPanel | GenSeparator
 
 [VarIcon0]
 Meter=String
-Text=
-MeterStyle=VarIcon | RightPanel
+Text= 
+MeterStyle=RightPanel | GenSmallIcon
 [Var0]
 Meter=String
 Text=Selected file 
-MeterStyle=VarTitle | RightPanel
+MeterStyle=RightPanel | GenSmallTitle
 [Var0Description]
 Meter=String
 Text=[#s_DynamicVariableFile]
-MeterStyle=VarDescription | RightPanel
+MeterStyle=RightPanel | GenDesc
 [Value0]
 Meter=String
 Text=Click to open directory
-MeterStyle=VarString | RightPanel
+MeterStyle=RightPanel | VarString
 LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
-
 
 [VarIcon1]
 Meter=String
 Text=[\xE90F] 
-MeterStyle=VarIcon | RightPanel
+MeterStyle=RightPanel | GenSmallIcon
 FontSize=14
-Y=5R
 [Var1]
 Meter=String
 Text=Generation 
-MeterStyle=VarTitle | RightPanel
-Y=-5r
+MeterStyle=RightPanel | GenSmallTitle
 [Var1Description]
 Meter=String
 Text=This will delete all files in "[#s_Skin]\settings" and copy over the generated settings skin.
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-MeterStyle=VarDescription | RightPanel
+MeterStyle=RightPanel | GenDesc
 [Value1]
 Meter=String
 Text=Generate & Inject
-MeterStyle=VarString | RightPanel
+MeterStyle=RightPanel | VarString
 LeftMouseUpAction=[!CommandMeasure Generator Construct]
 
-; [Generate]
-; Meter=String
-; Text=Generate & Inject
-; InlineSetting=Face | [#s_IconFontFace]
-; InlinePattern=[\xE90F]
-; MeterStyle=Center | VarString | VarTitle | RightPanel
-; Y=([#s_GeneratorPanelHeight] - [Generate:H] - [#s_VariableYPadding])
-; StringAlign=Center
-; X=([#s_GeneratorRightPanelWidth] / 2)
-; W=
-; DynamicVariables=1
-; Padding=10,0,10,0
-; LeftMouseUpAction=
 

@@ -23,7 +23,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 ## TODO:
 
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
-- [ ] Check if containers can be taller than their contents without affecting flow
+- [ ] Move scrollspeed to theme
 - [ ] Redo the Settings generator skins separate from the generated skins styles etc
 - [ ] Log errors ? Error rendering template ?
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
@@ -40,6 +40,8 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Better (custom ?) colour picker that can handle alpha
 - [ ] Another way to select file other than Drag & Drop
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Check if containers can be taller than their contents without affecting flow
+  - It affects flow
 - [x] LeftMouseUpAction override instead of using info variables
 - [x] Add way to change the icon font per Icon
 - [x] Make the skin remember the scroll position when variables are changed and the skin is refreshed

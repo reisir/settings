@@ -63,12 +63,12 @@ function Construct {
     if($Overrides.SkinDirectory) {
         $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
         $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
-        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\includes\Variables.inc"
+        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Includes\Variables.inc"
      } 
     else { 
         $TargetDirectory = "Settings\"
-        $dynamicThemeFile = "#ROOTCONFIGPATH#settings\Themes\1.inc"
-        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
+        $dynamicThemeFile = "#ROOTCONFIGPATH#Settings\Themes\1.inc"
+        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#Settings\Includes\Variables.inc"
      }
 
     # Generated files
@@ -77,6 +77,8 @@ function Construct {
     # Injectors
     $targetSkin = $RmAPI.VariableStr('s_Skin')
     $injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$targetSkin\$TargetDirectory"
+
+    $RmAPI.LogWarning("Generating $injectPath")
 
     # TODO: Handle unformatted variable files
     if($settingsFileContent -notmatch $categoryPattern) {
@@ -470,8 +472,12 @@ function Prepare-Directories {
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Themes"
     New-Item -Path $injectPath -ItemType "directory" -Name $TargetDirectory.TrimEnd('/')
     # Remove files in generated directories
-    Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
-    Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    # Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
+    # Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    # Get-ChildItem -Path "$generatedThemesDir*" -Include "*.inc" | Remove-Item
+    Get-ChildItem -Path "$generatedSkinDir*" -Recurse -Include "*.inc" | Remove-Item
+    Get-ChildItem -Path "$generatedAddonsDir*" | Remove-Item
+
     # Remove settings injected earlier
     Get-ChildItem -Path "$($injectPath)$TargetDirectory*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
     # Copy Includes to generated skin

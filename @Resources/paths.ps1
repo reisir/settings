@@ -4,7 +4,17 @@ function Update {
 
 function Paths {
 
-    $raw = "$($RmAPI.VariableStr('s_RawPath'))"
+    param(
+        [string]$raw = "",
+        [uint32]$generate = 0
+    )
+
+    if(-Not ($raw)) {
+        $raw = "$($RmAPI.VariableStr('s_RawPath'))"
+    } else {
+        $RmAPI.Bang("[!WriteKeyValue Variables s_RawPath `"$raw`" ]")
+    }
+
     $skinspath = "$($RmAPI.VariableStr('SKINSPATH'))"
 
     $dynamicVariableFile = $raw -replace "$([Regex]::Escape($skinspath))",""
@@ -12,9 +22,6 @@ function Paths {
 
     $dynamicVariableFile -match $pattern
     foreach($match in $Matches) {
-        # $match.GetEnumerator() | ForEach-Object {
-        #     $RmAPI.Log("Match $($_.Key): $($_.Value)")
-        # }
 
         $bangs = '[!WriteKeyValue Variables s_DynamicVariableFile "' + "$($Matches[0])" + '"]'
         $bangs += '[!WriteKeyValue Variables s_Skin "' + "$($Matches[1])" + '"]'
@@ -24,6 +31,11 @@ function Paths {
         $RmAPI.Bang("$bangs")
         $RmAPI.Bang("[!Refresh]")
 
+    }
+
+    if($generate -eq 1) {
+        Start-Sleep 0.1
+        $RmAPI.Bang("[!CommandMeasure Generator Construct]")
     }
 
 }

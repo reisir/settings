@@ -13,61 +13,54 @@ Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
 Y=0
 [Title1]
 Meter=String
-Text=Settings settings
+Text=Instructions
 MeterStyle=CategoryTitle | RightPanel
 W=([#s_RightPanelW] - [CategoryIcon1:W])
 Padding=0,[#s_CategoryTitleXPadding],0,0
+
 [CategoryDescription1]
 Meter=String
-Text=
-MeterStyle=VarDescription | RightPanel
-[CategoryTitleSeparator1]
-Meter=Image
-MeterStyle=CategoryTitleSeparator | RightPanel
-H=([#s_CategoryTitleBottomPadding] / 2)
-
-[VarIcon0]
-Meter=String
-Text=[\xE9E9]
-MeterStyle=VarIcon | RightPanel
-FontSize=14
-[Var0]
-Meter=String
-Text=Internal variables  
-MeterStyle=VarTitle | RightPanel
-Y=-6r
-[Var0Description]
-Meter=String
-Text=
+Text=For Settings to correctly parse your variables, you need to format the variable file.
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value0]
-Meter=String
-Text=Change to internal variable file
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
-[VarIcon1]
+[Value6]
 Meter=String
-Text=[\xE9F3]
+Text=1. Read the RainDoc documentation
+MeterStyle=VarString | Link1 | RightPanel
+LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
+
+[Value7]
+Meter=String
+Text=2. Drag & Drop your formatted variable file on this skin
+MeterStyle=VarString | Link0 | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+[Value8]
+Meter=String
+Text=3. Click on "Generate & Inject".
+MeterStyle=VarString | Link0 | RightPanel
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+
+[VarIcon2]
+Meter=String
+Text=[\xE835]
 MeterStyle=VarIcon | RightPanel
 FontSize=14
 Y=5R
-[Var1]
+[Var2]
 Meter=String
-Text=OnChangeAction
+Text=Example variable file
 MeterStyle=VarTitle | RightPanel
 Y=-6r
-[Var1Description]
+[Var2Description]
 Meter=String
-Text=Ran everytime a variable is changed.
+Text=
 MeterStyle=VarDescription | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value1]
+[Value2]
 Meter=String
-Text=Open s_OnChangeAction.inc
+Text=Change to the example file
 MeterStyle=VarString | RightPanel
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
+LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
