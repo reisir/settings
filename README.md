@@ -26,7 +26,6 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
 - [ ] Check if containers can be taller than their contents without affecting flow
 - [ ] Redo the Settings generator skins separate from the generated skins styles etc
-- [ ] Make the skin remember the scroll position when variables are changed and the skin is refreshed
 - [ ] Log errors ? Error rendering template ?
 - [ ] Refactor `Pipe-Variable` and `Pipe-Category`
   - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
@@ -39,12 +38,11 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
   - [ ] Proofread the wiki
   - [ ] Document Tooltip
     - [ ] Make it work first
-- [ ] Invert property for toggles
-  - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
 - [ ] Better (custom ?) colour picker that can handle alpha
 - [ ] Another way to select file other than Drag & Drop
-- [ ] Add way to change the icon font per Icon
 - [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Add way to change the icon font per Icon
+- [x] Make the skin remember the scroll position when variables are changed and the skin is refreshed
 - [x] Change the version in rainmeter.inc template
 - [x] Figure out a better way to make the scroll indicator work
   - It's not better but it works
@@ -64,3 +62,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [x] Combine meterstyles from separate files into one big file and @Include that to the main .ini
 - [x] Dynamically get list of templates for $implementedTypes
 - [x] Add safety newlines after variable templates
+- [x] Invert property for toggles
+  - [x] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
+    - Doesn't work :(
+- [ ] Check that all of the items in this list actually work
