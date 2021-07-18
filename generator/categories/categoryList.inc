@@ -21,23 +21,12 @@ ToolTipText=Generate
 
 [GeneratorIcon1]
 Meter=String
-Text=[\xE713]
-MeterStyle=CategoryIcon | LeftPanel | Center
-Padding=0,0,0,0
-X=([#s_GeneratorLeftPanelWidth] / 2)
-Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
-DynamicVariables=1
-LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 1][!Refresh]
-ToolTipText=Internal
-
-[GeneratorIcon2]
-Meter=String
 Text=[\xE897]
 MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
 DynamicVariables=1
-LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 2][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 1][!Refresh]
 ToolTipText=Help
 

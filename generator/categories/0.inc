@@ -40,14 +40,13 @@ MeterStyle=RightPanel | GenDesc
 [Value0]
 Meter=String
 Text=Click to open directory
-MeterStyle=RightPanel | VarString
+MeterStyle=RightPanel | VarString | GenString
 LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
 
 [VarIcon1]
 Meter=String
 Text=[\xE90F] 
 MeterStyle=RightPanel | GenSmallIcon
-FontSize=14
 [Var1]
 Meter=String
 Text=Generation 
@@ -60,7 +59,6 @@ MeterStyle=RightPanel | GenDesc
 [Value1]
 Meter=String
 Text=Generate & Inject
-MeterStyle=RightPanel | VarString
+MeterStyle=RightPanel | VarString | GenString 
 LeftMouseUpAction=[!CommandMeasure Generator Construct]
-
 

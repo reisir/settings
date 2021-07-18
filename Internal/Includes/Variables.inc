@@ -50,7 +50,7 @@ s_DebugDescriptionColor0=0,0,0,0
 s_DebugListColor1=0,255,51,100
 s_DebugListColor0=0,0,0,0
 ;?Toggle | Name Debug colors | Description Toggle debug colors on/off
-s_DebugColors=1
+s_DebugColors=0
 ;?Color | 
 s_DebugListIconColor1=255,255,0,100
 s_DebugListIconColor0=0,0,0,0
@@ -73,7 +73,7 @@ s_DebugToggleColor0=0,0,0,0
 s_DebugColorColor1=255,0,0,100
 s_DebugColorColor0=0,0,0,0
 
-s_CurrentCategory=4
+s_CurrentCategory=0
 s_ScrollLeft=0
 s_ScrollRight=0
 s_HideTopCorrector=0

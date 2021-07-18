@@ -1,73 +1,60 @@
 [FirstRight]
-Meter=String
-Text=First
-FontColor=0,0,0,0
-MeterStyle=FirstItem | FirstRightPanel
-Y=[#s_ScrollRight]
-
-[CategoryIcon1]
-Meter=String
-Text=
-MeterStyle=CategoryIcon | RightPanel
-Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
-Y=0
-[Title1]
-Meter=String
-Text=Settings settings
-MeterStyle=CategoryTitle | RightPanel
-W=([#s_RightPanelW] - [CategoryIcon1:W])
-Padding=0,[#s_CategoryTitleXPadding],0,0
-[CategoryDescription1]
-Meter=String
-Text=
-MeterStyle=VarDescription | RightPanel
-[CategoryTitleSeparator1]
 Meter=Image
-MeterStyle=CategoryTitleSeparator | RightPanel
-H=([#s_CategoryTitleBottomPadding] / 2)
+MeterStyle=FirstItem | FirstRightPanel
+Y=([#s_GenTopHeight])
+SolidColor=0,0,0,0
+W=0
+H=0
 
-[VarIcon0]
-Meter=String
-Text=[\xE9E9]
-MeterStyle=VarIcon | RightPanel
-FontSize=14
-[Var0]
-Meter=String
-Text=Internal variables  
-MeterStyle=VarTitle | RightPanel
-Y=-6r
-[Var0Description]
+[CategoryIcon0]
 Meter=String
 Text=
-MeterStyle=VarDescription | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value0]
+MeterStyle=RightPanel | GenIcon
+[Title0]
 Meter=String
-Text=Change to internal variable file
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\Variables.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
+Text=Instructions
+MeterStyle=GenTitle
+W=([#s_RightPanelW] - [CategoryIcon0:W])
+Padding=0,0,0,0
+[CategoryDescription0]
+Meter=String
+Text=For Settings to correctly parse your variables, you need to format the variable file.
+MeterStyle=RightPanel | GenDesc | ThickDescription
+[CategoryTitleSeparator0]
+Meter=Image
+MeterStyle=RightPanel | GenSeparator
 
-[VarIcon1]
+[Value6]
 Meter=String
-Text=[\xE9F3]
-MeterStyle=VarIcon | RightPanel
-FontSize=14
-Y=5R
-[Var1]
+Text=1. Read the RainDoc documentation
+MeterStyle=RightPanel | GenString | Link1
+LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
+
+[Value7]
 Meter=String
-Text=OnChangeAction
-MeterStyle=VarTitle | RightPanel
-Y=-6r
-[Var1Description]
+Text=2. Drag & Drop your formatted variable file on this skin
+MeterStyle=RightPanel | GenString | Link0
+
+[Value8]
 Meter=String
-Text=Ran everytime a variable is changed.
-MeterStyle=VarDescription | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value1]
+Text=3. Click on "Generate & Inject".
+MeterStyle=RightPanel | GenString | Link0
+
+[VarIcon2]
 Meter=String
-Text=Open s_OnChangeAction.inc
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=["#@#includes\s_OnChangeAction.inc"]
+Text=[\xE835]
+MeterStyle=RightPanel | GenSmallIcon
+[Var2]
+Meter=String
+Text=Example variable file
+MeterStyle=RightPanel | GenSmallTitle
+[Var2Description]
+Meter=String
+Text=
+MeterStyle=RightPanel | GenDesc
+[Value2]
+Meter=String
+Text=Change to the example file
+MeterStyle=RightPanel | VarString | GenString
+LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
 
