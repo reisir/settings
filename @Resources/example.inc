@@ -26,3 +26,6 @@ SkinWidth=400
 ;?Toggle | Name Enable automatic sizing
 autosize=1
 
+s_CurrentCategory=0
+s_ScrollLeft=-90
+s_ScrollRight=0

@@ -19,46 +19,42 @@ W=([#s_RightPanelW] - [CategoryIcon0:W])
 Padding=0,0,0,0
 [CategoryDescription0]
 Meter=String
-Text=a skin that generates settings skins for other skins.
+Text=a settings skin generator
 MeterStyle=VarDescription | ThickDescription | RightPanel
 [CategoryTitleSeparator0]
 Meter=Image
 MeterStyle=RightPanel | GenSeparator
 
-[VarIcon0]
+[Value6]
 Meter=String
-Text= 
+Text=1. Read the RainDoc documentation
+MeterStyle=RightPanel | GenString | Link1
+LeftMouseUpAction=["https://github.com/sceleri/settings/wiki"]
+
+[Value7]
+Meter=String
+Text=2. Drag & Drop your formatted variable file on this skin
+MeterStyle=RightPanel | GenString | Link0
+
+[Value8]
+Meter=String
+Text=3. Click on "[#s_GenerateText[#s_AutoInject]]"
+MeterStyle=RightPanel | GenString | Link0
+
+[VarIcon2]
+Meter=String
+Text=[\xE835]
 MeterStyle=RightPanel | GenSmallIcon
-[Var0]
+[Var2]
 Meter=String
-Text=Selected file 
+Text=Example variable file
 MeterStyle=RightPanel | GenSmallTitle
-[Var0Description]
+[Var2Description]
 Meter=String
-Text=[#s_DynamicVariableFile]
+Text=
 MeterStyle=RightPanel | GenDesc
-[Value0]
+[Value2]
 Meter=String
-Text=Click to open directory
+Text=Change to the example file
 MeterStyle=RightPanel | VarString | GenString
-LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
-
-[VarIcon1]
-Meter=String
-Text=[\xE90F] 
-MeterStyle=RightPanel | GenSmallIcon
-[Var1]
-Meter=String
-Text=Generation 
-MeterStyle=RightPanel | GenSmallTitle
-[Var1Description]
-Meter=String
-Text=This will delete all files in "[#s_Skin]\settings" and copy over the generated settings skin.
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-MeterStyle=RightPanel | GenDesc
-[Value1]
-Meter=String
-Text=Generate & Inject
-MeterStyle=RightPanel | VarString | GenString 
-LeftMouseUpAction=[!CommandMeasure Generator Construct]
-
+LeftMouseUpAction=[!SetVariable "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_RawPath" "#@#example.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]

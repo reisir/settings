@@ -65,7 +65,7 @@ s_DebugVarIconColor1=229,255,0,100
 s_DebugVarIconColor0=0,0,0,0
 ;?Color | 
 s_DebugToggleColor1=255,0,0,100
-s_DebugToggleColor0=0,0,0,0
+s_DebugToggleColor0=0,0,0,1
 ;?Color | 
 s_DebugColorColor1=255,0,0,100
 s_DebugColorColor0=0,0,0,0

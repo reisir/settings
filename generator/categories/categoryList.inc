@@ -10,23 +10,23 @@ MeterStyle=LeftPanel
 
 [GeneratorIcon0]
 Meter=String
-Text=[\xF259]
+Text=[\xE897]
 MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))
 DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 0][!Refresh]
-ToolTipText=Generate
+ToolTipText=Instructions
 
 [GeneratorIcon1]
 Meter=String
-Text=[\xE897]
+Text=[\xF259]
 MeterStyle=CategoryIcon | LeftPanel | Center
 Padding=0,0,0,0
 X=([#s_GeneratorLeftPanelWidth] / 2)
 Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
 DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 1][!Refresh]
-ToolTipText=Help
+ToolTipText=Generate
 

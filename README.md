@@ -22,21 +22,18 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
-- [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
-- [ ] Move scrollspeed to theme
 - [ ] Log errors ? Error rendering template ?
-- [ ] Refactor `Pipe-Variable` and `Pipe-Category`
-  - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
-    - This is mostly because I want the error logs to have access to the Name
-- [ ] Checkbox for auto-inject
+- [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
+  - This is mostly because I want the error logs to have access to the Name
 - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
 - [ ] Documentation
   - [ ] Write more examples for the wiki
   - [ ] Proofread the wiki
-  - [ ] Document Tooltip
-    - [ ] Make it work first
 - [ ] Better (custom ?) colour picker that can handle alpha
+  - [ ] Ability to type in color values
 - [ ] Another way to select file other than Drag & Drop
+- [x] Refactor `Pipe-Variable` and `Pipe-Category`
+- [x] Toggle for auto-inject
 - [x] Fix file needing to be in @Resources or its subdirectory to generate properly
 - [x] Get rid of the internal settings skin, not needed
 - [x] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
