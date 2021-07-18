@@ -472,10 +472,10 @@ function Prepare-Directories {
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Themes"
     New-Item -Path $injectPath -ItemType "directory" -Name $TargetDirectory.TrimEnd('/')
     # Remove files in generated directories
-    # Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
-    # Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
-    # Get-ChildItem -Path "$generatedThemesDir*" -Include "*.inc" | Remove-Item
-    Get-ChildItem -Path "$generatedSkinDir*" -Recurse -Include "*.inc" | Remove-Item
+    Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
+    Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    Get-ChildItem -Path "$generatedThemesDir*" -Include "*.inc" | Remove-Item
+    Get-ChildItem -Path "$generatedSkinDir*" -Include "*.ini" | Remove-Item
     Get-ChildItem -Path "$generatedAddonsDir*" | Remove-Item
 
     # Remove settings injected earlier
