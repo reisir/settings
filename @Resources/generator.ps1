@@ -53,23 +53,19 @@ function Construct {
 
     # GET OVERRIDES FROM VARIABLE FILE
     $overridePattern = '(?s-m)(;!.*?)(?=;@|$)'
-    $settingsFileContent -match $overridePattern
+    if($settingsFileContent -match $overridePattern) {
+        $Overrides = Filter-Properties -String $Matches[0]
+    } else {
+        $Overrides = @{
+            "SkinDirectory" = "Settings"
+            "SkinName" = "Settings"
+        }
+    }
 
-    $Overrides = Filter-Properties -String $Matches[0]
-
-    if($Overrides.SkinName) { $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" } 
-    else { $GeneratedSkinName = "Settings.ini" }
-
-    if($Overrides.SkinDirectory) {
-        $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
-        $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
-        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Includes\Variables.inc"
-     } 
-    else { 
-        $TargetDirectory = "Settings\"
-        $dynamicThemeFile = "#ROOTCONFIGPATH#Settings\Themes\1.inc"
-        $dynamicInternalVariableFile = "#ROOTCONFIGPATH#Settings\Includes\Variables.inc"
-     }
+    $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" 
+    $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
+    $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
+    $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Includes\Variables.inc"
 
     # Generated files
     $generatedSkinFile = "$($generatedSkinDir)$GeneratedSkinName"

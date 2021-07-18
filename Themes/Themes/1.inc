@@ -232,5 +232,5 @@ s_ToggleActiveColor=[#s_SelectedColor]
 s_ToggleInactiveColor=[#s_RightPanelBackgroundColor]
 
 s_ScrollLeft=0
-s_ScrollRight=0
-s_CurrentCategory=2
+s_ScrollRight=-240
+s_CurrentCategory=3

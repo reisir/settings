@@ -12,9 +12,6 @@ s_Theme1Name=Dark
 ;@Topic | Name Internal | 
 ;? | Name hidden | Hidden 1
 s_ScrollTreshold=[#s_PanelH]
-;s_ScrollRight=0
-;s_ScrollLeft=0
-;s_CurrentCategory=0
 s_SettingsTheme=1
 s_SaveScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight [#*s_ScrollRight*] "[#s_CurrentFile]"]
 s_SaveLeftScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight 0 "[#s_CurrentFile]"]
@@ -72,8 +69,3 @@ s_DebugToggleColor0=0,0,0,0
 ;?Color | 
 s_DebugColorColor1=255,0,0,100
 s_DebugColorColor0=0,0,0,0
-
-s_CurrentCategory=0
-s_ScrollLeft=0
-s_ScrollRight=0
-s_HideTopCorrector=0
