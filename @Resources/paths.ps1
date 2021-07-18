@@ -34,8 +34,7 @@ function Paths {
     }
 
     if($generate -eq 1) {
-        Start-Sleep 0.1
-        $RmAPI.Bang("[!CommandMeasure Generator Construct]")
+        $RmAPI.Bang("[!Refresh][!Delay 100][!CommandMeasure Generator Construct]")
     }
 
 }
