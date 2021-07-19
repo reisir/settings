@@ -36,9 +36,9 @@ s_TopBarColor=26,35,56,255
 ;?Color | Name Title text color
 s_TopFontColor=255,255,255
 ;? | Name Title font face
-s_TitleFont=Segoe UI Variable Display
+s_TitleFont=Segoe UI
 ;?Toggle | Name Show title bar rounding corrector | Invert 1
-s_HideTopCorrector=0
+s_HideTopCorrector=1
 ;?Integer | Name Title size
 s_TitleSize=15
 ;?Integer | Name Title nudge | Description Visual fix
@@ -68,7 +68,7 @@ s_FrostedGlassBorders=None
 
 ;@ | Name Font
 ;? | Name Font face 
-s_FontFace=Segoe UI Variable Display
+s_FontFace=Segoe UI
 ;? | Name Icon font face 
 s_IconFontFace=Segoe MDL2 Assets
 ;?Color | Name Font color  
@@ -232,5 +232,5 @@ s_ToggleActiveColor=[#s_SelectedColor]
 s_ToggleInactiveColor=[#s_RightPanelBackgroundColor]
 
 s_ScrollLeft=-90
-s_ScrollRight=0
-s_CurrentCategory=4
+s_ScrollRight=-240
+s_CurrentCategory=3
