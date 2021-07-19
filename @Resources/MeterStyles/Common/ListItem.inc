@@ -1,6 +1,5 @@
 [ListIcon]
 FontFace=#s_IconFontFace#
-AccurateText=1
 AntiAlias=1
 Y=0R
 X=0
@@ -15,7 +14,6 @@ FontFace=#s_FontFace#
 ClipString=2
 FontColor=[#s_FontColor]
 DynamicVariables=1
-AccurateText=1
 AntiAlias=1
 X=0R
 Y=0r

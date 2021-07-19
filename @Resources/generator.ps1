@@ -6,8 +6,6 @@ function Update {
 $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
 $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
 # $dynamicThemeFile = "#ROOTCONFIGPATH#settings\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
-$dynamicThemeFile = "#ROOTCONFIGPATH#settings\Themes\1.inc"
-$dynamicInternalVariableFile = "#ROOTCONFIGPATH#settings\includes\Variables.inc"
 
 # Generator directories
 $resourcesDir = "$($RmAPI.VariableStr('@'))"
@@ -25,6 +23,7 @@ $commonScriptsDir = "$($templatesDir)Common\"
 
 # Title script for easy access in Variable template scripts
 $variableCommonScript = "$($commonScriptsDir)VariableCommons.ps1"
+$listCommonScript = "$($commonScriptsDir)ListCommons.ps1"
 
 # Defaults
 $defaultVariableType = "String"
@@ -38,13 +37,6 @@ $generatedIncludeDir = "$($generatedSkinDir)Includes\"
 $generatedAddonsDir = "$($generatedSkinDir)Addons\"
 $generatedThemesDir = "$($generatedSkinDir)Themes\"
 
-# Generated files
-$generatedSkinFile = "$($generatedSkinDir)Settings.ini"
-
-# Injectors
-$targetSkin = $RmAPI.VariableStr('s_Skin')
-$injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$($targetSkin)\"
-
 # Testfile
 $testfile = "$($resourcesDir)test.inc"
 
@@ -55,23 +47,46 @@ function Construct {
     $categoryTypes = @(Get-ChildItem -Path $($categoryScriptsDir) -Name | % { $_.Split('.')[0] })
     $listTypes = @(Get-ChildItem -Path $($listitemScriptsDir) -Name | % { $_.Split('.')[0] })
 
-    # Reset directories, copy files etc.
-    Prepare-Directories
-
-    # Read settings file
+    # Read variables file
+    $RmAPI.Log("Parsing settings file")
     $settingsFileContent = Get-Content $variableFilePath -Raw
 
-    # Filter settings file into staggered array
-    $RmAPI.Log("Parsing settings file")
+    # GET OVERRIDES FROM VARIABLE FILE
+    $overridePattern = '(?s-m)(;!.*?)(?=;@|$)'
+    if($settingsFileContent -match $overridePattern) {
+        $Overrides = Filter-Properties -String $Matches[0]
+    } else {
+        $Overrides = @{
+            "SkinDirectory" = "Settings"
+            "SkinName" = "Settings"
+        }
+    }
 
-    # Regex patterns
-    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
+    $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" 
+    $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
+    $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
+    $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Includes\Variables.inc"
+
+    # Generated files
+    $generatedSkinFile = "$($generatedSkinDir)$GeneratedSkinName"
+
+    # Injectors
+    $targetSkin = $RmAPI.VariableStr('s_Skin')
+    $injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$targetSkin\$TargetDirectory"
+
+    $RmAPI.LogWarning("Generating $injectPath")
 
     # TODO: Handle unformatted variable files
     if($settingsFileContent -notmatch $categoryPattern) {
         $RmAPI.LogError("Variable file is not formatted")
         return
     }
+
+    # Reset directories, copy files etc.
+    Prepare-Directories
+
+    # Regex patterns
+    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
     
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     $settings = @(
@@ -87,7 +102,7 @@ function Construct {
         "SettingsFile" = $dynamicVariableFile
         "ThemeFile" = $dynamicThemeFile
     }
-    &"$($templatesDir)Rainmeter.ps1" -Options $RainmeterOptions > $generatedSkinFile
+    &"$($templatesDir)Rainmeter.ps1" -Options $RainmeterOptions -Overrides $Overrides > $generatedSkinFile
     
     # Construct categories
     $settings | ForEach-Object { $i = 0 } {
@@ -101,7 +116,11 @@ function Construct {
 
     Join-MeterStyles
 
-    Inject-Settings
+    &"$($templatesDir)TitleBar.ps1" -Overrides $Overrides > "$($generatedIncludeDir)TitleBar.inc"
+    
+    $Overrides > $testfile
+
+    Inject-Settings -Path $injectPath
 
 }
 
@@ -329,6 +348,8 @@ function Category-List {
 
     # First Item template
     $ini = &"$($templatesDir)FirstItem.ps1" -Side "Left"
+
+    ."$listCommonScript"
     
     # Loop through the categories
     $Settings | ForEach-Object { $i = 0 } {
@@ -340,7 +361,7 @@ function Category-List {
         if($listTypes -NotContains $_.Type) { $Type = $defaultListItemType }
 
         # Call the appropriate ListItem template script
-        $ini += &"$($listitemScriptsDir)$($Type).ps1" -Category $_ -InternalSettingsFile $dynamicInternalVariableFile
+        $ini += &"$($listitemScriptsDir)$($Type).ps1" -Category $_ 
         $ini += "`n`n"
         $i++
     }
@@ -383,6 +404,39 @@ function Filter-Hashtable {
 
 }
 
+function Filter-Properties {
+    param (
+    [Parameter(Mandatory=$true)]
+    [string]
+    $String
+    )
+
+    $Patterns = @{
+        "UnfilteredProperty" = '(?s-m)(?<=\|)(.*?)(?=\||\n|$)'
+        "PropertyKey" = '^\s*(.*?)\s|$|\n'
+        "PropertyValue" = '(?s-m)\s?.*?\s(.*?)(?=$|\n|\|)'
+    }
+
+    $hash = @{}
+    # Match every | Key Value | pair from the property line
+    Select-String -Pattern $Patterns.UnfilteredProperty -input $String -AllMatches | ForEach-Object {
+        # Filter each matched $category
+        foreach ($UnfilteredProperty in $_.Matches) {
+            $key, $value = ""
+            if($UnfilteredProperty -match $Patterns.PropertyValue) {
+                $value = $Matches[1]
+            }
+            # Only add the property to the hashtable if it has a key.
+            if($UnfilteredProperty -match $Patterns.PropertyKey) {
+                $key = Remove-Whitespace -String $Matches[1]
+                $hash["$key"] = "$value"
+            }
+        }
+    }
+
+    return $hash
+}
+
 function Remove-Newline {
     param (
         [Parameter()]
@@ -412,12 +466,16 @@ function Prepare-Directories {
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Includes"
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Addons"
     New-Item -Path $generatedSkinDir -ItemType "directory" -Name "Themes"
-    New-Item -Path $injectPath -ItemType "directory" -Name "Settings"
+    New-Item -Path $injectPath -ItemType "directory" -Name $TargetDirectory.TrimEnd('/')
     # Remove files in generated directories
     Get-ChildItem -Path "$generatedCategoriesDir*" -Include *.inc | Remove-Item
     Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
+    Get-ChildItem -Path "$generatedThemesDir*" -Include "*.inc" | Remove-Item
+    Get-ChildItem -Path "$generatedSkinDir*" -Include "*.ini" | Remove-Item
+    Get-ChildItem -Path "$generatedAddonsDir*" | Remove-Item
+
     # Remove settings injected earlier
-    Get-ChildItem -Path "$($injectPath)Settings\*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
+    Get-ChildItem -Path "$($injectPath)$TargetDirectory*" -Include @("*.inc","*.ini","RainRGB4RunCommand.exe") | Remove-Item
     # Copy Includes to generated skin
     Copy-Item -Path "$includeDir*" -Destination $generatedIncludeDir -Recurse
     # Copy Themes to generated skin
@@ -427,12 +485,17 @@ function Prepare-Directories {
 }
 
 function Inject-Settings {
+    param (
+        [Parameter()]
+        $Path
+    )
+
     # Inject generated settings
-    Copy-Item -Path "$generatedSkinDir*" -Destination "$($injectPath)settings\" -Recurse
-    
+    Copy-Item -Path "$generatedSkinDir*" -Destination $Path -Recurse
+
     $RmAPI.Log("Refreshing Rainmeter")
     $RmAPI.Bang('[!RefreshApp]')
     # $RmAPI.Bang('[!ActivateConfig]$($targetSkin)\settings\settings.ini')
     $RmAPI.Log("Loading generated settings skin")
-    Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\settings", "settings.ini"
+    Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\$TargetDirectory", "`"$GeneratedSkinName`""
 }

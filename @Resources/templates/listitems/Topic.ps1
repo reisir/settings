@@ -1,37 +1,32 @@
 param (
     [Parameter()]
     [System.Collections.Hashtable]
-    $Category,
-    [Parameter()]
-    [String]
-    $InternalSettingsFile
+    $Category
 )
 
 $ini = @"
-[ListItem$($Category.Index)]
-Meter=Image
-W=[#s_LeftPanelW]
-H=([ListIcon$($Category.Index):H] > [ListTitle$($Category.Index):H]) ? [ListIcon$($Category.Index):H] : [ListTitle$($Category.Index):H]
-SolidColor=255,255,255
-MeterStyle=LeftPanel
+$(ListContainer)
 
 [ListIcon$($Category.Index)]
 Meter=String
 Text=$($Category.Icon)
-MeterStyle=ListIcon | ListTopicIcon
-Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
 Container=ListItem$($Category.Index)
+MeterStyle=ListIcon | ListTopicIcon
+Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
+
 
 [ListTitle$($Category.Index)]
 Meter=String
 Text=$($Category.Name)
 MeterStyle=ListItem | ListTopicItem 
-W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]) - [#s_ListTopicGap])
-Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
+ClipStringW=([#s_LeftPanelW] - [ListIcon$($Category.Index):W] - [#s_ListRightPadding] - [#s_ListTopicGap])
+Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
+$(ListX)
 FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_FontWeight]
 Container=ListItem$($Category.Index)
-ToolTipTitle=$($Category.Name)
-ToolTipText=$($Category.Tooltip)
+
+$(SelectedIndicator)
+
 "@
 
 return $ini

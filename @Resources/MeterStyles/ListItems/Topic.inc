@@ -1,10 +1,9 @@
 [ListTopicIcon]
 Padding=[#s_ListTopicLeftPadding],[#s_ListYPadding],0,[#s_ListYPadding]
-FontSize=#s_FontSize3#
+FontSize=#s_ListTopicSize#
 FontColor=[#s_FontColor]
 
 [ListTopicItem]
-FontSize=#s_FontSize4#
+FontSize=#s_ListTopicSize#
 FontColor=[#s_FontColor]
-X=([#s_ListTopicGap])R
 

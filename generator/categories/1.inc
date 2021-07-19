@@ -1,86 +1,114 @@
 [FirstRight]
-Meter=String
-Text=First
-FontColor=0,0,0,0
-MeterStyle=FirstItem | FirstRightPanel
-Y=[#s_ScrollRight]
-
-[CategoryIcon1]
-Meter=String
-Text=
-MeterStyle=CategoryIcon | RightPanel
-Padding=[#s_CategoryTitleXPadding],[#s_CategoryTitleXPadding],0,0
-Y=0
-[Title1]
-Meter=String
-Text=
-MeterStyle=CategoryTitle | RightPanel
-W=([#s_RightPanelW] - [CategoryIcon1:W])
-Padding=0,[#s_CategoryTitleXPadding],0,0
-[CategoryDescription1]
-Meter=String
-Text=The generated theme settings skins edit the original file so you'll have to regenerate to see the effects of your changes.
-MeterStyle=VarDescription | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[CategoryTitleSeparator1]
 Meter=Image
-MeterStyle=CategoryTitleSeparator | RightPanel
-H=([#s_CategoryTitleBottomPadding] / 2)
+MeterStyle=FirstItem | FirstRightPanel
+Y=([#s_GenTopHeight])
+SolidColor=0,0,0,0
+W=0
+H=0
 
-[VariableIcon0]
+[CategoryIcon0]
 Meter=String
 Text=
-MeterStyle=VariableIcon | RightPanel
+MeterStyle=RightPanel | GenIcon
+[Title0]
+Meter=String
+Text=Generation
+MeterStyle=GenTitle
+W=([#s_RightPanelW] - [CategoryIcon0:W])
+Padding=0,0,0,0
+[CategoryDescription0]
+Meter=String
+Text=
+MeterStyle=RightPanel | GenDesc | ThickDescription
+[CategoryTitleSeparator0]
+Meter=Image
+MeterStyle=RightPanel | GenSeparator
+
+[VarIcon0]
+Meter=String
+Text= 
+MeterStyle=RightPanel | GenSmallIcon
 [Var0]
 Meter=String
-Text=Themes:
-MeterStyle=VarTitle | RightPanel
+Text=Selected file 
+MeterStyle=RightPanel | GenSmallTitle
 [Var0Description]
 Meter=String
-Text=
-MeterStyle=VarDescription | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value0]
-Meter=String
-Text=Change to theme: [#s_Theme0Name]
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "0"][!WriteKeyValue Variables "s_SettingsTheme" "0" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\0.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
-Padding=0,0,0,0
-[Value1]
-Meter=String
-Text=Change to theme: [#s_Theme1Name]
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "1"][!WriteKeyValue Variables "s_SettingsTheme" "1" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\1.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
-Padding=0,0,0,0
-[Value2]
-Meter=String
-Text=Change to theme: [#s_Theme2Name]
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!SetVariable "s_SettingsTheme" "2"][!WriteKeyValue Variables "s_SettingsTheme" "2" "#@#includes\Variables.inc"][!SetVariable "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_RawPath" "#@#includes\themes\2.inc"][!WriteKeyValue Variables "s_Type" "inc"][#s_FileChangeAction]
-Y=0R
-Padding=0,0,0,0
+Text=[#s_DynamicVariableFile]
+MeterStyle=RightPanel | GenDesc
+; [Value0]
+; Meter=String
+; Text=Click to open directory
+; MeterStyle=RightPanel | VarString | GenString
+; LeftMouseUpAction=["#ROOTCONFIGPATH#[#s_DynamicVariableDirectory]"]
 
-[VariableIcon1]
+[VarIcon2]
 Meter=String
-Text=
-Y=[#s_VariableYPadding]R
-MeterStyle=VariableIcon | RightPanel
+Text= 
+MeterStyle=RightPanel | GenSmallIcon
+[Var2]
+Meter=String
+Text=Auto Inject
+MeterStyle=RightPanel | GenSmallTitle
+[Var2Description]
+Meter=String
+Text=Copies the generated Settings to your skin
+W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
+MeterStyle=RightPanel | GenDesc
+
+[VariableContainer2]
+MeterStyle=RightPanel | VariableContainer
+Meter=Image
+H=(20 + 7)
+X=r
+Y=R
+
+[ToggleOff2]
+Meter=Shape
+Shape=Line 0,0,(25),0 | Extend Line
+Shape2=Ellipse (2.5/2),0,((20 - (2.5 * 2))/2),((20 - (2.5 * 2))/2) | Extend Circle
+Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
+Line=StrokeWidth 20 | Stroke Color [#s_FontColor] | StrokeStartCap Round | StrokeEndCap Round
+Hidden=([#s_AutoInject])
+LeftMouseUpAction=[!WriteKeyValue Variables "s_AutoInject" 1][!Refresh]
+MeterStyle=VarToggle
+Container=VariableContainer2
+
+[ToggleOn2]
+Meter=Shape
+Shape=Line 0,0,(25),0 | Extend Line
+Shape2=Ellipse ((25) - (2.5/2)),0,((20 - (2.5 * 2))/2),((20 - (2.5 * 2))/2) | Extend Circle
+Circle=StrokeWidth 0 | Fill Color [#s_RightPanelBackgroundColor]
+Line=StrokeWidth 20 | Stroke Color [#s_ToggleActiveColor] | StrokeStartCap Round | StrokeEndCap Round
+Hidden=([#s_AutoInject] - 1)
+LeftMouseUpAction=[!WriteKeyValue Variables "s_AutoInject" 0][!Refresh]
+MeterStyle=VarToggle
+Container=VariableContainer2
+
+
+
+[VarIcon1]
+Meter=String
+Text= 
+MeterStyle=RightPanel | GenSmallIcon
 [Var1]
 Meter=String
-Text=
-MeterStyle=VarTitle | RightPanel
+Text=Generation 
+MeterStyle=RightPanel | GenSmallTitle
 [Var1Description]
 Meter=String
-Text=Theme names can be changed in Settings' Internal variables
-MeterStyle=VarDescription | RightPanel
+Text=[#s_GenerateDescription[#s_AutoInject]]
 W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding] * 2)
-[Value3]
-Meter=String
-Text=Go to internal tab
-MeterStyle=VarString | RightPanel
-W=([#s_GeneratorRightPanelWidth] - [#s_VariableXPadding])
-LeftMouseUpAction=[!WriteKeyValue Variables s_GenCurrentCategory 2][!Refresh]
+MeterStyle=RightPanel | GenDesc
 
+[Generate]
+Meter=String
+Text=[#s_GenerateText[#s_AutoInject]]
+; X=62
+; Y=((20 / 2) - ([#CURRENTSECTION#:H] / 2)) + ([#s_VariableYPadding])
+; Container=VariableContainer2
+FontSize=12
+Padding=20,0,0,0
+MeterStyle=RightPanel | VarString | GenString 
+DynamicVariables=1
+LeftMouseUpAction=[!CommandMeasure Generator Construct]

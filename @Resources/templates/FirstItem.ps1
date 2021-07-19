@@ -6,11 +6,12 @@ param (
 
 $ini = @"
 [First$($Side)]
-Meter=String
-Text=First
-FontColor=0,0,0,0
+Meter=Image
 MeterStyle=FirstItem | First$($Side)Panel
-Y=[#s_Scroll$($Side)]
+Y=([#s_Scroll$($Side)] + [#s_TopHeight])
+SolidColor=0,0,0,0
+W=0
+H=0
 
 
 "@

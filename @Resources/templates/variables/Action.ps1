@@ -13,9 +13,16 @@ $(Title)
 [VariableValue$($Variable.Index)]
 Meter=String
 Text=$($Variable.Key)
-MeterStyle=VarString | Link$($Variable.Link)
+MeterStyle=VarString | RightPanel | Link$($Variable.Link)
 $(FontFace)
-LeftMouseUpAction=["$($Variable.Value)"]
+
+$(if($Variable.Value) {
+if( @("[", "!") -contains $Variable.Value.Trim().SubString(0,1)){
+"LeftMouseUpAction=$($Variable.Value)"
+} else {
+"LeftMouseUpAction=[`"$($Variable.Value)`"]"
+}
+})
 
 [MeasureLinkStatus$($Variable.Index)]
 Measure=Calc

@@ -22,39 +22,35 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
-- [ ] Close button
-- [ ] Make the upcoming image picker preset able to check if it's the only instance in that category
-- [ ] Check if containers can be taller than their contents without affecting flow
-- [ ] Redo the Settings skins separate from the generated skins styles etc
-- [ ] Clamp based scrolling
-  - [ ] Figure out a better way to make the scroll indicator work
-- [ ] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
 - [ ] Log errors ? Error rendering template ?
-- [ ] Refactor `Pipe-Variable` and `Pipe-Category`
-  - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
-    - This is mostly because I want the error logs to have access to the Name
-- [ ] Checkbox for auto-inject
-- [ ] Test if file needs to be in @Resources or its subdirectory
+- [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
+  - This is mostly because I want the error logs to have access to the Name
 - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
 - [ ] Documentation
   - [ ] Write more examples for the wiki
   - [ ] Proofread the wiki
-  - [ ] Document Tooltip
-    - [ ] Make it work first
-- [ ] Invert property for toggles
-  - [ ] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
-- [ ] Selected indicator doesn't take scrolling into account
-- [ ] Change the version in rainmeter.inc template
-- [ ] Internal settings
-  - [ ] Reset s_OnChangeAction before release
-  - [ ] Close button
-    - [ ] Set category back to 0
-    - [ ] Way to set the default category
-  - [ ] Toggle for variable indenting
 - [ ] Better (custom ?) colour picker that can handle alpha
+  - [ ] Ability to type in color values
 - [ ] Another way to select file other than Drag & Drop
-- [ ] Add way to change the icon font per Icon
-- [ ] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Refactor `Pipe-Variable` and `Pipe-Category`
+- [x] Toggle for auto-inject
+- [x] Fix file needing to be in @Resources or its subdirectory to generate properly
+- [x] Get rid of the internal settings skin, not needed
+- [x] Separate generator tabs into their own skins? Make Settings into a suite just for building settings skins?
+- [x] Redo the Settings generator skins separate from the generated skins styles etc
+- [x] Check if containers can be taller than their contents without affecting flow
+  - It affects flow
+- [x] LeftMouseUpAction override instead of using info variables
+- [x] Add way to change the icon font per Icon
+- [x] Make the skin remember the scroll position when variables are changed and the skin is refreshed
+- [x] Change the version in rainmeter.inc template
+- [x] Figure out a better way to make the scroll indicator work
+  - It's not better but it works
+- [x] Close button
+- [x] Implement scrolling again
+- [x] Make variables use `ClipStringW` instead of `W` so death.crafter stops complaining about clicking on them
+- [x] Selected indicator doesn't take scrolling into account
+  - Fixed by making a selected indicator for each list item
 - [x] Rename VarContainer etc to VariableContainer
 - [x] Padding between items and icons
 - [x] Fix InputText position
@@ -66,3 +62,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 - [x] Combine meterstyles from separate files into one big file and @Include that to the main .ini
 - [x] Dynamically get list of templates for $implementedTypes
 - [x] Add safety newlines after variable templates
+- [x] Invert property for toggles
+  - [x] Maybe just use `[\xF19E]` and `[\xF19F]` for toggles?
+    - Doesn't work :(
+- [ ] Check that all of the items in this list actually work

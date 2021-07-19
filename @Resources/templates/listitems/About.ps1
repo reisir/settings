@@ -1,39 +1,33 @@
 param (
     [Parameter()]
     [System.Collections.Hashtable]
-    $Category,
-    [Parameter()]
-    [String]
-    $InternalSettingsFile
+    $Category
 )
 
 $ini = @"
-[ListItem$($Category.Index)]
-Meter=Image
-W=[#s_LeftPanelW]
-H=([ListIcon$($Category.Index):H] > [ListTitle$($Category.Index):H]) ? [ListIcon$($Category.Index):H] : [ListTitle$($Category.Index):H]
-SolidColor=255,255,255
-MeterStyle=LeftPanel
+$(ListContainer)
 
 [ListIcon$($Category.Index)]
 Meter=String
 Text=$($Category.Icon)
-MeterStyle=ListIcon | ListAboutIcon
-Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2) 
 Container=ListItem$($Category.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
+MeterStyle=ListIcon | ListAboutIcon
+Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "[#s_CurrentFile]"][#s_SaveLeftScroll][!Delay 1][!Refresh]
 
 [ListTitle$($Category.Index)]
 Meter=String
 Text=$($Category.Name)
 MeterStyle=ListItem | ListAboutItem
-W=([#s_LeftPanelW] - ([ListIcon$($Category.Index):W] + [#s_ListRightPadding]) - [#s_ListAboutGap])
-Y=([ListItem$($Category.Index):H] / 2 - [#CURRENTSECTION#:H] / 2)
-FontWeight=([#s_CurrentCategory] = $($Category.Index)) ? [#s_SelectedFontWeight] : [#s_VariableTitleFontWeight]
-ToolTipTitle=$($Category.Name)
-ToolTipText=$($Category.Tooltip)
+ClipStringW=([#s_LeftPanelW] - [ListIcon$($Category.Index):W] - [#s_ListRightPadding] - [#s_ListAboutGap])
+Y=([#s_List$($Category.Type)TopPadding] + (([ListItem$($Category.Index):H] - [#s_List$($Category.Type)TotalPadding]) / 2) - ([#CURRENTSECTION#:H] / 2))
+$(ListX)
+FontWeight=[#s_SelectedFontWeight]
 Container=ListItem$($Category.Index)
-LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "$($InternalSettingsFile)"][!Refresh]
+LeftMouseUpAction=[!WriteKeyValue Variables s_CurrentCategory $($Category.Index) "[#s_CurrentFile]"][#s_SaveLeftScroll][!Delay 1][!Refresh]
+
+$(SelectedIndicator)
+
 "@
 
 return $ini

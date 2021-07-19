@@ -1,9 +1,8 @@
 [VarString]
-AccurateText=1
 AntiAlias=1
 FontColor=[#s_FontColor]
 FontFace=[#s_FontFace]
-FontSize=[#s_FontSize3]
+FontSize=[#s_VarTextSize]
 ClipString=2
 Padding=[#s_VariableXPadding],[#s_VariableYPadding],[#s_VariableXPadding],[#s_VariableYPadding]
 W=([#s_RightPanelW] - [#s_VariableXPadding] * 2)

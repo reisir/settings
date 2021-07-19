@@ -1,10 +1,9 @@
 [ListDefaultIcon]
 Padding=[#s_ListDefaultLeftPadding],[#s_ListYPadding],0,[#s_ListYPadding]
-FontSize=#s_FontSize2#
+FontSize=#s_ListDefaultSize#
 FontColor=[#s_FontColor]
 
 [ListDefaultItem]
-FontSize=#s_FontSize3#
+FontSize=#s_ListDefaultSize#
 FontColor=[#s_FontColor]
-X=([#s_ListDefaultGap])R
 
