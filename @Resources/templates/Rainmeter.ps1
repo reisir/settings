@@ -44,6 +44,10 @@ Plugin=FrostedGlass
 Type=[#s_FrostedGlassMode]
 Border=[#s_FrostedGlassBorders]
 
+[Ternary]
+Measure=Script
+ScriptFile=Addons\TerLua.lua
+
 [IncludeMeterStyles]
 @IncludeMeterStyles=#ROOTCONFIGPATH#$($dir)\Includes\MeterStyles.inc
 

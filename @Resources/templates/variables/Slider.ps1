@@ -80,7 +80,7 @@ Group=Sliders$($Variable.Index)
 
 [SliderValue$($Variable.Index)]
 Meter=String
-X=([#s_LeftPanelW]+[#s_VariableXPadding] + $($Variable.Width) + 15)
+X=([#s_LeftPanelW]+[#s_VariableXPadding] + $($Variable.Width) + 25)
 Y=r
 Text=[#$($Variable.Key)]
 FontSize=12
