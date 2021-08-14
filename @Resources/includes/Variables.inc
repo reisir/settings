@@ -69,3 +69,6 @@ s_DebugToggleColor0=0,0,0,1
 ;?Color | 
 s_DebugColorColor1=255,0,0,100
 s_DebugColorColor0=0,0,0,0
+s_CurrentCategory=4
+s_ScrollLeft=0
+s_ScrollRight=0

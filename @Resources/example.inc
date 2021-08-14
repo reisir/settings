@@ -7,6 +7,20 @@ Settings wiki=https://github.com/sceleri/settings/wiki
 ;?Action | Name Open the example file | Link 2
 example.inc=#@#example.inc
 
+; death.crafter tests
+
+;?Slider | Name SliderTest | Width 400 | MinValue -20 | MaxValue 50 | Precision 1 | Scroll 1,1,0 | Precision 1
+sliderVar=32
+
+;?List | Name List Test | Options Use bold, boldBool; Use Italic, italicBool ; Underline
+boldBool=1
+italicBool=1
+Underline=0
+
+;?Radio | Name RadioTest | Options Managing Director, LevelO; Manager, LevelA ; Supervisor, LevelB ; Employee, LevelC
+DesignationLevel=LevelB
+
+
 ;@Topic | Name Personalization | Icon [\xE771]
 ;@ | Name Font | Icon [\xE986]
 ;?String | Name Font face | Description The font used throughout the skin
