@@ -20,24 +20,28 @@ function Construct {
     $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
     $targetSkin = $RmAPI.VariableStr('s_Skin')
 
-
     if ($dyn) { $raw = "$($skinspath)$($dyn)" }
 
     if ($raw) {
+        $variableFilePath = $raw
         $dynamicVariableFile = $raw -replace "$([Regex]::Escape($skinspath))", ""
         $threepattern = '(.*?)\\(.*)\\(.*?)$'
         $twopattern = '(.*?)\\(.*?)$'
         if ($dynamicVariableFile -match $threepattern) {
-            $dynamicVariableFile = $Matches[0]
+            $dyn = $Matches[0]
             $targetSkin = $Matches[1]
         }
         else { 
             if ($dynamicVariableFile -match $twopattern) {
-                $dynamicVariableFile = $Matches[0]
+                $dyn = $Matches[0]
                 $targetSkin = $Matches[1]
             }
         }
+        $dynamicVariableFile = "#SKINSPATH#$($dyn)"
     }
+
+    $RmAPI.LogWarning("$dynamicVariableFile")
+    $RmAPI.LogWarning("$targetSkin")
 
     # Unused
     # $dynamicThemeFile = "#ROOTCONFIGPATH#settings\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
@@ -81,13 +85,15 @@ function Construct {
     $listTypes = @(Get-ChildItem -Path $($listitemScriptsDir) -Name | % { $_.Split('.')[0] })
 
     # Read variables file
-    $RmAPI.Log("Parsing settings file")
+    # $RmAPI.Log("Parsing settings file")
     $settingsFileContent = Get-Content $variableFilePath -Raw
 
     # GET OVERRIDES FROM VARIABLE FILE
     $overridePattern = '(?s-m)(;!.*?)(?=;@|$)'
     if ($settingsFileContent -match $overridePattern) {
         $Overrides = Filter-Properties -String $Matches[0]
+        $Overrides.SkinName = $Overrides.SkinName.Trim()
+        $Overrides.SkinDirectory = $Overrides.SkinDirectory.Trim()
     }
     else {
         $Overrides = @{
@@ -96,10 +102,10 @@ function Construct {
         }
     }
 
-    $GeneratedSkinName = "$($Overrides.SkinName.Trim()).ini" 
-    $TargetDirectory = "$($Overrides.SkinDirectory.Trim())\"
-    $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Themes\1.inc"
-    $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory.Trim())\Includes\Variables.inc"
+    $GeneratedSkinName = "$($Overrides.SkinName).ini" 
+    $TargetDirectory = "$($Overrides.SkinDirectory)\"
+    $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory)\Themes\1.inc"
+    $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory)\Includes\Variables.inc"
 
     # Generated files
     $generatedSkinFile = "$($generatedSkinDir)$GeneratedSkinName"
@@ -144,7 +150,7 @@ function Construct {
     }
 
     # Construct category list
-    $RmAPI.Log("Category list")
+    # $RmAPI.Log("Category list")
     Category-List -Settings $settings
 
     Join-MeterStyles

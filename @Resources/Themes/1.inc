@@ -38,7 +38,7 @@ s_TopFontColor=255,255,255
 ;? | Name Title font face
 s_TitleFont=Segoe UI
 ;?Toggle | Name Show title bar rounding corrector | Invert 1
-s_HideTopCorrector=1
+s_HideTopCorrector=0
 ;?Integer | Name Title size
 s_TitleSize=15
 ;?Integer | Name Title nudge | Description Visual fix
@@ -242,5 +242,5 @@ s_SliderDefaultMinValue=0
 s_SliderDefaultMaxValue=100
 
 s_ScrollLeft=0
-s_ScrollRight=-120
-s_CurrentCategory=2
+s_ScrollRight=-270
+s_CurrentCategory=3
