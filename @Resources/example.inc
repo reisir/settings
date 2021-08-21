@@ -1,5 +1,5 @@
 [Variables]
-;@About | Name About | Description an example settings skin generated from example.inc | Icon [\xE897]
+;@About | Name About | Description an example of a generated settings skin | Icon [\xE897]
 ;?Action | Name Disclaimer | Link 0
 These variables don't actually control anything=https://google.com
 ;?Action | Name Generate your own Settings skin: | Link 1

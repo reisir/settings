@@ -1,7 +1,7 @@
 [Variables]
 
 ;! | SkinName Theme 1 | SkinDirectory Themes
-s_OnChangeAction=[!Log "Theme Changed"][!CommandMeasure Paths """Paths "#s_CurrentFile#" 1""" #ROOTCONFIG#]
+s_OnChangeAction=[!Log "Theme Changed"][!CommandMeasure Generator """Construct -raw "#s_CurrentFile#"""" #ROOTCONFIG#]
 
 ;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
 ;?Action | Description Link test | Link 1
@@ -38,7 +38,7 @@ s_TopFontColor=255,255,255
 ;? | Name Title font face
 s_TitleFont=Segoe UI
 ;?Toggle | Name Show title bar rounding corrector | Invert 1
-s_HideTopCorrector=0
+s_HideTopCorrector=1
 ;?Integer | Name Title size
 s_TitleSize=15
 ;?Integer | Name Title nudge | Description Visual fix
@@ -242,5 +242,5 @@ s_SliderDefaultMinValue=0
 s_SliderDefaultMaxValue=100
 
 s_ScrollLeft=0
-s_ScrollRight=0
-s_CurrentCategory=1
+s_ScrollRight=-120
+s_CurrentCategory=2
