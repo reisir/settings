@@ -22,10 +22,10 @@ Remove-Variable scroll
 
 $doubler = {
     param(
-        $ini,
+        $string,
         $precision
     )
-    return "(Round(($ini),$precision))"
+    return "(Round(($string),$precision))"
 }
 
 $scroll = if ($scrollHash.isInverted -eq 0) {

@@ -22,6 +22,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 ## TODO:
 
+- [ ] Make UsePlugin work
 - [ ] Log errors ? Error rendering template ?
 - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
   - This is mostly because I want the error logs to have access to the Name

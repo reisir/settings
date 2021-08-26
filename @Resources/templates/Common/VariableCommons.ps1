@@ -1,23 +1,26 @@
 # Common functions for variable scripts
 
 function FontFace {
-    if($Variable.Font) {
+    if ($Variable.Font) {
         return "FontFace=$($Variable.Font)"
-    } else {
+    }
+    else {
         return "FontFace=#s_FontFace#"
     }
 }
 
 function IconText {
-    if($Variable.Icon) {
+    if ($Variable.Icon) {
         $icon = "Text=$($Variable.Icon)`n"
-        if($Variable.IconFont) {
+        if ($Variable.IconFont) {
             $icon += "FontFace=$($Variable.IconFont)`n"
-        } else {
+        }
+        else {
             $icon += "FontFace=#s_IconFontFace#`n"
         }
         return $icon
-    } else {
+    }
+    else {
         return "Hidden=1"
     }
 }
@@ -53,15 +56,4 @@ $(if($Variable.Description) {
 })
 
 "@
-}
-
-function UsePlugin {
-    param (
-        [Parameter()]
-        [String]
-        $Plugin
-    )
-
-    $usedPlugins[$Plugin] = $true
-    
 }

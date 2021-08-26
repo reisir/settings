@@ -10,7 +10,7 @@ example.inc=#@#example.inc
 ; death.crafter tests
 
 ;?Slider | Name SliderTest | Width 400 | MinValue -20 | MaxValue 50 | Precision 1 | Scroll 1,1,0 | Precision 1
-sliderVar=32
+sliderVar=16.8
 
 ;?List | Name List Test | Options Use bold, boldBool; Use Italic, italicBool ; Underline
 boldBool=1

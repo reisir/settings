@@ -9,13 +9,15 @@ Padding=0,[#s_List$($Category.Type)TopPadding],0,[#s_List$($Category.Type)Bottom
 SolidColor=255,255,255
 MeterStyle=LeftPanel
 
+
 "@
 }
 
 function ListX { 
-    if($Category.Icon) {
+    if ($Category.Icon) {
         return "X=([#s_List$($Category.Type)Gap])R`n"
-    } else {
+    }
+    else {
         return "X=R`n"
     }
 }

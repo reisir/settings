@@ -2,6 +2,24 @@ function Update {
 
 }
 
+$usedPlugins = @{
+    "FrostedGlass" = $true
+}
+
+# Function and variable used by templates and the generator to register used plugins.
+# So that the generator skin can display a list of plugins that need to be included in the users .rmskin
+# I put it up here so it's 100% registered before anything else and can be used without dotsourcing
+function UsePlugin {
+    param (
+        [Parameter()]
+        [String]
+        $Plugin
+    )
+
+    $usedPlugins[$Plugin] = $true
+    
+}
+
 function Construct {
     
     param(
@@ -15,13 +33,16 @@ function Construct {
 
     # Variables from Rainmeter
     $skinspath = "$($RmAPI.VariableStr('SKINSPATH'))"
+    $resourcesDir = "$($RmAPI.VariableStr('@'))"
+    $rootConfig = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))"
+
     # Variables from generator.ini 
     $variableFilePath = "$($RmAPI.VariableStr('s_RawPath'))"
     $dynamicVariableFile = "#SKINSPATH#$($RmAPI.VariableStr('s_DynamicVariableFile'))"
     $targetSkin = $RmAPI.VariableStr('s_Skin')
 
+    # I know this is fucky, but it works.
     if ($dyn) { $raw = "$($skinspath)$($dyn)" }
-
     if ($raw) {
         $variableFilePath = $raw
         $dynamicVariableFile = $raw -replace "$([Regex]::Escape($skinspath))", ""
@@ -40,14 +61,13 @@ function Construct {
         $dynamicVariableFile = "#SKINSPATH#$($dyn)"
     }
 
-    $RmAPI.LogWarning("$dynamicVariableFile")
-    $RmAPI.LogWarning("$targetSkin")
+    # $RmAPI.LogWarning("$dynamicVariableFile")
+    # $RmAPI.LogWarning("$targetSkin")
 
-    # Unused
-    # $dynamicThemeFile = "#ROOTCONFIGPATH#settings\themes\$($RmAPI.VariableStr('s_SettingsTheme')).inc"
+    # Other variables. If your IDE says half of these are unused, it's both right and wrong.
+    # Some of these are used by the template scripts that Construct runs
 
     # Generator directories
-    $resourcesDir = "$($RmAPI.VariableStr('@'))"
     $includeDir = "$($resourcesDir)Includes\"
     $addonsDir = "$($resourcesDir)Addons\"
     $themesDir = "$($resourcesDir)Themes\"
@@ -70,7 +90,7 @@ function Construct {
     $defaultListItemType = "Default"
 
     # Generated directories
-    $generatedSkinDir = "$($RmAPI.VariableStr('ROOTCONFIGPATH'))Settings\"
+    $generatedSkinDir = "$($rootConfig)Settings\"
     $generatedCategoriesDir = "$($generatedSkinDir)Categories\"
     $generatedIncludeDir = "$($generatedSkinDir)Includes\"
     $generatedAddonsDir = "$($generatedSkinDir)Addons\"
@@ -79,16 +99,16 @@ function Construct {
     # Testfile
     $testfile = "$($resourcesDir)test.inc"
 
-    # Implemented types
+    # Read template directories to get implemented types
     $variableTypes = @(Get-ChildItem -Path $($variableScriptsDir) -Name | % { $_.Split('.')[0] })
     $categoryTypes = @(Get-ChildItem -Path $($categoryScriptsDir) -Name | % { $_.Split('.')[0] })
     $listTypes = @(Get-ChildItem -Path $($listitemScriptsDir) -Name | % { $_.Split('.')[0] })
 
-    # Read variables file
-    # $RmAPI.Log("Parsing settings file")
+    # Read variable file
+    $RmAPI.Log("Parsing settings file")
     $settingsFileContent = Get-Content $variableFilePath -Raw
 
-    # GET OVERRIDES FROM VARIABLE FILE
+    # Overrides from variable file
     $overridePattern = '(?s-m)(;!.*?)(?=;@|$)'
     if ($settingsFileContent -match $overridePattern) {
         $Overrides = Filter-Properties -String $Matches[0]
@@ -102,18 +122,18 @@ function Construct {
         }
     }
 
+    # Set some variables idek
+
     $GeneratedSkinName = "$($Overrides.SkinName).ini" 
     $TargetDirectory = "$($Overrides.SkinDirectory)\"
     $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory)\Themes\1.inc"
-    $dynamicInternalVariableFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory)\Includes\Variables.inc"
 
-    # Generated files
     $generatedSkinFile = "$($generatedSkinDir)$GeneratedSkinName"
-
-    # Injectors
     $injectPath = "$($RmAPI.VariableStr('SKINSPATH'))$targetSkin\$TargetDirectory"
-
     $RmAPI.LogWarning("Generating $injectPath")
+
+    # Regex patterns
+    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
 
     # TODO: Handle unformatted variable files
     if ($settingsFileContent -notmatch $categoryPattern) {
@@ -121,19 +141,13 @@ function Construct {
         return
     }
 
-    # Reset directories, copy files etc.
+    # Reset directories
     Prepare-Directories
-
-    # Regex patterns
-    $categoryPattern = '(?s-m)(;@.*?)(?=;@|$)'
     
     # Get all $categoryPattern matches from $settingsFileContent to %_ with Foreach
     $settings = @(
         Select-String -Pattern $categoryPattern -Input $settingsFileContent -AllMatches | ForEach-Object {
-            # Filter each matched $category
-            foreach ($category in $_.Matches) {
-                Pipe-Category -String $category
-            }
+            foreach ($category in $_.Matches) { Pipe-Category -String $category }
         })
 
     # Write main settings.ini
@@ -150,21 +164,21 @@ function Construct {
     }
 
     # Construct category list
-    # $RmAPI.Log("Category list")
+    $RmAPI.Log("Constructing category list")
     Category-List -Settings $settings
 
     Join-MeterStyles
 
     &"$($templatesDir)TitleBar.ps1" -Overrides $Overrides > "$($generatedIncludeDir)TitleBar.inc"
     
-    $Overrides > $testfile
+    # $Overrides > $testfile
 
     Inject-Settings -Path $injectPath
 
 }
 
 function Join-MeterStyles {
-        
+    # TODO: Inline this
     Get-ChildItem $($meterstylesDir) -Include *.inc -Recurse | ForEach-Object { Get-Content $_; "" } | Out-File "$($includeDir)MeterStyles.inc"
    
 }
@@ -301,11 +315,8 @@ function Pipe-Category {
     
     # Make the Variables array
     $Category.Add("Variables", @())
-    # Get all UnfilteredVariable matches from UnfilteredVariables
     Select-String -Pattern $Patterns.UnfilteredVariable -input $Category.UnfilteredVariables -AllMatches | ForEach-Object {
-        # Filter each matched $category
         foreach ($UnfilteredVariable in $_.Matches) {
-            # Filter each Variable
             $v = Pipe-Variable -String $UnfilteredVariable
             $Category.Variables += , $v
         }
@@ -491,6 +502,7 @@ function Remove-Newline {
 function Remove-Whitespace {
     param (
         [Parameter()]
+        [string]
         $String
     )
 
