@@ -11,12 +11,14 @@ Meter=Shape
 Shape=Rectangle 0,#s_TopHeight#,#s_LeftPanelW#,#s_PanelH# | StrokeWidth 0 | Fill Color 0,0,0,0
 MouseScrollDownAction=[!EnableMeasure ScrollDownLeft][!UpdateMeasure ScrollDownLeft]
 MouseScrollUpAction=[!EnableMeasure ScrollUpLeft][!UpdateMeasure ScrollUpLeft]
+MouseActionCursor=0
 
 [RightScrollArea]
 Meter=Shape
 Shape=Rectangle #s_LeftPanelW#,#s_TopHeight#,#s_RightPanelW#,#s_PanelH# | StrokeWidth 0 | Fill Color 0,0,0,0
 MouseScrollDownAction=[!EnableMeasure ScrollDownRight][!UpdateMeasure ScrollDownRight]
 MouseScrollUpAction=[!EnableMeasure ScrollUpRight][!UpdateMeasure ScrollUpRight]
+MouseActionCursor=0
 
 [LeftMaxScrollAmount]
 Measure=Calc 
