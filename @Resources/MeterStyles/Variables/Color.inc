@@ -7,7 +7,6 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# "Outline" "Stroke Color [#s_ColorS
 
 [VarColorString]
 Y=0r
-X=[#s_VariableXPadding]R
 FontColor=[#s_FontColor]
 Padding=0,([#s_ColorSize] - [#s_VarTextSize]),0,(([#s_ColorSize] - [#s_VarTextSize]) + [#s_VariableYPadding])
 SolidColor=[#s_DebugColorColor[#s_DebugColors]] 

@@ -1,8 +1,5 @@
 [Variables]
 
-;! | SkinName Internal Settings | SkinDirectory Internal | Title Internal Settings
-s_OnChangeAction=[!Log "Internal Variables Changed"][!CommandMeasure Generator """Construct -raw "#s_CurrentFile#"""" #ROOTCONFIG#]
-
 ;@About | Name Internal settings | Description Changing internal variables requires generating to apply changes. | Icon [\xF259]
 ;?Integer | Name Scroll speed | Description | Font Impact
 s_ScrollSpeed=30

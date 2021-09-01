@@ -48,6 +48,12 @@ Border=[#s_FrostedGlassBorders]
 Measure=Script
 ScriptFile=Addons\Ternary.lua
 
+[ColorPickerUI]
+Measure=Script
+ScriptFile=Addons\ColorPickerUI\ColorPickerUI.lua
+Animations=0
+OnFinishAction=[#s_SaveScroll][#s_OnChangeAction][!Refresh]
+
 [IncludeMeterStyles]
 @IncludeMeterStyles=#ROOTCONFIGPATH#$($dir)\Includes\MeterStyles.inc
 
