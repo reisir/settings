@@ -24,15 +24,16 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
 
 - [ ] Make UsePlugin work
 - [ ] Log errors ? Error rendering template ?
+  - Show the exact line of potential error ?
 - [ ] Make categories and variables have Name defaulted to Key if Name not found during parsing
   - This is mostly because I want the error logs to have access to the Name
 - [ ] Make the "delete all files" red when hovering over "Generate & Inject"
 - [ ] Documentation
   - [ ] Write more examples for the wiki
   - [ ] Proofread the wiki
-- [ ] Better (custom ?) colour picker that can handle alpha
-  - [ ] Ability to type in color values
-- [ ] Another way to select file other than Drag & Drop
+- [x] Better (custom ?) colour picker that can handle alpha
+  - [x] Ability to type in color values
+- [x] Another way to select file other than Drag & Drop
 - [x] Refactor `Pipe-Variable` and `Pipe-Category`
 - [x] Toggle for auto-inject
 - [x] Fix file needing to be in @Resources or its subdirectory to generate properly
@@ -43,6 +44,7 @@ Settings is a Rainmeter skin that generates settings skins for other Rainmeter s
   - It affects flow
 - [x] LeftMouseUpAction override instead of using info variables
 - [x] Add way to change the icon font per Icon
+  - [ ] Link to sl23's icon collection skin
 - [x] Make the skin remember the scroll position when variables are changed and the skin is refreshed
 - [x] Change the version in rainmeter.inc template
 - [x] Figure out a better way to make the scroll indicator work
