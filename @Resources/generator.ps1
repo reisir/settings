@@ -90,7 +90,7 @@ function Construct {
     $defaultListItemType = "Default"
 
     # Generated directories
-    $generatedSkinDir = "$($rootConfig)Settings\"
+    $generatedSkinDir = "$($resourcesDir)Generated\"
     $generatedCategoriesDir = "$($generatedSkinDir)Categories\"
     $generatedIncludeDir = "$($generatedSkinDir)Includes\"
     $generatedAddonsDir = "$($generatedSkinDir)Addons\"

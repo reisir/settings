@@ -242,5 +242,5 @@ s_SliderDefaultMinValue=0
 s_SliderDefaultMaxValue=100
 
 s_ScrollLeft=0
-s_ScrollRight=-270
-s_CurrentCategory=3
+s_ScrollRight=0
+s_CurrentCategory=2
