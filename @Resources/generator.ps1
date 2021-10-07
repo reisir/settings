@@ -523,7 +523,10 @@ function Prepare-Directories {
     Get-ChildItem -Path "$generatedIncludeDir*" -Include *.inc | Remove-Item
     Get-ChildItem -Path "$generatedThemesDir*" -Include "*.inc" | Remove-Item
     Get-ChildItem -Path "$generatedSkinDir*" -Include "*.ini" | Remove-Item
-    Get-ChildItem -Path "$generatedAddonsDir*" | Remove-Item
+
+    Get-ChildItem -Path "$generatedAddonsDir*" | ForEach-Object {
+        Remove-Item $_.FullName -Recurse -Force
+    }
 
     # Remove settings injected earlier
     Get-ChildItem -Path "$($injectPath)$TargetDirectory*" -Include @("*.inc", "*.ini", "RainRGB4RunCommand.exe") | Remove-Item

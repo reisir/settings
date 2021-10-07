@@ -1,14 +1,8 @@
 [Variables]
 
-;! | SkinName Theme 1 | SkinDirectory Themes
-s_OnChangeAction=[!Log "Theme Changed"][!CommandMeasure Generator """Construct -raw "#s_CurrentFile#"""" #ROOTCONFIG#]
-
 ;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
 ;?Action | Description Link test | Link 1
 GitHub=https://GitHub.com/sceleri/settings
-
-;?Action | Description Banger | Link 2
-Bang your mom = [!Log "urmom"]
 
 ;@ | Name Close button
 ;?Color | Name Close button color
