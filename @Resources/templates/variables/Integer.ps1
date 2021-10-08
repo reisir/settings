@@ -30,7 +30,7 @@ H=[VariableValue$($Variable.Index):H]
 W=([#s_RightPanelW] - ([#s_VariableXPadding] * 2))
 DynamicVariables=1
 DefaultValue=[#$($Variable.Key)]
-Command1=[!WriteKeyValue "Variables" "$($Variable.Key)" "`$UserInput`$" "$($SettingsFile)"][#s_SaveScroll][!Refresh][#s_OnChangeAction]
+Command1=[!WriteKeyValue "Variables" "$($Variable.Key)" "`$UserInput`$" "$($SettingsFile)"][#s_SaveScroll][!Refresh][&MainLua:OnChangeAction()]
 OnDismissAction=[!SetOption VariableValue$($Variable.Index) FontColor "[#s_FontColor]"][!UpdateMeter VariableValue$($Variable.Index)][!Redraw]
 InputNumber=1
 "@

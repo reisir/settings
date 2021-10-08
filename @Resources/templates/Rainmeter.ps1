@@ -29,7 +29,7 @@ s_CurrentCategory=0
 [Rainmeter]
 Update=-1
 ;This updates measures like the scroll measure once
-OnRefreshAction=[!Update][!Redraw]
+OnRefreshAction=[!Update]
 AccurateText=1
 @IncludesOnChangeAction=#ROOTCONFIGPATH#$($dir)\Includes\s_OnChangeAction.inc
 @IncludeInternalVariables=#ROOTCONFIGPATH#$($dir)\Includes\Variables.inc
@@ -44,15 +44,15 @@ Plugin=FrostedGlass
 Type=[#s_FrostedGlassMode]
 Border=[#s_FrostedGlassBorders]
 
-[Ternary]
+[MainLua]
 Measure=Script
-ScriptFile=Addons\Ternary.lua
+ScriptFile=includes\MainLua.lua
 
 [ColorPickerUI]
 Measure=Script
 ScriptFile=Addons\ColorPickerUI\ColorPickerUI.lua
 Animations=0
-OnFinishAction=[#s_SaveScroll][#s_OnChangeAction][!Refresh]
+OnFinishAction=[#s_SaveScroll][&MainLua:OnChangeAction()][!Refresh]
 
 [IncludeMeterStyles]
 @IncludeMeterStyles=#ROOTCONFIGPATH#$($dir)\Includes\MeterStyles.inc

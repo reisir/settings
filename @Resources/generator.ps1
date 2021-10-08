@@ -1,25 +1,18 @@
 function Update {
 
 }
-
 $usedPlugins = @{
+    "CursorColor" = $false
+    "FileChoose" = $false
     "FrostedGlass" = $true
+    "Mouse" = $false
 }
-
-# Function and variable used by templates and the generator to register used plugins.
-# So that the generator skin can display a list of plugins that need to be included in the users .rmskin
-# I put it up here so it's 100% registered before anything else and can be used without dotsourcing
-function UsePlugin {
-    param (
-        [Parameter()]
-        [String]
-        $Plugin
-    )
-
-    $usedPlugins[$Plugin] = $true
-    
+function MakeTheme {
+    $RmAPI.Log("Making theme file")
+    Construct -raw "$($RmAPI.VariableStr("SKINSPATH"))$($RmAPI.VariableStr('s_DynamicVariableFile'))" -makingTheme $true
+    $RmAPI.Log("Making user settings")
+    Construct -makingTheme $false
 }
-
 function Construct {
     
     param(
@@ -28,7 +21,9 @@ function Construct {
         $raw,
         [Parameter(Mandatory = $false)]
         [string]
-        $dyn
+        $dyn,
+        [Parameter()]
+        $makingTheme
     )
 
     # Variables from Rainmeter
@@ -45,20 +40,8 @@ function Construct {
     if ($dyn) { $raw = "$($skinspath)$($dyn)" }
     if ($raw) {
         $variableFilePath = $raw
-        $dynamicVariableFile = $raw -replace "$([Regex]::Escape($skinspath))", ""
-        $threepattern = '(.*?)\\(.*)\\(.*?)$'
-        $twopattern = '(.*?)\\(.*?)$'
-        if ($dynamicVariableFile -match $threepattern) {
-            $dyn = $Matches[0]
-            $targetSkin = $Matches[1]
-        }
-        else { 
-            if ($dynamicVariableFile -match $twopattern) {
-                $dyn = $Matches[0]
-                $targetSkin = $Matches[1]
-            }
-        }
-        $dynamicVariableFile = "#SKINSPATH#$($dyn)"
+        $dynamicVariableFile = $raw -replace "$([Regex]::Escape($skinspath))", "#SKINSPATH#"
+        $targetSkin = (($raw -replace "$([Regex]::Escape($skinspath))", "") -split '\\')[0]
     }
 
     # $RmAPI.LogWarning("$dynamicVariableFile")
@@ -122,9 +105,13 @@ function Construct {
         }
     }
 
+    if ($dynamicVariableFile -match "^#SKINSPATH#settings\\@Resources\\Themes\\\d+\.inc$") {
+        $Overrides.SkinDirectory = "Themes"
+    }
+
     # Set some variables idek
 
-    $GeneratedSkinName = "$($Overrides.SkinName).ini" 
+    $GeneratedSkinName = "$($Overrides.SkinName).ini"
     $TargetDirectory = "$($Overrides.SkinDirectory)\"
     $dynamicThemeFile = "#ROOTCONFIGPATH#$($Overrides.SkinDirectory)\Themes\1.inc"
 
@@ -173,8 +160,18 @@ function Construct {
     
     # $Overrides > $testfile
 
-    Inject-Settings -Path $injectPath
-
+    if ($makingTheme) {
+        Inject-Settings -Path $injectPath -makingTheme $true
+    } else {
+        $RmAPI.Log("---- Reqired plugins ----")
+        $usedPlugins.GetEnumerator() | ForEach-Object {
+            if ($_.Value) {
+                $RmAPI.Log("Plugin Name : " + $_.Key)
+            }
+        }
+        $RmAPI.Log("---- --------------- ----")
+        Inject-Settings -Path $injectPath -makingTheme $false
+    }
 }
 
 function Join-MeterStyles {
@@ -541,15 +538,23 @@ function Prepare-Directories {
 function Inject-Settings {
     param (
         [Parameter()]
-        $Path
+        $Path,
+        [Parameter()]
+        $makingTheme
     )
 
     # Inject generated settings
     Copy-Item -Path "$generatedSkinDir*" -Destination $Path -Recurse
 
+    if ($makingTheme) {
+        $RmAPI.Bang("!Refresh `"$($RmAPI.VariableStr("ROOTCONFIG"))\Themes`"")
+        return
+    }
+
     $RmAPI.Log("Refreshing Rainmeter")
     $RmAPI.Bang('[!RefreshApp]')
+
     # $RmAPI.Bang('[!ActivateConfig]$($targetSkin)\settings\settings.ini')
     $RmAPI.Log("Loading generated settings skin")
-    Start-Process "C:\Program Files\Rainmeter\Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\$TargetDirectory", "`"$GeneratedSkinName`""
+    Start-Process "$($RmAPI.VariableStr("PROGRAMPATH"))Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\$TargetDirectory", "`"$GeneratedSkinName`""
 }

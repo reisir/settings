@@ -30,3 +30,13 @@ DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables "s_GenCurrentCategory" 1][!Refresh]
 ToolTipText=Generate
 
+[GeneratorIcon2]
+Meter=String
+Text=[\xEA86]
+MeterStyle=CategoryIcon | LeftPanel | Center
+Padding=0,0,0,0
+X=([#s_GeneratorLeftPanelWidth] / 2)
+Y=(([#s_GeneratorLeftPanelWidth] - [GeneratorIcon0:W]))R
+DynamicVariables=1
+LeftMouseUpAction=[!ActivateConfig "#ROOTCONFIG#\Themes"][!Refresh]
+ToolTipText=Theme

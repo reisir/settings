@@ -33,14 +33,14 @@ foreach ($label in $Variable.PSList.Labels) {
 
 [ListCheck$($Variable.Index)$(Remove-Whitespace -String $label)]
 Meter=String
-Text=[&Ternary:Ternary('[#$($Variable.PSList.Values[$i])]', '=', '1', '[\xE73A]', '[\xE739]')]
+Text=[&MainLua:Ternary('[#$($Variable.PSList.Values[$i])]', '=', '1', '[\xE73A]', '[\xE739]')]
 X=([#s_LeftPanelW]+[#s_VariableXPadding])
 Y=[#s_VariableYPadding]R
 FontSize=15
 MeterStyle=ListIcon | RightPanel
 Group=List$($Variable.Index)
 DynamicVariables=1
-LeftMouseUpAction=[!SetVariable $($Variable.PSList.Values[$i]) "(1-[#$($Variable.PSList.Values[$i])])"][!WriteKeyValue Variables $($Variable.PSList.Values[$i]) "[#$($Variable.PSList.Values[$i])]" "$SettingsFile"][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!SetVariable $($Variable.PSList.Values[$i]) "(1-[#$($Variable.PSList.Values[$i])])"][!WriteKeyValue Variables $($Variable.PSList.Values[$i]) "[#$($Variable.PSList.Values[$i])]" "$SettingsFile"][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 [ListString$($Variable.Index)$(Remove-Whitespace -String $label)]
 Meter=String
@@ -50,7 +50,7 @@ Y=-1r
 Padding=0,0,[#s_VariableXPadding],[#s_VariableYPadding]
 MeterStyle=VarString
 Group=List$($Variable.Index)
-LeftMouseUpAction=[!SetVariable $($Variable.PSList.Values[$i]) "(1-[#$($Variable.PSList.Values[$i])])"][!WriteKeyValue Variables $($Variable.PSList.Values[$i]) "[#$($Variable.PSList.Values[$i])]" "$SettingsFile"][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!SetVariable $($Variable.PSList.Values[$i]) "(1-[#$($Variable.PSList.Values[$i])])"][!WriteKeyValue Variables $($Variable.PSList.Values[$i]) "[#$($Variable.PSList.Values[$i])]" "$SettingsFile"][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 
 "@

@@ -7,6 +7,8 @@ param (
     $SettingsFile
 )
 
+$usedPlugins.FileChoose = $true
+
 if (-not $Variable.Width) {
     $Variable.Width=320
 }
@@ -48,5 +50,5 @@ Plugin=FileChoose
 UseNewStyle=1
 ImageInitialDirectory=$($Variable.InitialDirectory)
 ReturnValue=Path
-Command1=[!WriteKeyValue Variables $($Variable.Key) "`$Path`$" "$SettingsFile"][#s_SaveScroll][#s_OnChangeAction][!Refresh]
+Command1=[!WriteKeyValue Variables $($Variable.Key) "`$Path`$" "$SettingsFile"][#s_SaveScroll][&MainLua:OnChangeAction()][!Refresh]
 "@

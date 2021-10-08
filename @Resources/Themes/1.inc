@@ -1,4 +1,5 @@
 [Variables]
+s_OnChangeAction=[!CommandMeasure Generator MakeTheme "#ROOTCONFIG#"]
 
 ;@About | Name Theme: [#s_Theme1Name] | Description Customize the theme here 
 ;?Action | Description Link test | Link 1
@@ -9,14 +10,14 @@ GitHub=https://GitHub.com/sceleri/settings
 s_CloseButtonColor=FC3B4C
 ;?Integer | Name Close button stroke width
 s_CloseButtonStrokeWidth=0
-;?Color | Name Close button stroke color
+;?Color | Name Close button stroke color | Format rgba
 s_CloseButtonStrokeColor=255,255,255
 ;?Integer | Name Close button size | Description As a percentage of the title bar height
 s_CloseButtonSize=0.4
 s_CBS=([#s_TopHeight] * [#s_CloseButtonSize])
 ;?Integer | Name Close button cross thickness
 s_CloseCrossThick=2
-;?Color | Name Close button cross color
+;?Color | Name Close button cross color | Format rgba
 s_CloseCrossColor=0,0,0
 ;?Integer | Name Close button cross size | Description As a percentage of the close button size
 s_CS=0.6
@@ -25,10 +26,10 @@ s_CS=0.6
 ;?Integer | Name Title bar height
 s_TopHeight=40
 s_PanelTotalHeight=[#s_PanelH] - [#s_TopHeight]
-;?Color | Name Title bar background color 
-s_TopBarColor=26,35,56,255
-;?Color | Name Title text color
-s_TopFontColor=255,255,255
+;?Color | Name Title bar background color  | Format rgba
+s_TopBarColor=53,57,65,255
+;?Color | Name Title text color | Format rgba
+s_TopFontColor=255,255,255,255
 ;? | Name Title font face
 s_TitleFont=Segoe UI
 ;?Toggle | Name Show title bar rounding corrector | Invert 1
@@ -47,15 +48,13 @@ s_LeftPanelW=200
 s_RightPanelW=500
 ;?Integer | Name Skin height | Description 
 s_PanelH=600
-;?Color | Name Right panel background color
-s_RightPanelBackgroundColor=26,26,38,125
-;?Color | Name Left panel background color 
-s_LeftPanelBackgroundColor=28,28,43,125
+;?Color | Name Right panel background color | Format rgba
+s_RightPanelBackgroundColor=32,32,32,255
+;?Color | Name Left panel background color | Format rgba
+s_LeftPanelBackgroundColor=18,27,37,179
 ;?Integer | Name Background corner radius
-s_BackgroundRounding=5
-;?Toggle | Name Hide right panel rounding corrector
-s_HidePanelCorrector=0
-;? | Name FrostedGlass mode | Description Only available on Windows 10#CRLF#A certain Windows 10 update made Acrylic very laggy so it's not recommended.#CRLF#Available modes: Acrylic, Blur, None
+s_BackgroundRounding=10
+;?Radio | Name FrostedGlass mode | Options None; Blur; Acrylic | Description Only available on Windows 10#CRLF#A certain Windows 10 update made Acrylic very laggy so it's not recommended.
 s_FrostedGlassMode=Blur
 ;? | Name FrostedGlass border | Description All, None, Left, Right, Top and Bottom. Can be combined with pipes
 s_FrostedGlassBorders=None
@@ -65,7 +64,7 @@ s_FrostedGlassBorders=None
 s_FontFace=Segoe UI
 ;? | Name Icon font face 
 s_IconFontFace=Segoe MDL2 Assets
-;?Color | Name Font color  
+;?Color | Name Font color | Format rgba
 s_FontColor=235,235,235
 ;?Integer | Name Category Title Size
 s_CategoryTitleSize=20
@@ -96,7 +95,7 @@ s_RightScrollIndicatorMaxHeight=([#s_PanelTotalHeight] - ([#s_RightScrollIndicat
 s_RightScrollIndicatorXPadding=5
 ;?Integer | Name Right scroll indicator width | Description 
 s_RightScrollIndicatorWidth=5
-;?Color | Name Right scroll indicator color | Description 
+;?Color | Name Right scroll indicator color | Format rgba | Description 
 s_RightScrollIndicatorColor=255,255,255
 ;?Integer | Name Right scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
 s_RightScrollIndicatorRounding=1
@@ -109,7 +108,7 @@ s_LeftScrollIndicatorMaxHeight=([#s_PanelTotalHeight] - ([#s_LeftScrollIndicator
 s_LeftScrollIndicatorXPadding=5
 ;?Integer | Name Left scroll indicator width | Description 
 s_LeftScrollIndicatorWidth=5
-;?Color | Name Left scroll indicator color | Description 
+;?Color | Name Left scroll indicator color | Format rgba | Description 
 s_LeftScrollIndicatorColor=240,240,240
 ;?Integer | Name Left scroll indicator rounding | Description From 0 - 1 (where 0 is no rounding, 1 is fully rounded)
 s_LeftScrollIndicatorRounding=1
@@ -208,7 +207,7 @@ s_ColorStrokeWidthDefault=1
 s_ColorStrokeWidth=1
 ;?Integer | Name Color circle stroke width on hover | Description s_ColorStrokeWidthSelected
 s_ColorStrokeWidthSelected=2
-;?Color | Name Color circle stroke color | Description s_ColorStrokeColor (will change to s_Selected when hovered)
+;?Color | Name Color circle stroke color | Format rgba | Description s_ColorStrokeColor (will change to s_Selected when hovered)
 s_ColorStrokeColor=200,200,200
 ;?Integer | Name Gap between the circle and the string | Description s_ColorStringLeftPadding
 s_ColorStringLeftPadding=10
@@ -237,4 +236,4 @@ s_SliderDefaultMaxValue=100
 
 s_ScrollLeft=0
 s_ScrollRight=0
-s_CurrentCategory=2
+s_CurrentCategory=3

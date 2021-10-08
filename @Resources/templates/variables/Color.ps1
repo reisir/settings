@@ -7,6 +7,9 @@ param (
     $SettingsFile
 )
 
+$usedPlugins.CursorColor = $true
+$usedPlugins.Mouse = $true
+
 if (-not $Variable.Format) {
     $Variable.Format='rgb'
 } elseif (@('rgb', 'rgba', 'hex', 'hexa') -notcontains $Variable.Format.ToLower()) {

@@ -7,6 +7,8 @@ param(
     $SettingsFile
 )
 
+$usedPlugins.Mouse = $true
+
 $Variable.Width = if ($Variable.Width -match '^\s*(\d+\.?\d*?)\s*$') { $matches[1] } else { $RmApi.VariableStr("s_SliderDefaultWidth") }
 $Variable.MinValue = if ($Variable.MinValue -match '^\s*(\d+\.?\d*?)\s*$') { $matches[1] } else { $RmApi.VariableStr("s_SliderDefaultMinValue") }
 $Variable.MaxValue = if ($Variable.MaxValue -match '^\s*(\d+\.?\d*?)\s*$') { $matches[1] } else { $RmApi.VariableStr("s_SliderDefaultMaxValue") }
@@ -30,14 +32,14 @@ $doubler = {
 
 $scroll = if ($scrollHash.isInverted -eq 0) {
     @"
-MouseScrollUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]+$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
-MouseScrollDownAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]-$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+MouseScrollUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]+$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
+MouseScrollDownAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]-$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 "@
 }
 else {
     @"
-MouseScrollDownAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]+$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
-MouseScrollUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]-$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+MouseScrollDownAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]+$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
+MouseScrollUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(Clamp([#$($Variable.Key)]-$($scrollHash.Increment), $($Variable.MinValue), $($Variable.MaxValue)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue - $Variable.MinValue)))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 "@
 }
 
@@ -48,7 +50,7 @@ $(Title)
 Measure=Plugin
 Plugin=Mouse
 LeftMouseDragAction=[!SetOption SliderBlob$($Variable.Index) X "(Clamp(`$MouseX$,[#s_LeftPanelW]+[#s_VariableXPadding],([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width))))"][!UpdateMeter SliderBlob$($Variable.Index)][!UpdateMeasure SliderCalc$($Variable.Index)]
-LeftMouseUpAction=[!CommandMeasure Slider$($Variable.Index) "Stop"][#s_OnChangeAction][!Delay 150][!EnableMouseAction SliderBar$($Variable.Index) "LeftMouseUpAction"]
+LeftMouseUpAction=[!CommandMeasure Slider$($Variable.Index) "Stop"][&MainLua:OnChangeAction()][!Delay 150][!EnableMouseAction SliderBar$($Variable.Index) "LeftMouseUpAction"]
 RelativeToSkin=1
 RequireDragging=1
 DynamicVariables=1
@@ -69,7 +71,7 @@ Shape=Rectangle 0,0,$($Variable.Width),6,3 | Fill Color FFFFFF | StrokeWidth 0
 Shape2=Rectangle 0,0,($($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue)-($($Variable.MinValue)))),6,3 | Fill Color [#s_SelectedColor] | StrokeWidth 0
 DynamicVariables=1
 $scroll
-LeftMouseUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(($($Variable.MinValue))+($($Variable.MaxValue)-($($Variable.MinValue)))*(`$MouseX`$/$($Variable.Width)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue)-($($Variable.MinValue))))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!SetVariable $($Variable.Key) "$(&($doubler) -string "(($($Variable.MinValue))+($($Variable.MaxValue)-($($Variable.MinValue)))*(`$MouseX`$/$($Variable.Width)))"-precision $Variable.Precision)"][!WriteKeyValue Variables $($Variable.Key) "[#$($Variable.Key)]" "$SettingsFile"][!SetOption SliderBlob$($Variable.Index) X "([#s_LeftPanelW]+[#s_VariableXPadding]+$($Variable.Width)*([#$($Variable.Key)]-($($Variable.MinValue)))/($($Variable.MaxValue)-($($Variable.MinValue))))"][!UpdateMeterGroup Sliders$($Variable.Index)][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 Group=Sliders$($Variable.Index)
 
 [SliderBlob$($Variable.Index)]

@@ -12,7 +12,7 @@ example.inc=#@#example.inc
 ; death.crafter tests
 
 ;?Slider | Name SliderTest | Width 400 | MinValue -20 | MaxValue 50 | Precision 1 | Scroll 1,1,0 | Precision 1
-sliderVar=16.8
+sliderVar=37
 
 ;?List | Name List Test | Options Use bold, boldBool; Use Italic, italicBool ; Underline
 boldBool=1
@@ -20,7 +20,7 @@ italicBool=1
 Underline=0
 
 ;?Radio | Name RadioTest | Options Managing Director, LevelO; Manager, LevelA ; Supervisor, LevelB ; Employee, LevelC
-DesignationLevel=LevelB
+DesignationLevel=LevelC
 
 
 ;@Topic | Name Personalization | Icon [\xE771]
@@ -28,7 +28,7 @@ DesignationLevel=LevelB
 ;?String | Name Font face | Description The font used throughout the skin
 FontFace=Segoe UI
 ;?Color | Name Font color | Description Colour of all text elements
-FontColor=43,43,43
+FontColor=0,210,210
 ;?String | Name Font size | Description The size of all text elements
 FontSize=12
 

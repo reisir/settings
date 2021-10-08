@@ -36,6 +36,7 @@ MeterStyle=RightPanel | GenSmallTitle
 Meter=String
 Text=[#s_DynamicVariableFile]
 MeterStyle=RightPanel | GenDesc
+LeftMouseUpAction=[!CommandMeasure FileChoose "ChooseFile 1"]
 ; [Value0]
 ; Meter=String
 ; Text=Click to open directory

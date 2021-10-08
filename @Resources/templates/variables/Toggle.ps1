@@ -24,13 +24,13 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_FontColor] | StrokeStartCap 
 $(if($Variable.Invert){
 @"
 Hidden=([#$($Variable.Key)] - 1)
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 "@
 }else {
 @"
 Hidden=([#$($Variable.Key)])
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 "@
 })
@@ -46,13 +46,13 @@ Line=StrokeWidth [#s_ToggleSize] | Stroke Color [#s_ToggleActiveColor] | StrokeS
 $(if($Variable.Invert){
 @"
 Hidden=([#$($Variable.Key)])
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 1 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 1][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 "@
 }else {
 @"
 Hidden=([#$($Variable.Key)] - 1)
-LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][#s_SaveScroll][!Update][!Redraw][#s_OnChangeAction]
+LeftMouseUpAction=[!WriteKeyValue Variables "$($Variable.Key)" 0 "$($SettingsFile)"][!SetVariable "$($Variable.Key)" 0][#s_SaveScroll][!Update][!Redraw][&MainLua:OnChangeAction()]
 
 "@
 })

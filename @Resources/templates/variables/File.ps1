@@ -7,6 +7,8 @@ param (
     $SettingsFile
 )
 
+$usedPlugins.FileChoose = $true
+
 $chooseAction='ChooseFile'
 if ($Variable.ChooseFolder -match '1') {
     $chooseAction='ChooseFolder'
@@ -31,5 +33,5 @@ Plugin=FileChoose
 UseNewStyle=1
 FileInitialDirectory=$($Variable.InitialDirectory)
 ReturnValue=Path
-Command1=[!WriteKeyValue Variables $($Variable.Key) "`$Path`$" "$SettingsFile"][#s_SaveScroll][#s_OnChangeAction][!Refresh]
+Command1=[!WriteKeyValue Variables $($Variable.Key) "`$Path`$" "$SettingsFile"][#s_SaveScroll][&MainLua:OnChangeAction()][!Refresh]
 "@
