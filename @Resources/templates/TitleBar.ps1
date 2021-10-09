@@ -18,7 +18,7 @@ Shape2=Line (Cos(0.7854)  * [#s_CBS] / 2 * [#s_CS]), (Sin(0.7854)  * [#s_CBS] / 
 Shape3=Line (Cos(-0.7854) * [#s_CBS] / 2 * [#s_CS]), (Sin(-0.7854) * [#s_CBS] / 2 * [#s_CS]), (Cos(-0.7854) * [#s_CBS] / -2 * [#s_CS]), (Sin(-0.7854) * [#s_CBS] / -2 * [#s_CS]) | StrokeWidth [#s_CloseCrossThick] | Stroke Color [#s_CloseCrossColor]
 X=(-[#s_TopHeight] / 2)R
 Y=( [#s_TopHeight] / 2)
-LeftMouseUpAction=[!DeactivateConfig]
+LeftMouseUpAction=[#s_ResetScroll][!DeactivateConfig]
 
 [CreditIcon2]
 FontSize=[#s_CreditIconSize]

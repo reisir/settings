@@ -361,7 +361,7 @@ function Category-Ini {
     $ini += &"$($templatesDir)LastItem.ps1" -Side "Right"
     
     # Write category
-    $ini > "$($generatedCategoriesDir)$($i).inc"
+    $ini |  Out-File "$($generatedCategoriesDir)$($i).inc" -Encoding unicode
 
 }
 
@@ -420,7 +420,7 @@ function Category-List {
     $ini += &"$($listitemScriptsDir)Credit.ps1"
 
     # Write category list to file
-    $ini > "$($generatedCategoriesDir)CategoryList.inc"
+    $ini | Out-File "$($generatedCategoriesDir)CategoryList.inc" -Encoding unicode
 
 }
 
@@ -556,5 +556,5 @@ function Inject-Settings {
 
     # $RmAPI.Bang('[!ActivateConfig]$($targetSkin)\settings\settings.ini')
     $RmAPI.Log("Loading generated settings skin")
-    Start-Process "$($RmAPI.VariableStr("PROGRAMPATH"))Rainmeter.exe" -ArgumentList "!ActivateConfig", "$($targetSkin)\$TargetDirectory", "`"$GeneratedSkinName`""
+    Start-Process "$($RmAPI.VariableStr("PROGRAMPATH"))Rainmeter.exe" -ArgumentList "!ActivateConfig", "`"`"`"$($targetSkin)\$TargetDirectory`"`"`"", "`"`"`"$GeneratedSkinName`"`"`""
 }

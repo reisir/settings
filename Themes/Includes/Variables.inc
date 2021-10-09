@@ -10,9 +10,9 @@ s_Theme1Name=Dark
 ;? | Name hidden | Hidden 1
 s_ScrollTreshold=[#s_PanelH]
 s_SettingsTheme=1
-s_SaveRightScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight [#*s_ScrollRight*] "[#s_CurrentFile]"]
+s_SaveScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight [#*s_ScrollRight*] "[#s_CurrentFile]"]
 s_SaveLeftScroll=[!WriteKeyValue Variables s_ScrollLeft [#*s_ScrollLeft*] "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight 0 "[#s_CurrentFile]"]
-
+s_ResetScroll=[!WriteKeyValue Variables s_ScrollLeft 0 "[#s_CurrentFile]"][!WriteKeyValue Variables s_ScrollRight 0 "[#s_CurrentFile]"]
 ;@ | Name Test | Icon [\xE9F5] | Description Test variables for theme editing
 ;? | Name Long Description | Description My description is so long that it should hopefully force this string meter to clipstring=2 and break to multiple lines thanks.
 longdesc=value

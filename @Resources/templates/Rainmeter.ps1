@@ -30,6 +30,7 @@ s_CurrentCategory=0
 Update=-1
 ;This updates measures like the scroll measure once
 OnRefreshAction=[!Update]
+OnCloseAction=[#s_ResetScroll]
 AccurateText=1
 @IncludesOnChangeAction=#ROOTCONFIGPATH#$($dir)\Includes\s_OnChangeAction.inc
 @IncludeInternalVariables=#ROOTCONFIGPATH#$($dir)\Includes\Variables.inc
