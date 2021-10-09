@@ -2,10 +2,10 @@ function Update {
 
 }
 $usedPlugins = @{
-    "CursorColor" = $false
-    "FileChoose" = $false
+    "CursorColor"  = $false
+    "FileChoose"   = $false
     "FrostedGlass" = $true
-    "Mouse" = $false
+    "Mouse"        = $false
 }
 function MakeTheme {
     $RmAPI.Log("Making theme file")
@@ -162,7 +162,8 @@ function Construct {
 
     if ($makingTheme) {
         Inject-Settings -Path $injectPath -makingTheme $true
-    } else {
+    }
+    else {
         $RmAPI.Log("---- Reqired plugins ----")
         $usedPlugins.GetEnumerator() | ForEach-Object {
             if ($_.Value) {
