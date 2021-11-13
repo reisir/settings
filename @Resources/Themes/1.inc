@@ -51,7 +51,7 @@ s_PanelH=600
 ;?Color | Name Right panel background color | Format rgba
 s_RightPanelBackgroundColor=32,32,32,255
 ;?Color | Name Left panel background color | Format rgba
-s_LeftPanelBackgroundColor=18,27,37,230
+s_LeftPanelBackgroundColor=39,42,48,230
 ;?Integer | Name Background corner radius
 s_BackgroundRounding=10
 ;?Radio | Name FrostedGlass mode | Options None; Blur; Acrylic | Description Only available on Windows 10#CRLF#A certain Windows 10 update made Acrylic very laggy so it's not recommended.
@@ -171,7 +171,7 @@ s_ListDefaultTotalPadding=([#s_ListDefaultTopPadding] + [#s_ListDefaultBottomPad
 ;?Integer | Name Default item left padding | Description 
 s_ListDefaultLeftPadding=15
 ;?Integer | Name Default item icon gap | Description 
-s_ListDefaultGap=0
+s_ListDefaultGap=5
 
 ;@ | Name Topic items
 ;?Integer | Name Topic item top padding | Description 
@@ -236,4 +236,4 @@ s_SliderDefaultMaxValue=100
 
 s_ScrollLeft=0
 s_ScrollRight=0
-s_CurrentCategory=3
+s_CurrentCategory=1

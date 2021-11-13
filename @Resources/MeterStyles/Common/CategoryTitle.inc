@@ -10,7 +10,7 @@ FontColor=[#s_FontColor]
 [CategoryTitle]
 AntiAlias=1
 Y=0r
-X=0R
+X=5R
 Padding=0,[#s_CategoryTitleTopPadding],0,0
 ClipString=2
 FontFace=#s_FontFace#
